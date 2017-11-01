@@ -1,15 +1,5 @@
 from docbuilder import DocBuilder
 
-# Config
-DocBuilder()\
-    .parse("js/config.js")\
-    .html("docs/api/config.html")
-
-# Engine
-DocBuilder()\
-    .parse("js/engine.js")\
-    .html("docs/api/engine.html")
-
 # Modules
 modules = [
     "data",
@@ -37,8 +27,7 @@ modules = [
 for m in modules:
     print("    " + m)
     DocBuilder()\
-        .parse("js/adt/%s.js" % m)\
-        .html("docs/api/%s.html" % m,
-              style="img#logo{position:fixed;top:20px;right:20px;width:100px;}",
-              main="<img id='logo' src='../../resources/img/logo-dark.png'/>")
+        .parse("source/%s.js" % m)\
+        .html("api/%s.html" % m,
+              style="img#logo{position:fixed;top:20px;right:20px;width:100px;}")
 
