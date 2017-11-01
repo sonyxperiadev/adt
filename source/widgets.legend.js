@@ -1,0 +1,153 @@
+/**
+ * Module implementing a colored legend.
+ * Part of the Analytics Dashboard Tools.
+ *
+ * A legend is a static label together with a colored square.
+ *
+ * @copyright Copyright (C) 2017 Sony Mobile Communications AB.
+ * All rights, including trade secret rights, reserved.
+ * @author Enys Mones (enys.mones@sony.com)
+ * @module widgets.legend
+ * @memberOf adt
+ * @requires d3@v4
+ * @requires adt.widgets
+ */
+(function (global, factory) {
+    if (typeof exports === "object" && typeof module !== "undefined") {
+        factory(exports);
+    } else if (typeof define === 'function' && define.amd) {
+        define(['exports'], factory);
+    } else {
+        factory((global.adt = global.adt || {}));
+    }
+} (this, (function (exports) {
+    "use strict";
+
+    // Load widgets
+    if (exports.widgets) {
+        var widgets = exports.widgets;
+    } else {
+        throw new Error("adt.widgets.legend Error: widgets module is not exported");
+    }
+
+    /**
+     * The legend widget class.
+     *
+     * @class Legend
+     * @memberOf adt.widgets.legend
+     * @param {string} name Identifier of the legend.
+     * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
+     * @constructor
+     */
+    function Legend(name, parent) {
+        var _w = widgets.Widget.call(this, name, "legend", "div", parent);
+
+        /**
+         * Sets legend text.
+         *
+         * @method text
+         * @memberOf adt.widgets.legend.Legend
+         * @param {string} label Text of the legend.
+         */
+        _w.attr.add(this, "text", "");
+
+        /**
+         * Sets legend color.
+         * Default is white.
+         *
+         * @method color
+         * @memberOf adt.widgets.legend.Legend
+         * @param {string} color Color to use.
+         */
+        _w.attr.add(this, "color", "white");
+
+        /**
+         * Sets callback for mouse over on the legend.
+         *
+         * @method mouseover
+         * @memberOf adt.widgets.legend.Legend
+         * @param {function} callback Callback to set.
+         */
+        _w.attr.add(this, "mouseover", null);
+
+        /**
+         * Sets callback for mouse leave on the legend.
+         *
+         * @method mouseleave
+         * @memberOf adt.widgets.legend.Legend
+         * @param {function} callback Callback to set.
+         */
+        _w.attr.add(this, "mouseleave", null);
+
+        /**
+         * Sets callback for click on the legend.
+         *
+         * @method click
+         * @memberOf adt.widgets.legend.Legend
+         * @param {function} callback Callback to set.
+         */
+        _w.attr.add(this, "click", null);
+
+        // Widget elements.
+        var _square = null;
+        var _text = null;
+
+        /**
+         * Highlights legend. A highlighted legend has a bold text.
+         *
+         * @method highlight
+         * @memberOf adt.widgets.legend.Legend
+         * @param {boolean} on Whether to turn highlight on or off.
+         */
+        this.highlight = function(on) {
+            _text.style("font-weight", on ? "900" : "normal");
+        };
+
+        // Rendering methods.
+        _w.render.build = function() {
+            if (!_square) {
+                _square = _w.widget.append("div")
+                    .style("position", "relative")
+                    .style("float", "left")
+                    .style("display", "block")
+                    .style("background-color", "white")
+                    .style("cursor", "pointer");
+            }
+            if (!_text) {
+                _text = _w.widget.append("div")
+                    .style("position", "relative")
+                    .style("float", "left")
+                    .style("color", "white")
+                    .style("font-size", "16px")
+                    .style("text-align", "left")
+                    .style("cursor", "pointer");
+            }
+        };
+
+        _w.render.update = function() {};
+
+        _w.render.style = function() {
+            _w.widget.style("pointer-events", "all");
+            _.forOwn(_w.attr.margins, function(margin, side) {
+                _w.widget.style("margin-" + side, margin + "px");
+            });
+            _text.style("font-size", _w.attr.fontSize + "px")
+                .html(_w.attr.text);
+            if (_w.attr.mouseover)
+                _text.on("mouseover", _w.attr.mouseover);
+            if (_w.attr.mouseleave)
+                _text.on("mouseleave", _w.attr.mouseleave);
+            if (_w.attr.click)
+                _text.on("click", _w.attr.click);
+            _square.style("width", 0.8*_w.attr.fontSize + "px")
+                .style("height", 0.8*_w.attr.fontSize + "px")
+                .style("margin-right", 0.4*_w.attr.fontSize + "px")
+                .style("margin-top", 0.2*_w.attr.fontSize + "px")
+                .style("background-color", _w.attr.color);
+            _w.widget.style("display", "block");
+        }
+    }
+
+    Legend.prototype = Object.create(widgets.Widget.prototype);
+    exports.widgets.Legend = Legend;
+})));

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>flight stat</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+    <script src="../../dl/widgets.min.js"></script>
+    <script src="../../dl/widgets.map.min.js"></script>
+</head>
+<body>
+<script>
+    var map = new adt.widgets.Map("flight")
+        .x(0)                       // Top-left corner is adjusted to
+        .y(0)                       // the window
+        .width(window.innerWidth)   // Size is set to the window size
+        .height(window.innerHeight)
+        .backgroundColor("#111")
+        .borderColor("#888")
+        .foregroundColor("#222")
+        .render();                  // Must be called to draw the map
+</script>
+</body>
+</html>

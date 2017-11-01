@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
+	<script src="../js/lib/d3.v4.min.js"></script>
+	<title>home | adt</title>
+    <link rel="stylesheet" type="text/css" href="wp.min.css">
+
+	<style>
+		img#logo {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+
+<!-- Menu -->
+<input type="checkbox" id="menu"><label for="menu" id="open">☰</label>
+<aside>
+	<div class="logo">adt</div>
+	<nav>
+		<div>
+			<a href="#description">what is this</a>
+			<a href="#usage">how can I use it</a>
+			<a href="#requirements">requirements</a>
+            <a href="#contact">contact</a>
+            <a href="#contact">tutorials</a>
+			<input type="checkbox" id="s1-api"><label for="s1-api">api</label>
+			<div class="s1">
+				<a href="#api-data">data</a>
+				<a href="#api-rest">rest</a>
+				<a href="#api-signals">signals</a>
+				<input type="checkbox" id="s2-system"><label for="s2-system">system</label>
+				<div class="s2">
+					<a href="#api-system.log">system.log</a>
+					<a href="#api-system.version">system.version</a>
+				</div>
+				<a href="#api-user">user</a>
+				<input type="checkbox" id="s2-widgets"><label for="s2-widgets">widgets</label>
+				<div class="s2">
+                    <a href="#api-widgets.areachart">widgets.areachart</a>
+                    <a href="#api-widgets.barchart">widgets.barchart</a>
+                    <a href="#api-widgets.chordchart">widgets.chordchart</a>
+                    <a href="#api-widgets.grid">widgets.grid</a>
+					<a href="#api-widgets.hint">widgets.hint</a>
+					<a href="#api-widgets.image">widgets.image</a>
+					<a href="#api-widgets.info">widgets.info</a>
+					<a href="#api-widgets.label">widgets.label</a>
+					<a href="#api-widgets.legend">widgets.legend</a>
+					<a href="#api-widgets.linechart">widgets.linechart</a>
+					<a href="#api-widgets.map">widgets.map</a>
+					<a href="#api-widgets.piechart">widgets.piechart</a>
+					<a href="#api-widgets.slider">widgets.slider</a>
+					<a href="#api-widgets.status">widgets.status</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+</aside>
+
+<!-- Main content -->
+<main><label for="menu" id="exit"></label>
+	<!-- team logo -->
+	<img id="logo" src="../resources/img/logo-dark.png"/>
+
+    <!-- what is this? -->
+	<h1 id="description">what is this</h1>
+	This is the developer site for Analytics Dashboard Tools (<span class="adt"></span>) is a Javascript library used within Sony Mobile to quickly build interactive dashboards for displaying real-time data.
+
+
+	<!-- how can you use it -->
+	<h1 id="usage">how can I use it</h1>
+	To use any of the modules, at the moment you need to download the module source and include it in the HTML file:
+	<pre>&lt;script src="module.js"&gt;&lt;/script&gt;</pre>
+
+
+	<!-- requirements -->
+	<h1 id="requirements">requirements</h1>
+	Some of the modules rely on external libraries.
+	Here is a list of all libraries that are used:
+	<dl class="custom">
+		<dt><code>d3@4</code></dt>
+		<dd>SVG manipulation library. <a href="https://d3js.org/">[website]</a></dd>
+
+		<dt><code>queue</code></dt>
+		<dd>Module for reading files asynchronously. <a href="https://github.com/d3/d3-queue">[github]</a></dd>
+
+		<dt><code>topojson</code></dt>
+		<dd>Module for reading TopoJSON files. <a href="https://github.com/topojson">[github]</a></dd>
+
+		<dt><code>lodash</code></dt>
+		<dd>A set of useful utility methods. <a href="https://lodash.com/">[website]</a></dd>
+
+		<dt><code>localforage</code></dt>
+		<dd>Module for managing local storage. <a href="http://localforage.github.io/localForage/">[website]</a></dd>
+
+		<dt><code>spin</code></dt>
+		<dd>Widget of showing a spinner. <a href="http://spin.js.org/">[website]</a></dd>
+	</dl>
+
+
+    <!-- contact -->
+    <h1 id="contact">contact</h1>
+    Questions related to the map: <code style="float:right">Analytics-Office@sonymobile.com</code>
+    Bugs/questions related to the <span class="adt"></span> library: <code style="float:right">enys.mones@sony.com</code>
+
+
+    <!-- tutorials -->
+    <h1 id="tutorials">tutorials</h1>
+    Here is a (continuously increasing) list of tutorials that show how you can use the library to create some
+    interactive maps and dashboards, just to help you start with <span class="adt"></span>.
+    <dl class="custom">
+        <dt><a href="tutorials/flightstat">flightstat</a></dt>
+        <dd>A quick guide to build a real-time flight tracker using the open ADS-B database.</dd>
+    </dl>
+
+
+	<!-- api -->
+	<h1 id="api">api</h1>
+    Below you find the API documentation for the modules. With the exception of the widgets, each module is a standalone
+    script that can be loaded and used as it is right out of the box. For the widgets, the module <code>adt.widgets</code>
+    needs to be loaded first.
+
+
+</main>
+
+<script>
+	function addEntry(d) {
+		var div = d3.select("main").append("div");
+
+		div.append("h" + d.level)
+			.attr("id", "api-" + d.name)
+			.text(d.name);
+		div.append("div")
+			.html(d.desc + "<br>");
+		if (d.links) {
+            div.append("a")
+                .attr("href", "dl/" + d.name + ".min.js")
+                .text("[download]");
+            div.append("span").html("&nbsp;");
+            div.append("a")
+                .attr("href", "api/" + d.name + ".html")
+                .text("[documentation]");
+        }
+    }
+
+	(function() {
+		[
+		    {
+		        name: "data",
+				desc: "Module including data classes for representing and manipulating data.",
+				level: 2,
+				links: true
+		    },
+            {
+                name: "rest",
+                desc: "Module implementing some wrappers for querying REST API end points.",
+                level: 2,
+                links: true
+            },
+            {
+                name: "signals",
+                desc: "Managing event subscriptions and event emissions.",
+				level: 2,
+                links: true
+            },
+            {
+                name: "system",
+                desc: "Various i/o related operations.",
+                level: 2,
+                links: false
+            },
+            {
+                name: "system.log",
+                desc: "Logging methods for development and maintenance.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "system.version",
+                desc: "Version monitoring and automatic version updates.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "user",
+                desc: "Various methods for detecting and triggering user events.",
+                level: 2,
+                links: true
+            },
+            {
+                name: "widgets",
+                desc: "The interactive charts and other widget elements on the dashboard. All widgets are shipped with a set of already available methods for positioning and basic styling.",
+                level: 2,
+                links: true
+            },
+            {
+                name: "widgets.areachart",
+                desc: "An area chart.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.barchart",
+                desc: "An interactive bar chart.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.chordchart",
+                desc: "An interactive chord chart.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.grid",
+                desc: "A convenient grid for arranging widgets in a more ordered manner.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.hint",
+                desc: "A small hint that disappears once the user interacts with the dashboard.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.image",
+                desc: "A single static image.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.info",
+                desc: "An info window that covers the entire dashboard and disappears once user clicks outside.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.label",
+                desc: "A static text label.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.legend",
+                desc: "A label together with a colored square to use as legend.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.linechart",
+                desc: "An interactive line chart.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.map",
+                desc: "An interactive world map with some built-in functions.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.piechart",
+                desc: "An interactive pie chart.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.slider",
+                desc: "A slider for manipulating charts.",
+                level: 3,
+                links: true
+            },
+            {
+                name: "widgets.status",
+                desc: "A status label containing a label and a value.",
+                level: 3,
+                links: true
+            }
+		].forEach(function(m) {
+		    addEntry(m);
+		});
+		d3.select("main")
+			.style("margin-bottom", "30px");
+	})();
+</script>
+</body>
+</html>

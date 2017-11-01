@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>flight stat</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+    <script src="../../dl/widgets.min.js"></script>
+    <script src="../../dl/widgets.map.min.js"></script>
+    <script src="../../dl/rest.min.js"></script>
+</head>
+<body>
+<script>
+    var map = new adt.widgets.Map("flight")
+        .x(0)                       // Top-left corner is adjusted to
+        .y(0)                       // the window
+        .width(window.innerWidth)   // Size is set to the window size
+        .height(window.innerHeight)
+        .backgroundColor("#111")
+        .borderColor("#888")
+        .foregroundColor("#222")
+        .render();                  // Must be called to draw the map
+    map.staticLayer.add("SAS");     // Add static layer 'SAS'
+    map.dynamicLayer.add("SAS");    // Add dynamic layer 'SAS'
+
+    // We use the cors-anywhere app to access the API
+    // (even from localhost)
+    var proxy = "https://cors-anywhere.herokuapp.com/";
+
+    // Create REST object that fetches the data
+    var api = new adt.REST(
+        proxy + "https://public-api.adsbexchange.com",
+        "VirtualRadar",
+        "AircraftList.json");
+
+    // Query the database every 10 seconds
+    setInterval(function() {
+        api.json({fCallS: "SAS"}, function (json) {
+            // Data is fetched successfully
+            updateMap(json);
+        }, function (error) {
+            // Print error to the console
+            console.log(error);
+        }, false);
+    }, 10000);
+
+    // Update method
+    var flights = {};
+    function updateMap(data) {
+        // Loop through aircrafts
+        data.acList.forEach(function(d) {
+            var id = d.Call;
+            if (!flights.hasOwnProperty(id))
+                flights[id] = {
+                    color: "rgb(" + parseInt(255*Math.random())
+                        + "," + parseInt(255*Math.random())
+                        + "," + parseInt(255*Math.random()) + ")"
+                };
+
+            // Get geo coordinates
+            var latLon = [d.Lat, d.Long];
+
+            // Show airplane if it is new or latitude/longitude has an angle difference of 0.1
+            if (!flights[id].hasOwnProperty(latLon) ||
+                Math.abs(flights[id].latLon[0]-latLon[0])+Math.abs(flights[id].latLon[1]-latLon[1]) > 10) {
+                // Add to static map as trail of the flight
+                map.staticLayer.draw.dot("SAS", latLon, 1, flights[id].color);
+
+                // Add to dynamic map to see the plane is updated
+                map.dynamicLayer.draw.dot("SAS", latLon, 10, flights[id].color, 400);
+            }
+
+            // Update coordinates
+            flights[id].latLon = latLon;
+        });
+    }
+</script>
+</body>
+</html>
