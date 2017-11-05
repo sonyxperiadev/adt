@@ -2,8 +2,24 @@
  * Module implementing various data structures and data manipulation methods.
  * Part of the Analytics Dashboard Tools.
  *
- * @copyright Copyright (C) 2017 Sony Mobile Communications AB.
- * All rights, including trade secret rights, reserved.
+ * @copyright Copyright (C) 2017 Sony Mobile Communications Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
  * @module data
  * @memberOf adt
@@ -184,7 +200,7 @@
              * @method set
              * @memberOf adt.data.structures.Histogram
              * @param {Array} data Array containing {x: number, y: number} objects.
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function set(data) {
                 _data = data;
@@ -210,7 +226,7 @@
              * @memberOf adt.data.structures.Histogram
              * @param {number} x Value of the data point.
              * @param {number} y Frequency of the data point.
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function add(x, y) {
                 _data.push({x: x, y: y, index: _data.length});
@@ -223,7 +239,7 @@
              * @method scale
              * @memberOf adt.data.structures.Histogram
              * @param {number} factor Multiplying factor.
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function scale(factor) {
                 _data.forEach(function(d) {
@@ -237,7 +253,7 @@
              *
              * @method normalize
              * @memberOf adt.data.structures.Histogram
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function normalize() {
                 var s = d3.sum(_data, function (d) {
@@ -255,7 +271,7 @@
              * @method sortByX
              * @memberOf adt.data.structures.Histogram
              * @param {boolean} descending Whether histogram should be sorted in descending instead of ascending order.
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function sortByX(descending) {
                 _data.sort(function(a, b) {
@@ -270,7 +286,7 @@
              * @method sortByY
              * @memberOf adt.data.structures.Histogram
              * @param {boolean} descending Whether histogram should be sorted in descending instead of ascending order.
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function sortByY(descending) {
                 _data.sort(function(a, b) {
@@ -284,7 +300,7 @@
              *
              * @method unsort
              * @memberOf adt.data.structures.Histogram
-             * @returns {Histogram} Reference to the current histogram.
+             * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
             function unsort() {
                 _data.sort(function(a, b) {
@@ -333,7 +349,7 @@
              * @method clear
              * @memberOf adt.data.structures.History
              * @param {Date} start Start time of the history.
-             * @returns {History} Reference to the current history.
+             * @returns {adt.data.structures.History} Reference to the current history.
              */
             function clear(start) {
                 _data = [];
@@ -361,7 +377,7 @@
              * @param {Date} x Temporal value of the data.
              * @param {string} idy Y id of the data.
              * @param {number} y Y value of the data.
-             * @returns {History} Reference to the current history.
+             * @returns {adt.data.structures.History} Reference to the current history.
              */
             function update(idx, x, idy, y) {
                 _data[idx].x = x;

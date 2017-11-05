@@ -17,8 +17,24 @@
  * Note that the module already contains the paths for the countries as well as additional country data (capital info,
  * population size), which results in a relatively large size even minified (~730 kB).
  *
- * @copyright Copyright (C) 2017 Sony Mobile Communications AB.
- * All rights, including trade secret rights, reserved.
+ * @copyright Copyright (C) 2017 Sony Mobile Communications Inc.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
  * @module widgets.map
  * @memberOf adt
@@ -754,6 +770,11 @@
          * @memberOf adt.widgets.map.Map
          * @private
          */
+        var __ZOOM = d3.zoom()
+            .scaleExtent([1 / 2, 4])
+            .on("zoom", function () {
+                _zoom._zoom();
+            });
         var _zoom = (function () {
             /**
              * The transformation used for the zoom.
@@ -839,6 +860,11 @@
              * @private
              */
             function _zoom(transformation, duration) {
+                _mapLayer._zoomFn(transformation);
+                //_staticLayer._zoomFn(transformation);
+                //_dynamicLayer._zoomFn(transformation);
+                return;
+
                 // Turn on watcher
                 _watchers._zooming = true;
 
@@ -898,6 +924,18 @@
              * @private
              */
             function _click(country) {
+                // If country is valid and not focus country, zoom in
+                if (country && _focus !== country.name) {
+                    _focus = country.name;
+                    /*_zoom(new _Transformation()
+                     .translate(-country.svg.center[0], -country.svg.center[1])
+                     .scale(60 / Math.sqrt(1 + Math.max(country.svg.width, country.svg.height)))
+                     .translate(_w.attr.width / 2, _w.attr.height / 2),
+                     700);*/
+                    _zoom(country.svg)
+                }
+
+                return;
                 // If watchers are on, ignore click
                 if (_watchers._zooming) {
                     return;
@@ -938,11 +976,15 @@
                     return;
                 }
 
-                // Create transformation based on scroll direction
-                var pos = direction === "in"
-                    ? _transformation.inverse().point(d3.mouse(this))
-                    : [_w.attr.width / 2, _w.attr.height / 2];
+                // Set transformation level
                 var level = Math.max(1, _transformation.zoomLevel() + dy / 10);
+
+                // Set transformation position
+                var mouse = _transformation.inverse().point(d3.mouse(this));
+                var pos = [_w.attr.width/2 - (1-1/level)*(_w.attr.width/2 - mouse[0]),
+                    _w.attr.height/2 - (1-1/level)*(_w.attr.height/2 - mouse[1])];
+
+                // Build transformation
                 var tr = new _Transformation()
                     .translate(-pos[0], -pos[1])
                     .scale(level)
@@ -960,7 +1002,8 @@
                 _level: _level,
                 _transform: _transform,
                 _invert: _invert,
-                zoomOut: zoomOut
+                zoomOut: zoomOut,
+                _zoom: _zoom
             };
         })();
 
@@ -985,7 +1028,8 @@
             var _svg = _w.widget.append("svg")
                 .attr("id", _id + "-map-layer")
                 .style("position", "absolute")
-                .on("wheel.zoom", _zoom._scroll);
+                .call(__ZOOM);
+            //.on("wheel.zoom", _zoom._scroll);
 
             /**
              * The background of the map (water).
@@ -1071,6 +1115,17 @@
              * @private
              */
             function _zoomFn(transformation, duration, callback) {
+                if (transformation) {
+                    var translate = [transformation.center[0], transformation.center[1]];
+                    var scale = 60 / Math.sqrt(1 + Math.max(transformation.width, transformation.height));
+                    _land.transition().duration(750)
+                        .call(__ZOOM.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale) ); // updated for d3 v4
+                } else {
+                    _land
+                        .attr("transform", d3.event.transform);
+                }
+                return;
+
                 // Country borders
                 _paths
                     .style("stroke-width", 0.5 / transformation.zoomLevel() + "px");
@@ -1083,7 +1138,6 @@
                         // Additional callback
                         if (callback)
                             callback();
-
                     });
             }
 
@@ -1428,8 +1482,21 @@
                                     _canvas.fillStyle = color;
 
                                 // Adjust radius and position
-                                var adjustedR = r / (fresh ? 1 :_zoom._level());
-                                var adjustedPos = fresh ? _zoom._transform([x, y]) : [x, y];
+                                if (!this._level)
+                                    this._level = 1;
+                                if (d3.event)
+                                    this._level = d3.event.transform.k;
+                                var adjustedR = r / (fresh ? 1/Math.sqrt(this._level) : Math.sqrt(this._level));
+                                if (!this._tr) {
+                                    this._tr = new _Transformation();
+                                }
+                                if (d3.event) {
+                                    this._tr = new _Transformation()
+                                        .scale(d3.event.transform.k)
+                                        .translate(d3.event.transform.x, d3.event.transform.y);
+                                }
+                                //var adjustedPos = fresh ? _zoom._transform([x, y]) : [x, y];
+                                var adjustedPos = fresh ? this._tr.point([x, y]) : [x, y];
 
                                 // Draw
                                 _canvas.fillRect(adjustedPos[0] - adjustedR / 2, adjustedPos[1] - adjustedR / 2,
@@ -1521,10 +1588,18 @@
              * @private
              */
             function _zoomFn(transformation) {
-                var m = transformation.toTr();
-                _.forOwn(_layers, function(layer) {
-                    layer.canvas.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
+                /*var m = transformation.toTr();
+                 _.forOwn(_layers, function(layer) {
+                 layer.canvas.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
+                 });*/
+                _staticLayer._clear();
+                _.forOwn(_layers, function (layer) {
+                    var context = layer.canvas;
+                    context.translate(d3.event.transform.x, d3.event.transform.y);
+                    context.scale(d3.event.transform.k, d3.event.transform.k);
                 });
+                _staticLayer._render();
+                _staticLayer._restore();
             }
 
             /**
@@ -1765,7 +1840,7 @@
                                 birth: new Date().getTime()/1000
                             });
                         }
-                        
+
                         // Start some regular automatic erase to prevent elements stuck on the map.
                         setInterval(function() {
                             // Remove too old elements and collect young ones
@@ -1857,8 +1932,10 @@
             function _zoomFn(transformation, duration) {
                 _.forOwn(_layers, function(layer) {
                     // Zoom SVG
-                    layer.g.transition().duration(duration ? duration : 0)
-                        .attr("transform", transformation.svg());
+                    //layer.g.transition().duration(duration ? duration : 0)
+                    //    .attr("transform", transformation.svg());
+                    layer.g
+                        .attr("transform", d3.event.transform);
                 });
             }
 
