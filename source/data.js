@@ -182,9 +182,10 @@
          *
          * @class Histogram
          * @memberOf adt.data.structures
+         * @param {Array} data Array to initialize histogram with.
          * @constructor
          */
-        Histogram: function() {
+        Histogram: function(data) {
             /**
              * The histogram data.
              *
@@ -192,7 +193,7 @@
              * @memberOf adt.data.structures.Histogram
              * @private
              */
-            var _data = [];
+            var _data = data ? data : [];
 
             /**
              * Assigns histogram data to the passed Array.
@@ -202,10 +203,10 @@
              * @param {Array} data Array containing {x: number, y: number} objects.
              * @returns {adt.data.structures.Histogram} Reference to the current histogram.
              */
-            function set(data) {
+            this.set = function(data) {
                 _data = data;
                 return this;
-            }
+            };
 
             /**
              * Returns a copy of the underlying histogram data.
@@ -327,18 +328,18 @@
          * Each data point is a (x, y) pair where y values are dates, y values are objects containing multiple
          * dimensions.
          *
-         * @class History
+         * @class TimeSeries
          * @memberOf adt.data.structures
          * @param {Array} dimensions Array of keys for the different y values.
          * @constructor
          */
-        History: function(dimensions) {
+        TimeSeries: function(dimensions) {
             /**
              * The actual historical data.
              * Initialized to an empty array.
              *
              * @var {Array} _data
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @private
              */
             var _data = [];
@@ -347,9 +348,9 @@
              * Clears history and re-allocates it based on the starting time.
              *
              * @method clear
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @param {Date} start Start time of the history.
-             * @returns {adt.data.structures.History} Reference to the current history.
+             * @returns {adt.data.structures.TimeSeries} Reference to the current history.
              */
             function clear(start) {
                 _data = [];
@@ -372,12 +373,12 @@
              * Updates history at a specific point.
              *
              * @method update
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @param {number} idx Temporal id of the data.
              * @param {Date} x Temporal value of the data.
              * @param {string} idy Y id of the data.
              * @param {number} y Y value of the data.
-             * @returns {adt.data.structures.History} Reference to the current history.
+             * @returns {adt.data.structures.TimeSeries} Reference to the current history.
              */
             function update(idx, x, idy, y) {
                 _data[idx].x = x;
@@ -388,7 +389,7 @@
              * Returns a sub history cut from the end.
              *
              * @method sub
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @param {number=} length Length of the sub history to cut. If not specified, the total history is returned.
              * @param {number=} offset Offset measured from the end of the history. If not specified, 0 is used.
              * @returns {Array} The sliced history array.
@@ -406,7 +407,7 @@
              * Returns the sum of the last several bins.
              *
              * @method sum
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @param {number=} length Number of bins to take sum over. If not specified, the last element is returned.
              * @param {number=} offset Offset measured from the end of the history. If not specified, 0 is used.
              * @returns {object} Object containing the sum for each y dimension.
@@ -431,7 +432,7 @@
              * Calculates the peak level in the specified slice of history.
              *
              * @method peak
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @param {number=} length Number of bins to calculate peak over. If not specified, the entire history is
              * considered.
              * @param {number=} offset Offset measured from the end of the history. If not specified, 0 is used.
@@ -455,7 +456,7 @@
              * The trend is simply the change from the bin before last and the last one.
              *
              * @method trend
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @returns {object} Object containing the relative changes for each y dimensions.
              */
             function trend(offset) {
@@ -478,7 +479,7 @@
              * Returns a distribution of y values in the specified interval.
              *
              * @method yDist
-             * @memberOf adt.data.structures.History
+             * @memberOf adt.data.structures.TimeSeries
              * @param {number=} length Number of bins to calculate distribution over. If not specified, the entire history is
              * considered.
              * @param {number=} offset Offset measured from the end of the history. If not specified, 0 is used.

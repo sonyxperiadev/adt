@@ -2,54 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9712abed-51c8-4e30-aa3e-ca07ec679781" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source/ml.anomaly.js" afterPath="$PROJECT_DIR$/source/ml.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/data.html" afterPath="$PROJECT_DIR$/api/data.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/rest.html" afterPath="$PROJECT_DIR$/api/rest.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/signals.html" afterPath="$PROJECT_DIR$/api/signals.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/system.log.html" afterPath="$PROJECT_DIR$/api/system.log.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/system.version.html" afterPath="$PROJECT_DIR$/api/system.version.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/user.html" afterPath="$PROJECT_DIR$/api/user.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.areachart.html" afterPath="$PROJECT_DIR$/api/widgets.areachart.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.barchart.html" afterPath="$PROJECT_DIR$/api/widgets.barchart.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.chordchart.html" afterPath="$PROJECT_DIR$/api/widgets.chordchart.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.grid.html" afterPath="$PROJECT_DIR$/api/widgets.grid.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.hint.html" afterPath="$PROJECT_DIR$/api/widgets.hint.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.html" afterPath="$PROJECT_DIR$/api/widgets.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.image.html" afterPath="$PROJECT_DIR$/api/widgets.image.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.info.html" afterPath="$PROJECT_DIR$/api/widgets.info.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.label.html" afterPath="$PROJECT_DIR$/api/widgets.label.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.legend.html" afterPath="$PROJECT_DIR$/api/widgets.legend.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.linechart.html" afterPath="$PROJECT_DIR$/api/widgets.linechart.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.map.html" afterPath="$PROJECT_DIR$/api/widgets.map.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.piechart.html" afterPath="$PROJECT_DIR$/api/widgets.piechart.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.slider.html" afterPath="$PROJECT_DIR$/api/widgets.slider.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/widgets.status.html" afterPath="$PROJECT_DIR$/api/widgets.status.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/widgets.map.min.js" afterPath="$PROJECT_DIR$/lib/widgets.map.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/data.min.js" afterPath="$PROJECT_DIR$/lib/data.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/data.js" afterPath="$PROJECT_DIR$/source/data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/ml.anomaly.js" afterPath="$PROJECT_DIR$/source/ml.anomaly.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rest.js" afterPath="$PROJECT_DIR$/source/rest.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/signals.js" afterPath="$PROJECT_DIR$/source/signals.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/system.log.js" afterPath="$PROJECT_DIR$/source/system.log.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/system.version.js" afterPath="$PROJECT_DIR$/source/system.version.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/user.js" afterPath="$PROJECT_DIR$/source/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.areachart.js" afterPath="$PROJECT_DIR$/source/widgets.areachart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.barchart.js" afterPath="$PROJECT_DIR$/source/widgets.barchart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.chordchart.js" afterPath="$PROJECT_DIR$/source/widgets.chordchart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.grid.js" afterPath="$PROJECT_DIR$/source/widgets.grid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.hint.js" afterPath="$PROJECT_DIR$/source/widgets.hint.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.image.js" afterPath="$PROJECT_DIR$/source/widgets.image.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.info.js" afterPath="$PROJECT_DIR$/source/widgets.info.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.js" afterPath="$PROJECT_DIR$/source/widgets.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.label.js" afterPath="$PROJECT_DIR$/source/widgets.label.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.legend.js" afterPath="$PROJECT_DIR$/source/widgets.legend.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.linechart.js" afterPath="$PROJECT_DIR$/source/widgets.linechart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.map.js" afterPath="$PROJECT_DIR$/source/widgets.map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.piechart.js" afterPath="$PROJECT_DIR$/source/widgets.piechart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.slider.js" afterPath="$PROJECT_DIR$/source/widgets.slider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.status.js" afterPath="$PROJECT_DIR$/source/widgets.status.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/widgets.tooltip.js" afterPath="$PROJECT_DIR$/source/widgets.tooltip.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -63,58 +21,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="docbuilder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/docbuilder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6426">
-              <caret line="357" column="44" lean-forward="false" selection-start-line="357" selection-start-column="44" selection-end-line="357" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rest.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/rest.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/source/data.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="299" column="14" lean-forward="true" selection-start-line="299" selection-start-column="14" selection-end-line="299" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ml.anomaly.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/ml.anomaly.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -129,6 +36,9 @@
       <list>
         <option value="$PROJECT_DIR$/python/docbuilder.py" />
         <option value="$PROJECT_DIR$/source/rest.js" />
+        <option value="$PROJECT_DIR$/source/user.js" />
+        <option value="$PROJECT_DIR$/source/ml.anomaly.js" />
+        <option value="$PROJECT_DIR$/source/ml.js" />
         <option value="$PROJECT_DIR$/source/data.js" />
       </list>
     </option>
@@ -210,6 +120,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="nodejs_interpreter_path" value="/usr/bin/node" />
+    <property name="javascript.nodejs.core.library.configured.version" value="4.2.6" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -328,23 +241,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1509888765498</updated>
-      <workItem from="1509888766819" duration="546000" />
+      <workItem from="1509888766819" duration="2352000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="546000" />
+    <option name="totallyTimeSpent" value="2352000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5021834" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.4978166" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -352,7 +265,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -368,14 +280,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -392,14 +296,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/docbuilder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6426">
-          <caret line="357" column="44" lean-forward="false" selection-start-line="357" selection-start-column="44" selection-end-line="357" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/widgets.hint.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
@@ -408,10 +304,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/ml.anomaly.js">
+    <entry file="file://$PROJECT_DIR$/source/widgets.grid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/widgets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-378">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/system.version.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/ml.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -424,10 +352,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="299" column="14" lean-forward="true" selection-start-line="299" selection-start-column="14" selection-end-line="299" selection-end-column="14" />
+        <state relative-caret-position="2245">
+          <caret line="131" column="8" lean-forward="false" selection-start-line="131" selection-start-column="8" selection-end-line="131" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/docbuilder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="348" column="36" lean-forward="true" selection-start-line="348" selection-start-column="36" selection-end-line="348" selection-end-column="36" />
           <folding />
         </state>
       </provider>
