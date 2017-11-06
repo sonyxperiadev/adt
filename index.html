@@ -14,7 +14,7 @@
 <!-- Menu -->
 <input type="checkbox" id="menu"><label for="menu" id="open">☰</label>
 <aside>
-	<div class="adt-logo">adt</div>
+	<div class="adt-logo">adt v0.1</div>
 	<nav>
 		<div>
 			<a href="#description">what is this</a>
@@ -50,6 +50,7 @@
 					<a href="#api-widgets.status">widgets.status</a>
 				</div>
 			</div>
+			<a href="#todo">todo</a>
 		</div>
 	</nav>
 </aside>
@@ -72,17 +73,16 @@
 
 	<!-- install -->
 	<h1 id="installing">installing</h1>
-	In the browser:
+	At the moment, modules should be included directly in the dashboard website:
 	<pre>&lt;script src="module_name.js"&gt;&lt;/script&gt;</pre>
 
-	Node:
-	<pre>var adtModule = require("module_name");</pre>
+	In future versions, the library will be added as a Node package.
 
 
 	<!-- requirements -->
 	<h1 id="requirements">requirements</h1>
 	Some of the modules rely on external libraries.
-	Here is a list of all libraries that are used:
+	Here is a complete list of all libraries that are used in <span class="adt"></span>:
 	<dl class="custom">
 		<dt><code>d3@4</code></dt>
 		<dd>SVG manipulation library. <a href="https://d3js.org/">[website]</a></dd>
@@ -119,13 +119,24 @@
     Below you find the API documentation for the modules. With the exception of the widgets, each module is a standalone
     script that can be loaded and used as it is right out of the box. For the widgets, the module <code>adt.widgets</code>
     needs to be loaded first.
+	<div id="api-content"></div>
+
+
+	<!-- todo -->
+	<h1 id="todo">todo</h1>
+	A (non-exhaustive) list of TODO and planned improvements for future versions.
+	<ul>
+		<li>Add <code>package.json</code> with each module as a separate npm package.</li>
+		<li>Add unit tests.</li>
+		<li>Improve zooming mechanism in <code>adt.widgets.map</code>.</li>
+	</ul>
 
 
 </main>
 
 <script>
 	function addEntry(d) {
-		var div = d3.select("main").append("div");
+		var div = d3.select("#api-content").append("div");
 
 		div.append("h" + d.level)
 			.attr("id", "api-" + d.name)
@@ -134,7 +145,7 @@
 			.html(d.desc + "<br>");
 		if (d.links) {
             div.append("a")
-                .attr("href", "lib/" + d.name + ".min.js")
+                .attr("href", "build/" + d.name + ".min.js")
                 .text("[download]");
             div.append("span").html("&nbsp;");
             div.append("a")
