@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../style/wp.min.css">
+    <link rel="stylesheet" type="text/css" href="../../style/adt.css">
     <script src="../../external/d3.v4.min.js"></script>
     <title>flightstat | tutorials | adt</title>
     <style>
@@ -21,7 +22,7 @@
 <!-- Menu -->
 <input type="checkbox" id="menu"><label for="menu" id="open">☰</label>
 <aside>
-    <div class="logo">adt</div>
+    <div class="adt-logo">adt</div>
     <nav>
         <div>
             <a href="#goal">Goal</a>
@@ -45,8 +46,9 @@
 
 <!-- Main content -->
 <main><label for="menu" id="exit"></label>
-    <!-- team logo -->
-    <img id="logo" src="../../../resources/img/logo-dark.png"/>
+    <!-- logos -->
+    <a href="https://www.sonymobile.com/"><img class="logo x" src="../../img/x.png"/></a>
+    <img class="logo ao" src="../../img/ao.png"/>
 
     <!-- goal -->
     <h1 id="goal">Goal</h1>
@@ -83,8 +85,8 @@
     module that is required by all other widgets.
     So, again in the head, after the dependencies goes the following
     <pre>
-&lt;script src="../../dl/widgets.min.js"&gt;&lt;/script&gt;
-&lt;script src="../../dl/adt/widgets.map.min.js"&gt;&lt;/script&gt;</pre>
+&lt;script src="build//widgets.min.js"&gt;&lt;/script&gt;
+&lt;script src="build//adt/widgets.map.min.js"&gt;&lt;/script&gt;</pre>
 
     In this tutorial, the modules are available from the documentation, but you need to change the above to fit your
     directory structure.
@@ -164,6 +166,7 @@ var map = new adt.widgets.Map("flight")
     <h2 id="step2a">fetching data</h2>
     Here we make use of the <code>adt.rest</code> module that implements the <code>REST</code> class, which is simply
     a wrapper for the existing request methods (in <code>d3</code>).
+    First, add <code>&lt;script src="build/widgets.min.js"&gt;&lt;/script&gt;</code> to the head of <code>index.html</code>.
     To get the data, we create a new <code>REST</code> object that is directed to the endpoint of the API:
 
     <pre>
@@ -293,7 +296,7 @@ function updateMap(data) {
     });
 }</pre>
 
-    For a reference, <a href="step2b.html">here</a> you can see a working version of the automated and colored map.
+    For a reference, <a href="step2c.html">here</a> you can see a working version of the automated and colored map.
 
     <br><br>
 

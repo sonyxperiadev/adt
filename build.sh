@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SRC_DIR="source"
-DST_DIR="lib"
+SRC_DIR="src"
+DST_DIR="build"
 AVAILABLE_MODULES=(
     "data"
     "rest"

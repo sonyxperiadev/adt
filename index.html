@@ -18,10 +18,9 @@
 	<nav>
 		<div>
 			<a href="#description">what is this</a>
-			<a href="#usage">how can I use it</a>
+			<a href="#installing">installing</a>
 			<a href="#requirements">requirements</a>
-            <a href="#contact">contact</a>
-            <a href="#contact">tutorials</a>
+            <a href="#tutorials">tutorials</a>
 			<input type="checkbox" id="s1-api"><label for="s1-api">api</label>
 			<div class="s1">
 				<a href="#api-data">data</a>
@@ -61,15 +60,23 @@
 	<a href="https://www.sonymobile.com/"><img class="logo x" src="img/x.png"/></a>
 	<img class="logo ao" src="img/ao.png"/>
 
-    <!-- what is this? -->
-	<h1 id="description">what is this</h1>
-	This is the developer site for Analytics Dashboard Tools (<span class="adt"></span>) is a Javascript library used within Sony Mobile to quickly build interactive dashboards for displaying real-time data.
+
+    <!-- description -->
+	<h1 id="description">description</h1>
+	This is the documentation site for Analytics Dashboard Tools (<span class="adt"></span>) is a Javascript library used within Sony Mobile to quickly build interactive dashboards for displaying real-time data.
+	In short, <span class="adt"></span> is simply a collection of reusable charts (wrapper methods around D3 with a
+	bunch of convenience functions).
+	However, in order to make the dashboard interactive and the building process less painful, <span class="adt"></span>
+	also has some modules used to logging, emitting events and listening to various user inputs.
 
 
-	<!-- how can you use it -->
-	<h1 id="usage">how can I use it</h1>
-	To use any of the modules, at the moment you need to download the module source and include it in the HTML file:
-	<pre>&lt;script src="module.js"&gt;&lt;/script&gt;</pre>
+	<!-- install -->
+	<h1 id="installing">installing</h1>
+	In the browser:
+	<pre>&lt;script src="module_name.js"&gt;&lt;/script&gt;</pre>
+
+	Node:
+	<pre>var adtModule = require("module_name");</pre>
 
 
 	<!-- requirements -->
@@ -95,12 +102,6 @@
 		<dt><code>spin</code></dt>
 		<dd>Widget of showing a spinner. <a href="http://spin.js.org/">[website]</a></dd>
 	</dl>
-
-
-    <!-- contact -->
-    <h1 id="contact">contact</h1>
-    Questions related to the map: <code style="float:right">Analytics-Office@sonymobile.com</code>
-    Bugs/questions related to the <span class="adt"></span> library: <code style="float:right">enys.mones@sony.com</code>
 
 
     <!-- tutorials -->

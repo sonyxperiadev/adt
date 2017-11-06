@@ -27,7 +27,7 @@ modules = [
 for m in modules:
     print("    " + m)
     DocBuilder()\
-        .parse("source/%s.js" % m)\
+        .parse("src/%s.js" % m)\
         .html("api/%s.html" % m,
               style="img#logo{position:fixed;top:20px;right:20px;width:100px;}")
 
