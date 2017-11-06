@@ -240,7 +240,7 @@
          */
         var cheats = {
             /**
-             * Adds a single egg. An egg is a one-time irreversible cheat. Once activated, it will be persistent
+             * Adds a single Easter egg. An Ester egg is a one-time irreversible cheat. Once activated, it will be persistent
              * until page reload.
              *
              * @method egg
