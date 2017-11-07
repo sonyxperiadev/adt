@@ -1,4 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
 /node_modules/
-python/*.pyc
+docs/python/*.pyc

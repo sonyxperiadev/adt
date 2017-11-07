@@ -2,6 +2,7 @@
 
 SRC_DIR="src"
 DST_DIR="build"
+DL_DIR="docs/dl"
 AVAILABLE_MODULES=(
     "data"
     "rest"
@@ -32,7 +33,7 @@ echo "-----------------------"
 
 # Build docs
 echo "  building documentation"
-python python/parser.py
+python docs/python/parser.py
 
 # Build modules
 echo "  compiling modules:"
@@ -42,4 +43,5 @@ for module in "${AVAILABLE_MODULES[@]}"; do
         ${SRC_DIR}/${module}.js \
         --mangle \
         --output ${DST_DIR}/${module}.min.js
+    cp ${DST_DIR}/${module}.min.js ${DL_DIR}/
 done

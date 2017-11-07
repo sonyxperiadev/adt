@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
-	<script src="external/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<title>home | adt</title>
     <link rel="stylesheet" type="text/css" href="style/wp.min.css">
     <link rel="stylesheet" type="text/css" href="style/adt.css">
@@ -127,8 +127,7 @@
 	A (non-exhaustive) list of TODO and planned improvements for future versions.
 	<ul>
 		<li>Add <code>package.json</code> with each module as a separate npm package.</li>
-		<li>Add unit tests.</li>
-		<li>Improve zooming mechanism in <code>adt.widgets.map</code>.</li>
+		<li>Add tests.</li>
 	</ul>
 
 
@@ -145,7 +144,7 @@
 			.html(d.desc + "<br>");
 		if (d.links) {
             div.append("a")
-                .attr("href", "build/" + d.name + ".min.js")
+                .attr("href", "dl/" + d.name + ".min.js")
                 .text("[download]");
             div.append("span").html("&nbsp;");
             div.append("a")
