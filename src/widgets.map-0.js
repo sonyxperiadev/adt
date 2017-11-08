@@ -15,7 +15,7 @@
  * Additionally, you only need to work in geo locations, all transformations and projections are cared for under the
  * hood.
  * Note that the module already contains the paths for the countries as well as additional country data (capital info,
- * population size), which results in a significantly large size even minified (~730 kB).
+ * population size), which results in a relatively large size even minified (~730 kB).
  *
  * @copyright Copyright (C) 2017 Sony Mobile Communications Inc.
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -44,6 +44,7 @@
  * @requires adt.widgets
  */
 // TODO add country name in center of largest land
+// TODO scale country name by zoom level
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         factory(exports);
@@ -61,6 +62,7 @@
     } else {
         throw new Error("adt.widgets.map Error: widgets module is not exported");
     }
+
 
     /**
      * JSON string containing the paths for the countries.
@@ -82,7 +84,6 @@
      * If not specified, the identity transformation is created.
      * @constructor
      * @private
-     * @deprecated
      */
     var _Transformation = function (transformation) {
         /**
@@ -763,210 +764,224 @@
         };
 
         /**
-         * Namespace responsible for all zoom operations.
+         * Handles zoom events.
          *
          * @namespace _zoom
          * @memberOf adt.widgets.map.Map
          * @private
          */
-        var _zoom = (function() {
+        var _zoom = (function () {
             /**
-             * Zoom max scale level.
+             * The transformation used for the zoom.
              *
-             * @var {number} _SCALE_MAX
+             * @var {adt.widgets.map._Transformation} _transformation
              * @memberOf adt.widgets.map.Map._zoom
              * @private
              */
-            var _SCALE_MAX = 128;
+            var _transformation = new _Transformation();
 
             /**
-             * Zoom translate boundary factor. This is the extent we allow translations outside the map.
+             * Current focus country.
              *
-             * @var {number} _TRANSLATE_BOUND_FACTOR
+             * @var {?string} Name of focus country.
              * @memberOf adt.widgets.map.Map._zoom
              * @private
              */
-            var _TRANSLATE_BOUND_FACTOR = 0.3;
+            var _focus = null;
 
             /**
-             * Layers that are affected by the zoom.
+             * Zoom event watchers preventing multiple zoom events to collide.
              *
-             * @var {object} _layers
+             * @var {object} _watchers
              * @memberOf adt.widgets.map.Map._zoom
              * @private
              */
-            var _layers = {};
-
-            /**
-             * Current transformation.
-             *
-             * @var {object} _transform
-             * @memberOf adt.widgets.map.Map._zoom
-             * @private
-             */
-            var _transform = d3.zoomIdentity;
-
-            /**
-             * Current zoom level.
-             *
-             * @var {number} _level
-             * @memberOf adt.widgets.map.Map._zoom
-             * @private
-             */
-            var _level = 1;
-
-            /**
-             * The zoom object.
-             *
-             * @var {object} _zoom
-             * @memberOf adt.widgets.map.Map._zoom
-             * @private
-             */
-            var _zoom = d3.zoom()
-                .scaleExtent([1, _SCALE_MAX])
-                .on("zoom", _zoomed);
-
-            /**
-             * Transforms a point according to the current zoom.
-             *
-             * @method transform
-             * @memberOf adt.widgets.map.Map._zoom
-             * @param {Array} point Array of x and y values to transform.
-             * @returns {Array} The transformed point.
-             */
-            function transform(point) {
-                return _transform.apply(point);
-            }
-
-            /**
-             * Inverts a point according to the current zoom.
-             *
-             * @method invert
-             * @memberOf adt.widgets.map.Map._zoom
-             * @param {Array} point Array of x and y values to invert.
-             * @returns {Array} The inverted point.
-             */
-            function invert(point) {
-                return _transform.invert(point);
-            }
+            var _watchers = {
+                /**
+                 * Watcher for zooming. Turned on when zoom starts, turned of when zoom ends.
+                 *
+                 * @var {boolean} _zooming
+                 * @memberOf adt.widgets.map.Map._zoom._watchers
+                 * @private
+                 */
+                _zooming: false
+            };
 
             /**
              * Returns the current zoom level.
              *
-             * @method level
+             * @method _level
              * @memberOf adt.widgets.map.Map._zoom
-             * @returns {number} Zoom level.
-             */
-            function level() {
-                return _level;
-            }
-
-            /**
-             * Initializes zoom boundary.
-             *
-             * @method init
-             * @memberOf adt.widgets.map.Map._zoom
-             */
-            function init() {
-                _zoom.translateExtent([[-_TRANSLATE_BOUND_FACTOR*_w.attr.width, -_TRANSLATE_BOUND_FACTOR*_w.attr.height],
-                    [(1+_TRANSLATE_BOUND_FACTOR)*_w.attr.width, (1+_TRANSLATE_BOUND_FACTOR)*_w.attr.height]]);
-            }
-
-            /**
-             * Sets a layer to the specified selection.
-             *
-             * @method setLayer
-             * @memberOf adt.widgets.map.Map._zoom
-             * @param {string} name Name of the layer to set.
-             * @param {object} layer Selection to set to layer.
-             */
-            function setLayer(name, layer) {
-                _layers[name] = layer;
-            }
-
-            /**
-             * Performs the zoom on all available layers.
-             *
-             * @method _zoomed
-             * @memberOf adt.widgets.map.Map._zoom
+             * @returns {number} Current zoom level.
              * @private
              */
-            function _zoomed() {
-                // Zoom map
-                _layers.map.paths.style("stroke-width", 0.5 / d3.event.transform.k + "px");
-                _layers.map.paths.attr("transform", d3.event.transform);
+            function _level() {
+                return _transformation.zoomLevel();
+            }
 
-                // Zoom static layer
+            /**
+             * Calculates transform of a point.
+             *
+             * @method _transform
+             * @memberOf adt.widgets.map.Map._zoom
+             * @param {Array} point Two dimensional point to invert.
+             * @returns {Array} Transformed coordinates.
+             * @private
+             */
+            function _transform(point) {
+                return _transformation.point(point);
+            }
+
+            /**
+             * Calculates inverse transform of a point.
+             *
+             * @method _invert
+             * @memberOf adt.widgets.map.Map._zoom
+             * @param {Array} point Two dimensional point to invert.
+             * @returns {Array} Inverted coordinates.
+             * @private
+             */
+            function _invert(point) {
+                return _transformation.inverse().point(point);
+            }
+
+            /**
+             * Performs a zoom event.
+             *
+             * @method _zoom
+             * @memberOf adt.widgets.map.Map._zoom
+             * @param {adt.widgets.map._Transformation} transformation The transform used for the zoom.
+             * @param {number=} duration Duration of the zoom animation.
+             * @private
+             */
+            function _zoom(transformation, duration) {
+                // Turn on watcher
+                _watchers._zooming = true;
+
+                // Update transform
+                _transformation = new _Transformation(transformation);//adt.widgets.map._Transformation(transformation);
+
+                // Perform transform
                 _staticLayer._clear();
-                _.forOwn(_layers.static, function(layer) {
-                    layer.canvas.translate(d3.event.transform.x, d3.event.transform.y);
-                    layer.canvas.scale(d3.event.transform.k, d3.event.transform.k);
-                });
-                _staticLayer._render(d3.event.transform.k);
-                _staticLayer._restore();
+                _mapLayer._zoomFn(transformation, duration, function() {
+                    _staticLayer._zoomFn(transformation);
+                    _staticLayer._render();
+                    _staticLayer._restore();
 
-                // Zoom dynamic layer
-                _.forOwn(_layers.dynamic, function(layer) {
-                    layer.g.attr("transform", d3.event.transform);
+                    // TUrn off watchers
+                    _watchers._zooming = false;
                 });
 
-                // Zoom touch layer
-                _layers.touch.attr("transform", d3.event.transform);
+                // Zoom dynamic layers
+                _dynamicLayer._zoomFn(transformation, duration);
+            }
 
-                // Save last transform
-                if (d3.event && d3.event.transform) {
-                    _transform = d3.zoomIdentity
-                        .translate(d3.event.transform.x, d3.event.transform.y)
-                        .scale(d3.event.transform.k);
-                    _level = d3.event.transform.k;
+            /**
+             * Zooms out of the map.
+             *
+             * @method zoomOut
+             * @memberOf adt.widgets.map.Map._zoom
+             * @returns {boolean} True if zoom out was carried out, false otherwise.
+             */
+            function zoomOut() {
+                // If zoom watcher is on, ignore zoom out
+                if (_watchers._zooming)
+                    return false;
+
+                // Check current zoom level: if already 1, don't do anything
+                if (_transformation.zoomLevel() !== 1) {
+                    _focus = null;
+                    _zoom(new _Transformation()
+                            .translate(-_w.attr.width / 2, -_w.attr.height / 2)
+                            .scale(1)
+                            .translate(_w.attr.width / 2, _w.attr.height / 2),
+                        700);
+                    return true;
+                } else {
+                    _watchers._zooming = false;
+                    return false;
                 }
             }
 
             /**
-             * Resets zoom to identity.
+             * Performs a click triggered zoom on the map.
+             * If clicked on a country, map is zoomed to it. If clicked on water, map is zoomed out, if already
+             * zoomed out, removes focuses.
              *
-             * @method reset
+             * @method _click
              * @memberOf adt.widgets.map.Map._zoom
+             * @param {object=} country Country that was clicked on the map.
+             * @private
              */
-            function reset() {
-                // Zoom map
-                _layers.map.svg.transition().duration(1000)
-                    .call(_zoom.transform, d3.zoomIdentity);
+            function _click(country) {
+                // If watchers are on, ignore click
+                if (_watchers._zooming) {
+                    return;
+                }
+
+                // If country is valid and not focus country, zoom in
+                if (country && _focus !== country.name) {
+                    _focus = country.name;
+                    //adt.signals.emit(Engine.SIGNALS.countryFocus, Engine.state.focus.country);
+                    _zoom(new _Transformation()
+                            .translate(-country.svg.center[0], -country.svg.center[1])
+                            .scale(60 / Math.sqrt(1 + Math.max(country.svg.width, country.svg.height)))
+                            .translate(_w.attr.width / 2, _w.attr.height / 2),
+                        700);
+                } else {
+                    zoomOut();
+                }
             }
 
             /**
-             * Performs zoom when clicked on a country.
+             * Performs a scroll zoom.
              *
-             * @method clicked
+             * @method _scroll
              * @memberOf adt.widgets.map.Map._zoom
-             * @param {Array} bounds Country boundaries.
+             * @private
              */
-            function click(bounds) {
-                // Get zoom parameters
-                var dx = bounds[1][0] - bounds[0][0],
-                    dy = bounds[1][1] - bounds[0][1],
-                    x = (bounds[0][0] + bounds[1][0]) / 2,
-                    y = (bounds[0][1] + bounds[1][1]) / 2,
-                    scale = Math.max(1, Math.min(_SCALE_MAX, 0.8 / Math.max(dx / _w.attr.width, dy / _w.attr.height))),
-                    translate = [_w.attr.width / 2 - scale * x, _w.attr.height / 2 - scale * y];
+            function _scroll() {
+                // If zooming watcher is on, ignore scrolling
+                if (_watchers._zooming)
+                    return false;
 
-                // Zoom map
-                _layers.map.svg.transition().duration(1000)
-                    .call(_zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+                // Clamp scroll amount
+                var dy = -Math.min(100, Math.max(-100, d3.event.deltaY));
+                var direction = dy > 0 ? "in" : "out";
+
+                // If already zoomed out, don't zoom further out
+                if (_transformation.isIdentity() && dy < 0) {
+                    return;
+                }
+
+                // Create transformation based on scroll direction
+                var pos = direction === "in"
+                    ? _transformation.inverse().point(d3.mouse(this))
+                    : [_w.attr.width / 2, _w.attr.height / 2];
+                var level = Math.max(1, _transformation.zoomLevel() + dy / 10);
+                var tr = new _Transformation()
+                    .translate(-pos[0], -pos[1])
+                    .scale(level)
+                    .translate(_w.attr.width / 2, _w.attr.height / 2);
+
+                // Zoom using a slight interpolation from current transformation to the new one
+                var interpolationFactor = direction === "in" ? 1000 : 500;
+                _zoom(_transformation.interpolate(tr, Math.min(1, Math.abs(dy) / interpolationFactor)));
             }
 
-            // Public methods
+            // Exposed methods
             return {
-                init: init,
-                setLayer: setLayer,
-                zoom: _zoom,
-                reset: reset,
-                click: click,
-                transform: transform,
-                invert: invert,
-                level: level
+                _click: _click,
+                _scroll: _scroll,
+                _level: _level,
+                _transform: _transform,
+                _invert: _invert,
+                zoomOut: zoomOut
             };
         })();
+
+        // Public methods
+        this.zoomOut = _zoom.zoomOut;
 
         /**
          * Map layer: draws countries.
@@ -986,7 +1001,7 @@
             var _svg = _w.widget.append("svg")
                 .attr("id", _id + "-map-layer")
                 .style("position", "absolute")
-                .call(_zoom.zoom);
+                .on("wheel.zoom", _zoom._scroll);
 
             /**
              * The background of the map (water).
@@ -1028,8 +1043,6 @@
                 })
                 .style("stroke-width", "0.5px")
                 .style("cursor", "pointer");
-            // Set map layer for zoom
-            _zoom.setLayer('map', {svg: _svg, paths: _paths});
 
             /**
              * Projection used for the map.
@@ -1061,6 +1074,33 @@
              */
             function _project(latLon) {
                 return _projection([latLon[1], latLon[0]]);
+            }
+
+            /**
+             * Performs zoom operation on the map.
+             *
+             * @method _zoomFn
+             * @memberOf adt.widgets.map.Map._mapLayer
+             * @param {adt.widgets.map._Transformation} transformation The transformation used for the zoom.
+             * @param {number=} duration Duration of the zoom animation.
+             * @param {function=} callback Optional callback at the end of the zoom.
+             * @private
+             */
+            function _zoomFn(transformation, duration, callback) {
+                // Country borders
+                _paths
+                    .style("stroke-width", 0.5 / transformation.zoomLevel() + "px");
+
+                // Zoom map
+                _land
+                    .transition().duration(duration ? duration : 0)
+                    .attr("transform", transformation.svg())
+                    .on("end", function () {
+                        // Additional callback
+                        if (callback)
+                            callback();
+
+                    });
             }
 
             /**
@@ -1191,17 +1231,17 @@
                 _background
                     .style("fill", _w.attr.backgroundColor)
                     .on("click", function() {
-                        // Zoom out
-                        _zoom.reset();
-
-                        // Remove focus
+                        // Set colors
                         _paths
                             .classed("focus", false)
                             .style("fill", _w.attr.foregroundColor);
 
+                        // Zoom out
+                        var zoomed = _zoom.zoomOut();
+
                         // Additional out click event
                         if (_w.attr.outClick)
-                            _w.attr.outClick();
+                            _w.attr.outClick(zoomed);
                     });
                 _paths
                     .attr("d", _pathFn)
@@ -1227,28 +1267,23 @@
                             _w.attr.mouseleave(d.name, i);
                     })
                     .on("click", function (d, i) {
-                        // Check if country is already in focus
+                        // Set/remove focus
                         var c = d3.select(this);
                         var focused = c.classed("focus");
-
-                        // Zoom in/out
-                        if (focused)
-                            _zoom.reset();
-                        else {
-                            _zoom.click(_pathFn.bounds(d));
-                        }
-
-                        // Set/remove focus
                         var color = d3.color(_w.attr.foregroundColor);
                         _paths
                             .classed("focus", function(dd) { return dd === d ? !focused : false; })
                             .style("fill", color);
                         c.style("fill", !focused ? color.brighter() : color);
 
+                        // Zoom
+                        _zoom._click(d);
+
                         // Additional actions
                         if (_w.attr.click)
                             _w.attr.click(d.name, i);
-                    });
+                    })
+                    .on();
             }
 
             /**
@@ -1295,6 +1330,7 @@
             return {
                 _select: _select,
                 _project: _project,
+                _zoomFn: _zoomFn,
                 _update: _update,
                 _style: _style,
                 dim: dim,
@@ -1335,7 +1371,6 @@
              * @private
              */
             var _layers = {};
-            _zoom.setLayer('static', _layers);
 
             /**
              * Returns an array of existing static layers.
@@ -1403,16 +1438,14 @@
 
                         // Draw namespace
                         var draw = {
-                            dot: function(x, y, r, color, old) {
+                            dot: function(x, y, r, color, fresh) {
                                 // Set color if specified
                                 if (color)
                                     _canvas.fillStyle = color;
 
                                 // Adjust radius and position
-                                var adjustedR = r / _zoom.level();
-                                var adjustedPos = !old
-                                    ? _zoom.transform([x, y])
-                                    : [x, y];
+                                var adjustedR = r / (fresh ? 1 :_zoom._level());
+                                var adjustedPos = fresh ? _zoom._transform([x, y]) : [x, y];
 
                                 // Draw
                                 _canvas.fillRect(adjustedPos[0] - adjustedR / 2, adjustedPos[1] - adjustedR / 2,
@@ -1423,8 +1456,8 @@
                         // Renders layer
                         function render() {
                             // Calculate bounding box
-                            var topLeft = _zoom.invert([0, 0]);
-                            var bottomRight = _zoom.invert([_w.attr.width, _w.attr.height]);
+                            var topLeft = _zoom._invert([0, 0]);
+                            var bottomRight = _zoom._invert([_w.attr.width, _w.attr.height]);
                             var boundingBox = {
                                 xMin: topLeft[0],
                                 xMax: bottomRight[0],
@@ -1443,7 +1476,7 @@
                                 // Finally, draw element
                                 switch (d.type) {
                                     case "dot":
-                                        draw.dot(d.x, d.y, d.r, d.color, true);
+                                        draw.dot(d.x, d.y, d.r, d.color);
                                         break;
                                     default:
                                         break;
@@ -1496,6 +1529,21 @@
             }
 
             /**
+             * Performs the zoom operation on the static layers.
+             *
+             * @method _zoomFn
+             * @memberOf adt.widgets.map.Map.staticLayer
+             * @param {adt.widgets.map._Transformation} transformation Transformation of the zoom.
+             * @private
+             */
+            function _zoomFn(transformation) {
+                var m = transformation.toTr();
+                _.forOwn(_layers, function(layer) {
+                    layer.canvas.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
+                });
+            }
+
+            /**
              * Erases the content of a static layer.
              *
              * @method erase
@@ -1522,6 +1570,11 @@
              * @private
              */
             function _clear() {
+                // Make layers invisible
+                _container
+                    .transition().duration(200)
+                    .style("opacity", 0);
+
                 // Save and clear canvases
                 _.forOwn(_layers, function(layer) {
                     layer.canvas.save();
@@ -1560,9 +1613,9 @@
              * @memberOf adt.widgets.map.Map.staticLayer
              * @private
              */
-            function _render(scale) {
+            function _render() {
                 _.forOwn(_layers, function(layer) {
-                    layer.render(scale);
+                    layer.render();
                 });
             }
 
@@ -1577,6 +1630,12 @@
                 _.forOwn(_layers, function(layer) {
                     layer.canvas.restore();
                 });
+
+                // Show layers
+                _container.transition();
+                _container
+                    .transition().duration(400)
+                    .style("opacity", 1);
             }
 
             /**
@@ -1614,7 +1673,7 @@
                         _layers[safeId].append.dot(mappedPos[0], mappedPos[1], r, color);
 
                         // Draw it right away
-                        _layers[safeId].draw.dot(mappedPos[0], mappedPos[1], r, color);
+                        _layers[safeId].draw.dot(mappedPos[0], mappedPos[1], r, color, true);
                         return true;
                     } else {
                         return false;
@@ -1627,6 +1686,7 @@
                 _style: _style,
                 _clear: _clear,
                 _restore: _restore,
+                _zoomFn: _zoomFn,
                 _render: _render,
                 get: get,
                 add: add,
@@ -1677,7 +1737,6 @@
              * @private
              */
             var _layers = {};
-            _zoom.setLayer('dynamic', _layers);
 
             /**
              * Returns an array of existing dynamic layers.
@@ -1803,6 +1862,23 @@
             }
 
             /**
+             * Performs a zoom operation on the dynamic layers.
+             *
+             * @method _zoomFn
+             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @param {adt.widgets.map._Transformation} transformation Transformation of the zoom.
+             * @param {number=} duration Duration of the zoom animation.
+             * @private
+             */
+            function _zoomFn(transformation, duration) {
+                _.forOwn(_layers, function(layer) {
+                    // Zoom SVG
+                    layer.g.transition().duration(duration ? duration : 0)
+                        .attr("transform", transformation.svg());
+                });
+            }
+
+            /**
              * Erases a dynamic layers.
              *
              * @method erase
@@ -1850,13 +1926,13 @@
                     var safeId = _w.utils.encode(id);
                     if (_layers.hasOwnProperty(safeId)) {
                         // Map geo coordinates to SVG
-                        var adjustedR = r / _zoom.level();
+                        var scaledR = r / _zoom._level();
                         var mappedPos = _mapLayer._project(latLon);
 
                         var d = _layers[safeId].g.append("circle")
                             .attr("cx", mappedPos[0])
                             .attr("cy", mappedPos[1])
-                            .attr("r", adjustedR)
+                            .attr("r", scaledR)
                             .style("fill", color);
                         _layers[safeId].append(d);
 
@@ -1877,6 +1953,7 @@
             // Public methods
             return {
                 _style: _style,
+                _zoomFn: _zoomFn,
                 get: get,
                 add: add,
                 highlight: highlight,
@@ -1911,7 +1988,6 @@
                 .style("position", "absolute")
                 .style("pointer-events", "none");
             var _g = _container.append("g");
-            _zoom.setLayer('touch', _g);
 
             /**
              * Adds a touch element to the touch layer. A touch element is an invisible circle.
@@ -1932,7 +2008,7 @@
                     return false;
 
                 // Map geo coordinates to SVG
-                var adjustedR = r / _zoom.level();
+                var scaledR = r / _zoom._level();
                 var mappedPos = _mapLayer._project(latLon);
 
                 _g.append("circle")
@@ -1940,7 +2016,7 @@
                     .attr("data-r", r)
                     .attr("cx", mappedPos[0])
                     .attr("cy", mappedPos[1])
-                    .attr("r", adjustedR)
+                    .attr("r", scaledR)
                     .style("fill", null)
                     .style("opacity", 0)
                     .style("pointer-events", "all")
@@ -1994,6 +2070,27 @@
             }
 
             /**
+             * Performs a zoom operation on the touch layer.
+             *
+             * @method _zoomFn
+             * @memberOf adt.widgets.map.Map.touchLayer
+             * @param {adt.widgets.map._Transformation} transformation Transformation of the zoom.
+             * @param {number=} duration Duration of the zoom animation.
+             * @private
+             */
+            function _zoomFn(transformation, duration) {
+                // Zoom SVG
+                _g.transition().duration(duration ? duration : 0)
+                    .attr("transform", transformation.svg());
+
+                // Resize touch elements
+                _g.selectAll("circle")
+                    .attr("r", function() {
+                        return d3.select(this).attr("data-r") / _zoom._level();
+                    });
+            }
+
+            /**
              * Erases the touch layer.
              *
              * @method erase
@@ -2006,6 +2103,7 @@
             // Public methods
             return {
                 _style: _style,
+                _zoomFn: _zoomFn,
                 add: add,
                 remove: remove,
                 erase: erase
@@ -2031,9 +2129,6 @@
             _w.widget
                 .style("background-color", _w.attr.backgroundColor)
                 .style("pointer-events", null);
-
-            // Init zoom bounds
-            _zoom.init();
 
             // Style layers
             _mapLayer._style();
