@@ -779,6 +779,21 @@
              */
             var _pathFn = d3.geoPath().projection(_projection);
 
+            // TODO add country names
+            /*var _countryNames = _land.selectAll("text")
+                .data(_countries._paths)
+                .enter().append("text")
+                .attr("fill", "red")
+                .attr("x", function(d) {
+                    return _pathFn.centroid(d)[0];
+                })
+                .attr("y", function(d) {
+                    return _pathFn.centroid(d)[1];
+                })
+                .style("pointer-events", "none")
+                .style("opacity", 0)
+                .text(function(d) { return d.name; });*/
+
             /**
              * Projects (latitude, longitude) geo coordinates into an (x, y) point on the map.
              *
@@ -1138,7 +1153,7 @@
                                     _canvas.fillStyle = color;
 
                                 // Adjust radius and position
-                                var adjustedR = r / Math.pow(_zoom.level(), 0.9);
+                                var adjustedR = r / (old ? Math.pow(_zoom.level(), 0.9) : 0.6);
                                 var adjustedPos = !old
                                     ? _zoom.transform([x, y])
                                     : [x, y];
