@@ -158,7 +158,12 @@ var map = new adt.widgets.Map("flight")
     <h2 id="step2a">fetching data</h2>
     Here we make use of the <code>adt.rest</code> module that implements the <code>REST</code> class, which is simply
     a wrapper for the existing request methods (in <code>d3</code>).
-    First, add <code>&lt;script src="build/widgets.min.js"&gt;&lt;/script&gt;</code> to the head of <code>index.html</code>.
+    First, add
+
+    <pre>
+&lt;script src="build/widgets.min.js"&gt;&lt;/script&gt;</pre>
+
+    to the head of <code>index.html</code>.
     To get the data, we create a new <code>REST</code> object that is directed to the endpoint of the API:
 
     <pre>
