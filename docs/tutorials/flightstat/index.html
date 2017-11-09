@@ -57,6 +57,7 @@
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;flight stat&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -72,7 +73,7 @@
 &lt;script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"&gt;&lt;/script&gt;</pre>
 
-    The libraries can be found through the links listed in the home of the documentation.
+    The libraries can be obtained through the links listed in the home of the documentation.
 
     <br><br>In order to add the map, we first include the corresponding module, along with the <code>widget</code>
     module that is required by all other widgets.
@@ -100,7 +101,7 @@ var map = new adt.widgets.Map("flight")
 &lt;/script&gt;
     </pre>
 
-    And that's it, congratulations, you just built your first map dashboard in no more than 21 lines!
+    And that's it, congratulations, you just built your first map dashboard in no more than 22 lines!
     <a href="step1c.html">This</a> is how it should look like.
     Although we don't have any data yet and it lacks some styling, our map can be zoomed with scroll or by clicking on
     any country!
@@ -110,7 +111,7 @@ var map = new adt.widgets.Map("flight")
     application.
 
     <h2 id="step1d">chaining</h2>
-    All widgets have been designed with the chaining rule in mind that enables the developer setting multiple properties
+    All widgets have been designed with the chaining rule in mind that enables us setting multiple properties
     of the widget in a simple and clear manner.
     As you can see, once we created the map widget, we just set the parameters by adding consecutive function calls after
     the constructor.
@@ -120,10 +121,10 @@ var map = new adt.widgets.Map("flight")
 
     <br><br>Another important behavior is the method <code>render()</code> that must be called in order to draw the
     widget.
-    Under the hood, <code>adt.widget</code> simply collects and updated the various parameters of the widget while
-    keeping it hidden and <code>render()</code> actually makes it visible.
+    Under the hood, <code>adt.widget</code> simply collects the various parameters of the widget while keeping it hidden
+    and when we call <code>render()</code>, the widget actually becomes visible.
     Moreover, <code>render()</code> is implemented according to the get-or-create design, that is, once it is called,
-    further calls simply update the widget with the new properties.
+    further calls simply update the widget with the new style and data.
     Therefore, you can simply modify the widget on-the-run and then render it in the end.
 
     <h2 id="step1e">styling and basic interactions</h2>
@@ -152,13 +153,12 @@ var map = new adt.widgets.Map("flight")
     highlighted automatically, due to the little brighter foreground color.
     Also, if you zoom in on a country, it remains highlighted.
 
-    <br><br>Great, not that we have our map that we can plot data on, let us fetch some data from the flight stats API
-    and bind to it!
+    <br><br>Great, now that we have our map, let us fetch some data from the flight stats API and show it!
 
     <h1 id="step2">Step 2: Adding data</h1>
     <h2 id="step2a">fetching data</h2>
     Here we make use of the <code>adt.rest</code> module that implements the <code>REST</code> class, which is simply
-    a wrapper for the existing request methods (in <code>d3</code>).
+    a wrapper for the existing request methods (more specifically <code>d3</code> methods).
     First, add
 
     <pre>
