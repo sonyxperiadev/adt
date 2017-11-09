@@ -624,6 +624,10 @@
                 // Zoom map
                 _layers.map.paths.style("stroke-width", 0.5 / d3.event.transform.k + "px");
                 _layers.map.paths.attr("transform", d3.event.transform);
+                _layers.map.names
+                    .style("opacity", Math.pow(d3.event.transform.k, 2) / 100)
+                    .attr("font-size", 10 / d3.event.transform.k + "pt")
+                    .attr("transform", d3.event.transform);
 
                 // Zoom static layer
                 _staticLayer._clear();
@@ -757,8 +761,6 @@
                 })
                 .style("stroke-width", "0.5px")
                 .style("cursor", "pointer");
-            // Set map layer for zoom
-            _zoom.setLayer('map', {svg: _svg, paths: _paths});
 
             /**
              * Projection used for the map.
@@ -780,19 +782,20 @@
             var _pathFn = d3.geoPath().projection(_projection);
 
             // TODO add country names
-            /*var _countryNames = _land.selectAll("text")
+            var _countryNames = _land.selectAll("text")
                 .data(_countries._paths)
                 .enter().append("text")
-                .attr("fill", "red")
-                .attr("x", function(d) {
-                    return _pathFn.centroid(d)[0];
-                })
-                .attr("y", function(d) {
-                    return _pathFn.centroid(d)[1];
-                })
+                .attr("fill", "#ddd")
+                .style("text-shadow", "0 0 1px black")
+                .attr("font-size", "10pt")
+                .attr("font-family", "'Montserrat', sans-serif")
+                .attr("text-anchor", "middle")
                 .style("pointer-events", "none")
-                .style("opacity", 0)
-                .text(function(d) { return d.name; });*/
+                .style("opacity", 0.01)
+                .text(function(d) { return d.name; });
+
+            // Set map layer for zoom
+            _zoom.setLayer('map', {svg: _svg, paths: _paths, names: _countryNames});
 
             /**
              * Projects (latitude, longitude) geo coordinates into an (x, y) point on the map.
@@ -817,6 +820,7 @@
             function _calculateCenters() {
                 _countries._paths.forEach(function(country) {
                     country.svg.center = _pathFn.centroid(country);
+                    country.svg.realCenter = _getRealCenter(country);
                 });
             }
 
@@ -898,6 +902,46 @@
             }
 
             /**
+             * Returns the coordinates of the largest paths for a country.
+             *
+             * @method _getRealCenter
+             * @memberOf adt.widgets.map.Map._mapLayer
+             * @param {object} country Country to calculate real center for.
+             * @returns {Array} Array containing the x and y coordinates of the real center.
+             * @private
+             */
+            function _getRealCenter(country) {
+                if (country.geometry.coordinates.length === 1) {
+                    return _pathFn.centroid(country);
+                }
+                else {
+                    var region = {
+                        type: "Feature",
+                        geometry: {
+                            type: "Polygon",
+                            coordinates: country.geometry.coordinates[0]
+                        }
+                    };
+                    for (var i=1; i<country.geometry.coordinates.length; i++) {
+                        var r = {
+                            type: "Feature",
+                            geometry: {
+                                type: "Polygon",
+                                coordinates: country.geometry.coordinates[i]
+                            }
+                        };
+                        if (_pathFn.area(r) > _pathFn.area(region)) {
+                            region = r;
+                        }
+                    }
+                    var center = _pathFn.centroid(region);
+                    if (isNaN(center[0]) || isNaN(center[1]))
+                        return _pathFn.centroid(country);
+                    else return center;
+                }
+            }
+
+            /**
              * Updates map data.
              *
              * @method _update
@@ -918,6 +962,16 @@
                 _calculateCenters();
                 _calculateSizes();
                 _calculateAreas();
+
+                // Add country names
+                // TODO add manual corrections (Israel, Tajikistan, etc)
+                _countryNames
+                    .attr("x", function(d) {
+                        return d.svg.realCenter[0];
+                    })
+                    .attr("y", function(d) {
+                        return d.svg.realCenter[1];
+                    });
             }
 
             /**
