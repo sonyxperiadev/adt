@@ -2,11 +2,15 @@
  * Module implementing an interactive world map.
  * Part of the Analytics Dashboard Tools.
  *
+ * The map widget is an interactive world map with all countries, dependent territories and special areas of
+ * geographical interest. All separate areas that have their own ISO 3166-1 numeric-3 code are included extended by
+ * Kosovo, Northern Cyprus and Somaliland. Therefore, the notion 'country' always refers to a region with their own
+ * ISO 3166-1 numeric-3 code.
  * <br><br>Some of the built-in features:
  * <ul>
- *     <li>Zoom: clicking on country zooms in on that country, clicking on water zooms out. Scrolling on the map
+ *     <li>Zoom: clicking on country zooms in the map, clicking on water zooms out. Scrolling on the map
  *     enables zoom in/out.
- *     <li>Attach callbacks on country hover/leave/click.
+ *     <li>Attach callbacks on country/territory hover/leave/click.
  *     <li>Simply decide if a geo location is within a country or not.
  *     <li>Add multiple static layers, draw on or highlight any of them.
  *     <li>Add multiple dynamic layers with animated dots.
@@ -181,6 +185,15 @@
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "outClick", null);
+
+        /**
+         * Displays labels on the map when zoomed.
+         *
+         * @method labels
+         * @memberOf adt.widgets.map.Map
+         * @param {boolean} on Whether to enable labels or not.
+         */
+        _w.attr.add(this, "labels", false);
 
         /**
          * Namespace containing various country related methods.
@@ -630,14 +643,18 @@
              * @private
              */
             function _zoomed() {
+                var k = d3.event.transform.k;
+
                 // Zoom map
-                _layers.map.paths.style("stroke-width", 0.5 / d3.event.transform.k + "px");
+                _layers.map.paths.style("stroke-width", 0.5 / k + "px");
                 _layers.map.paths.attr("transform", d3.event.transform);
-                /*_layers.map.names
-                    .style("opacity", Math.pow(d3.event.transform.k, 4) / 1000)
-                    .attr("font-size", 10 / d3.event.transform.k + "pt")
-                    .attr("dy", 5 / d3.event.transform.k + "pt")
-                    .attr("transform", d3.event.transform);*/
+                if (_layers.map.labels) {
+                    _layers.map.labels
+                        .style("opacity", k > 3 ? Math.pow(k, 4) / 1000 : 0)
+                        .attr("font-size", 10 / k + "pt")
+                        .attr("dy", 5 / k + "pt")
+                        .attr("transform", d3.event.transform);
+                }
 
                 // Zoom static layer
                 _staticLayer._clear();
@@ -798,21 +815,7 @@
              * @memberOf adt.widgets.map.Map._mapLayer
              * @private
              */
-            /*var _countryNames = _land.selectAll("text")
-                .data(_countries._paths)
-                .enter().append("text")
-                .style("fill", "#ddd")
-                .style("text-shadow", "0 0 1px black")
-                .attr("font-size", "10pt")
-                .attr("font-family", "'Montserrat', sans-serif")
-                .attr("text-anchor", "middle")
-                .attr("dy", "5pt")
-                .style("pointer-events", "none")
-                .style("opacity", 0.001)
-                .text(function(d) { return d.name; });*/
-
-            // Set map layer for zoom
-            _zoom.setLayer('map', {svg: _svg, paths: _paths/*, names: _countryNames*/});
+            var _pathLabels = null;
 
             /**
              * Projects (latitude, longitude) geo coordinates into an (x, y) point on the map.
@@ -980,15 +983,6 @@
                 _calculateCenters();
                 _calculateSizes();
                 _calculateAreas();
-
-                // Add country names
-                /*_countryNames
-                    .attr("x", function(d) {
-                        return d.svg.realCenter[0] + (_CENTER_CORRECTIONS[d.name] ? _CENTER_CORRECTIONS[d.name][0] : 0);
-                    })
-                    .attr("y", function(d) {
-                        return d.svg.realCenter[1] + (_CENTER_CORRECTIONS[d.name] ? _CENTER_CORRECTIONS[d.name][1] : 0);
-                    });*/
             }
 
             /**
@@ -1064,6 +1058,44 @@
                         if (_w.attr.click)
                             _w.attr.click(d.name, i);
                     });
+
+                // Add path names
+                /*
+                if (_w.attr.labels && _pathLabels === null) {
+                    _pathLabels = _land.selectAll("text")
+                        .data(_countries._paths)
+                        .enter().append("text")
+                        .style("fill", "#ddd")
+                        .style("text-shadow", "0 0 1px black")
+                        .attr("font-size", "10pt")
+                        .attr("font-family", "'Montserrat', sans-serif")
+                        .attr("text-anchor", "middle")
+                        .attr("dy", "5pt")
+                        .style("cursor", "pointer")
+                        .style("opacity", 0)
+                        .text(function(d) { return d.name; })
+                        .attr("x", function (d) {
+                            return d.svg.realCenter[0] + (_CENTER_CORRECTIONS[d.name] ? _CENTER_CORRECTIONS[d.name][0] : 0);
+                        })
+                        .attr("y", function (d) {
+                            return d.svg.realCenter[1] + (_CENTER_CORRECTIONS[d.name] ? _CENTER_CORRECTIONS[d.name][1] : 0);
+                        })
+                        .on("click", function(d) {
+                            // Check if country is already in focus
+                            var c = d3.select(this);
+                            var focused = c.classed("focus");
+
+                            // Zoom in/out
+                            if (focused)
+                                _zoom.reset();
+                            else {
+                                _zoom.click(_pathFn.bounds(d));
+                            }
+                        });
+                }*/
+
+                // Set map layer for zoom
+                _zoom.setLayer('map', {svg: _svg, paths: _paths, labels: _pathLabels});
             }
 
             /**

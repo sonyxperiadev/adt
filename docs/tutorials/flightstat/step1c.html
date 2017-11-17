@@ -10,7 +10,7 @@
     <script src="../../../external/topojson.v1.min.js"></script>
     <script src="../../../external/lodash.4.17.4.min.js"></script>
     <script src="../../dl/widgets.min.js"></script>
-    <script src="../../dl/widgets.map.js"></script>
+    <script src="../../../src/widgets.map.js"></script>
 </head>
 <body>
 <script>
@@ -19,6 +19,7 @@
         .y(0)                       // the window
         .width(window.innerWidth)   // Size is set to the window size
         .height(window.innerHeight)
+        .labels(true)
         .render();                  // Must be called to draw the map
 </script>
 </body>

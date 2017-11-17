@@ -106,7 +106,7 @@
         _w.attr.add(this, "colors", "grey");
 
         /**
-         * Sets lowe boundary of the Y axis.
+         * Sets lower boundary of the Y axis.
          * Default is 0.
          *
          * @method yMin
@@ -177,9 +177,11 @@
             };
             _svg.axes = {
                 x: _svg.g.append("g")
-                    .attr("class", "x axis"),
+                    .attr("class", "x axis")
+                .attr("font-family", "inherit"),
                 y: _svg.g.append("g")
                     .attr("class", "y axis")
+                    .attr("font-family", "inherit")
             };
 
             // Add labels
@@ -187,10 +189,12 @@
                 x: _svg.g.append("text")
                     .attr("class", "x axis-label")
                     .attr("text-anchor", "end")
+                    .attr("font-family", "inherit")
                     .attr("stroke-width", 0),
                 y: _svg.g.append("text")
                     .attr("class", "y axis-label")
                     .attr("text-anchor", "begin")
+                    .attr("font-family", "inherit")
                     .attr("stroke-width", 0)
             };
 
@@ -232,7 +236,7 @@
             }
 
             // Scale and axes
-            var scale = _w.utils.scale(_w.utils.boundary(data),
+            var scale = _w.utils.scale(_w.utils.boundary(data, {y: [_w.attr.yMin, null]}),
                 _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                 _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                 {x: {type: _w.attr.xType}});
