@@ -170,11 +170,7 @@
          * @returns {adt.widgets.grid.Grid} Reference to the current grid.
          */
         this.flexible = function (on) {
-            window.onresize = function () {
-                if (!on) {
-                    return;
-                }
-
+            function onresize() {
                 // Only resize when resize operation has finished
                 clearTimeout(_resizeFinished);
                 _resizeFinished = setTimeout(function () {
@@ -215,8 +211,14 @@
                             .height(widget.height * _w.attr.height / _rows)
                             .render(0);
                     });
-                }, 700);
-            };
+                }, 100);
+            }
+
+            if (on)
+                window.addEventListener("resize", onresize);
+            else
+                window.removeEventListener("resize", onresize);
+
             return this;
         };
 
@@ -234,8 +236,32 @@
                 // Border
                 _w.widget.style("box-shadow", "0 0 1px black inset");
 
-                // Horizontal lines
+                // White stripes
                 for (var y = 1; y < _rows; y++) {
+                    _w.widget.append("div")
+                        .attr("class", "grid-border-h")
+                        .attr("data-y", y)
+                        .style("position", "absolute")
+                        .style("left", "0")
+                        .style("top", (y * _w.attr.height / _rows - 1.5) + "px")
+                        .style("width", _w.attr.width + "px")
+                        .style("height", "3px")
+                        .style("background-color", "white")
+                }
+                for (var x = 1; x < _columns; x++) {
+                    _w.widget.append("div")
+                        .attr("class", "grid-border-v")
+                        .attr("data-x", x)
+                        .style("position", "absolute")
+                        .style("left", (x * _w.attr.width / _columns - 1.5) + "px")
+                        .style("top", "0")
+                        .style("width", "3px")
+                        .style("height", _w.attr.height + "px")
+                        .style("background-color", "white")
+                }
+
+                // Black lines
+                for (y = 1; y < _rows; y++) {
                     _w.widget.append("div")
                         .attr("class", "grid-border-h")
                         .attr("data-y", y)
@@ -244,11 +270,9 @@
                         .style("top", (y * _w.attr.height / _rows - 0.5) + "px")
                         .style("width", _w.attr.width + "px")
                         .style("height", "1px")
-                        .style("background-color", "grey")
+                        .style("background-color", "black")
                 }
-
-                // Vertical lines
-                for (var x = 1; x < _columns; x++) {
+                for (x = 1; x < _columns; x++) {
                     _w.widget.append("div")
                         .attr("class", "grid-border-v")
                         .attr("data-x", x)
@@ -257,7 +281,7 @@
                         .style("top", "0")
                         .style("width", "1px")
                         .style("height", _w.attr.height + "px")
-                        .style("background-color", "grey")
+                        .style("background-color", "black")
                 }
             } else {
                 _show = false;
