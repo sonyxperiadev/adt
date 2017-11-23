@@ -115,6 +115,26 @@
          */
         _w.attr.add(this, "yMin", 0);
 
+        /**
+         * Sets callback for mouse over on a line.
+         * Must accept an argument with the name of the line.
+         *
+         * @method mouseover
+         * @memberOf adt.widgets.linechart.LineChart
+         * @param {function} callback Callback to set.
+         */
+        _w.attr.add(this, "mouseover", null);
+
+        /**
+         * Sets callback for mouse leave on a line.
+         * Must accept an argument with the name of the line.
+         *
+         * @method mouseleave
+         * @memberOf adt.widgets.linechart.LineChart
+         * @param {function} callback Callback to set.
+         */
+        _w.attr.add(this, "mouseleave", null);
+
         // Widget elements.
         var _svg = null;
         var _data = [];
@@ -178,7 +198,7 @@
             _svg.axes = {
                 x: _svg.g.append("g")
                     .attr("class", "x axis")
-                .attr("font-family", "inherit"),
+                    .attr("font-family", "inherit"),
                 y: _svg.g.append("g")
                     .attr("class", "y axis")
                     .attr("font-family", "inherit")
@@ -321,10 +341,24 @@
 
             // Plot
             _.forOwn(_svg.errors, function(lk, k) {
-                _svg.errors[k].style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k]);
+                _svg.errors[k]
+                    .style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k])
+                    .on("mouseover", function() {
+                        _w.attr.mouseover && _w.attr.mouseover(k);
+                    })
+                    .on("mouseleave", function() {
+                        _w.attr.mouseleave && _w.attr.mouseleave(k);
+                    });
             });
             _.forOwn(_svg.lines, function(lk, k) {
-                _svg.lines[k].style("stroke", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k]);
+                _svg.lines[k]
+                    .style("stroke", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k])
+                    .on("mouseover", function() {
+                        _w.attr.mouseover && _w.attr.mouseover(k);
+                    })
+                    .on("mouseleave", function() {
+                        _w.attr.mouseleave && _w.attr.mouseleave(k);
+                    });
             });
 
             _w.widget.style("display", "block");
