@@ -106,6 +106,19 @@
         _w.attr.add(this, "colors", "grey");
 
         /**
+         * Adds a legend to the line chart (experimental feature).
+         * Legend is added to the right side of the chart and eats up 20% of the widget,
+         * therefore margin.right should be adjusted accordingly.
+         * Default is false.
+         * Note: this method is still experimental, and therefore it is unstable.
+         *
+         * @method legend
+         * @memberOf adt.widgets.linechart.LineChart
+         * @param {boolean} on Whether legend should be added.
+         */
+        _w.attr.add(this, "legend", false);
+
+        /**
          * Sets lower boundary of the Y axis.
          * Default is 0.
          *
@@ -178,6 +191,7 @@
         this.highlight = function(key) {
             _w.utils.highlight(_svg, ".line", key);
         };
+        var highlight = this.highlight;
 
         /**
          * Adds a marker to the specified line.
@@ -342,6 +356,40 @@
                     .style("stroke-width", "2px")
                     .style("shape-rendering", "geometricPrecision");
             });
+
+            // Add legend
+            if (_w.attr.legend) {
+                var legend = _svg.g.append("g")
+                    .attr("class", "legend");
+                var y = 0;
+                _.forOwn(_svg.lines, function(lk, k) {
+                    var g = legend.append("g")
+                        .style("cursor", "pointer")
+                        .on("mouseover", function() {
+                            highlight(k);
+                        })
+                        .on("mouseleave", function() {
+                            highlight();
+                        });
+                    g.append("rect")
+                        .attr("x", _w.attr.width*0.8)
+                        .attr("y", y)
+                        .attr("width", _w.attr.fontSize)
+                        .attr("height", _w.attr.fontSize)
+                        .style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k])
+                        .style("stroke", "none");
+                    g.append("text")
+                        .attr("x", _w.attr.width*0.83)
+                        .attr("y", y)
+                        .attr("dy", 0.8*_w.attr.fontSize)
+                        .attr("text-anchor", "start")
+                        .style("fill", _w.attr.fontColor)
+                        .attr("font-family", "inherit")
+                        .attr("font-size", _w.attr.fontSize + "px")
+                        .text(k);
+                    y += _w.attr.height*0.08;
+                });
+            }
         };
 
         _w.render.update = function(duration) {

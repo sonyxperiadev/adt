@@ -19,11 +19,13 @@
     }
 
     var chart = new adt.widgets.LineChart("chart")
+        .resize(0.8)
         .x(100).y(100)
         .width(800).height(300)
-        .margins({top: 30, bottom: 30, left: 30, right: 30})
+        .margins({top: 30, bottom: 30, left: 30, right: 150})
         .data(data)
         .yMin(null)
+        .fontSize(16)
         .fontColor("black")
         .mouseover(function(k) {
             var x = parseInt(10 + Math.random()*80);
@@ -33,8 +35,8 @@
             chart.removeMarker("m1");
         })
         .colors({orange: "orange", apple: "limegreen"})
+        .legend(true)
         .render();
-
 </script>
 </body>
 </html>
