@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../external/d3.v4.min.js"></script>
+    <script src="../external/lodash.4.17.4.min.js"></script>
+    <script src="../src/widgets.js"></script>
+    <script src="../src/widgets.linechart.js"></script>
+    <title>line chart example</title>
+</head>
+<body>
+<script>
+    var data = [];
+    for (var i=0; i<100; i++) {
+        data.push({
+            x: i,
+            y: {orange: Math.sin(Math.PI*i/20), apple: Math.cos(Math.PI*i/15)}
+        });
+    }
+
+    var chart = new adt.widgets.LineChart("chart")
+        .x(100).y(100)
+        .width(800).height(300)
+        .margins({top: 30, bottom: 30, left: 30, right: 30})
+        .data(data)
+        .yMin(null)
+        .fontColor("black")
+        .mouseover(function(k) {
+            var x = parseInt(10 + Math.random()*80);
+            chart.addMarker("m1", "orange", x, x+10, "trend");
+        })
+        .mouseleave(function(k) {
+            chart.removeMarker("m1");
+        })
+        .colors({orange: "orange", apple: "limegreen"})
+        .render();
+
+</script>
+</body>
+</html>

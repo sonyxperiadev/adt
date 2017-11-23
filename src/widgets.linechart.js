@@ -139,6 +139,7 @@
         var _svg = null;
         var _data = [];
         var _scaleFactor = 1.0;
+        var _markers = [];
 
         /**
          * Binds data to the line plot.
@@ -176,6 +177,110 @@
          */
         this.highlight = function(key) {
             _w.utils.highlight(_svg, ".line", key);
+        };
+
+        /**
+         * Adds a marker to the specified line.
+         * A marker is a text along with a 90-degree angle connecting two points of a line.
+         * If a marker with the specified identifier already exists, the marker is ignored.
+         *
+         * @method addMarker
+         * @memberOf adt.widgets.linechart.LineChart
+         * @param {string} id Marker identifier.
+         * @param {string} key Key of the line to mark.
+         * @param {(number|string)} start Start X position of the marker.
+         * @param {(number|string)} end End X position of the marker.
+         * @param {string} label Label of the marker.
+         * @returns {?object} D3 selection of the marker if it could be added, null otherwise.
+         */
+        this.addMarker = function(id, key, start, end, label) {
+            // Check if marker exists
+            if (_markers.hasOwnProperty(id)) {
+                return null;
+            }
+
+            // Get Y coordinates
+            var row1 = _data.filter(function(d) {
+                return d.x === start;
+            })[0];
+            if (!row1 || !row1.hasOwnProperty('y') || !row1.y.hasOwnProperty(key))
+                return null;
+            var y1 = row1.y[key];
+            var row2 = _data.filter(function(d) {
+                return d.x === end;
+            })[0];
+            if (!row2 || !row2.hasOwnProperty('y') || !row2.y.hasOwnProperty(key))
+                return null;
+            var y2 = row2.y[key];
+
+            // Get color
+            var color = typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[key];
+
+            // Add marker
+            var xCorner = y1 < y2 ? start : end;
+            var yCorner = y1 < y2 ? y2 : y1;
+            var marker = _svg.g.append("g")
+                .attr("class", "marker");
+            marker.append("line")
+                .attr("x1", _svg.scale.x(start)+2)
+                .attr("y1", _svg.scale.y(yCorner))
+                .attr("x2", _svg.scale.x(end)+2)
+                .attr("y2", _svg.scale.y(yCorner))
+                .style("stroke", color)
+                .style("stroke-dasharray", "3 3")
+                .style("stroke-width", 2);
+           marker.append("line")
+                .attr("x1", _svg.scale.x(xCorner)+2)
+                .attr("y1", _svg.scale.y(y1))
+                .attr("x2", _svg.scale.x(xCorner)+2)
+                .attr("y2", _svg.scale.y(y2))
+                .style("stroke", color)
+                .style("stroke-dasharray", "3 3")
+                .style("stroke-width", 2);
+            marker.append("circle")
+                .attr("cx", _svg.scale.x(start)+2)
+                .attr("cy", _svg.scale.y(y1))
+                .attr("r", 4)
+                .style("stroke", "none")
+                .style("fill", color);
+            marker.append("circle")
+                .attr("cx", _svg.scale.x(end)+2)
+                .attr("cy", _svg.scale.y(y2))
+                .attr("r", 4)
+                .style("stroke", "none")
+                .style("fill", color);
+            marker.append("text")
+                .attr("x", _svg.scale.x(xCorner)+2)
+                .attr("y", _svg.scale.y(yCorner))
+                .attr("dy", -5)
+                .attr("text-anchor", y1 < y2 ? "start" : "end")
+                .style("fill", _w.attr.fontColor)
+                .style("font-family", "inherit")
+                .style("font-size", "0.9em")
+                .text(label);
+
+            // Add to markers
+            _markers[id] = marker;
+
+            // Return marker
+            return marker;
+        };
+
+        /**
+         * Removes a marker from the plot.
+         *
+         * @method removeMarker
+         * @memberOf adt.widgets.linechart.LineChart
+         * @param {string} id Identifier of the marker to remove.
+         * @returns {boolean} True if marker exists and could be removed, false otherwise.
+         */
+        this.removeMarker = function(id) {
+            if (_markers.hasOwnProperty(id)) {
+                _markers[id].remove();
+                delete _markers[id];
+                return true;
+            }
+            return false;
         };
 
         // Rendering methods.
@@ -256,16 +361,16 @@
             }
 
             // Scale and axes
-            var scale = _w.utils.scale(_w.utils.boundary(data, {y: [_w.attr.yMin, null]}),
+            _svg.scale = _w.utils.scale(_w.utils.boundary(data, {y: [_w.attr.yMin, null]}),
                 _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                 _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                 {x: {type: _w.attr.xType}});
             _svg.axes.x
                 .transition().duration(duration)
-                .call(_svg.axisFn.x.scale(scale.x));
+                .call(_svg.axisFn.x.scale(_svg.scale.x));
             _svg.axes.y
                 .transition().duration(duration)
-                .call(_svg.axisFn.y.scale(scale.y));
+                .call(_svg.axisFn.y.scale(_svg.scale.y));
 
             // Lines and error bands
             _.forOwn(data[0].y, function(yk, k) {
@@ -284,9 +389,9 @@
                 }
                 var line = d3.line()
                     .x(function (d) {
-                        return scale.x(d.x) + 2;
+                        return _svg.scale.x(d.x) + 2;
                     }).y(function (d) {
-                        return scale.y(d.y[k]);
+                        return _svg.scale.y(d.y[k]);
                     });
                 _svg.lines[k]
                     .transition().duration(duration)
