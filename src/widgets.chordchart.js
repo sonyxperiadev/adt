@@ -5,9 +5,9 @@
  * A chord chart displays directed relationship between groups of segments. Each segment is
  * represented by a slice in the chord and ribbons correspond to the flow between segments.
  * In case of a flow matrix <code>M</code>, the color of a ribbon from segment <code>i</code> to
- * segment <code>j</code> is always the color of the largest target. That is, if <code>M[i][j] = 3</code>
+ * segment <code>j</code> is always the color of the largest source. That is, if <code>M[i][j] = 3</code>
  * and <code>M[j][i] = 10</code>, there is 7 more flow from <code>j</code> to <code>i</code> and the color
- * of the ribbon between these segments is the same as the color of segment <code>i</code> (the target of
+ * of the ribbon between these segments is the same as the color of segment <code>j</code> (the target of
  * the larger flow).
  *
  * @copyright Copyright (C) 2017 Sony Mobile Communications Inc.
@@ -34,7 +34,6 @@
  * @requires d3@v4
  * @requires adt.widgets
  */
-// TODO margins!
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         factory(exports);
@@ -116,8 +115,7 @@
 
         /**
          * Sets callback for mouse over on a segment.
-         * Can accept two parameters: the segment data and its index.
-         * Properties of the segment data: index, name, value.
+         * Can accept two parameters: the segment name and its index.
          *
          * @method mouseover
          * @memberOf adt.widgets.chordchart.ChordChart
@@ -127,14 +125,23 @@
 
         /**
          * Sets callback for mouse leave on a segment.
-         * Can accept two parameters: the segment data and its index.
-         * Properties of the segment data: index, name, value.
+         * Can accept two parameters: the segment name and its index.
          *
          * @method mouseleave
          * @memberOf adt.widgets.chordchart.ChordChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
+
+        /**
+         * Inverts the chord meaning the color of each chord now correspods to the largest
+         * source instead of the largest target.
+         *
+         * @method invert
+         * @memberOf adt.widgets.chordchart.ChordChart
+         * @param {boolean} on If chord should be inverted.
+         */
+        _w.attr.add(this, "invert", false);
 
         // Widget elements.
         var _svg = null;
@@ -158,6 +165,7 @@
             _data = [];
             var n = 0,
                 d = 0;
+
             // Build index/name mappings
             data.forEach(function(dd) {
                 if (!_indexByName.has(d = dd.source)) {
@@ -358,7 +366,7 @@
 
             // Make chord generator
             _svg.chordFn = d3.chord()
-                .padAngle(0.1)
+                .padAngle(0.05)
                 .sortGroups(d3.descending)
                 .sortSubgroups(d3.descending);
 
@@ -407,12 +415,12 @@
                 .style("pointer-events", "all")
                 .on("mouseover", function(d, i) {
                     if (_w.attr.mouseover) {
-                        _w.attr.mouseover(d, i);
+                        _w.attr.mouseover(d.name, i);
                     }
                 })
                 .on("mouseleave", function(d, i) {
                     if (_w.attr.mouseleave) {
-                        _w.attr.mouseleave(d, i);
+                        _w.attr.mouseleave(d.name, i);
                     }
                 });
             _svg.newGroups.append("path")
@@ -491,8 +499,10 @@
                 })
                 .style("pointer-events", "all")
                 .style("fill", function (d) {
-                    return _w.attr.colors[d.target.name];
-                });
+                    return _w.attr.colors[_w.attr.invert ? d.source.name : d.target.name];
+                })
+                .style("stroke-width", "2px")
+                .style("stroke", "white");
             _svg.newRibbons
                 .transition().duration(duration)
                 .attrTween("d", _ribbonTween(null));
@@ -514,7 +524,7 @@
                 })
                 .transition().duration(duration)
                 .style("fill", function (d) {
-                    return _w.attr.colors[d.target.name];
+                    return _w.attr.colors[_w.attr.invert ? d.source.name : d.target.name];
                 })
                 .attrTween("d", _ribbonTween(_prev_chord));
 
@@ -534,14 +544,15 @@
 
             // Chart
             _svg.g
-                .attr("transform", "translate(" + (space/2 + _w.attr.radius + _w.attr.thickness)
-                    + "," + (space/2 + _w.attr.radius + _w.attr.thickness) + ")");
+                .attr("transform", "translate(" + _w.attr.width/2
+                    + "," + _w.attr.height/2 + ")");
 
             // Label
             _svg.label
                 .attr("transform", "translate(0," + (15 + _w.attr.radius + _w.attr.thickness) + ")")
                 .style("width", 2*(_w.attr.radius + _w.attr.thickness) + "px")
-                .style("font-size", _w.attr.fontSize + "px")
+                .attr("font-family", "inherit")
+                .attr("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
                 .text(_w.attr.label);
 

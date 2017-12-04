@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../external/d3.v4.min.js"></script>
+    <script src="../external/lodash.4.17.4.min.js"></script>
+    <script src="../src/widgets.js"></script>
+    <script src="../src/widgets.chordchart.js"></script>
+    <title>Chord chart widget test</title>
+</head>
+<body>
+<script>
+    var DATA = [
+        {source: "melon", target: "apple", value: 1},
+        {source: "melon", target: "pear", value: 2},
+        {source: "melon", target: "orange", value: 3},
+        {source: "apple", target: "melon", value: 4},
+        {source: "apple", target: "pear", value: 5},
+        {source: "apple", target: "orange", value: 6},
+        {source: "pear", target: "melon", value: 7},
+        {source: "pear", target: "apple", value: 8},
+        {source: "pear", target: "orange", value: 9},
+        {source: "orange", target: "melon", value: 10},
+        {source: "orange", target: "apple", value: 11},
+        {source: "orange", target: "pear", value: 12},
+        {source: "banana", target: "apple", value: 1},
+        {source: "apple", target: "banana", value: 2}
+    ];
+
+    var chords = new adt.widgets.ChordChart("TEST")
+        .x(100)
+        .y(100)
+        .radius(150)
+        .thickness(20)
+        .margins({left:20, right: 20, top: 20, bottom: 20})
+        .ticks(true)
+        .invert(true)
+        .fontColor("black")
+        .fontSize(24)
+        .data(DATA)
+        .mouseover(function(name, index) {
+            chords.highlight(name);
+        })
+        .mouseleave(function(d, i) {
+            chords.highlight();
+        })
+        .render();
+
+    setTimeout(function () {
+        DATA.pop();
+        DATA.pop();
+        chords
+            .colors({
+                'melon': "dodgerblue",
+                'apple': "crimson",
+                'pear': "limegreen",
+                'orange': "goldenrod",
+                'banana': "purple"
+            })
+            .data(DATA)
+            .render(700);
+    }, 1000);
+
+    setTimeout(function () {
+        DATA.push({source: "banana", target: "apple", value: 1});
+        DATA.push({source: "apple", target: "banana", value: 2});
+        chords
+            .colors({
+                'melon': "dodgerblue",
+                'apple': "crimson",
+                'pear': "limegreen",
+                'orange': "goldenrod",
+                'banana': "purple"
+            })
+            .data(DATA)
+            .render(700);
+    }, 3000);
+</script>
+</body>
+</html>

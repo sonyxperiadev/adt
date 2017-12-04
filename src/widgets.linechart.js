@@ -215,13 +215,13 @@
 
             // Get Y coordinates
             var row1 = _data.filter(function(d) {
-                return d.x === start;
+                return d.x - start === 0;
             })[0];
             if (!row1 || !row1.hasOwnProperty('y') || !row1.y.hasOwnProperty(key))
                 return null;
             var y1 = row1.y[key];
             var row2 = _data.filter(function(d) {
-                return d.x === end;
+                return d.x - end === 0;
             })[0];
             if (!row2 || !row2.hasOwnProperty('y') || !row2.y.hasOwnProperty(key))
                 return null;
