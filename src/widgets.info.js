@@ -30,21 +30,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Info = factory(global.d3, global.adt.widgets.Widget, global);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.info Error: widgets module is not exported");
-    }
 
     /**
      * The info widget class.
@@ -62,7 +57,7 @@
                 _info.remove();
             }
 
-            var _w = widgets.Widget.call(this, "info", "info", "div");
+            var _w = Widget.call(this, "info", "info", "div");
             _info = _w.widget;
 
             /**
@@ -160,6 +155,7 @@
         return _Info;
     })();
 
-    Info.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.Info = Info;
-})));
+    // Export
+    Info.prototype = Object.create(Widget.prototype);
+    return Info;
+}));

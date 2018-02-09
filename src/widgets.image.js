@@ -30,21 +30,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Image = factory(global.d3, global.adt.widgets.Widget, global);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.image Error: widgets module is not exported");
-    }
 
     /**
      * The image widget class.
@@ -56,7 +51,7 @@
      * @constructor
      */
     function Image(name, parent) {
-        var _w = widgets.Widget.call(this, name, "image", "img", parent);
+        var _w = Widget.call(this, name, "image", "img", parent);
 
         /**
          * Sets the image source path.
@@ -88,6 +83,7 @@
         };
     }
 
-    Image.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.Image = Image;
-})));
+    // Export
+    Image.prototype = Object.create(Widget.prototype);
+    return Image;
+}));

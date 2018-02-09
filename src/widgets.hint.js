@@ -31,21 +31,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Hint = factory(global.d3, global.adt.widgets.Widget, global);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.hint Error: widgets module is not exported");
-    }
 
     /**
      * The hint widget class.
@@ -101,7 +96,7 @@
             if (_hints.hasOwnProperty(_id)) {
                 return _hints[_id];
             } else {
-                var _w = widgets.Widget.call(this, name, "hint", "div");
+                var _w = Widget.call(this, name, "hint", "div");
                 var that = this;
             }
 
@@ -112,27 +107,31 @@
             _w.attr.add(this, "text", "");
 
             // Add missing CSS for hint
-            if (d3.select("#" + _styleId).empty()) {
-                d3.select("head").append("style")
-                    .attr("id", _styleId)
-                    .text("." + _class + ":after{content:' ';position:absolute;width:0;height:0;left:20.5px;top:40px;border:7px solid;border-color:#000 transparent transparent #000;}");
-            }
+            try {
+                if (d3.select("#" + _styleId).empty()) {
+                    d3.select("head").append("style")
+                        .attr("id", _styleId)
+                        .text("." + _class + ":after{content:' ';position:absolute;width:0;height:0;left:20.5px;top:40px;border:7px solid;border-color:#000 transparent transparent #000;}");
+                }
 
-            // Setup mouse interaction
-            if (d3.select("#" + _detectorId).empty()) {
-                d3.select("body")
-                    .append("div")
-                    .attr("id", _detectorId)
-                    .style("position", "absolute")
-                    .style("top", 0)
-                    .style("bottom", 0)
-                    .style("left", 0)
-                    .style("right", 0)
-                    .on("mousemove", function () {
-                        d3.selectAll("." + _class).remove();
-                        d3.select(this).remove();
-                        _clear();
-                    });
+                // Setup mouse interaction
+                if (d3.select("#" + _detectorId).empty()) {
+                    d3.select("body")
+                        .append("div")
+                        .attr("id", _detectorId)
+                        .style("position", "absolute")
+                        .style("top", 0)
+                        .style("bottom", 0)
+                        .style("left", 0)
+                        .style("right", 0)
+                        .on("mousemove", function () {
+                            d3.selectAll("." + _class).remove();
+                            d3.select(this).remove();
+                            _clear();
+                        });
+                }
+            } catch (e) {
+                console.error("MissingDOMException: there is no DOM, could not add widget");
             }
 
             // Rendering methods.
@@ -174,6 +173,7 @@
         return _Hint;
     })();
 
-    Hint.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.Hint = Hint;
-})));
+    // Export
+    Hint.prototype = Object.create(Widget.prototype);
+    return Hint;
+}));

@@ -28,21 +28,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'));
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.AreaChart = factory(global.d3, global.adt.widgets.Widget);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.areachart Error: widgets module is not exported");
-    }
 
     /**
      * The area chart widget class.
@@ -54,7 +49,7 @@
      * @constructor
      */
     function AreaChart(name, parent) {
-        var _w = widgets.Widget.call(this, name, "areaChart", "svg", parent);
+        var _w = Widget.call(this, name, "areaChart", "svg", parent);
 
         /**
          * Sets the X label.
@@ -301,6 +296,7 @@
         };
     }
 
-    AreaChart.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.AreaChart = AreaChart;
-})));
+    // Export
+    AreaChart.prototype = Object.create(Widget.prototype);
+    return AreaChart;
+}));

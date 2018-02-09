@@ -27,13 +27,14 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('lodash'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['_', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.data = factory(global._);
     }
-} (this, (function (exports) {
+} (this, function (_) {
     "use strict";
 
     /**
@@ -652,10 +653,9 @@
     };
 
     // Exports
-    if (!exports.data)
-        var data = exports.data = {};
-    data.format = format;
-    data.explore = explore;
-    data.structures = structures;
-})));
-
+    return {
+        format: format,
+        explore: explore,
+        structures: structures
+    };
+}));

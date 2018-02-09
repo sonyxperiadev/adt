@@ -50,21 +50,16 @@
 // TODO add country name in center of largest land
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('lodash'), require('topojson'), require('./widgets'));
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', '_', 'topojson', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Map = factory(global.d3, global._, global.topojson, global.adt.widgets.Widget);
     }
-} (this, (function (exports) {
+} (this, function (d3, _, topojson, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.map Error: widgets module is not exported");
-    }
 
     /**
      * JSON string containing the paths for the countries.
@@ -97,7 +92,7 @@
      */
     function Map(name, parent) {
         var _id = "adt-widgets-map";
-        var _w = widgets.Widget.call(this, name, "map", "div", parent);
+        var _w = Widget.call(this, name, "map", "div", parent);
 
         /**
          * Sets horizontal position of the map center relative to the widget's center.
@@ -1896,7 +1891,7 @@
         };
     }
 
-    Map.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets = exports.widgets || {};
-    exports.widgets.Map = Map;
-})));
+    // Export
+    Map.prototype = Object.create(Widget.prototype);
+    return Map;
+}));

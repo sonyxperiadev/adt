@@ -30,21 +30,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'));
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Legend = factory(global.d3, global.adt.widgets.Widget, global);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.legend Error: widgets module is not exported");
-    }
 
     /**
      * The legend widget class.
@@ -56,7 +51,7 @@
      * @constructor
      */
     function Legend(name, parent) {
-        var _w = widgets.Widget.call(this, name, "legend", "div", parent);
+        var _w = Widget.call(this, name, "legend", "div", parent);
 
         /**
          * Sets legend text.
@@ -147,7 +142,8 @@
             _.forOwn(_w.attr.margins, function(margin, side) {
                 _w.widget.style("margin-" + side, margin + "px");
             });
-            _text.style("font-size", _w.attr.fontSize + "px")
+            _text.style("color", _w.attr.fontColor)
+                .style("font-size", _w.attr.fontSize + "px")
                 .html(_w.attr.text);
             if (_w.attr.mouseover)
                 _text.on("mouseover", _w.attr.mouseover);
@@ -164,6 +160,7 @@
         }
     }
 
-    Legend.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.Legend = Legend;
-})));
+    // Export
+    Legend.prototype = Object.create(Widget.prototype);
+    return Legend;
+}));

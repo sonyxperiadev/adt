@@ -27,13 +27,14 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(require('d3'), exports);
+        module.exports = factory(require('d3'), exports);
     } else if (typeof define === 'function' && define.amd) {
         define(['d3', 'exports'], factory);
     } else {
-        factory(global.d3, (global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.rest = factory(global.d3);
     }
-} (this, (function (d3, exports) {
+} (this, function (d3) {
     "use strict";
 
     /**
@@ -41,19 +42,19 @@
      * Endpoint URL, database and table must be set at object construction and cannot be changed later on.
      * This is to ensure that one {Rest} object connects to a single table.
      *
-     * @class REST
+     * @class Rest
      * @memberOf adt.rest
      * @param {string} endpoint Endpoint of the REST API.
      * @param {string} database Database to use.
      * @param {string} table Table name.
      * @constructor
      */
-    exports.REST = function(endpoint, database, table) {
+    var Rest = function(endpoint, database, table) {
         /**
          * Performs a query to the connected table.
          *
          * @method _query
-         * @memberOf adt.rest.REST
+         * @memberOf adt.rest.Rest
          * @param {object=} params Object containing the parameters of the query.
          * @param {function} exec Function to call in order to execute the query.
          * @param {function=} onSuccess Callback to perform if the query was successful. Must accept the response
@@ -104,7 +105,7 @@
          * Performs a query to a REST API that is expected to return a JSON file.
          *
          * @method json
-         * @memberOf adt.rest.REST
+         * @memberOf adt.rest.Rest
          * @param {object} params Object containing the parameters of the query.
          * @param {function=} onSuccess Callback to perform if the query was successful. Must accept the JSON response
          * of the query.
@@ -119,7 +120,7 @@
          * Performs a query to a REST API that is expected to return a CSV file.
          *
          * @method csv
-         * @memberOf adt.rest.REST
+         * @memberOf adt.rest.Rest
          * @param {object} params Object containing the parameters of the query.
          * @param {function=} onSuccess Callback to perform if the query was successful. Must accept the CSV response
          * of the query.
@@ -136,4 +137,9 @@
             csv: csv
         };
     };
-})));
+
+    // Exports
+    return {
+        Rest: Rest
+    };
+}));

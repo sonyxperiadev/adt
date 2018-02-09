@@ -28,21 +28,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.PieChart = factory(global.d3, global.adt.widgets.Widget, global);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.piechart Error: widgets module is not exported");
-    }
 
     /**
      * The pie chart widget class.
@@ -54,7 +49,7 @@
      * @constructor
      */
     function PieChart(name, parent) {
-        var _w = widgets.Widget.call(this, name, "pieChart", "svg", parent);
+        var _w = Widget.call(this, name, "pieChart", "svg", parent);
 
         /**
          * Sets the inner radius in pixels.
@@ -175,8 +170,8 @@
 
         _w.render.update = function (duration) {
             _svg.g.datum(_data);
-            _svg.path.data(_svg.pie);
-            _svg.path
+            _svg.paths.data(_svg.pie);
+            _svg.paths
                 .attr("d", _svg.arc)
                 .transition().duration(duration)
                 .attrTween("d", function (a) {
@@ -229,6 +224,7 @@
         };
     }
 
-    PieChart.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.PieChart = PieChart;
-})));
+    // Export
+    PieChart.prototype = Object.create(Widget.prototype);
+    return PieChart;
+}));

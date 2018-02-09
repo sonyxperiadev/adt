@@ -36,13 +36,15 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('lodash'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', '_', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Widget = factory(global.d3, global._);
     }
-} (this, (function (exports) {
+} (this, function (d3, _) {
     "use strict";
 
     /**
@@ -65,20 +67,24 @@
          * @private
          */
         var _widget;
-        if (parent) {
-            _widget = parent.append(element)
-                .attr("id", "adt-widget-" + type + "-" + name)
-                .attr("class", "adt-widget")
-                .style("display", "none")
-                .style("position", "absolute")
-                .style("pointer-events", "none");
-        } else {
-            _widget = d3.select("body").append(element)
-                .attr("id", "adt-widget-" + type + "-" + name)
-                .attr("class", "adt-widget")
-                .style("display", "none")
-                .style("position", "absolute")
-                .style("pointer-events", "none");
+        try {
+            if (parent) {
+                _widget = parent.append(element)
+                    .attr("id", "adt-widget-" + type + "-" + name)
+                    .attr("class", "adt-widget")
+                    .style("display", "none")
+                    .style("position", "absolute")
+                    .style("pointer-events", "none");
+            } else {
+                _widget = d3.select("body").append(element)
+                    .attr("id", "adt-widget-" + type + "-" + name)
+                    .attr("class", "adt-widget")
+                    .style("display", "none")
+                    .style("position", "absolute")
+                    .style("pointer-events", "none");
+            }
+        } catch (e) {
+            console.error("MissingDOMException: there is no DOM, could not add widget");
         }
 
         /**
@@ -802,9 +808,6 @@
      .style("opacity", 1);
      }*/
 
-    // Exports
-    if (!exports.widgets)
-        var widgets = exports.widgets = {};
-    //widgets.Tooltip = Tooltip;
-    widgets.Widget = Widget;
-})));
+    // Add to exports
+    return Widget;
+}));

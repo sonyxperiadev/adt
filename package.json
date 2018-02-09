@@ -1,0 +1,17 @@
+{
+  "name": "adt",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": "https://github.com/sonyxperiadev/adt",
+  "dependencies": {
+    "d3": "4.13.0",
+    "localforage": "^1.5.6",
+    "lodash": "^4.17.5",
+    "queue-async": "^1.2.1",
+    "spin": "^0.0.1",
+    "topojson": "^3.0.2"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.3.9"
+  }
+}

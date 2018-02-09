@@ -28,21 +28,16 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        factory(exports);
+        module.exports = factory(require('d3'), require('./widgets'), exports);
     } else if (typeof define === 'function' && define.amd) {
-        define(['exports'], factory);
+        define(['d3', 'widgets', 'exports'], factory);
     } else {
-        factory((global.adt = global.adt || {}));
+        global.adt = global.adt || {};
+        global.adt.widgets = global.adt.widgets || {};
+        global.adt.widgets.Grid = factory(global.d3, global.adt.widgets.Widget, global);
     }
-} (this, (function (exports) {
+} (this, function (d3, Widget) {
     "use strict";
-
-    // Load widgets
-    if (exports.widgets) {
-        var widgets = exports.widgets;
-    } else {
-        throw new Error("adt.widgets.grid Error: widgets module is not exported");
-    }
 
     /**
      * The grid class.
@@ -54,7 +49,7 @@
      * @constructor
      */
     function Grid(name, parent) {
-        var _w = widgets.Widget.call(this, name, "grid", "div", parent);
+        var _w = Widget.call(this, name, "grid", "div", parent);
 
         // Widget elements
         var _x = _w.attr.x;
@@ -390,6 +385,7 @@
         };
     }
 
-    Grid.prototype = Object.create(widgets.Widget.prototype);
-    exports.widgets.Grid = Grid;
-})));
+    // Export
+    Grid.prototype = Object.create(Widget.prototype);
+    return Grid;
+}));

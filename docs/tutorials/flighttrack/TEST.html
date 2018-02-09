@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flight stat</title>
+    <script src="../../../dependencies/d3.v4.min.js"></script>
+    <script src="../../../dependencies/topojson.v1.min.js"></script>
+    <script src="../../../dependencies/lodash.4.17.4.min.js"></script>
+    <script src="../../../src/data.js"></script>
+    <script src="../../../src/widgets.js"></script>
+    <script src="../../../src/widgets.areachart.js"></script>
+    <script src="../../../src/widgets.barchart.js"></script>
+    <script src="../../../src/widgets.chordchart.js"></script>
+    <script src="../../../src/widgets.grid.js"></script>
+    <script src="../../../src/widgets.hint.js"></script>
+    <script src="../../../src/widgets.image.js"></script>
+    <script src="../../../src/widgets.info.js"></script>
+    <script src="../../../src/widgets.label.js"></script>
+    <script src="../../../src/widgets.legend.js"></script>
+    <script src="../../../src/widgets.linechart.js"></script>
+    <script src="../../../src/widgets.piechart.js"></script>
+    <script src="../../../src/widgets.slider.js"></script>
+    <script src="../../../src/widgets.status.js"></script>
+    <script src="../../../src/widgets.map.js"></script>
+    <script src="../../../src/rest.js"></script>
+    <script src="../../../src/signals.js"></script>
+    <script src="../../../src/user.js"></script>
+    <script src="../../../src/system.log.js"></script>
+    <script src="../../../src/system.version.js"></script>
+</head>
+<body style="width:100%;height:700px">
+<script>
+    var data = [
+        {x: 1, y: {'orange': 2}},
+        {x: 2, y: {'orange': 5}},
+        {x: 3, y: {'orange': 3}}
+    ];
+    var data2 = [
+        {x: 1, y: 2},
+        {x: 2, y: 5},
+        {x: 3, y: 3}
+    ];
+    new adt.widgets.Status("status")
+        .x(700)
+        .y(-200)
+        .fontColor("purple")
+        .fontSize(20)
+        .status("status")
+        .render();
+    new adt.widgets.Slider("slider")
+        .fontColor("dodgerblue")
+        .render();
+    new adt.widgets.PieChart("pie")
+        .data([{name: "apple", value: 3, color: "red"},
+            {name: "orange", value: 4, color: "orange"},
+            {name: "melon", value: 1, color: "green"}])
+        .x(100)
+        .y(400)
+        .render();
+    var map = new adt.widgets.Map("flight")
+        .x(0)                       // Top-left corner is adjusted to
+        .y(0)                       // the window
+        .width(window.innerWidth)   // Size is set to the window size
+        .height(window.innerHeight)
+        .labels(true)
+        .render();                  // Must be called to draw the map
+    new adt.widgets.Label("label")
+        .text("THIS IS A LABEL")
+        .fontColor("red")
+        .render();
+    new adt.widgets.Legend("legend")
+        .text("THIS IS A LEGEND")
+        .color("blue")
+        .fontColor("black")
+        .fontSize(20)
+        .y(200)
+        .render();
+    var grid = new adt.widgets.Grid("grid")
+        .rows(3)
+        .cols(3)
+        .flexible(true)
+        .render();
+    grid.show(true);
+    var chart = new adt.widgets.LineChart("flight")
+        .margins({left: 30, right: 30, top: 30, bottom: 30})
+        .fontColor("black")
+        .data(data)
+        .render();
+    adt.system.log.i("success", 3);
+    console.log(adt.system.version.current());
+    adt.user.cheats.feature("testing", function() {
+        console.log("testing is ON");
+    }, function() {
+        console.log("testing is OFF");
+    });
+
+    var DATA = [
+        {source: "melon", target: "apple", value: 1},
+        {source: "melon", target: "pear", value: 2},
+        {source: "melon", target: "orange", value: 3},
+        {source: "apple", target: "melon", value: 4},
+        {source: "apple", target: "pear", value: 5},
+        {source: "apple", target: "orange", value: 6},
+        {source: "pear", target: "melon", value: 7},
+        {source: "pear", target: "apple", value: 8},
+        {source: "pear", target: "orange", value: 9},
+        {source: "orange", target: "melon", value: 10},
+        {source: "orange", target: "apple", value: 11},
+        {source: "orange", target: "pear", value: 12},
+        {source: "banana", target: "apple", value: 1},
+        {source: "apple", target: "banana", value: 2}
+    ];
+
+    var chords = new adt.widgets.ChordChart("TEST")
+        .x(100)
+        .y(100)
+        .radius(150)
+        .thickness(20)
+        .margins({left:20, right: 20, top: 20, bottom: 20})
+        .ticks(true)
+        .invert(true)
+        .fontColor("black")
+        .fontSize(24)
+        .data(DATA)
+        .mouseover(function(name, index) {
+            chords.highlight(name);
+        })
+        .mouseleave(function(d, i) {
+            chords.highlight();
+        })
+        .render();
+</script>
+</body>
+</html>
