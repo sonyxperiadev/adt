@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.grid
+ * @module widgets.Grid
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -43,7 +43,7 @@
      * The grid class.
      *
      * @class Grid
-     * @memberOf adt.widgets.grid
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -65,7 +65,7 @@
          * Resize grid. Note that it also removes all widgets already in the grid.
          *
          * @method _resize
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @private
          */
         function _resize() {
@@ -92,7 +92,7 @@
          * Sets the X position of the widget.
          *
          * @method x
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {number} x Distance from the window side. If positive, position is measured from the left,
          * otherwise it is measured from the right.
          * @param {string=} dim Distance dimension. If not specified, pixels are used.
@@ -110,7 +110,7 @@
          * Sets the Y position of the widget.
          *
          * @method y
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {number} y Distance from the window side. If positive, position is measured from the top,
          * otherwise it is measured from the bottom.
          * @param {string=} dim Distance dimension. If not specified, pixels are used.
@@ -129,9 +129,9 @@
          * Default is 1.
          *
          * @method rows
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {number} size Number of rows.
-         * @returns {adt.widgets.grid.Grid} Reference to the current grid.
+         * @returns {adt.widgets.Grid} Reference to the current grid.
          */
         this.rows = function (size) {
             _rows = size;
@@ -144,9 +144,9 @@
          * Default is 1.
          *
          * @method cols
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {number} size Number of cols.
-         * @returns {adt.widgets.grid.Grid} Reference to the current grid.
+         * @returns {adt.widgets.Grid} Reference to the current grid.
          */
         this.cols = function (size) {
             _columns = size;
@@ -160,9 +160,9 @@
          * Note that this method overwrites {windows.onresize}.
          *
          * @method flexible
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {boolean} on Whether the grid should be flexible.
-         * @returns {adt.widgets.grid.Grid} Reference to the current grid.
+         * @returns {adt.widgets.Grid} Reference to the current grid.
          */
         this.flexible = function (on) {
             function onresize() {
@@ -221,7 +221,7 @@
          * Shows/hides grid borders.
          *
          * @method show
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {boolean=} on True if grid should be shown, false otherwise.
          */
         function show(on) {
@@ -297,7 +297,7 @@
          * Note that the rows are measured from the top.
          *
          * @method add
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {adt.widgets.Widget} widget Widget to add.
          * @param {number} column Column index of the cell to add widget to.
          * @param {number} row Row index of the cell to add widget to.
@@ -353,7 +353,7 @@
          * Returns the widget occupying the cell at the specified row and column.
          *
          * @method get
-         * @memberOf adt.widgets.grid.Grid
+         * @memberOf adt.widgets.Grid
          * @param {number} row Row of the cell to get widget for.
          * @param {number} column Column of the cell to get widget for.
          * @returns {?adt.widgets.Widget} The widget in the specified cell if cell is in grid and it is not empty,

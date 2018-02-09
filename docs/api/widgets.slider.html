@@ -1,26 +1,25 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.slider</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.slider</div><nav><div><input type='checkbox' id='s2-adt.widgets.slider'></input><label for='s2-adt.widgets.slider'>widgets.slider</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.slider.Slider'></input><label for='s3-adt.widgets.slider.Slider'>Slider</label><div class='s3'><a href='#api-adt.widgets.slider.Slider.min'>min</a><a href='#api-adt.widgets.slider.Slider.max'>max</a><a href='#api-adt.widgets.slider.Slider.step'>step</a><a href='#api-adt.widgets.slider.Slider.label'>label</a><a href='#api-adt.widgets.slider.Slider.callback'>callback</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.slider'>adt.widgets.slider</h2>Module implementing a slider. Part of the Analytics Dashboard Tools. 
-<br><br>Requires: <code>d3@v4</code> <code>adt.widgets</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.slider.Slider'>Slider</h2>
-<div class='card'><pre>adt.widgets.slider.Slider(name[, parent])</pre>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.Slider</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.Slider</div><nav><div></div></nav></aside><main><h2 id='api-adt.widgets.Slider'>Slider</h2>
+<div class='card'><pre>adt.widgets.Slider(name[, parent])</pre>
 <br>The slider widget class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Identifier of the widget.</td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, widget is appended to body. <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.slider.Slider.min'>min</h2>
-<div class='card'><pre>adt.widgets.slider.Slider.min(value)</pre>
+</div><br><h2 id='api-adt.widgets.Slider.min'>min</h2>
+<div class='card'><pre>adt.widgets.Slider.min(value)</pre>
 <br>Sets the lower boundary of the slider. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>Lower boundary.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.slider.Slider.max'>max</h2>
-<div class='card'><pre>adt.widgets.slider.Slider.max(value)</pre>
+</div><br><h2 id='api-adt.widgets.Slider.max'>max</h2>
+<div class='card'><pre>adt.widgets.Slider.max(value)</pre>
 <br>Sets the upper boundary of the slider. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>Upper boundary.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.slider.Slider.step'>step</h2>
-<div class='card'><pre>adt.widgets.slider.Slider.step(value)</pre>
+</div><br><h2 id='api-adt.widgets.Slider.step'>step</h2>
+<div class='card'><pre>adt.widgets.Slider.step(value)</pre>
 <br>Sets the step of the slider scale for ordinal scale. If zero is passed, a continuous scale is used. Default is 0 (continuous scale). 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>Step size.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.slider.Slider.label'>label</h2>
-<div class='card'><pre>adt.widgets.slider.Slider.label(text)</pre>
+</div><br><h2 id='api-adt.widgets.Slider.label'>label</h2>
+<div class='card'><pre>adt.widgets.Slider.label(text)</pre>
 <br>Sets the label for the slider. The label is shown on the left side of the slider. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>text</i></td><td><code>string</code></td><td>Label text.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.slider.Slider.callback'>callback</h2>
-<div class='card'><pre>adt.widgets.slider.Slider.callback(func)</pre>
+</div><br><h2 id='api-adt.widgets.Slider.callback'>callback</h2>
+<div class='card'><pre>adt.widgets.Slider.callback(func)</pre>
 <br>Sets callback attached to the slider. Must accept one parameter describing the value of the slider. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>func</i></td><td><code>function</code></td><td>The callback to call on value change.</td></tr></table>
 </div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>

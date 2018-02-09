@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.slider
+ * @module widgets.Slider
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -43,7 +43,7 @@
      * The slider widget class.
      *
      * @class Slider
-     * @memberOf adt.widgets.slider
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -55,7 +55,7 @@
          * Sets the lower boundary of the slider.
          *
          * @method min
-         * @memberOf adt.widgets.slider.Slider
+         * @memberOf adt.widgets.Slider
          * @param {number} value Lower boundary.
          */
         _w.attr.add(this, "min", 0);
@@ -64,7 +64,7 @@
          * Sets the upper boundary of the slider.
          *
          * @method max
-         * @memberOf adt.widgets.slider.Slider
+         * @memberOf adt.widgets.Slider
          * @param {number} value Upper boundary.
          */
         _w.attr.add(this, "max", 1);
@@ -75,7 +75,7 @@
          * Default is 0 (continuous scale).
          *
          * @method step
-         * @memberOf adt.widgets.slider.Slider
+         * @memberOf adt.widgets.Slider
          * @param {number} value Step size.
          */
         _w.attr.add(this, "step", 0);
@@ -85,7 +85,7 @@
          * The label is shown on the left side of the slider.
          *
          * @method label
-         * @memberOf adt.widgets.slider.Slider
+         * @memberOf adt.widgets.Slider
          * @param {string} text Label text.
          */
         _w.attr.add(this, "label", "");
@@ -94,7 +94,7 @@
          * Sets callback attached to the slider. Must accept one parameter describing the value of the slider.
          *
          * @method callback
-         * @memberOf adt.widgets.slider.Slider
+         * @memberOf adt.widgets.Slider
          * @param {function} func The callback to call on value change.
          */
         _w.attr.add(this, "callback", null);

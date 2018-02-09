@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.info
+ * @module widgets.Info
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -45,7 +45,7 @@
      * The info widget class.
      *
      * @class Info
-     * @memberOf adt.widgets.info
+     * @memberOf adt.widgets
      * @constructor
      */
     var Info = (function () {
@@ -64,7 +64,7 @@
              * Sets the info box content.
              *
              * @method content
-             * @memberOf adt.widgets.info.Info
+             * @memberOf adt.widgets.Info
              * @param {string} text Content of the info box. Can be HTML formatted.
              */
             _w.attr.add(this, "content", "");
@@ -74,7 +74,7 @@
              * Default is black.
              *
              * @method backgroundColor
-             * @memberOf adt.widgets.info.Info
+             * @memberOf adt.widgets.Info
              * @param {string} color Color to set background to.
              */
             _w.attr.add(this, "backgroundColor", "black");

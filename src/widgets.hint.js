@@ -24,7 +24,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.hint
+ * @module widgets.Hint
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -46,7 +46,7 @@
      * The hint widget class.
      *
      * @class Hint
-     * @memberOf adt.widgets.hint
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @constructor
      */
@@ -55,7 +55,7 @@
          * List of visible hints.
          *
          * @var {object} _hints
-         * @memberOf adt.widgets.hint.Hint
+         * @memberOf adt.widgets.Hint
          * @private
          */
         var _hints = {};
@@ -64,7 +64,7 @@
          * Clears hints list.
          *
          * @method _clear
-         * @memberOf adt.widgets.hint.Hint
+         * @memberOf adt.widgets.Hint
          * @private
          */
         function _clear() {
@@ -80,7 +80,7 @@
          * The actual hint class.
          *
          * @class _Hint
-         * @memberOf adt.widgets.hint.Hint
+         * @memberOf adt.widgets.Hint
          * @param {string} name Name of the hint.
          * @private
          */
@@ -102,7 +102,7 @@
 
             /**
              * @property {string} text The hint text.
-             * @memberOf adt.widgets.hint.Hint
+             * @memberOf adt.widgets.Hint
              */
             _w.attr.add(this, "text", "");
 

@@ -1,42 +1,41 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.areachart</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.areachart</div><nav><div><input type='checkbox' id='s2-adt.widgets.areachart'></input><label for='s2-adt.widgets.areachart'>widgets.areachart</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.areachart.AreaChart'></input><label for='s3-adt.widgets.areachart.AreaChart'>AreaChart</label><div class='s3'><a href='#api-adt.widgets.areachart.AreaChart.xLabel'>xLabel</a><a href='#api-adt.widgets.areachart.AreaChart.yLabel'>yLabel</a><a href='#api-adt.widgets.areachart.AreaChart.xType'>xType</a><a href='#api-adt.widgets.areachart.AreaChart.yTIckFormat'>yTIckFormat</a><a href='#api-adt.widgets.areachart.AreaChart.colors'>colors</a><a href='#api-adt.widgets.areachart.AreaChart.opacity'>opacity</a><a href='#api-adt.widgets.areachart.AreaChart.yMin'>yMin</a><a href='#api-adt.widgets.areachart.AreaChart.data'>data</a><a href='#api-adt.widgets.areachart.AreaChart.highlight'>highlight</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.areachart'>adt.widgets.areachart</h2>Module implementing an area chart. Part of the Analytics Dashboard Tools. 
-<br><br>Requires: <code>d3@v4</code> <code>adt.widgets</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.areachart.AreaChart'>AreaChart</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart(name[, parent])</pre>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.AreaChart</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.AreaChart</div><nav><div></div></nav></aside><main><h2 id='api-adt.widgets.AreaChart'>AreaChart</h2>
+<div class='card'><pre>adt.widgets.AreaChart(name[, parent])</pre>
 <br>The area chart widget class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Identifier of the widget.</td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, widget is appended to body. <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.xLabel'>xLabel</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.xLabel(label)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.xLabel'>xLabel</h2>
+<div class='card'><pre>adt.widgets.AreaChart.xLabel(label)</pre>
 <br>Sets the X label. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Text to set label to.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.yLabel'>yLabel</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.yLabel(label)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.yLabel'>yLabel</h2>
+<div class='card'><pre>adt.widgets.AreaChart.yLabel(label)</pre>
 <br>Sets the Y label. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Text to set label to.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.xType'>xType</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.xType(type)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.xType'>xType</h2>
+<div class='card'><pre>adt.widgets.AreaChart.xType(type)</pre>
 <br>Sets the type of the X axis. Supported values are: number, time, string. Default is number. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>type</i></td><td><code>string</code></td><td>Type of the X axis.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.yTIckFormat'>yTIckFormat</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.yTIckFormat(format)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.yTIckFormat'>yTIckFormat</h2>
+<div class='card'><pre>adt.widgets.AreaChart.yTIckFormat(format)</pre>
 <br>Sets the formatting function of the y ticks. Default is a float with two decimals. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>format</i></td><td><code>function</code></td><td>Formatting function.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.colors'>colors</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.colors(color)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.colors'>colors</h2>
+<div class='card'><pre>adt.widgets.AreaChart.colors(color)</pre>
 <br>Sets the color of the area plots. Default is grey. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code> <code>object</code></td><td>Single color string or an object containing colors for each plot.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.opacity'>opacity</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.opacity(value)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.opacity'>opacity</h2>
+<div class='card'><pre>adt.widgets.AreaChart.opacity(value)</pre>
 <br>Sets the opacity of the area plots. Default is 0.3. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>The opacity value to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.yMin'>yMin</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.yMin(value)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.yMin'>yMin</h2>
+<div class='card'><pre>adt.widgets.AreaChart.yMin(value)</pre>
 <br>Sets lowe boundary of the Y axis. Default is 0. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>Value to set lower boundary to.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.data'>data</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.data(data, scale)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.data'>data</h2>
+<div class='card'><pre>adt.widgets.AreaChart.data(data, scale)</pre>
 <br>Binds data to the area plot. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array of <code>x, y</code> objects where X is a number or Date, Y is an object containing the y values for each area to plot.</td></tr><tr><td><i>scale</i></td><td><code>number</code></td><td>Optional scaling parameter. Each data point is divided by this value.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.areachart.AreaChart.highlight'>highlight</h2>
-<div class='card'><pre>adt.widgets.areachart.AreaChart.highlight(key)</pre>
+</div><br><h2 id='api-adt.widgets.AreaChart.highlight'>highlight</h2>
+<div class='card'><pre>adt.widgets.AreaChart.highlight(key)</pre>
 <br>Highlights the specified plot. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>key</i></td><td><code>string</code></td><td>Key of the area to highlight.</td></tr></table>
 </div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>

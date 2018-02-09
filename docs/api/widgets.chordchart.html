@@ -1,46 +1,45 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.chordchart</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.chordchart</div><nav><div><input type='checkbox' id='s2-adt.widgets.chordchart'></input><label for='s2-adt.widgets.chordchart'>widgets.chordchart</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.chordchart.ChordChart'></input><label for='s3-adt.widgets.chordchart.ChordChart'>ChordChart</label><div class='s3'><a href='#api-adt.widgets.chordchart.ChordChart.radius'>radius</a><a href='#api-adt.widgets.chordchart.ChordChart.thickness'>thickness</a><a href='#api-adt.widgets.chordchart.ChordChart.label'>label</a><a href='#api-adt.widgets.chordchart.ChordChart.ticks'>ticks</a><a href='#api-adt.widgets.chordchart.ChordChart.colors'>colors</a><a href='#api-adt.widgets.chordchart.ChordChart.mouseover'>mouseover</a><a href='#api-adt.widgets.chordchart.ChordChart.mouseleave'>mouseleave</a><a href='#api-adt.widgets.chordchart.ChordChart.invert'>invert</a><a href='#api-adt.widgets.chordchart.ChordChart.data'>data</a><a href='#api-adt.widgets.chordchart.ChordChart.highlight'>highlight</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.chordchart'>adt.widgets.chordchart</h2>Module implementing a chord chart. Part of the Analytics Dashboard Tools.  A chord chart displays directed relationship between groups of segments. Each segment is represented by a slice in the chord and ribbons correspond to the flow between segments. In case of a flow matrix <code>M</code>, the color of a ribbon from segment <code>i</code> to segment <code>j</code> is always the color of the largest source. That is, if <code>M[i][j] = 3</code> and <code>M[j][i] = 10</code>, there is 7 more flow from <code>j</code> to <code>i</code> and the color of the ribbon between these segments is the same as the color of segment <code>j</code> (the target of the larger flow). 
-<br><br>Requires: <code>d3@v4</code> <code>adt.widgets</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.chordchart.ChordChart'>ChordChart</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart(name[, parent])</pre>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.ChordChart</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.ChordChart</div><nav><div></div></nav></aside><main><h2 id='api-adt.widgets.ChordChart'>ChordChart</h2>
+<div class='card'><pre>adt.widgets.ChordChart(name[, parent])</pre>
 <br>The chord chart widget class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Identifier of the widget.</td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, widget is appended to body. <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.radius'>radius</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.radius(size)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.radius'>radius</h2>
+<div class='card'><pre>adt.widgets.ChordChart.radius(size)</pre>
 <br>Sets radius in pixels. Default is 100. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>size</i></td><td><code>number</code></td><td>Size of the radius in pixels.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.thickness'>thickness</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.thickness(size)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.thickness'>thickness</h2>
+<div class='card'><pre>adt.widgets.ChordChart.thickness(size)</pre>
 <br>Sets the thickness of the segments. Default is 10. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>size</i></td><td><code>number</code></td><td>Size of the thickness in pixels.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.label'>label</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.label(text)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.label'>label</h2>
+<div class='card'><pre>adt.widgets.ChordChart.label(text)</pre>
 <br>Adds a label below the chord. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>text</i></td><td><code>string</code></td><td>Label text.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.ticks'>ticks</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.ticks(on)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.ticks'>ticks</h2>
+<div class='card'><pre>adt.widgets.ChordChart.ticks(on)</pre>
 <br>Whether to have ticks (labels on the segments). Default is false. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>on</i></td><td><code>boolean</code></td><td>Whether to have ticks or not.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.colors'>colors</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.colors(color)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.colors'>colors</h2>
+<div class='card'><pre>adt.widgets.ChordChart.colors(color)</pre>
 <br>Sets the color of the lines. Default is Tableau's standard color scheme. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code> <code>object</code></td><td>Single color string or an object containing colors for each segment.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.mouseover'>mouseover</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.mouseover(callback)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.mouseover'>mouseover</h2>
+<div class='card'><pre>adt.widgets.ChordChart.mouseover(callback)</pre>
 <br>Sets callback for mouse over on a segment. Can accept two parameters: the segment name and its index. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.mouseleave'>mouseleave</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.mouseleave(callback)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.mouseleave'>mouseleave</h2>
+<div class='card'><pre>adt.widgets.ChordChart.mouseleave(callback)</pre>
 <br>Sets callback for mouse leave on a segment. Can accept two parameters: the segment name and its index. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.invert'>invert</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.invert(on)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.invert'>invert</h2>
+<div class='card'><pre>adt.widgets.ChordChart.invert(on)</pre>
 <br>Inverts the chord meaning the color of each chord now correspods to the largest source instead of the largest target. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>on</i></td><td><code>boolean</code></td><td>If chord should be inverted.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.data'>data</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.data(data)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.data'>data</h2>
+<div class='card'><pre>adt.widgets.ChordChart.data(data)</pre>
 <br>Binds data to the chord chart. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array of <code>source, target, value</code> objects denoting the size of chord from segment to segment.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.chordchart.ChordChart.highlight'>highlight</h2>
-<div class='card'><pre>adt.widgets.chordchart.ChordChart.highlight(key)</pre>
+</div><br><h2 id='api-adt.widgets.ChordChart.highlight'>highlight</h2>
+<div class='card'><pre>adt.widgets.ChordChart.highlight(key)</pre>
 <br>Highlights the specified segment. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>key</i></td><td><code>string</code></td><td>Key of the segment to highlight.</td></tr></table>
 </div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>

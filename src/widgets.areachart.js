@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.areachart
+ * @module widgets.AreaChart
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -43,7 +43,7 @@
      * The area chart widget class.
      *
      * @class AreaChart
-     * @memberOf adt.widgets.areachart
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -55,7 +55,7 @@
          * Sets the X label.
          *
          * @method xLabel
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {string} label Text to set label to.
          */
         _w.attr.add(this, "xLabel", "");
@@ -64,7 +64,7 @@
          * Sets the Y label.
          *
          * @method yLabel
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {string} label Text to set label to.
          */
         _w.attr.add(this, "yLabel", "");
@@ -75,7 +75,7 @@
          * Default is number.
          *
          * @method xType
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {string} type Type of the X axis.
          */
         _w.attr.add(this, "xType", "number");
@@ -85,7 +85,7 @@
          * Default is a float with two decimals.
          *
          * @method yTIckFormat
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {function} format Formatting function.
          */
         _w.attr.add(this, "yTickFormat", d3.format(".2s"));
@@ -95,7 +95,7 @@
          * Default is grey.
          *
          * @method colors
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {(string|object)} color Single color string or an object containing colors for each plot.
          */
         _w.attr.add(this, "colors", "grey");
@@ -105,7 +105,7 @@
          * Default is 0.3.
          *
          * @method opacity
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {number} value The opacity value to set.
          */
         _w.attr.add(this, "opacity", 0.3);
@@ -115,7 +115,7 @@
          * Default is 0.
          *
          * @method yMin
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {number} value Value to set lower boundary to.
          */
         _w.attr.add(this, "yMin", 0);
@@ -129,7 +129,7 @@
          * Binds data to the area plot.
          *
          * @method data
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {Array} data Array of {x, y} objects where X is a number or Date, Y is an object containing the y
          * values for each area to plot.
          * @param {number} scale Optional scaling parameter. Each data point is divided by this value.
@@ -154,7 +154,7 @@
          * Highlights the specified plot.
          *
          * @method highlight
-         * @memberOf adt.widgets.areachart.AreaChart
+         * @memberOf adt.widgets.AreaChart
          * @param {string} key Key of the area to highlight.
          */
         this.highlight = function(key) {

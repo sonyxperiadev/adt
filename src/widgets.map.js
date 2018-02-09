@@ -40,7 +40,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.map
+ * @module widgets.Map
  * @memberOf adt
  * @requires lodash@4.17.4
  * @requires d3@v4
@@ -99,7 +99,7 @@
          * Default is 0.
          *
          * @method centerX
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {number} dx Horizontal distance to set.
          */
         _w.attr.add(this, "centerX", 0);
@@ -109,7 +109,7 @@
          * Default is 0.
          *
          * @method centerY
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {number} dy Vertical distance to set.
          */
         _w.attr.add(this, "centerY", 0);
@@ -119,7 +119,7 @@
          * Default is white.
          *
          * @method backgroundColor
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {string} color Background color.
          */
         _w.attr.add(this, "backgroundColor", "white");
@@ -129,7 +129,7 @@
          * Default is black.
          *
          * @method foregroundColor
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {string} color Foreground color.
          */
         _w.attr.add(this, "foregroundColor", "black");
@@ -139,7 +139,7 @@
          * Default is white.
          *
          * @method borderColor
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {string} color Border color.
          */
         _w.attr.add(this, "borderColor", "white");
@@ -148,7 +148,7 @@
          * Sets callback for mouse over on a country. Can accept two arguments: country name and country index.
          *
          * @method mouseover
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseover", null);
@@ -157,7 +157,7 @@
          * Sets callback for mouse leave on a country. Can accept two arguments: country name and country index.
          *
          * @method mouseleave
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
@@ -166,7 +166,7 @@
          * Sets callback for click on a country. Can accept two arguments: country name and country index.
          *
          * @method click
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "click", null);
@@ -176,7 +176,7 @@
          * Can accept one parameter denoting if a zoom out was performed.
          *
          * @method outClick
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "outClick", null);
@@ -185,7 +185,7 @@
          * Displays labels on the map when zoomed.
          *
          * @method labels
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @param {boolean} on Whether to enable labels or not.
          */
         _w.attr.add(this, "labels", false);
@@ -194,7 +194,7 @@
          * Namespace containing various country related methods.
          *
          * @namespace countries
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          */
         var _countries = (function() {
             var pathsJSON = JSON.parse(_PATHS);
@@ -203,7 +203,7 @@
              * Country paths.
              *
              * @var {object} _paths
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @private
              */
             var _paths = topojson.feature(pathsJSON, pathsJSON['objects']['countries']).features;
@@ -220,7 +220,7 @@
              * Country info.
              *
              * @var {object} _info
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @private
              */
             var _info = d3.map();
@@ -236,7 +236,7 @@
              * Country IDs.
              *
              * @var {object} _ids
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @private
              */
             var _ids = d3.map();
@@ -248,7 +248,7 @@
              * Returns country ID from its name.
              *
              * @method _getId
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @param {string} country Country name.
              * @returns {?number} ID of the country if exists, null otherwise.
              * @private
@@ -262,7 +262,7 @@
              * map.
              *
              * @method get
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @returns {Array}
              */
             function get() {
@@ -282,7 +282,7 @@
              * Note that some capitals and geo coordinates can be null.
              *
              * @method capital
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @param {string} country Name of the country to return capital data for.
              * @returns {(object|Array)} Object or array of objects containing the capital data.
              */
@@ -299,7 +299,7 @@
              * Source: CIA World Factbook (2017)
              *
              * @method population
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @param {string} country Name of the country to return population data for.
              * @returns {(number|Array)} Population or array of population data.
              */
@@ -314,7 +314,7 @@
              * Source: http://bl.ocks.org/bycoffe/5575904
              *
              * @method _pointInPolygon
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @param {Array} point Array containing the X and Y coordinates of the point.
              * @param {Array} polygon Array containing the array of coordinates for the polygon corners.
              * @return {boolean} True if point is inside polygon, false otherwise.
@@ -340,7 +340,7 @@
              * Checks if a geo location is inside a country.
              *
              * @method containsGeoLoc
-             * @memberOf adt.widgets.map.Map.countries
+             * @memberOf adt.widgets.Map.countries
              * @param {string} country Name of the country to check boundaries against.
              * @param {Array} latLon Two element array containing the latitude and longitude of the point.
              * @returns {boolean} True if point is inside the country, false otherwise.
@@ -382,14 +382,14 @@
          * Namespace containing various clustering related methods.
          *
          * @namespace clustering
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          */
         var _clustering = (function() {
             /**
              * The list of groups.
              *
              * @var {object} _groupLists
-             * @memberOf adt.widgets.map.Map.clustering
+             * @memberOf adt.widgets.Map.clustering
              * @private
              */
             var _clusterings = {};
@@ -399,7 +399,7 @@
              * group selector.
              *
              * @method selector
-             * @memberOf adt.widgets.map.Map.clustering
+             * @memberOf adt.widgets.Map.clustering
              * @param {string} id Identifier of the clustering.
              * @param {string} name Name of the group.
              * @returns {string} Selector representing the clustering and group name.
@@ -412,7 +412,7 @@
              * Returns an array of clustering group IDs or existing clustering IDs.
              *
              * @method get
-             * @memberOf adt.widgets.map.Map.clustering
+             * @memberOf adt.widgets.Map.clustering
              * @param {string} id Identifier of clustering. If invalid or not specified, the list of clustering IDs is
              * returned.
              * @returns {Array} Array of existing clustering IDs.
@@ -429,7 +429,7 @@
              * Adds a new clustering.
              *
              * @method add
-             * @memberOf adt.widgets.map.Map.clustering
+             * @memberOf adt.widgets.Map.clustering
              * @param {string} id Identifier of the clustering to add.
              * @param {object} groups Object containing the key as the name of the group and value as array of
              * countries.
@@ -448,7 +448,7 @@
              * Removes a clustering.
              *
              * @method remove
-             * @memberOf adt.widgets.map.Map.clustering
+             * @memberOf adt.widgets.Map.clustering
              * @param {string} id Identifier of the clustering to remove.
              * @returns {boolean} True if clustering exists and could be removed, false otherwise.
              */
@@ -473,7 +473,7 @@
              * Marks countries according to the clusterings.
              *
              * @method _mark
-             * @memberOf adt.widgets.map.Map.clustering
+             * @memberOf adt.widgets.Map.clustering
              * @private
              */
             function _mark() {
@@ -512,7 +512,7 @@
          * Namespace responsible for all zoom operations.
          *
          * @namespace _zoom
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @private
          */
         var _zoom = (function() {
@@ -520,7 +520,7 @@
              * Zoom max scale level.
              *
              * @var {number} _SCALE_MAX
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             var _SCALE_MAX = 128;
@@ -529,7 +529,7 @@
              * Zoom translate boundary factor. This is the extent we allow translations outside the map.
              *
              * @var {number} _TRANSLATE_BOUND_FACTOR
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             var _TRANSLATE_BOUND_FACTOR = 0.3;
@@ -538,7 +538,7 @@
              * Layers that are affected by the zoom.
              *
              * @var {object} _layers
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             var _layers = {};
@@ -547,7 +547,7 @@
              * Current transformation.
              *
              * @var {object} _transform
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             var _transform = d3.zoomIdentity;
@@ -556,7 +556,7 @@
              * Current zoom level.
              *
              * @var {number} _level
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             var _level = 1;
@@ -565,7 +565,7 @@
              * The zoom object.
              *
              * @var {object} _zoom
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             var _zoom = d3.zoom()
@@ -576,7 +576,7 @@
              * Transforms a point according to the current zoom.
              *
              * @method transform
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @param {Array} point Array of x and y values to transform.
              * @returns {Array} The transformed point.
              */
@@ -588,7 +588,7 @@
              * Inverts a point according to the current zoom.
              *
              * @method invert
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @param {Array} point Array of x and y values to invert.
              * @returns {Array} The inverted point.
              */
@@ -600,7 +600,7 @@
              * Returns the current zoom level.
              *
              * @method level
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @returns {number} Zoom level.
              */
             function level() {
@@ -611,7 +611,7 @@
              * Initializes zoom boundary.
              *
              * @method init
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              */
             function init() {
                 _zoom.translateExtent([[-_TRANSLATE_BOUND_FACTOR*_w.attr.width, -_TRANSLATE_BOUND_FACTOR*_w.attr.height],
@@ -622,7 +622,7 @@
              * Sets a layer to the specified selection.
              *
              * @method setLayer
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @param {string} name Name of the layer to set.
              * @param {object} layer Selection to set to layer.
              */
@@ -634,7 +634,7 @@
              * Performs the zoom on all available layers.
              *
              * @method _zoomed
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @private
              */
             function _zoomed() {
@@ -681,7 +681,7 @@
              * Resets zoom to identity.
              *
              * @method reset
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              */
             function reset() {
                 // Zoom map
@@ -693,7 +693,7 @@
              * Performs zoom when clicked on a country.
              *
              * @method clicked
-             * @memberOf adt.widgets.map.Map._zoom
+             * @memberOf adt.widgets.Map._zoom
              * @param {Array} bounds Country boundaries.
              */
             function click(bounds) {
@@ -727,7 +727,7 @@
          * Map layer: draws countries.
          *
          * @namespace _mapLayer
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          * @private
          */
         var _mapLayer = (function () {
@@ -735,7 +735,7 @@
              * The SVG element for the map (countries).
              *
              * @var {object} _svg
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _svg = _w.widget.append("svg")
@@ -747,7 +747,7 @@
              * The background of the map (water).
              *
              * @var {object} _background
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _background = _svg.append("rect")
@@ -762,7 +762,7 @@
              * The container of the countries.
              *
              * @var {object} _land
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _land = _svg.append("g")
@@ -772,7 +772,7 @@
              * Paths of the countries.
              *
              * @var {object} _paths
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _paths = _land.selectAll("path")
@@ -788,7 +788,7 @@
              * Projection used for the map.
              *
              * @var {function} _projection
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _projection = d3.geoMercator()
@@ -798,7 +798,7 @@
              * Path projector function.
              *
              * @var {function} _pathFn
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _pathFn = d3.geoPath().projection(_projection);
@@ -807,7 +807,7 @@
              * Displayed country names.
              *
              * @var {object} _countryNames
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             var _pathLabels = null;
@@ -816,7 +816,7 @@
              * Projects (latitude, longitude) geo coordinates into an (x, y) point on the map.
              *
              * @method _project
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @param {Array} latLon Array containing the latitude and longitude.
              * @returns {Array} Array containing the mapped (x, y) coordinates.
              * @private
@@ -829,7 +829,7 @@
              * Calculates country centers.
              *
              * @method _calculateCenters
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             function _calculateCenters() {
@@ -843,7 +843,7 @@
              * Calculates country dimensions (bounding boxes).
              *
              * @method _calculateSizes
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             function _calculateSizes() {
@@ -882,7 +882,7 @@
              * Calculates country areas for ray-casting.
              *
              * @method _calculateAreas
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             function _calculateAreas() {
@@ -920,7 +920,7 @@
              * Returns the coordinates of the largest paths for a country.
              *
              * @method _getRealCenter
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @param {object} country Country to calculate real center for.
              * @returns {Array} Array containing the x and y coordinates of the real center.
              * @private
@@ -961,7 +961,7 @@
              * Updates map data.
              *
              * @method _update
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             function _update() {
@@ -984,7 +984,7 @@
              * Sets adjustable style properties.
              *
              * @method _style
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @private
              */
             function _style() {
@@ -1097,7 +1097,7 @@
              * Selects a country or group of countries.
              *
              * @method _select
-             * @memberOf adt.widgets.map.Map._mapLayer
+             * @memberOf adt.widgets.Map._mapLayer
              * @param {string=} id ID of country or group to select. If not specified, all countries are selected.
              * @returns {object} D3 selection corresponding to the group.
              * @private
@@ -1120,7 +1120,7 @@
              * Highlights a single country or a group of countries.
              *
              * @method highlight
-             * @memberOf adt.widgets.map.Map
+             * @memberOf adt.widgets.Map
              * @param {?string=} id ID of a country or a group to highlight. If not specified, all countries are
              * highlighted.
              * @param {string=} color Optional color to use for highlight (default is the bright version of foreground).
@@ -1152,14 +1152,14 @@
          * The static layers namespace.
          *
          * @namespace staticLayer
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          */
         var _staticLayer = (function() {
             /**
              * Container of all static layers.
              *
              * @var {object} _container.
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @private
              */
             var _container = _w.widget.append("div")
@@ -1173,7 +1173,7 @@
              * List of static layers.
              *
              * @var {object} _layers
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @private
              */
             var _layers = {};
@@ -1183,7 +1183,7 @@
              * Returns an array of existing static layers.
              *
              * @method get
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @returns {Array} Array of existing static layer IDs.
              */
             function get() {
@@ -1194,7 +1194,7 @@
              * Adds a new static layer to the map if it there is no layer with the same ID already.
              *
              * @method add
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @param {string} id Identifier of the new static layer.
              * @returns {boolean} True if new layer could be added, false otherwise.
              */
@@ -1314,7 +1314,7 @@
              * Styles all static layers.
              *
              * @method _style
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @private
              */
             function _style() {
@@ -1341,7 +1341,7 @@
              * Erases the content of a static layer.
              *
              * @method erase
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @param {string} id Identifier of the layer to use.
              * @returns {boolean} True if layer exists and could be erased, false otherwise.
              */
@@ -1360,7 +1360,7 @@
              * Clears all layers.
              *
              * @method _clear
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @private
              */
             function _clear() {
@@ -1375,7 +1375,7 @@
              * Highlights a specific layer. If no layer is passed, removed highlight.
              *
              * @method highlight
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @param {string} id Identifier of the static layer to highlight. If not given, highlight is cancelled.
              */
             function highlight(id) {
@@ -1399,7 +1399,7 @@
              * Renders all layers.
              *
              * @method _render
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @private
              */
             function _render(scale) {
@@ -1412,7 +1412,7 @@
              * Restores canvas states.
              *
              * @method _restore
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              * @private
              */
             function _restore() {
@@ -1425,14 +1425,14 @@
              * Namespace containing drawing functions.
              *
              * @namespace draw
-             * @memberOf adt.widgets.map.Map.staticLayer
+             * @memberOf adt.widgets.Map.staticLayer
              */
             var draw = {
                 /**
                  * Adds a dot to the specified static layer.
                  *
                  * @method dot
-                 * @memberOf adt.widgets.map.Map.staticLayer.draw
+                 * @memberOf adt.widgets.Map.staticLayer.draw
                  * @param {string} id Identifier of the layer to use.
                  * @param {Array} latLon Array containing the latitude and longitude.
                  * @param {number} r Radius of the dot.
@@ -1496,14 +1496,14 @@
          * the animation.
          *
          * @namespace dynamicLayer
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          */
         var _dynamicLayer = (function() {
             /**
              * Container of all dynamic layers.
              *
              * @var {object} _container.
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @private
              */
             var _container = _w.widget.append("div")
@@ -1515,7 +1515,7 @@
              * List of dynamic layers.
              *
              * @var {object} _layers
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @private
              */
             var _layers = {};
@@ -1525,7 +1525,7 @@
              * Returns an array of existing dynamic layers.
              *
              * @method get
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @returns {Array} Array of existing dynamic layer IDs.
              */
             function get() {
@@ -1536,7 +1536,7 @@
              * Adds a new static layer to the map if it there is no layer with the same ID already.
              *
              * @method add
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @param {string} id Identifier of the new static layer.
              * @returns {boolean} True if new layer could be added, false otherwise.
              */
@@ -1603,7 +1603,7 @@
              * Styles all dynamic layers.
              *
              * @method _style
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @private
              */
             function _style() {
@@ -1624,7 +1624,7 @@
              * Erases a dynamic layers.
              *
              * @method erase
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @param {string} id Identifier of the dynamic layer to erase.
              * @returns {boolean} True if layer exists and could be erased, false otherwsise.
              */
@@ -1642,7 +1642,7 @@
              * Highlights a specific dynamic layer. If no layer is passed, removes highlight.
              *
              * @method highlight
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              * @param {string} id Identifier of the layer to highlight. If not given, highlight is cancelled.
              */
             function highlight(id) {
@@ -1666,14 +1666,14 @@
              * Namespace containing drawing methods.
              *
              * @namespace draw
-             * @memberOf adt.widgets.map.Map.dynamicLayer
+             * @memberOf adt.widgets.Map.dynamicLayer
              */
             var draw = {
                 /**
                  * Draws a shrinking dot on a dynamic layer.
                  *
                  * @method dot
-                 * @memberOf adt.widgets.map.Map.dynamicLayer.draw
+                 * @memberOf adt.widgets.Map.dynamicLayer.draw
                  * @param {string} id Identifier of the dynamic layer to use.
                  * @param {Array} latLon Array containing the latitude and longitude of the dot center.
                  * @param {number} r Radius of the dot.
@@ -1742,7 +1742,7 @@
          * The touch layer is used to place invisible interactive elements on the map.
          *
          * @namespace touchLayer
-         * @memberOf adt.widgets.map.Map
+         * @memberOf adt.widgets.Map
          */
         var _touchLayer = (function(){
             // The SVG container for the touch content
@@ -1759,7 +1759,7 @@
              * Adds a touch element to the touch layer. A touch element is an invisible circle.
              *
              * @method add
-             * @memberOf adt.widgets.map.Map.touchLayer
+             * @memberOf adt.widgets.Map.touchLayer
              * @param {string} id Identifier of the touch element.
              * @param {Array} latLon Array containing the geo coordinates of the touch element.
              * @param {number} r Radius of the touch element.
@@ -1805,7 +1805,7 @@
              * Removes a touch element from the layer.
              *
              * @method remove
-             * @memberOf adt.widgets.map.Map.touchLayer
+             * @memberOf adt.widgets.Map.touchLayer
              * @param {string} id Identifier of the touch element to remove.
              * @returns {boolean} True if element could be removed, false otherwise.
              */
@@ -1823,7 +1823,7 @@
              * Styles touch layer.
              *
              * @method _style
-             * @memberOf adt.widgets.map.Map.touchLayer
+             * @memberOf adt.widgets.Map.touchLayer
              * @private
              */
             function _style() {
@@ -1839,7 +1839,7 @@
              * Erases the touch layer.
              *
              * @method erase
-             * @memberOf adt.widgets.map.Map.touchLayer
+             * @memberOf adt.widgets.Map.touchLayer
              */
             function erase() {
                 _g.html("");

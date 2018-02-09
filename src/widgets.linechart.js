@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.linechart
+ * @module widgets.Linechart
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -43,7 +43,7 @@
      * The line chart widget class.
      *
      * @class LineChart
-     * @memberOf adt.widgets.linechart
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -55,7 +55,7 @@
          * Sets the X label.
          *
          * @method xLabel
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {string} label Text to set label to.
          */
         _w.attr.add(this, "xLabel", "");
@@ -64,7 +64,7 @@
          * Sets the Y label.
          *
          * @method yLabel
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {string} label Text to set label to.
          */
         _w.attr.add(this, "yLabel", "");
@@ -75,7 +75,7 @@
          * Default is number.
          *
          * @method xType
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {string} type Type of the X axis.
          */
         _w.attr.add(this, "xType", "number");
@@ -85,7 +85,7 @@
          * Default is a float with two decimals.
          *
          * @method yTIckFormat
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {function} format Formatting function.
          */
         _w.attr.add(this, "yTickFormat", d3.format(".2s"));
@@ -95,7 +95,7 @@
          * Default is grey.
          *
          * @method colors
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {(string|object)} color Single color string or an object containing colors for each plot.
          */
         _w.attr.add(this, "colors", "grey");
@@ -108,7 +108,7 @@
          * Note: this method is still experimental, and therefore it is unstable.
          *
          * @method legend
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {boolean} on Whether legend should be added.
          */
         _w.attr.add(this, "legend", false);
@@ -118,7 +118,7 @@
          * Default is 0.
          *
          * @method yMin
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {number} value Value to set lower boundary to.
          */
         _w.attr.add(this, "yMin", 0);
@@ -128,7 +128,7 @@
          * Must accept an argument with the name of the line.
          *
          * @method mouseover
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseover", null);
@@ -138,7 +138,7 @@
          * Must accept an argument with the name of the line.
          *
          * @method mouseleave
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
@@ -156,7 +156,7 @@
          * Error is only drawn for lines that are defined as property in {dy}.
          *
          * @method data
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {Array} data Array of data points.
          * @param {number} scale Optional scaling parameter. Each data point is divided by this value.
          */
@@ -180,7 +180,7 @@
          * Highlights the specified plot.
          *
          * @method highlight
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {string} key Key of the line to highlight.
          */
         this.highlight = function(key) {
@@ -194,7 +194,7 @@
          * If a marker with the specified identifier already exists, the marker is ignored.
          *
          * @method addMarker
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {string} id Marker identifier.
          * @param {string} key Key of the line to mark.
          * @param {(number|string)} start Start X position of the marker.
@@ -279,7 +279,7 @@
          * Removes a marker from the plot.
          *
          * @method removeMarker
-         * @memberOf adt.widgets.linechart.LineChart
+         * @memberOf adt.widgets.LineChart
          * @param {string} id Identifier of the marker to remove.
          * @returns {boolean} True if marker exists and could be removed, false otherwise.
          */

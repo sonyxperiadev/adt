@@ -21,20 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.barchart
+ * @module widgets.BarChart
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        module.exports = factory(require('d3'), require('./widgets'), exports);
+        module.exports = factory(require('d3'), require('./widgets'));
     } else if (typeof define === 'function' && define.amd) {
         define(['d3', 'widgets', 'exports'], factory);
     } else {
         global.adt = global.adt || {};
         global.adt.widgets = global.adt.widgets || {};
-        global.adt.widgets.BarChart = factory(global.d3, global.adt.widgets.Widget, global);
+        global.adt.widgets.BarChart = factory(global.d3, global.adt.widgets.Widget);
     }
 } (this, function (d3, Widget) {
     "use strict";
@@ -43,7 +43,7 @@
      * The bar chart widget class.
      *
      * @class BarChart
-     * @memberOf adt.widgets.barchart
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -55,7 +55,7 @@
          * Sets the X label.
          *
          * @method xLabel
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {string} label Text to set label to.
          */
         _w.attr.add(this, "xLabel", "");
@@ -64,7 +64,7 @@
          * Sets the Y label.
          *
          * @method yLabel
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {string} label Text to set label to.
          */
         _w.attr.add(this, "yLabel", "");
@@ -75,7 +75,7 @@
          * Default is number.
          *
          * @method xType
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {string} type Type of the X axis.
          */
         _w.attr.add(this, "xType", "string");
@@ -85,7 +85,7 @@
          * Default value is 0.
          *
          * @method xTickAngle
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {number} angle Rotation angle in degrees.
          */
         _w.attr.add(this, "xTickAngle", 0);
@@ -95,7 +95,7 @@
          * Default is a float with two decimals.
          *
          * @method yTIckFormat
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {function} format Formatting function.
          */
         _w.attr.add(this, "yTickFormat", d3.format(".2s"));
@@ -105,7 +105,7 @@
          * Default is grey.
          *
          * @method colors
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {(string|object)} color Single color string or an object containing colors for each plot.
          */
         _w.attr.add(this, "colors", "grey");
@@ -114,7 +114,7 @@
          * Sets callback for mouse over on a bar.
          *
          * @method mouseover
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseover", null);
@@ -123,7 +123,7 @@
          * Sets callback for mouse leave on a bar.
          *
          * @method mouseleave
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
@@ -133,7 +133,7 @@
          * Default is false.
          *
          * @method vertical
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {boolean} vertical Whether to set bar chart to vertical.
          */
         _w.attr.add(this, "vertical", false);
@@ -146,9 +146,9 @@
          * Binds data to the bar chart.
          *
          * @method data
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {Array} data Array of {x: (number|string), y: number} objects.
-         * @returns {adt.widgets.barchart.BarChart} Reference to the current bar chart.
+         * @returns {adt.widgets.BarChart} Reference to the current bar chart.
          */
         this.data = function(data) {
             _data = _.cloneDeep(data);
@@ -167,7 +167,7 @@
          * Highlights the specified plot.
          *
          * @method highlight
-         * @memberOf adt.widgets.barchart.BarChart
+         * @memberOf adt.widgets.BarChart
          * @param {string} key Key of the line to highlight.
          */
         this.highlight = function(key) {

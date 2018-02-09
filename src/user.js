@@ -27,7 +27,7 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        module.exports = factory(require('d3'), exports);
+        module.exports = factory(require('d3'));
     } else if (typeof define === 'function' && define.amd) {
         define(['d3', 'exports'], factory);
     } else {

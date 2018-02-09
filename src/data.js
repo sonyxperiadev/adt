@@ -27,7 +27,7 @@
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
-        module.exports = factory(require('lodash'), exports);
+        module.exports = factory(require('lodash'));
     } else if (typeof define === 'function' && define.amd) {
         define(['_', 'exports'], factory);
     } else {

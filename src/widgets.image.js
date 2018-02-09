@@ -23,7 +23,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.image
+ * @module widgets.Image
  * @memberOf adt
  * @requires d3@v4
  * @requires adt.widgets
@@ -45,7 +45,7 @@
      * The image widget class.
      *
      * @class Image
-     * @memberOf adt.widgets.image
+     * @memberOf adt.widgets
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -57,7 +57,7 @@
          * Sets the image source path.
          *
          * @method src
-         * @memberOf adt.widgets.image.Image
+         * @memberOf adt.widgets.Image
          * @param {string} path Path to the image source.
          */
         _w.attr.add(this, "src", "");

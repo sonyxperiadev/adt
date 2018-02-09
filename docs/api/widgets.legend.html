@@ -1,30 +1,29 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.legend</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.legend</div><nav><div><input type='checkbox' id='s2-adt.widgets.legend'></input><label for='s2-adt.widgets.legend'>widgets.legend</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.legend.Legend'></input><label for='s3-adt.widgets.legend.Legend'>Legend</label><div class='s3'><a href='#api-adt.widgets.legend.Legend.text'>text</a><a href='#api-adt.widgets.legend.Legend.color'>color</a><a href='#api-adt.widgets.legend.Legend.mouseover'>mouseover</a><a href='#api-adt.widgets.legend.Legend.mouseleave'>mouseleave</a><a href='#api-adt.widgets.legend.Legend.click'>click</a><a href='#api-adt.widgets.legend.Legend.highlight'>highlight</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.legend'>adt.widgets.legend</h2>Module implementing a colored legend. Part of the Analytics Dashboard Tools.  A legend is a static label together with a colored square. 
-<br><br>Requires: <code>d3@v4</code> <code>adt.widgets</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.legend.Legend'>Legend</h2>
-<div class='card'><pre>adt.widgets.legend.Legend(name[, parent])</pre>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.Legend</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets.Legend</div><nav><div></div></nav></aside><main><h2 id='api-adt.widgets.Legend'>Legend</h2>
+<div class='card'><pre>adt.widgets.Legend(name[, parent])</pre>
 <br>The legend widget class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Identifier of the legend.</td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, widget is appended to body. <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.legend.Legend.text'>text</h2>
-<div class='card'><pre>adt.widgets.legend.Legend.text(label)</pre>
+</div><br><h2 id='api-adt.widgets.Legend.text'>text</h2>
+<div class='card'><pre>adt.widgets.Legend.text(label)</pre>
 <br>Sets legend text. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Text of the legend.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.legend.Legend.color'>color</h2>
-<div class='card'><pre>adt.widgets.legend.Legend.color(color)</pre>
+</div><br><h2 id='api-adt.widgets.Legend.color'>color</h2>
+<div class='card'><pre>adt.widgets.Legend.color(color)</pre>
 <br>Sets legend color. Default is white. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code></td><td>Color to use.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.legend.Legend.mouseover'>mouseover</h2>
-<div class='card'><pre>adt.widgets.legend.Legend.mouseover(callback)</pre>
+</div><br><h2 id='api-adt.widgets.Legend.mouseover'>mouseover</h2>
+<div class='card'><pre>adt.widgets.Legend.mouseover(callback)</pre>
 <br>Sets callback for mouse over on the legend. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.legend.Legend.mouseleave'>mouseleave</h2>
-<div class='card'><pre>adt.widgets.legend.Legend.mouseleave(callback)</pre>
+</div><br><h2 id='api-adt.widgets.Legend.mouseleave'>mouseleave</h2>
+<div class='card'><pre>adt.widgets.Legend.mouseleave(callback)</pre>
 <br>Sets callback for mouse leave on the legend. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.legend.Legend.click'>click</h2>
-<div class='card'><pre>adt.widgets.legend.Legend.click(callback)</pre>
+</div><br><h2 id='api-adt.widgets.Legend.click'>click</h2>
+<div class='card'><pre>adt.widgets.Legend.click(callback)</pre>
 <br>Sets callback for click on the legend. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.legend.Legend.highlight'>highlight</h2>
-<div class='card'><pre>adt.widgets.legend.Legend.highlight(on)</pre>
+</div><br><h2 id='api-adt.widgets.Legend.highlight'>highlight</h2>
+<div class='card'><pre>adt.widgets.Legend.highlight(on)</pre>
 <br>Highlights legend. A highlighted legend has a bold text. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>on</i></td><td><code>boolean</code></td><td>Whether to turn highlight on or off.</td></tr></table>
 </div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>
