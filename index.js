@@ -1,5 +1,5 @@
-var data = require("./build/data.min");
-var signals = require("./build/signals.min");
+var data = require("./src/data");
+var signals = require("./src/signals");
 
 module.exports = {
     data: data,
