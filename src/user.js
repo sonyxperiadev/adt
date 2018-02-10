@@ -55,8 +55,8 @@
         var _codes = [];
 
         // Bind key listener to body
-        window.addEventListener("load", function() {
-            try {
+        try {
+            window.addEventListener("load", function() {
                 d3.select("body")
                 .on("keydown", function () {
                     // Get key
@@ -75,10 +75,10 @@
                         }
                     }
                 });
-            } catch (e) {
-                console.error("No DOM, could not attach event listener");
-            }
-        });
+            });
+        } catch (e) {
+            console.error("No DOM, could not attach event listener");
+        }
 
 
         /**
@@ -171,16 +171,16 @@
     setInterval(function() {
         _idle += 10000;
     }, 10000);
-    window.addEventListener("load", function() {
-        try {
-            d3.select("body")
-                .on("mousemove", function () {
-                    _idle = 0;
-                });
-        } catch (e) {
-            console.error("No DOM, could not attach event listener");
-        }
-    });
+    try {
+        window.addEventListener("load", function() {
+                d3.select("body")
+                    .on("mousemove", function () {
+                        _idle = 0;
+                    });
+        });
+    } catch (e) {
+        console.error("No DOM, could not attach event listener");
+    }
 
     /**
      * Adds an idle action, that is, a callback function that is triggered once the user have not interacted

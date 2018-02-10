@@ -10,6 +10,14 @@ var ChordChart = require("./src/widgets.chordchart");
 var Grid = require("./src/widgets.grid");
 var Hint = require("./src/widgets.hint");
 var Image = require("./src/widgets.image");
+var Info = require("./src/widgets.info");
+var Label = require("./src/widgets.label");
+var Legend = require("./src/widgets.legend");
+var LineChart = require("./src/widgets.linechart");
+var Map = require("./src/widgets.map");
+var PieChart = require("./src/widgets.piechart");
+var Slider = require("./src/widgets.slider");
+var Status = require("./src/widgets.status");
 
 module.exports = {
     data: data,
@@ -26,6 +34,14 @@ module.exports = {
         ChordChart: ChordChart,
         Grid: Grid,
         Hint: Hint,
-        Image: Image
+        Image: Image,
+        Info: Info,
+        Label: Label,
+        Legend: Legend,
+        LineChart: LineChart,
+        PieChart: PieChart,
+        Map: Map,
+        Slider: Slider,
+        Status: Status
     }
 };
