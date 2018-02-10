@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>flight stat</title>
+    <title>flight track</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
@@ -29,10 +29,9 @@
     var proxy = "https://cors-anywhere.herokuapp.com/";
 
     // Create REST object that fetches the data
-    var api = new adt.REST(
-        proxy + "https://public-api.adsbexchange.com",
-        "VirtualRadar",
-        "AircraftList.json");
+    var api = new adt.rest.Rest(
+        proxy + "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json"
+    );
 
     // Query the database every 10 seconds
     setInterval(function() {

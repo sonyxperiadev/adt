@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../../style/wp.min.css">
     <link rel="stylesheet" type="text/css" href="../../style/adt.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <title>flightstat | tutorials | adt</title>
+    <title>flight track | tutorials | adt</title>
 </head>
 <body>
 
@@ -173,13 +173,11 @@ var map = new adt.widgets.Map("flight")
 var proxy = "https://cors-anywhere.herokuapp.com/";
 
 // Create REST object that fetches the data
-var api = new adt.REST(
-        proxy + "https://public-api.adsbexchange.com",
-        "VirtualRadar",
-        "AircraftList.json");</pre>
+var api = new adt.rest.Rest(
+    proxy + "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json"
+);</pre>
 
-    The above snippet creates a REST object pointed at the flight stats base URL (with a proxy to avoid CORS errors),
-    sets the database to <code>VirtualRadar</code> and the table to <code>AircractList.json</code>.
+    The above snippet creates a REst object pointed at the flight stats base URL (with a proxy to avoid CORS errors).
     Sometimes the Heroku app used for the CORS proxy is down and the database is not accessible.
     If this happens, please try to refresh the page a few minutes later (or check
     <a href="https://cors-anywhere.herokuapp.com" target="_blank">https://cors-anywhere.herokuapp.com</a> if the app is

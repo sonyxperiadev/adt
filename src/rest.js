@@ -45,11 +45,9 @@
      * @class Rest
      * @memberOf adt.rest
      * @param {string} endpoint Endpoint of the REST API.
-     * @param {string} database Database to use.
-     * @param {string} table Table name.
      * @constructor
      */
-    var Rest = function(endpoint, database, table) {
+    var Rest = function(endpoint) {
         /**
          * Performs a query to the connected table.
          *
@@ -65,7 +63,7 @@
          */
         function _query(params, exec, onSuccess, onFailure, settings) {
             // Build query URL
-            var url = endpoint + "/" + database + "/" + table;
+            var url = endpoint;
 
             // Get parameter keys
             var keys = d3.keys(params).sort();
