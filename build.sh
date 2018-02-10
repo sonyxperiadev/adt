@@ -45,3 +45,5 @@ for module in "${AVAILABLE_MODULES[@]}"; do
         --output ${DST_DIR}/${module}.min.js
     cp ${DST_DIR}/${module}.min.js ${DL_DIR}/
 done
+
+# Build full library
