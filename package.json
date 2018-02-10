@@ -13,6 +13,5 @@
   },
   "devDependencies": {
     "uglify-js": "^3.3.9"
-  },
-  "main": "index.js"
+  }
 }

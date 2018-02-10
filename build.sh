@@ -37,8 +37,10 @@ python docs/python/parser.py
 
 # Build modules
 echo "  compiling modules:"
+module_list=""
 for module in "${AVAILABLE_MODULES[@]}"; do
     echo "    $module"
+    module_list=${module_list}" "${SRC_DIR}/${module}.js
     uglifyjs \
         ${SRC_DIR}/${module}.js \
         --mangle \
@@ -47,3 +49,4 @@ for module in "${AVAILABLE_MODULES[@]}"; do
 done
 
 # Build full library
+uglifyjs ${module_list} --mangle --output somc-adt.min.js
