@@ -29,10 +29,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.ChordChart
- * @memberOf adt
+ * @module chordchart
+ * @memberOf adt.widgets
  * @requires d3@v4
- * @requires adt.widgets
+ * @requires adt.widgets.Widget
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -51,7 +51,7 @@
      * The chord chart widget class.
      *
      * @class ChordChart
-     * @memberOf adt.widgets
+     * @memberOf adt.widgets.chordchart
      * @param {string} name Identifier of the widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -64,7 +64,7 @@
          * Default is 100.
          *
          * @method radius
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {number} size Size of the radius in pixels.
          */
         _w.attr.add(this, "radius", 100, "dim");
@@ -74,7 +74,7 @@
          * Default is 10.
          *
          * @method thickness
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {number} size Size of the thickness in pixels.
          */
         _w.attr.add(this, "thickness", 10, "dim");
@@ -83,7 +83,7 @@
          * Adds a label below the chord.
          *
          * @method label
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {string} text Label text.
          */
         _w.attr.add(this, "label", "");
@@ -93,7 +93,7 @@
          * Default is false.
          *
          * @method ticks
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {boolean} on Whether to have ticks or not.
          */
         _w.attr.add(this, "ticks", false);
@@ -103,7 +103,7 @@
          * Default is Tableau's standard color scheme.
          *
          * @method colors
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {(string|object)} color Single color string or an object containing colors for each segment.
          */
         _w.attr.add(this, "colors", null);
@@ -113,7 +113,7 @@
          * Can accept two parameters: the segment name and its index.
          *
          * @method mouseover
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseover", null);
@@ -123,7 +123,7 @@
          * Can accept two parameters: the segment name and its index.
          *
          * @method mouseleave
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
@@ -133,7 +133,7 @@
          * source instead of the largest target.
          *
          * @method invert
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {boolean} on If chord should be inverted.
          */
         _w.attr.add(this, "invert", false);
@@ -150,7 +150,7 @@
          * Binds data to the chord chart.
          *
          * @method data
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {Array} data Array of {source, target, value} objects denoting the size of chord from segment to
          * segment.
          */
@@ -201,7 +201,7 @@
          * Creates a default color scheme based on the groups.
          *
          * @method _makeColors
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {Array} groups Array containing the chord groups.
          * @returns {object} The color schemes.
          * @private
@@ -219,7 +219,7 @@
          * Creates an identifier for a ribbon.
          *
          * @method _ribbonId
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {object} data Object describing the ribbon.
          * @returns {string} Identifier.
          * @private
@@ -234,7 +234,7 @@
          * Calculates an arc tween function from a starting chord data.
          *
          * @method _arcTween
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {object} start Starting chord data.
          * @returns {function} The arc tween animation function.
          * @private
@@ -274,7 +274,7 @@
          * Calculates a ribbon tween from a starting chord data.
          *
          * @method _ribbonTween
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {object} start Starting chord data.
          * @returns {function} The ribbon tween animation function.
          * @private
@@ -343,7 +343,7 @@
          * Highlights the specified segment.
          *
          * @method highlight
-         * @memberOf adt.widgets.ChordChart
+         * @memberOf adt.widgets.chordchart.ChordChart
          * @param {string} key Key of the segment to highlight.
          */
         this.highlight = function(key) {

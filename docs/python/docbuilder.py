@@ -238,7 +238,7 @@ class DocBuilder:
 
             # Build content
             prop = b['property'][0]
-            content = _tagify(prop['name'], "pre") + "<br>"
+            content = _tagify(_tagify(b.path(), "code"), "pre") + "<br>"
             content += _tagify(prop['type']['types'][0], "code")
             content += " " + _codify(prop['desc']) + "\n"
 
@@ -284,7 +284,7 @@ class DocBuilder:
 
                 # Add closing brackets
                 code += ''.join("]" for p in params if 'optional' in p['type']['options'])
-            content += _tagify(b.path() + "(" + code + ")", "pre") + "\n"
+            content += _tagify(_tagify(b.path() + "(" + code + ")", "code"), "pre") + "\n"
 
             # Add description
             content += "<br>" + _codify(b['desc']) + "\n"

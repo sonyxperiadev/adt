@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.Piechart
- * @memberOf adt
+ * @module piechart
+ * @memberOf adt.widgets
  * @requires d3@v4
- * @requires adt.widgets
+ * @requires adt.widgets.Widget
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -43,7 +43,7 @@
      * The pie chart widget class.
      *
      * @class PieChart
-     * @memberOf adt.widgets
+     * @memberOf adt.widgets.piechart
      * @param {string} name Identifier of the pie chart.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -56,7 +56,7 @@
          * Default is 0.
          *
          * @method innerRadius
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {number} size Size of the inner radius in pixels.
          */
         _w.attr.add(this, "innerRadius", 0, "dim");
@@ -66,7 +66,7 @@
          * Default is 50.
          *
          * @method outerRadius
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {number} size Size of the outer radius in pixels.
          */
         _w.attr.add(this, "outerRadius", 50, "dim");
@@ -75,7 +75,7 @@
          * Sets pie chart label.
          *
          * @method label
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {string} text Label text.
          */
         _w.attr.add(this, "label", "");
@@ -84,7 +84,7 @@
          * Sets callback for mouse over on a slice.
          *
          * @method mouseover
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseover", null);
@@ -93,7 +93,7 @@
          * Sets callback for mouse leave on a slice.
          *
          * @method mouseleave
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
@@ -110,7 +110,7 @@
          * Binds new data to pie chart.
          *
          * @method data
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {Array} data Array of objects with keys 'name', 'value' and 'color'.
          */
         this.data = function (data) {
@@ -122,7 +122,7 @@
          * Highlights the specified slice.
          *
          * @method highlight
-         * @memberOf adt.widgets.PieChart
+         * @memberOf adt.widgets.piechart.PieChart
          * @param {string} name Name of the slice to highlight.
          */
         this.highlight = function(name) {

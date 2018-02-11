@@ -23,10 +23,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.Legend
- * @memberOf adt
+ * @module legend
+ * @memberOf adt.widgets
  * @requires d3@v4
- * @requires adt.widgets
+ * @requires adt.widgets.Widget
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -45,7 +45,7 @@
      * The legend widget class.
      *
      * @class Legend
-     * @memberOf adt.widgets
+     * @memberOf adt.widgets.legend
      * @param {string} name Identifier of the legend.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -57,7 +57,7 @@
          * Sets legend text.
          *
          * @method text
-         * @memberOf adt.widgets.Legend
+         * @memberOf adt.widgets.legend.Legend
          * @param {string} label Text of the legend.
          */
         _w.attr.add(this, "text", "");
@@ -67,7 +67,7 @@
          * Default is white.
          *
          * @method color
-         * @memberOf adt.widgets.Legend
+         * @memberOf adt.widgets.legend.Legend
          * @param {string} color Color to use.
          */
         _w.attr.add(this, "color", "white");
@@ -76,7 +76,7 @@
          * Sets callback for mouse over on the legend.
          *
          * @method mouseover
-         * @memberOf adt.widgets.Legend
+         * @memberOf adt.widgets.legend.Legend
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseover", null);
@@ -85,7 +85,7 @@
          * Sets callback for mouse leave on the legend.
          *
          * @method mouseleave
-         * @memberOf adt.widgets.Legend
+         * @memberOf adt.widgets.legend.Legend
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "mouseleave", null);
@@ -94,7 +94,7 @@
          * Sets callback for click on the legend.
          *
          * @method click
-         * @memberOf adt.widgets.Legend
+         * @memberOf adt.widgets.legend.Legend
          * @param {function} callback Callback to set.
          */
         _w.attr.add(this, "click", null);
@@ -107,7 +107,7 @@
          * Highlights legend. A highlighted legend has a bold text.
          *
          * @method highlight
-         * @memberOf adt.widgets.Legend
+         * @memberOf adt.widgets.legend.Legend
          * @param {boolean} on Whether to turn highlight on or off.
          */
         this.highlight = function(on) {

@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../style/wp.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/synesenom/whiteprint/c69fcfc1/wp.min.css">
     <link rel="stylesheet" type="text/css" href="../../style/adt.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <title>flight track | tutorials | adt</title>
 </head>
@@ -14,7 +17,7 @@
 <!-- Menu -->
 <input type="checkbox" id="menu"><label for="menu" id="open">☰</label>
 <aside>
-    <div class="adt-logo">adt</div>
+    <div class="logo">adt</div>
     <nav>
         <div>
             <a href="#goal">Goal</a>
@@ -39,8 +42,8 @@
 <!-- Main content -->
 <main><label for="menu" id="exit"></label>
     <!-- logos -->
-    <a href="https://www.sonymobile.com/"><img class="logo x" src="../../img/x.png"/></a>
-    <img class="logo ao" src="../../img/ao.png"/>
+    <a href="https://www.sonymobile.com/"><img class="sony-logo sony-x" src="../../img/x.png"/></a>
+    <img class="sony-logo sony-ao" src="../../img/ao.png"/>
 
     <!-- goal -->
     <h1 id="goal">Goal</h1>
@@ -53,8 +56,7 @@
     <h1 id="step1">Step 1: An empty map</h1>
     <h2 id="step1a">index.html</h2>
     We start by creating the <code>index.html</code> that will contain all code for our dashboard:
-    <pre>
-&lt;!DOCTYPE html&gt;
+    <pre><code class="html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
@@ -63,24 +65,22 @@
 &lt;body&gt;
 &lt;script&gt;&lt;/script&gt;
 &lt;/body&gt;
-&lt;/html&gt;</pre>
+&lt;/html&gt;</code></pre>
     We already added the <code>script</code> tag that will be populated with all the code.
 
     <h2 id="step1b">loading libraries</h2>
     First of all, we add all dependencies in the head of <code>index.html</code>:
-    <pre>
-&lt;script src="https://d3js.org/d3.v4.min.js"&gt;&lt;/script&gt;
+    <pre><code class="html">&lt;script src="https://d3js.org/d3.v4.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"&gt;&lt;/script&gt;</pre>
+&lt;script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"&gt;&lt;/script&gt;</code></pre>
 
     The libraries can be obtained through the links listed in the home of the documentation.
 
     <br><br>In order to add the map, we first include the corresponding module, along with the <code>widget</code>
     module that is required by all other widgets.
     So, again in the head, after the dependencies goes the following
-    <pre>
-&lt;script src="build//widgets.min.js"&gt;&lt;/script&gt;
-&lt;script src="build//adt/widgets.map.min.js"&gt;&lt;/script&gt;</pre>
+    <pre><code class="html">&lt;script src="build//widgets.min.js"&gt;&lt;/script&gt;
+&lt;script src="build//adt/widgets.map.min.js"&gt;&lt;/script&gt;</code></pre>
 
     In this tutorial, the modules are available from the documentation, but you need to change the above to fit your
     directory structure.
@@ -90,16 +90,14 @@
     <h2 id="step1c">adding the map</h2>
     Now we have everything to build our very first dashboard: a static map with no data shown at all.
     Just add a <code>script</code> tag in the <code>body</code> and create a map widget that fills the entire window:
-    <pre>
-&lt;script&gt;
+    <pre><code class="html">&lt;script&gt;
 var map = new adt.widgets.Map("flight")
     .x(0)                       // Top-left corner is adjusted to
     .y(0)                       // the window
     .width(window.innerWidth)   // Size is set to the window size
     .height(window.innerHeight)
     .render();                  // Must be called to draw the map
-&lt;/script&gt;
-    </pre>
+&lt;/script&gt;</code></pre>
 
     And that's it, congratulations, you just built your first map dashboard in no more than 22 lines!
     <a href="step1c.html">This</a> is how it should look like.
@@ -133,8 +131,7 @@ var map = new adt.widgets.Map("flight")
     up some basic colors.
     For the sake of simplicity, we just append these right before rendering the map:
 
-    <pre>
-&lt;script&gt;
+    <pre><code class="html">&lt;script&gt;
 var map = new adt.widgets.Map("flight")
     .x(0)                       // Top-left corner is adjusted to
     .y(0)                       // the window
@@ -144,8 +141,7 @@ var map = new adt.widgets.Map("flight")
     .borderColor("#888")
     .foregroundColor("#222")
     .render();                  // Must be called to draw the map
-&lt;/script&gt;
-    </pre>
+&lt;/script&gt;</code></pre>
 
     The functions <code>backgroundColor(color)</code>, <code>foregroundColor(color)</code> and <code>borderColor(color)</code>
     are rather talkative, so no further explanation is needed.
@@ -161,21 +157,19 @@ var map = new adt.widgets.Map("flight")
     a wrapper for the existing request methods (more specifically <code>d3</code> methods).
     First, add
 
-    <pre>
-&lt;script src="build/widgets.min.js"&gt;&lt;/script&gt;</pre>
+    <pre><code class="html">&lt;script src="build/widgets.min.js"&gt;&lt;/script&gt;</code></pre>
 
     to the head of <code>index.html</code>.
     To get the data, we create a new <code>REST</code> object that is directed to the endpoint of the API:
 
-    <pre>
-// We use the cors-anywhere app to access the API
+    <pre><code class="javascript">// We use the cors-anywhere app to access the API
 // (even from localhost)
 var proxy = "https://cors-anywhere.herokuapp.com/";
 
 // Create REST object that fetches the data
 var api = new adt.rest.Rest(
     proxy + "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json"
-);</pre>
+);</code></pre>
 
     The above snippet creates a REst object pointed at the flight stats base URL (with a proxy to avoid CORS errors).
     Sometimes the Heroku app used for the CORS proxy is down and the database is not accessible.
@@ -185,15 +179,14 @@ var api = new adt.rest.Rest(
     To query the data from the database, we simply call the <code>REST.json</code> method that creates the HTTP request
     URL and fetches the data that is expected in a JSON format:
 
-    <pre>
-// Fetch the data
+    <pre><code class="javascript">// Fetch the data
 api.json({fCallS: "SAS"}, function(data) {
     // Data is fetched successfully
     updateMap(data);
 }, function(error) {
     // Print error to the console
     console.log(error);
-});</pre>
+});</code></pre>
 
     The first argument of <code>REST.json</code> is the parameters of the query, which in this case is a filter in the
     ADS-B database to have only flights with a flight call starting with 'SAS'.
@@ -204,17 +197,15 @@ api.json({fCallS: "SAS"}, function(data) {
     the map.
     But before that, we add a static and a dynamic drawing layer to the map:
 
-    <pre>
-map.staticLayer.add("SAS");     // Add static layer 'SAS'
-map.dynamicLayer.add("SAS");    // Add dynamic layer 'SAS'</pre>
+    <pre><code class="javascript">map.staticLayer.add("SAS");     // Add static layer 'SAS'
+map.dynamicLayer.add("SAS");    // Add dynamic layer 'SAS'</code></pre>
 
     For the sake of simplicity, we add each flight as a white dot.
     The static dot will show the trail of the flight, the dynamic dot will tell if it is updated.
     After a little investigation of the structure of the data we receive from ADS-B, we can extract the coordinates of
     each aircraft:
 
-    <pre>
-// Update method
+    <pre><code class="javascript">// Update method
 function updateMap(data) {
     // Loop through aircrafts
     data.acList.forEach(function(d) {
@@ -227,7 +218,7 @@ function updateMap(data) {
         // Add to dynamic map to see the plane is updated
         map.dynamicLayer.draw.dot("SAS", latLon, 10, "white", 400);
     });
-}</pre>
+}</code></pre>
 
     Now if you open the page, you should see some while dots around Scandinavia after the flashing animation of circles
     (<a href="step2b.html">this</a> is how it should look).
@@ -243,8 +234,7 @@ function updateMap(data) {
     We can make our map a little more active by wrapping the complete data fetching and draw in a
     <code>setInterval</code>:
 
-    <pre>
-// Query the database every 10 seconds
+    <pre><code class="javascript">// Query the database every 10 seconds
 setInterval(function() {
     api.json({fCallS: "SAS"}, function (json) {
         // Data is fetched successfully
@@ -253,7 +243,7 @@ setInterval(function() {
         // Print error to the console
         console.log(error);
     }, false);
-}, 10000);</pre>
+}, 10000);</code></pre>
 
     Since we don't clear the static page, we can actually see the trail of the flights, which become more revealing if
     you zoom in on the map around Scandinavia.
@@ -264,8 +254,7 @@ setInterval(function() {
     along the latitude/longitude.
     All together our new <code>updateMap</code> method:
 
-    <pre>
-// Update method
+    <pre><code class="javascript">// Update method
 var flights = {};
 function updateMap(data) {
     // Loop through aircrafts
@@ -294,7 +283,7 @@ function updateMap(data) {
         // Update coordinates
         flights[id].latLon = latLon;
     });
-}</pre>
+}</code></pre>
 
     For a reference, <a href="step2c.html">here</a> you can see a working version of the automated and colored map.
 

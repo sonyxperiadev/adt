@@ -1,104 +1,104 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.data</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.data</div><nav><div><input type='checkbox' id='s1-adt.data'></input><label for='s1-adt.data'>data</label><div class='s1'><input type='checkbox' id='s2-adt.data.format'></input><label for='s2-adt.data.format'>format</label><div class='s2'><a href='#api-adt.data.format.si'>si</a><a href='#api-adt.data.format.idfy'>idfy</a><a href='#api-adt.data.format.namify'>namify</a></div><input type='checkbox' id='s2-adt.data.explore'></input><label for='s2-adt.data.explore'>explore</label><div class='s2'><a href='#api-adt.data.explore.sum'>sum</a></div><input type='checkbox' id='s2-adt.data.structures'></input><label for='s2-adt.data.structures'>structures</label><div class='s2'><input type='checkbox' id='s3-adt.data.structures.Histogram'></input><label for='s3-adt.data.structures.Histogram'>Histogram</label><div class='s3'><a href='#api-adt.data.structures.Histogram.set'>set</a><a href='#api-adt.data.structures.Histogram.get'>get</a><a href='#api-adt.data.structures.Histogram.add'>add</a><a href='#api-adt.data.structures.Histogram.scale'>scale</a><a href='#api-adt.data.structures.Histogram.normalize'>normalize</a><a href='#api-adt.data.structures.Histogram.sortByX'>sortByX</a><a href='#api-adt.data.structures.Histogram.sortByY'>sortByY</a><a href='#api-adt.data.structures.Histogram.unsort'>unsort</a></div><input type='checkbox' id='s3-adt.data.structures.TimeSeries'></input><label for='s3-adt.data.structures.TimeSeries'>TimeSeries</label><div class='s3'><a href='#api-adt.data.structures.TimeSeries.clear'>clear</a><a href='#api-adt.data.structures.TimeSeries.update'>update</a><a href='#api-adt.data.structures.TimeSeries.sub'>sub</a><a href='#api-adt.data.structures.TimeSeries.sum'>sum</a><a href='#api-adt.data.structures.TimeSeries.peak'>peak</a><a href='#api-adt.data.structures.TimeSeries.trend'>trend</a><a href='#api-adt.data.structures.TimeSeries.yDist'>yDist</a></div><input type='checkbox' id='s3-adt.data.structures.Table'></input><label for='s3-adt.data.structures.Table'>Table</label><div class='s3'><a href='#api-adt.data.structures.Table.slice'>slice</a><a href='#api-adt.data.structures.Table.segment'>segment</a><a href='#api-adt.data.structures.Table.sort'>sort</a><a href='#api-adt.data.structures.Table.unsort'>unsort</a></div></div></div></div></nav></aside><main><h2 id='api-adt.data'>adt.data</h2>Module implementing various data structures and data manipulation methods. Part of the Analytics Dashboard Tools. 
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.data</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.data</div><nav><div><input type='checkbox' id='s1-adt.data'></input><label for='s1-adt.data'>data</label><div class='s1'><input type='checkbox' id='s2-adt.data.format'></input><label for='s2-adt.data.format'>format</label><div class='s2'><a href='#api-adt.data.format.si'>si</a><a href='#api-adt.data.format.idfy'>idfy</a><a href='#api-adt.data.format.namify'>namify</a></div><input type='checkbox' id='s2-adt.data.explore'></input><label for='s2-adt.data.explore'>explore</label><div class='s2'><a href='#api-adt.data.explore.sum'>sum</a></div><input type='checkbox' id='s2-adt.data.structures'></input><label for='s2-adt.data.structures'>structures</label><div class='s2'><input type='checkbox' id='s3-adt.data.structures.Histogram'></input><label for='s3-adt.data.structures.Histogram'>Histogram</label><div class='s3'><a href='#api-adt.data.structures.Histogram.set'>set</a><a href='#api-adt.data.structures.Histogram.get'>get</a><a href='#api-adt.data.structures.Histogram.add'>add</a><a href='#api-adt.data.structures.Histogram.scale'>scale</a><a href='#api-adt.data.structures.Histogram.normalize'>normalize</a><a href='#api-adt.data.structures.Histogram.sortByX'>sortByX</a><a href='#api-adt.data.structures.Histogram.sortByY'>sortByY</a><a href='#api-adt.data.structures.Histogram.unsort'>unsort</a></div><input type='checkbox' id='s3-adt.data.structures.TimeSeries'></input><label for='s3-adt.data.structures.TimeSeries'>TimeSeries</label><div class='s3'><a href='#api-adt.data.structures.TimeSeries.clear'>clear</a><a href='#api-adt.data.structures.TimeSeries.update'>update</a><a href='#api-adt.data.structures.TimeSeries.sub'>sub</a><a href='#api-adt.data.structures.TimeSeries.sum'>sum</a><a href='#api-adt.data.structures.TimeSeries.peak'>peak</a><a href='#api-adt.data.structures.TimeSeries.trend'>trend</a><a href='#api-adt.data.structures.TimeSeries.yDist'>yDist</a></div><input type='checkbox' id='s3-adt.data.structures.Table'></input><label for='s3-adt.data.structures.Table'>Table</label><div class='s3'><a href='#api-adt.data.structures.Table.slice'>slice</a><a href='#api-adt.data.structures.Table.segment'>segment</a><a href='#api-adt.data.structures.Table.sort'>sort</a><a href='#api-adt.data.structures.Table.unsort'>unsort</a></div></div></div></div></nav></aside><main><h2 id='api-adt.data'>adt.data</h2>Module implementing various data structures and data manipulation methods. Part of the Analytics Dashboard Tools. 
 <br><br>Requires: <code>lodash@4.17.4</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.data.format'>adt.data.format</h2>Collection of string and number formatting methods. 
 <br><br><br><h2 id='api-adt.data.format.si'>si</h2>
-<div class='card'><pre>adt.data.format.si(x)</pre>
+<div class='card'><pre><code>adt.data.format.si(x)</code></pre>
 <br>Formats a number using SI prefixes. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>x</i></td><td><code>number</code></td><td>Number to format.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>string</code></i></td><td>Number formatted with SI prefixes if valid, 'N/A' otherwise.</td></tr></table></div><br><h2 id='api-adt.data.format.idfy'>idfy</h2>
-<div class='card'><pre>adt.data.format.idfy(name)</pre>
+<div class='card'><pre><code>adt.data.format.idfy(name)</code></pre>
 <br>Converts a name into a valid identifier. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Name to convert.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>string</code></i></td><td>The converted ID.</td></tr></table></div><br><h2 id='api-adt.data.format.namify'>namify</h2>
-<div class='card'><pre>adt.data.format.namify(id)</pre>
+<div class='card'><pre><code>adt.data.format.namify(id)</code></pre>
 <br>Converts an identifier back into a name. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier to convert.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>string</code></i></td><td>Converted name.</td></tr></table></div><br><h2 id='api-adt.data.explore'>adt.data.explore</h2>Namespace for manipulating the content of a CSV file . 
 <br><br><br><h2 id='api-adt.data.explore.sum'>sum</h2>
-<div class='card'><pre>adt.data.explore.sum(data, column, segments)</pre>
+<div class='card'><pre><code>adt.data.explore.sum(data, column, segments)</code></pre>
 <br>Calculates the sum of a column grouped by some segments. Returns the sorted rows in descending order. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array of data to calculate sum for. Content of a CSV file.</td></tr><tr><td><i>column</i></td><td><code>number</code> <code>string</code></td><td>Column index or name of the column to sum.</td></tr><tr><td><i>segments</i></td><td><code>number</code> <code>string</code> <code>Array</code></td><td>Single index/name of the columns to group by or an array of column indices/names.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Sorted rows of sums with keys of the unique segment column names/ids separated by '.'.</td></tr></table></div><br><h2 id='api-adt.data.structures'>adt.data.structures</h2>Collection of smart data structures. 
 <br><br><br><h2 id='api-adt.data.structures.Histogram'>Histogram</h2>
-<div class='card'><pre>adt.data.structures.Histogram(data)</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram(data)</code></pre>
 <br>Class representing a histogram. A histogram is an array of (value, frequency) pairs. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array to initialize histogram with.</td></tr></table>
 </div><br><h2 id='api-adt.data.structures.Histogram.set'>set</h2>
-<div class='card'><pre>adt.data.structures.Histogram.set(data)</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.set(data)</code></pre>
 <br>Assigns histogram data to the passed Array. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array containing <code>x: number, y: number</code> objects.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.get'>get</h2>
-<div class='card'><pre>adt.data.structures.Histogram.get()</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.get()</code></pre>
 <br>Returns a copy of the underlying histogram data. 
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>The histogram data.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.add'>add</h2>
-<div class='card'><pre>adt.data.structures.Histogram.add(x, y)</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.add(x, y)</code></pre>
 <br>Adds an (x, y) pair to the histogram. The new data point is added to the tail of the histogram. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>x</i></td><td><code>number</code></td><td>Value of the data point.</td></tr><tr><td><i>y</i></td><td><code>number</code></td><td>Frequency of the data point.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.scale'>scale</h2>
-<div class='card'><pre>adt.data.structures.Histogram.scale(factor)</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.scale(factor)</code></pre>
 <br>Multiplies all frequencies by the specified factor. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>factor</i></td><td><code>number</code></td><td>Multiplying factor.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.normalize'>normalize</h2>
-<div class='card'><pre>adt.data.structures.Histogram.normalize()</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.normalize()</code></pre>
 <br>Normalizes histogram to have a sum of frequencies equal to unit. 
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.sortByX'>sortByX</h2>
-<div class='card'><pre>adt.data.structures.Histogram.sortByX(descending)</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.sortByX(descending)</code></pre>
 <br>Sorts histogram by its values. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>descending</i></td><td><code>boolean</code></td><td>Whether histogram should be sorted in descending instead of ascending order.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.sortByY'>sortByY</h2>
-<div class='card'><pre>adt.data.structures.Histogram.sortByY(descending)</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.sortByY(descending)</code></pre>
 <br>Sorts histogram by its frequencies. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>descending</i></td><td><code>boolean</code></td><td>Whether histogram should be sorted in descending instead of ascending order.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.Histogram.unsort'>unsort</h2>
-<div class='card'><pre>adt.data.structures.Histogram.unsort()</pre>
+<div class='card'><pre><code>adt.data.structures.Histogram.unsort()</code></pre>
 <br>Restores original order of the histogram data. 
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Histogram</code></i></td><td>Reference to the current histogram.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries'>TimeSeries</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries(dimensions)</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries(dimensions)</code></pre>
 <br>Data structure representing historical data. Each data point is a (x, y) pair where y values are dates, y values are objects containing multiple dimensions. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>dimensions</i></td><td><code>Array</code></td><td>Array of keys for the different y values.</td></tr></table>
 </div><br><h2 id='api-adt.data.structures.TimeSeries.clear'>clear</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.clear(start)</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.clear(start)</code></pre>
 <br>Clears history and re-allocates it based on the starting time. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>start</i></td><td><code>Date</code></td><td>Start time of the history.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.TimeSeries</code></i></td><td>Reference to the current history.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries.update'>update</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.update(idx, x, idy, y)</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.update(idx, x, idy, y)</code></pre>
 <br>Updates history at a specific point. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>idx</i></td><td><code>number</code></td><td>Temporal id of the data.</td></tr><tr><td><i>x</i></td><td><code>Date</code></td><td>Temporal value of the data.</td></tr><tr><td><i>idy</i></td><td><code>string</code></td><td>Y id of the data.</td></tr><tr><td><i>y</i></td><td><code>number</code></td><td>Y value of the data.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.TimeSeries</code></i></td><td>Reference to the current history.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries.sub'>sub</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.sub([length[, offset]])</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.sub([length[, offset]])</code></pre>
 <br>Returns a sub history cut from the end. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>length</i></td><td><code>number</code></td><td>Length of the sub history to cut. If not specified, the total history is returned. <code>optional</code></td></tr><tr><td><i>offset</i></td><td><code>number</code></td><td>Offset measured from the end of the history. If not specified, 0 is used. <code>optional</code></td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>The sliced history array.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries.sum'>sum</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.sum([length[, offset]])</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.sum([length[, offset]])</code></pre>
 <br>Returns the sum of the last several bins. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>length</i></td><td><code>number</code></td><td>Number of bins to take sum over. If not specified, the last element is returned. <code>optional</code></td></tr><tr><td><i>offset</i></td><td><code>number</code></td><td>Offset measured from the end of the history. If not specified, 0 is used. <code>optional</code></td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>object</code></i></td><td>Object containing the sum for each y dimension.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries.peak'>peak</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.peak([length[, offset]])</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.peak([length[, offset]])</code></pre>
 <br>Calculates the peak level in the specified slice of history. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>length</i></td><td><code>number</code></td><td>Number of bins to calculate peak over. If not specified, the entire history is considered. <code>optional</code></td></tr><tr><td><i>offset</i></td><td><code>number</code></td><td>Offset measured from the end of the history. If not specified, 0 is used. <code>optional</code></td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>number</code></i></td><td>Peak level in the last n bins.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries.trend'>trend</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.trend()</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.trend()</code></pre>
 <br>Calculates the trend in the last two bins. The trend is simply the change from the bin before last and the last one. 
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>object</code></i></td><td>Object containing the relative changes for each y dimensions.</td></tr></table></div><br><h2 id='api-adt.data.structures.TimeSeries.yDist'>yDist</h2>
-<div class='card'><pre>adt.data.structures.TimeSeries.yDist([length[, offset]])</pre>
+<div class='card'><pre><code>adt.data.structures.TimeSeries.yDist([length[, offset]])</code></pre>
 <br>Returns a distribution of y values in the specified interval. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>length</i></td><td><code>number</code></td><td>Number of bins to calculate distribution over. If not specified, the entire history is considered. <code>optional</code></td></tr><tr><td><i>offset</i></td><td><code>number</code></td><td>Offset measured from the end of the history. If not specified, 0 is used. <code>optional</code></td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>object</code></i></td><td>Object containing the relative frequency of y dimensions.</td></tr></table></div><br><h2 id='api-adt.data.structures.Table'>Table</h2>
-<div class='card'><pre>adt.data.structures.Table([data])</pre>
+<div class='card'><pre><code>adt.data.structures.Table([data])</code></pre>
 <br>Data structure representing a data in a tabular form. Tables can be segmented, grouped, etc. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array of objects to initialize table with. Each element in the array is a row, and each column must be present in every row as a property. <code>optional</code></td></tr></table>
 </div><br><h2 id='api-adt.data.structures.Table.slice'>slice</h2>
-<div class='card'><pre>adt.data.structures.Table.slice(x, y)</pre>
+<div class='card'><pre><code>adt.data.structures.Table.slice(x, y)</code></pre>
 <br>Creates a low dimension data set by slicing the table. The result is an array that can be used by the chart widgets. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>x</i></td><td><code>string</code></td><td>Column for the X values.</td></tr><tr><td><i>y</i></td><td><code>string</code> <code>Array</code></td><td>Column or array of columns for the Y values.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of {x, y} data points for using in charts.</td></tr></table></div><br><h2 id='api-adt.data.structures.Table.segment'>segment</h2>
-<div class='card'><pre>adt.data.structures.Table.segment(column, value)</pre>
+<div class='card'><pre><code>adt.data.structures.Table.segment(column, value)</code></pre>
 <br>Segments the table by a column value. If value is a number, all rows are included within a 10% of error of the distance between the closest row and the specified value. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>column</i></td><td><code>string</code></td><td>Column to segment table by.</td></tr><tr><td><i>value</i></td><td><code>string</code> <code>number</code></td><td>Value to use for segmentation.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Table</code></i></td><td>The segmented table.</td></tr></table></div><br><h2 id='api-adt.data.structures.Table.sort'>sort</h2>
-<div class='card'><pre>adt.data.structures.Table.sort(column)</pre>
+<div class='card'><pre><code>adt.data.structures.Table.sort(column)</code></pre>
 <br>Sorts the table by a column. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>column</i></td><td><code>number</code></td><td>Column to sort table by.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.data.structures.Table</code></i></td><td>The segmented table.</td></tr></table></div><br><h2 id='api-adt.data.structures.Table.unsort'>unsort</h2>
-<div class='card'><pre>adt.data.structures.Table.unsort()</pre>
+<div class='card'><pre><code>adt.data.structures.Table.unsort()</code></pre>
 <br>Reverses any sorting previously performed on the table. 
-</div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>
+</div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='sony-logo sony-x' src='../img/x.png'/></a><img class='sony-logo sony-ao' src='../img/ao.png'/></main></body></html>

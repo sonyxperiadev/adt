@@ -1,137 +1,137 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.widgets</div><nav><div><input type='checkbox' id='s2-adt.widgets.Map'></input><label for='s2-adt.widgets.Map'>widgets.Map</label><div class='s2'><a href='#api-adt.widgets.Map.centerX'>centerX</a><a href='#api-adt.widgets.Map.centerY'>centerY</a><a href='#api-adt.widgets.Map.backgroundColor'>backgroundColor</a><a href='#api-adt.widgets.Map.foregroundColor'>foregroundColor</a><a href='#api-adt.widgets.Map.borderColor'>borderColor</a><a href='#api-adt.widgets.Map.mouseover'>mouseover</a><a href='#api-adt.widgets.Map.mouseleave'>mouseleave</a><a href='#api-adt.widgets.Map.click'>click</a><a href='#api-adt.widgets.Map.outClick'>outClick</a><a href='#api-adt.widgets.Map.labels'>labels</a><input type='checkbox' id='s3-adt.widgets.Map.countries'></input><label for='s3-adt.widgets.Map.countries'>countries</label><div class='s3'><a href='#api-adt.widgets.Map.countries.get'>get</a><a href='#api-adt.widgets.Map.countries.capital'>capital</a><a href='#api-adt.widgets.Map.countries.population'>population</a><a href='#api-adt.widgets.Map.countries.containsGeoLoc'>containsGeoLoc</a></div><input type='checkbox' id='s3-adt.widgets.Map.clustering'></input><label for='s3-adt.widgets.Map.clustering'>clustering</label><div class='s3'><a href='#api-adt.widgets.Map.clustering.selector'>selector</a><a href='#api-adt.widgets.Map.clustering.get'>get</a><a href='#api-adt.widgets.Map.clustering.add'>add</a><a href='#api-adt.widgets.Map.clustering.remove'>remove</a></div><a href='#api-adt.widgets.Map.highlight'>highlight</a><input type='checkbox' id='s3-adt.widgets.Map.staticLayer'></input><label for='s3-adt.widgets.Map.staticLayer'>staticLayer</label><div class='s3'><a href='#api-adt.widgets.Map.staticLayer.get'>get</a><a href='#api-adt.widgets.Map.staticLayer.add'>add</a><a href='#api-adt.widgets.Map.staticLayer.erase'>erase</a><a href='#api-adt.widgets.Map.staticLayer.highlight'>highlight</a><input type='checkbox' id='s4-adt.widgets.Map.staticLayer.draw'></input><label for='s4-adt.widgets.Map.staticLayer.draw'>draw</label><div class='s4'><a href='#api-adt.widgets.Map.staticLayer.draw.dot'>dot</a></div></div><input type='checkbox' id='s3-adt.widgets.Map.dynamicLayer'></input><label for='s3-adt.widgets.Map.dynamicLayer'>dynamicLayer</label><div class='s3'><a href='#api-adt.widgets.Map.dynamicLayer.get'>get</a><a href='#api-adt.widgets.Map.dynamicLayer.add'>add</a><a href='#api-adt.widgets.Map.dynamicLayer.erase'>erase</a><a href='#api-adt.widgets.Map.dynamicLayer.highlight'>highlight</a><input type='checkbox' id='s4-adt.widgets.Map.dynamicLayer.draw'></input><label for='s4-adt.widgets.Map.dynamicLayer.draw'>draw</label><div class='s4'><a href='#api-adt.widgets.Map.dynamicLayer.draw.dot'>dot</a></div></div><input type='checkbox' id='s3-adt.widgets.Map.touchLayer'></input><label for='s3-adt.widgets.Map.touchLayer'>touchLayer</label><div class='s3'><a href='#api-adt.widgets.Map.touchLayer.add'>add</a><a href='#api-adt.widgets.Map.touchLayer.remove'>remove</a><a href='#api-adt.widgets.Map.touchLayer.erase'>erase</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.map.Map'>Map</h2>
-<div class='card'><pre>adt.widgets.map.Map(name[, parent])</pre>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.map</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.widgets.map</div><nav><div><input type='checkbox' id='s2-adt.widgets.map'></input><label for='s2-adt.widgets.map'>map</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.map.Map'></input><label for='s3-adt.widgets.map.Map'>Map</label><div class='s3'><a href='#api-adt.widgets.map.Map.centerX'>centerX</a><a href='#api-adt.widgets.map.Map.centerY'>centerY</a><a href='#api-adt.widgets.map.Map.backgroundColor'>backgroundColor</a><a href='#api-adt.widgets.map.Map.foregroundColor'>foregroundColor</a><a href='#api-adt.widgets.map.Map.borderColor'>borderColor</a><a href='#api-adt.widgets.map.Map.mouseover'>mouseover</a><a href='#api-adt.widgets.map.Map.mouseleave'>mouseleave</a><a href='#api-adt.widgets.map.Map.click'>click</a><a href='#api-adt.widgets.map.Map.outClick'>outClick</a><a href='#api-adt.widgets.map.Map.labels'>labels</a><input type='checkbox' id='s4-adt.widgets.map.Map.countries'></input><label for='s4-adt.widgets.map.Map.countries'>countries</label><div class='s4'><a href='#api-adt.widgets.map.Map.countries.get'>get</a><a href='#api-adt.widgets.map.Map.countries.capital'>capital</a><a href='#api-adt.widgets.map.Map.countries.population'>population</a><a href='#api-adt.widgets.map.Map.countries.containsGeoLoc'>containsGeoLoc</a></div><input type='checkbox' id='s4-adt.widgets.map.Map.clustering'></input><label for='s4-adt.widgets.map.Map.clustering'>clustering</label><div class='s4'><a href='#api-adt.widgets.map.Map.clustering.selector'>selector</a><a href='#api-adt.widgets.map.Map.clustering.get'>get</a><a href='#api-adt.widgets.map.Map.clustering.add'>add</a><a href='#api-adt.widgets.map.Map.clustering.remove'>remove</a></div><a href='#api-adt.widgets.map.Map.highlight'>highlight</a><input type='checkbox' id='s4-adt.widgets.map.Map.staticLayer'></input><label for='s4-adt.widgets.map.Map.staticLayer'>staticLayer</label><div class='s4'><a href='#api-adt.widgets.map.Map.staticLayer.get'>get</a><a href='#api-adt.widgets.map.Map.staticLayer.add'>add</a><a href='#api-adt.widgets.map.Map.staticLayer.erase'>erase</a><a href='#api-adt.widgets.map.Map.staticLayer.highlight'>highlight</a><input type='checkbox' id='s5-adt.widgets.map.Map.staticLayer.draw'></input><label for='s5-adt.widgets.map.Map.staticLayer.draw'>draw</label><div class='s5'><a href='#api-adt.widgets.map.Map.staticLayer.draw.dot'>dot</a></div></div><input type='checkbox' id='s4-adt.widgets.map.Map.dynamicLayer'></input><label for='s4-adt.widgets.map.Map.dynamicLayer'>dynamicLayer</label><div class='s4'><a href='#api-adt.widgets.map.Map.dynamicLayer.get'>get</a><a href='#api-adt.widgets.map.Map.dynamicLayer.add'>add</a><a href='#api-adt.widgets.map.Map.dynamicLayer.erase'>erase</a><a href='#api-adt.widgets.map.Map.dynamicLayer.highlight'>highlight</a><input type='checkbox' id='s5-adt.widgets.map.Map.dynamicLayer.draw'></input><label for='s5-adt.widgets.map.Map.dynamicLayer.draw'>draw</label><div class='s5'><a href='#api-adt.widgets.map.Map.dynamicLayer.draw.dot'>dot</a></div></div><input type='checkbox' id='s4-adt.widgets.map.Map.touchLayer'></input><label for='s4-adt.widgets.map.Map.touchLayer'>touchLayer</label><div class='s4'><a href='#api-adt.widgets.map.Map.touchLayer.add'>add</a><a href='#api-adt.widgets.map.Map.touchLayer.remove'>remove</a><a href='#api-adt.widgets.map.Map.touchLayer.erase'>erase</a></div></div></div></div></nav></aside><main><h2 id='api-adt.widgets.map'>adt.widgets.map</h2>Module implementing an interactive world map. Part of the Analytics Dashboard Tools.  The map widget is an interactive world map with all countries, dependent territories and special areas of geographical interest. All separate areas that have their own ISO 3166-1 numeric-3 code are included extended by Kosovo, Northern Cyprus and Somaliland. Therefore, the notion 'country' always refers to a region with their own ISO 3166-1 numeric-3 code. <br><br>Some of the built-in features: <ul> <li>Zoom: clicking on country zooms in the map, clicking on water zooms out. Scrolling on the map enables zoom in/out. <li>Attach callbacks on country/territory hover/leave/click. <li>Simply decide if a geo location is within a country or not. <li>Add multiple static layers, draw on or highlight any of them. <li>Add multiple dynamic layers with animated dots. <li>Pass a list of clusterings to the map and highlight any of them. </ul> Additionally, you only need to work in geo locations, all transformations and projections are cared for under the hood. Note that the module already contains the paths for the countries as well as additional country data (capital info, population size), which results in a significantly large size even minified (~730 kB). 
+<br><br>Requires: <code>lodash@4.17.4</code> <code>d3@v4</code> <code>topojson@v1</code> <code>adt.widgets.Widget</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.map.Map'>Map</h2>
+<div class='card'><pre><code>adt.widgets.map.Map(name[, parent])</code></pre>
 <br>The map widget class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Identifier of the widget.</td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, widget is appended to body. <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map'>adt.widgets.Map</h2>Module implementing an interactive world map. Part of the Analytics Dashboard Tools.  The map widget is an interactive world map with all countries, dependent territories and special areas of geographical interest. All separate areas that have their own ISO 3166-1 numeric-3 code are included extended by Kosovo, Northern Cyprus and Somaliland. Therefore, the notion 'country' always refers to a region with their own ISO 3166-1 numeric-3 code. <br><br>Some of the built-in features: <ul> <li>Zoom: clicking on country zooms in the map, clicking on water zooms out. Scrolling on the map enables zoom in/out. <li>Attach callbacks on country/territory hover/leave/click. <li>Simply decide if a geo location is within a country or not. <li>Add multiple static layers, draw on or highlight any of them. <li>Add multiple dynamic layers with animated dots. <li>Pass a list of clusterings to the map and highlight any of them. </ul> Additionally, you only need to work in geo locations, all transformations and projections are cared for under the hood. Note that the module already contains the paths for the countries as well as additional country data (capital info, population size), which results in a significantly large size even minified (~730 kB). 
-<br><br>Requires: <code>lodash@4.17.4</code> <code>d3@v4</code> <code>topojson@v1</code> <code>adt.widgets</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.Map.centerX'>centerX</h2>
-<div class='card'><pre>adt.widgets.Map.centerX(dx)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.centerX'>centerX</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.centerX(dx)</code></pre>
 <br>Sets horizontal position of the map center relative to the widget's center. Default is 0. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>dx</i></td><td><code>number</code></td><td>Horizontal distance to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.centerY'>centerY</h2>
-<div class='card'><pre>adt.widgets.Map.centerY(dy)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.centerY'>centerY</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.centerY(dy)</code></pre>
 <br>Sets vertical position of the map center relative to the widget's center. Default is 0. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>dy</i></td><td><code>number</code></td><td>Vertical distance to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.backgroundColor'>backgroundColor</h2>
-<div class='card'><pre>adt.widgets.Map.backgroundColor(color)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.backgroundColor'>backgroundColor</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.backgroundColor(color)</code></pre>
 <br>Sets color of the background (water). Default is white. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code></td><td>Background color.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.foregroundColor'>foregroundColor</h2>
-<div class='card'><pre>adt.widgets.Map.foregroundColor(color)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.foregroundColor'>foregroundColor</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.foregroundColor(color)</code></pre>
 <br>Sets color of the foreground (soil). Default is black. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code></td><td>Foreground color.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.borderColor'>borderColor</h2>
-<div class='card'><pre>adt.widgets.Map.borderColor(color)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.borderColor'>borderColor</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.borderColor(color)</code></pre>
 <br>Sets color of the borders. Default is white. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code></td><td>Border color.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.mouseover'>mouseover</h2>
-<div class='card'><pre>adt.widgets.Map.mouseover(callback)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.mouseover'>mouseover</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.mouseover(callback)</code></pre>
 <br>Sets callback for mouse over on a country. Can accept two arguments: country name and country index. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.mouseleave'>mouseleave</h2>
-<div class='card'><pre>adt.widgets.Map.mouseleave(callback)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.mouseleave'>mouseleave</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.mouseleave(callback)</code></pre>
 <br>Sets callback for mouse leave on a country. Can accept two arguments: country name and country index. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.click'>click</h2>
-<div class='card'><pre>adt.widgets.Map.click(callback)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.click'>click</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.click(callback)</code></pre>
 <br>Sets callback for click on a country. Can accept two arguments: country name and country index. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.outClick'>outClick</h2>
-<div class='card'><pre>adt.widgets.Map.outClick(callback)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.outClick'>outClick</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.outClick(callback)</code></pre>
 <br>Sets callback for click on water. Can accept one parameter denoting if a zoom out was performed. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.labels'>labels</h2>
-<div class='card'><pre>adt.widgets.Map.labels(on)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.labels'>labels</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.labels(on)</code></pre>
 <br>Displays labels on the map when zoomed. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>on</i></td><td><code>boolean</code></td><td>Whether to enable labels or not.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.countries'>adt.widgets.Map.countries</h2>Namespace containing various country related methods. 
-<br><br><br><h2 id='api-adt.widgets.Map.countries.get'>get</h2>
-<div class='card'><pre>adt.widgets.Map.countries.get()</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.countries'>adt.widgets.map.Map.countries</h2>Namespace containing various country related methods. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.countries.get'>get</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.countries.get()</code></pre>
 <br>Returns an array containing <code>id: number, name: string</code> objects of the country ids and names in the map. 
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td></td></tr></table></div><br><h2 id='api-adt.widgets.Map.countries.capital'>capital</h2>
-<div class='card'><pre>adt.widgets.Map.countries.capital(country)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td></td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.countries.capital'>capital</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.countries.capital(country)</code></pre>
 <br>Returns the capital of a country or all countries. If country is passed and is valid, an object <code>name: string, lon: number, lat: number</code> is returned with with the name and geo coordinates of the capital. Otherwise, an array containing the capitals in the above format is returned. Note that some capitals and geo coordinates can be null. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>country</i></td><td><code>string</code></td><td>Name of the country to return capital data for.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>object</code> <code>Array</code></i></td><td>Object or array of objects containing the capital data.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.countries.population'>population</h2>
-<div class='card'><pre>adt.widgets.Map.countries.population(country)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>object</code> <code>Array</code></i></td><td>Object or array of objects containing the capital data.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.countries.population'>population</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.countries.population(country)</code></pre>
 <br>Returns the population of a country or all countries. If country is passed and is valid, the population is returned, otherwise an array containing <code>name: string, population: number</code> objects is returned containing all population data. Source: CIA World Factbook (2017) 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>country</i></td><td><code>string</code></td><td>Name of the country to return population data for.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>number</code> <code>Array</code></i></td><td>Population or array of population data.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.countries.containsGeoLoc'>containsGeoLoc</h2>
-<div class='card'><pre>adt.widgets.Map.countries.containsGeoLoc(country, latLon)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>number</code> <code>Array</code></i></td><td>Population or array of population data.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.countries.containsGeoLoc'>containsGeoLoc</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.countries.containsGeoLoc(country, latLon)</code></pre>
 <br>Checks if a geo location is inside a country. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>country</i></td><td><code>string</code></td><td>Name of the country to check boundaries against.</td></tr><tr><td><i>latLon</i></td><td><code>Array</code></td><td>Two element array containing the latitude and longitude of the point.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if point is inside the country, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.clustering'>adt.widgets.Map.clustering</h2>Namespace containing various clustering related methods. 
-<br><br><br><h2 id='api-adt.widgets.Map.clustering.selector'>selector</h2>
-<div class='card'><pre>adt.widgets.Map.clustering.selector(id, name)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if point is inside the country, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.clustering'>adt.widgets.map.Map.clustering</h2>Namespace containing various clustering related methods. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.clustering.selector'>selector</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.clustering.selector(id, name)</code></pre>
 <br>Returns the ID selector to a clustering and a group. This can be passed to methods that require a group selector. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the clustering.</td></tr><tr><td><i>name</i></td><td><code>string</code></td><td>Name of the group.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>string</code></i></td><td>Selector representing the clustering and group name.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.clustering.get'>get</h2>
-<div class='card'><pre>adt.widgets.Map.clustering.get(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>string</code></i></td><td>Selector representing the clustering and group name.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.clustering.get'>get</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.clustering.get(id)</code></pre>
 <br>Returns an array of clustering group IDs or existing clustering IDs. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of clustering. If invalid or not specified, the list of clustering IDs is returned.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of existing clustering IDs.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.clustering.add'>add</h2>
-<div class='card'><pre>adt.widgets.Map.clustering.add(id, groups)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of existing clustering IDs.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.clustering.add'>add</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.clustering.add(id, groups)</code></pre>
 <br>Adds a new clustering. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the clustering to add.</td></tr><tr><td><i>groups</i></td><td><code>object</code></td><td>Object containing the key as the name of the group and value as array of countries.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if clustering doesn't exist and could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.clustering.remove'>remove</h2>
-<div class='card'><pre>adt.widgets.Map.clustering.remove(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if clustering doesn't exist and could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.clustering.remove'>remove</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.clustering.remove(id)</code></pre>
 <br>Removes a clustering. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the clustering to remove.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if clustering exists and could be removed, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.highlight'>highlight</h2>
-<div class='card'><pre>adt.widgets.Map.highlight([id[, color[, duration]]])</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if clustering exists and could be removed, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.highlight'>highlight</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.highlight([id[, color[, duration]]])</code></pre>
 <br>Highlights a single country or a group of countries. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>?string</code></td><td>ID of a country or a group to highlight. If not specified, all countries are highlighted. <code>optional</code></td></tr><tr><td><i>color</i></td><td><code>string</code></td><td>Optional color to use for highlight (default is the bright version of foreground). <code>optional</code></td></tr><tr><td><i>duration</i></td><td><code>string</code></td><td>Optional duration length in ms (default is 0). <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.staticLayer'>adt.widgets.Map.staticLayer</h2>The static layers namespace. 
-<br><br><br><h2 id='api-adt.widgets.Map.staticLayer.get'>get</h2>
-<div class='card'><pre>adt.widgets.Map.staticLayer.get()</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.staticLayer'>adt.widgets.map.Map.staticLayer</h2>The static layers namespace. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.staticLayer.get'>get</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.staticLayer.get()</code></pre>
 <br>Returns an array of existing static layers. 
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of existing static layer IDs.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.staticLayer.add'>add</h2>
-<div class='card'><pre>adt.widgets.Map.staticLayer.add(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of existing static layer IDs.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.staticLayer.add'>add</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.staticLayer.add(id)</code></pre>
 <br>Adds a new static layer to the map if it there is no layer with the same ID already. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the new static layer.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if new layer could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.staticLayer.erase'>erase</h2>
-<div class='card'><pre>adt.widgets.Map.staticLayer.erase(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if new layer could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.staticLayer.erase'>erase</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.staticLayer.erase(id)</code></pre>
 <br>Erases the content of a static layer. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the layer to use.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists and could be erased, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.staticLayer.highlight'>highlight</h2>
-<div class='card'><pre>adt.widgets.Map.staticLayer.highlight(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists and could be erased, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.staticLayer.highlight'>highlight</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.staticLayer.highlight(id)</code></pre>
 <br>Highlights a specific layer. If no layer is passed, removed highlight. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the static layer to highlight. If not given, highlight is cancelled.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.staticLayer.draw'>adt.widgets.Map.staticLayer.draw</h2>Namespace containing drawing functions. 
-<br><br><br><h2 id='api-adt.widgets.Map.staticLayer.draw.dot'>dot</h2>
-<div class='card'><pre>adt.widgets.Map.staticLayer.draw.dot(id, latLon, r, color)</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.staticLayer.draw'>adt.widgets.map.Map.staticLayer.draw</h2>Namespace containing drawing functions. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.staticLayer.draw.dot'>dot</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.staticLayer.draw.dot(id, latLon, r, color)</code></pre>
 <br>Adds a dot to the specified static layer. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the layer to use.</td></tr><tr><td><i>latLon</i></td><td><code>Array</code></td><td>Array containing the latitude and longitude.</td></tr><tr><td><i>r</i></td><td><code>number</code></td><td>Radius of the dot.</td></tr><tr><td><i>color</i></td><td><code>string</code></td><td>Color of the dot.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists, coordinates are valid and dot could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.dynamicLayer'>adt.widgets.Map.dynamicLayer</h2>The dynamic layers namespace.  Dynamic layers are used to draw temporary, usually animated primitives on the map. Note that every element drawn to the dynamic layer is removed after 10 seconds to avoid elements being stuck in the map (e.g., due to the browser being in the background or other circumstances that prevent the animation. 
-<br><br><br><h2 id='api-adt.widgets.Map.dynamicLayer.get'>get</h2>
-<div class='card'><pre>adt.widgets.Map.dynamicLayer.get()</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists, coordinates are valid and dot could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.dynamicLayer'>adt.widgets.map.Map.dynamicLayer</h2>The dynamic layers namespace.  Dynamic layers are used to draw temporary, usually animated primitives on the map. Note that every element drawn to the dynamic layer is removed after 10 seconds to avoid elements being stuck in the map (e.g., due to the browser being in the background or other circumstances that prevent the animation. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.dynamicLayer.get'>get</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.dynamicLayer.get()</code></pre>
 <br>Returns an array of existing dynamic layers. 
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of existing dynamic layer IDs.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.dynamicLayer.add'>add</h2>
-<div class='card'><pre>adt.widgets.Map.dynamicLayer.add(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>Array</code></i></td><td>Array of existing dynamic layer IDs.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.dynamicLayer.add'>add</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.dynamicLayer.add(id)</code></pre>
 <br>Adds a new static layer to the map if it there is no layer with the same ID already. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the new static layer.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if new layer could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.dynamicLayer.erase'>erase</h2>
-<div class='card'><pre>adt.widgets.Map.dynamicLayer.erase(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if new layer could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.dynamicLayer.erase'>erase</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.dynamicLayer.erase(id)</code></pre>
 <br>Erases a dynamic layers. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the dynamic layer to erase.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists and could be erased, false otherwsise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.dynamicLayer.highlight'>highlight</h2>
-<div class='card'><pre>adt.widgets.Map.dynamicLayer.highlight(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists and could be erased, false otherwsise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.dynamicLayer.highlight'>highlight</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.dynamicLayer.highlight(id)</code></pre>
 <br>Highlights a specific dynamic layer. If no layer is passed, removes highlight. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the layer to highlight. If not given, highlight is cancelled.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.Map.dynamicLayer.draw'>adt.widgets.Map.dynamicLayer.draw</h2>Namespace containing drawing methods. 
-<br><br><br><h2 id='api-adt.widgets.Map.dynamicLayer.draw.dot'>dot</h2>
-<div class='card'><pre>adt.widgets.Map.dynamicLayer.draw.dot(id, latLon, r[, color[, duration]])</pre>
+</div><br><h2 id='api-adt.widgets.map.Map.dynamicLayer.draw'>adt.widgets.map.Map.dynamicLayer.draw</h2>Namespace containing drawing methods. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.dynamicLayer.draw.dot'>dot</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.dynamicLayer.draw.dot(id, latLon, r[, color[, duration]])</code></pre>
 <br>Draws a shrinking dot on a dynamic layer. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the dynamic layer to use.</td></tr><tr><td><i>latLon</i></td><td><code>Array</code></td><td>Array containing the latitude and longitude of the dot center.</td></tr><tr><td><i>r</i></td><td><code>number</code></td><td>Radius of the dot.</td></tr><tr><td><i>color</i></td><td><code>string</code></td><td>Color of the dot. <code>optional</code></td></tr><tr><td><i>duration</i></td><td><code>number</code></td><td>Duration of the dot animation. If not specified, no animation is performed. <code>optional</code></td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists, coordinates are valid and dot could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.touchLayer'>adt.widgets.Map.touchLayer</h2>The invisible touch layer namespace.  The touch layer is used to place invisible interactive elements on the map. 
-<br><br><br><h2 id='api-adt.widgets.Map.touchLayer.add'>add</h2>
-<div class='card'><pre>adt.widgets.Map.touchLayer.add(id, latLon, r[, mouseover[, mouseleave[, click]]])</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if layer exists, coordinates are valid and dot could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.touchLayer'>adt.widgets.map.Map.touchLayer</h2>The invisible touch layer namespace.  The touch layer is used to place invisible interactive elements on the map. 
+<br><br><br><h2 id='api-adt.widgets.map.Map.touchLayer.add'>add</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.touchLayer.add(id, latLon, r[, mouseover[, mouseleave[, click]]])</code></pre>
 <br>Adds a touch element to the touch layer. A touch element is an invisible circle. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the touch element.</td></tr><tr><td><i>latLon</i></td><td><code>Array</code></td><td>Array containing the geo coordinates of the touch element.</td></tr><tr><td><i>r</i></td><td><code>number</code></td><td>Radius of the touch element.</td></tr><tr><td><i>mouseover</i></td><td><code>function</code></td><td>Callback on hovering the touch element. <code>optional</code></td></tr><tr><td><i>mouseleave</i></td><td><code>function</code></td><td>Callback on leaving the touch element. <code>optional</code></td></tr><tr><td><i>click</i></td><td><code>function</code></td><td>Callback on clicking the touch element. <code>optional</code></td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if coordinates are valid and touch element could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.touchLayer.remove'>remove</h2>
-<div class='card'><pre>adt.widgets.Map.touchLayer.remove(id)</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if coordinates are valid and touch element could be added, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.touchLayer.remove'>remove</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.touchLayer.remove(id)</code></pre>
 <br>Removes a touch element from the layer. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>id</i></td><td><code>string</code></td><td>Identifier of the touch element to remove.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if element could be removed, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.Map.touchLayer.erase'>erase</h2>
-<div class='card'><pre>adt.widgets.Map.touchLayer.erase()</pre>
+<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>boolean</code></i></td><td>True if element could be removed, false otherwise.</td></tr></table></div><br><h2 id='api-adt.widgets.map.Map.touchLayer.erase'>erase</h2>
+<div class='card'><pre><code>adt.widgets.map.Map.touchLayer.erase()</code></pre>
 <br>Erases the touch layer. 
-</div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>
+</div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='sony-logo sony-x' src='../img/x.png'/></a><img class='sony-logo sony-ao' src='../img/ao.png'/></main></body></html>

@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='../style/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.system.log</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='adt-logo'>adt.system.log</div><nav><div><input type='checkbox' id='s2-adt.system.log'></input><label for='s2-adt.system.log'>system.log</label><div class='s2'><a href='#api-adt.system.log.severity'>severity</a><a href='#api-adt.system.log.d'>d</a><a href='#api-adt.system.log.i'>i</a><a href='#api-adt.system.log.w'>w</a><a href='#api-adt.system.log.e'>e</a></div></div></nav></aside><main><h2 id='api-adt.system.log'>adt.system.log</h2>Module for logging operations. Part of the Analytics Dashboard Tools. 
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.system.log</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.system.log</div><nav><div><input type='checkbox' id='s2-adt.system.log'></input><label for='s2-adt.system.log'>system.log</label><div class='s2'><a href='#api-adt.system.log.severity'>severity</a><a href='#api-adt.system.log.d'>d</a><a href='#api-adt.system.log.i'>i</a><a href='#api-adt.system.log.w'>w</a><a href='#api-adt.system.log.e'>e</a></div></div></nav></aside><main><h2 id='api-adt.system.log'>adt.system.log</h2>Module for logging operations. Part of the Analytics Dashboard Tools. 
 <br><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.system.log.severity'>severity</h2>
-<div class='card'><pre>adt.system.log.severity(level)</pre>
+<div class='card'><pre><code>adt.system.log.severity(level)</code></pre>
 <br>Sets severity level for the logger. Available severity levels (in increasing severity order): debug, info, warning and error. Either the full name or the initial of the level is passed. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>level</i></td><td><code>string</code></td><td>Severity level to set logger to.</td></tr></table>
 </div><br><h2 id='api-adt.system.log.d'>d</h2>
-<div class='card'><pre>adt.system.log.d(Tag, Log)</pre>
+<div class='card'><pre><code>adt.system.log.d(Tag, Log)</code></pre>
 <br>Prints a debug message on the console if severity level is at least 'debug'. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>Tag</i></td><td><code>tag</code></td><td>to use for the log.</td></tr><tr><td><i>Log</i></td><td><code>message</code></td><td>message.</td></tr></table>
 </div><br><h2 id='api-adt.system.log.i'>i</h2>
-<div class='card'><pre>adt.system.log.i(tag, message)</pre>
+<div class='card'><pre><code>adt.system.log.i(tag, message)</code></pre>
 <br>Prints an info message on console if severity level is at least 'info'. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>tag</i></td><td><code>string</code></td><td>Tag to use for the log.</td></tr><tr><td><i>message</i></td><td><code>string</code></td><td>Log message.</td></tr></table>
 </div><br><h2 id='api-adt.system.log.w'>w</h2>
-<div class='card'><pre>adt.system.log.w(tag, message)</pre>
+<div class='card'><pre><code>adt.system.log.w(tag, message)</code></pre>
 <br>Prints a warning message to console if severity level is at least 'warning'. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>tag</i></td><td><code>string</code></td><td>Tag to use for the log.</td></tr><tr><td><i>message</i></td><td><code>string</code></td><td>Log message.</td></tr></table>
 </div><br><h2 id='api-adt.system.log.e'>e</h2>
-<div class='card'><pre>adt.system.log.e(tag, message)</pre>
+<div class='card'><pre><code>adt.system.log.e(tag, message)</code></pre>
 <br>Prints an error message to console if severity level is at least 'error'. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>tag</i></td><td><code>string</code></td><td>Tag to use for the log.</td></tr><tr><td><i>message</i></td><td><code>string</code></td><td>Log message.</td></tr></table>
-</div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='logo x' src='../img/x.png'/></a><img class='logo ao' src='../img/ao.png'/></main></body></html>
+</div><br><label for='menu' id='exit'></label><a href='https://www.sonymobile.com/'><img class='sony-logo sony-x' src='../img/x.png'/></a><img class='sony-logo sony-ao' src='../img/ao.png'/></main></body></html>

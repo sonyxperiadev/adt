@@ -34,6 +34,10 @@
  * @requires d3@v4
  * @requires lodash@4.17.4
  */
+// TODO add universal method xLabel, yLabel and use whenever applicable
+// TODO add attributes xType, xTickAngle, yTickFormat
+// TODO add attributes mouseover, mouseleave, click
+// TODO add chart tooltip
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('lodash'), exports);
@@ -173,7 +177,7 @@
         };
 
         /**
-         * Namespace of some convenience methods.
+         * Collection of some convenience methods.
          *
          * @namespace _utils
          * @memberOf adt.widgets.Widget

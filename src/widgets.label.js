@@ -24,10 +24,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.Label
- * @memberOf adt
+ * @module label
+ * @memberOf adt.widgets
  * @requires d3@v4
- * @requires adt.widgets
+ * @requires adt.widgets.Widget
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -46,7 +46,7 @@
      * The label widget class.
      *
      * @class Label
-     * @memberOf adt.widgets
+     * @memberOf adt.widgets.label
      * @param {string} name Identifier of the label.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * @constructor
@@ -58,7 +58,7 @@
          * Sets text of the label.
          *
          * @method text
-         * @memberOf adt.widgets.Label
+         * @memberOf adt.widgets.label.Label
          * @param {string} label Text of the label.
          */
         _w.attr.add(this, "text", "");
@@ -68,7 +68,7 @@
          * Default is center.
          *
          * @method align
-         * @memberOf adt.widgets.Label
+         * @memberOf adt.widgets.label.Label
          * @param {string} alignment The alignment to set.
          */
         _w.attr.add(this, "align", "center");

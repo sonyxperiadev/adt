@@ -23,10 +23,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * @author Enys Mones (enys.mones@sony.com)
- * @module widgets.Status
- * @memberOf adt
+ * @module status
+ * @memberOf adt.widgets
  * @requires d3@v4
- * @requires adt.widgets
+ * @requires adt.widgets.Widget
  */
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -45,7 +45,7 @@
      * The status widget class.
      *
      * @class Status
-     * @memberOf adt.widgets
+     * @memberOf adt.widgets.status
      * @param {string} name Identifier of the status widget.
      * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
      * Accepts HTML formatting.
@@ -58,7 +58,7 @@
          * Sets the status label (description of the status).
          *
          * @method label
-         * @memberOf adt.widgets.Status
+         * @memberOf adt.widgets.status.Status
          * @param {string} text Label text.
          */
         _w.attr.add(this, "label", "");
@@ -67,7 +67,7 @@
          * Sets the status value (current status).
          *
          * @method status
-         * @memberOf adt.widgets.Status
+         * @memberOf adt.widgets.status.Status
          * @param {string} text Status value text.
          */
         _w.attr.add(this, "status", "");
