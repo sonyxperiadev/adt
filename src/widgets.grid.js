@@ -224,7 +224,7 @@
          * @memberOf adt.widgets.grid.Grid
          * @param {boolean=} on True if grid should be shown, false otherwise.
          */
-        function show(on) {
+        this.show = function(on) {
             if (on) {
                 _show = true;
 
@@ -286,8 +286,8 @@
                 _w.widget.selectAll(".grid-border-v")
                     .remove();
             }
-        }
-        this.show = show;
+            return this;
+        };
 
         /**
          * Adds a widget to the specified row and column.

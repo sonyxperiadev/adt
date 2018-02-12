@@ -56,7 +56,7 @@
     } else {
         global.adt = global.adt || {};
         global.adt.widgets = global.adt.widgets || {};
-        global.adt.widgets.map.Map = factory(global.d3, global._, global.topojson, global.adt.widgets.Widget);
+        global.adt.widgets.Map = factory(global.d3, global._, global.topojson, global.adt.widgets.Widget);
     }
 } (this, function (d3, _, topojson, Widget) {
     "use strict";

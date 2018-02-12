@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">-->
+    <script src="../../dependencies/d3.v4.min.js"></script>
+    <script src="../../dependencies/lodash.4.17.4.min.js"></script>
+    <script src="../../dependencies/topojson.v1.min.js"></script>
+    <title>examples | adt</title>
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/synesenom/whiteprint/c69fcfc1/wp.min.css">-->
+    <link rel="stylesheet" type="text/css" href="../style/adt.css">
+    <!-- widgets -->
+    <script src="../dl/widgets.min.js"></script>
+    <script src="../dl/widgets.areachart.min.js"></script>
+    <script src="../dl/widgets.barchart.min.js"></script>
+    <script src="../dl/widgets.chordchart.min.js"></script>
+    <script src="../dl/widgets.grid.min.js"></script>
+    <script src="../dl/widgets.linechart.min.js"></script>
+    <script src="../dl/widgets.map.min.js"></script>
+
+    <style>
+        .example-container {
+            width: 100%;
+        }
+        .example {
+            position: relative;
+            float: left;
+            width: 320px;
+            height: 280px;
+            margin: 60px;
+            box-shadow: 1px 1px 3px gray;
+            border-radius: 3px;
+        }
+        .example a {
+            text-decoration: none;
+            color: black;
+        }
+        .example:hover .widget-container {
+            color: dodgerblue;
+        }
+        .widget-container {
+            display: block;
+            width: 280px;
+            height: 240px;
+            padding: 20px;
+        }
+        .chart-name {
+            width: 100%;
+            height: 40px;
+            font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
+        }
+        .widget {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="example-container">
+    <div class="example">
+        <a href="areachart.html"><div class="widget-container">
+            <div class="chart-name">Area chart</div>
+            <div id="areachart" class="widget"></div>
+        </div></a>
+    </div>
+
+    <div class="example">
+        <a href="barchart.html"><div class="widget-container">
+            <div class="chart-name">Area chart</div>
+            <div id="barchart" class="widget"></div>
+        </div></a>
+    </div>
+
+    <div class="example">
+        <a href="chordchart.html"><div class="widget-container">
+            <div class="chart-name">Chord chart</div>
+            <div id="chordchart" class="widget"></div>
+        </div></a>
+    </div>
+
+    <div class="example">
+        <a href="grid.html"><div class="widget-container">
+            <div class="chart-name">Grid</div>
+            <div id="grid" class="widget"></div>
+        </div></a>
+    </div>
+
+    <div class="example">
+        <a href="linechart.html"><div class="widget-container">
+            <div class="chart-name">Line chart</div>
+            <div id="linechart" class="widget"></div>
+        </div></a>
+    </div>
+
+    <div class="example">
+        <a href="map.html"><div class="widget-container">
+            <div class="chart-name">Map</div>
+            <div id="map" class="widget"></div>
+        </div></a>
+    </div>
+</div>
+
+<script>
+    var DUMMY_DATA = [];
+    for (var i=0; i<100; i++) {
+        DUMMY_DATA.push({
+            x: i,
+            y: {dogs: 10*Math.pow(i/100, 2), cats: 10*Math.exp(-i/100)*Math.pow(Math.cos(Math.PI*i/15), 2)+2}
+        });
+    }
+    var DUMMY_DATA_2 = [];
+    for (i=0; i<10; i++) {
+        DUMMY_DATA_2.push({
+            x: i,
+            y: Math.cos(i/1.2) + Math.pow(i/2.1, 1.1)
+        });
+    }
+    var DUMMY_DATA_MATRIX = [
+        {source: "melon", target: "apple", value: 1},
+        {source: "melon", target: "pear", value: 2},
+        {source: "melon", target: "orange", value: 3},
+        {source: "apple", target: "melon", value: 4},
+        {source: "apple", target: "pear", value: 5},
+        {source: "apple", target: "orange", value: 6},
+        {source: "pear", target: "melon", value: 7},
+        {source: "pear", target: "apple", value: 8},
+        {source: "pear", target: "orange", value: 9},
+        {source: "orange", target: "melon", value: 10},
+        {source: "orange", target: "apple", value: 11},
+        {source: "orange", target: "pear", value: 12},
+        {source: "banana", target: "apple", value: 1},
+        {source: "apple", target: "banana", value: 2}
+    ];
+    var COLORS_MATRIX = {
+        'melon': "dodgerblue",
+        'apple': "crimson",
+        'pear': "limegreen",
+        'orange': "goldenrod",
+        'banana': "purple"
+    };
+    var DUMMY_COLORS = {dogs: "dodgerblue", cats: "yellowgreen"};
+
+    window.addEventListener("load", function() {
+        //d3.csv("data/world_data.csv", function(data) {
+        // Area chart
+        var areaChart = new adt.widgets.AreaChart("areachart", d3.select("#areachart"))
+            .width(280)
+            .height(200)
+            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .fontColor("black")
+            .fontSize(14)
+            .colors(DUMMY_COLORS)
+            .data(DUMMY_DATA)
+            .render();
+
+        // Bar chart
+        var barChart = new adt.widgets.BarChart("barchart", d3.select("#barchart"))
+            .width(280)
+            .height(200)
+            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .fontColor("black")
+            .fontSize(14)
+            .colors("dodgerblue")
+            .data(DUMMY_DATA_2)
+            .render();
+
+        // Chord chart
+        var chordChart = new adt.widgets.ChordChart("chordchart", d3.select("#chordchart"))
+            .x(50)
+            .radius(80)
+            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .fontColor("black")
+            .fontSize(14)
+            .colors(COLORS_MATRIX)
+            .data(DUMMY_DATA_MATRIX)
+            .render();
+
+        // TODO fix grid positioning
+        var grid = new adt.widgets.Grid("grid", d3.select("#grid"))
+            .width(280)
+            .height(200)
+            .rows(2)
+            .cols(3)
+            .show(true)
+            .render();
+        /*grid.add(new adt.widgets.AreaChart("areachart")
+            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .fontColor("black")
+            .fontSize(14)
+            .colors(DUMMY_COLORS)
+            .data(DUMMY_DATA), 0, 0, 1, 1);*/
+
+        // Line chart
+        var lineChart = new adt.widgets.LineChart("linechart", d3.select("#linechart"))
+            .width(280)
+            .height(200)
+            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .fontColor("black")
+            .fontSize(14)
+            .colors(DUMMY_COLORS)
+            .data(DUMMY_DATA)
+            .render();
+
+        // Map
+        var map = new adt.widgets.Map("map", d3.select("#map"))
+            .x(0)
+            .y(0)
+            .width(280)
+            .height(200)
+            .backgroundColor("white")
+            .borderColor("black")
+            .foregroundColor("#888")
+            .render();
+
+        //});
+    });
+</script>
+</body>
+</html>
