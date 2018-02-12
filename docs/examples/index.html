@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
     <script src="../../dependencies/d3.v4.min.js"></script>
     <script src="../../dependencies/lodash.4.17.4.min.js"></script>
     <script src="../../dependencies/topojson.v1.min.js"></script>
     <title>examples | adt</title>
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/synesenom/whiteprint/c69fcfc1/wp.min.css">-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/synesenom/whiteprint/c69fcfc1/wp.min.css">
     <link rel="stylesheet" type="text/css" href="../style/adt.css">
     <!-- widgets -->
-    <script src="../dl/widgets.min.js"></script>
-    <script src="../dl/widgets.areachart.min.js"></script>
-    <script src="../dl/widgets.barchart.min.js"></script>
-    <script src="../dl/widgets.chordchart.min.js"></script>
-    <script src="../dl/widgets.grid.min.js"></script>
-    <script src="../dl/widgets.linechart.min.js"></script>
-    <script src="../dl/widgets.map.min.js"></script>
+    <script src="../../src/widgets.js"></script>
+    <script src="../../src/widgets.areachart.js"></script>
+    <script src="../../src/widgets.barchart.js"></script>
+    <script src="../../src/widgets.chordchart.js"></script>
+    <script src="../../src/widgets.grid.js"></script>
+    <script src="../../src/widgets.linechart.js"></script>
+    <script src="../../src/widgets.map.js"></script>
 
     <style>
+        .title {
+            position: relative;
+            width: calc(100% - 40px);
+            height: 20px;
+            font-variant: all-small-caps;
+            font-size: 2em;
+            margin-left: 40px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
         .example-container {
             width: 100%;
         }
@@ -28,78 +38,90 @@
             float: left;
             width: 320px;
             height: 280px;
-            margin: 60px;
+            margin: 40px;
             box-shadow: 1px 1px 3px gray;
             border-radius: 3px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        @media screen and (max-width: 700px) {
+            .example {
+                width: 320px;
+                margin-left: calc(50% - 150px);
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
         }
         .example a {
             text-decoration: none;
-            color: black;
-        }
-        .example:hover .widget-container {
             color: dodgerblue;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .example a:hover {
+            color: #888;
         }
         .widget-container {
             display: block;
-            width: 280px;
-            height: 240px;
+            width: 320px;
+            height: 280px;
             padding: 20px;
         }
         .chart-name {
-            width: 100%;
+            width: 280px;
             height: 40px;
             font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
         }
         .widget {
             position: relative;
             display: block;
-            width: 100%;
+            width: 280px;
             height: 200px;
+            font-family: 'Montserrat', sans-serif;
         }
     </style>
 </head>
 <body>
+<div class="title">Examples</div>
 <div class="example-container">
     <div class="example">
-        <a href="areachart.html"><div class="widget-container">
-            <div class="chart-name">Area chart</div>
+        <div class="widget-container">
+            <div class="chart-name"><a href="areachart.html">Area chart</a></div>
             <div id="areachart" class="widget"></div>
-        </div></a>
+        </div>
     </div>
 
     <div class="example">
-        <a href="barchart.html"><div class="widget-container">
-            <div class="chart-name">Area chart</div>
+        <div class="widget-container">
+            <div class="chart-name"><a href="barchart.html">Bar chart</a></div>
             <div id="barchart" class="widget"></div>
-        </div></a>
+        </div>
     </div>
 
     <div class="example">
-        <a href="chordchart.html"><div class="widget-container">
-            <div class="chart-name">Chord chart</div>
+        <div class="widget-container">
+            <div class="chart-name"><a href="chordchart.html">Chord chart</a></div>
             <div id="chordchart" class="widget"></div>
-        </div></a>
+        </div>
     </div>
 
     <div class="example">
-        <a href="grid.html"><div class="widget-container">
-            <div class="chart-name">Grid</div>
+        <div class="widget-container">
+            <div class="chart-name"><a href="grid.html">Grid</a></div>
             <div id="grid" class="widget"></div>
-        </div></a>
+        </div>
     </div>
 
     <div class="example">
-        <a href="linechart.html"><div class="widget-container">
-            <div class="chart-name">Line chart</div>
+        <div class="widget-container">
+            <div class="chart-name"><a href="linechart.html">Line chart</a></div>
             <div id="linechart" class="widget"></div>
-        </div></a>
+        </div>
     </div>
 
     <div class="example">
-        <a href="map.html"><div class="widget-container">
-            <div class="chart-name">Map</div>
+        <div class="widget-container">
+            <div class="chart-name"><a href="map.html">Map</a></div>
             <div id="map" class="widget"></div>
-        </div></a>
+        </div>
     </div>
 </div>
 
@@ -141,7 +163,7 @@
         'orange': "goldenrod",
         'banana': "purple"
     };
-    var DUMMY_COLORS = {dogs: "dodgerblue", cats: "yellowgreen"};
+    var DUMMY_COLORS = {dogs: "dodgerblue", cats: "limegreen"};
 
     window.addEventListener("load", function() {
         //d3.csv("data/world_data.csv", function(data) {
@@ -149,7 +171,9 @@
         var areaChart = new adt.widgets.AreaChart("areachart", d3.select("#areachart"))
             .width(280)
             .height(200)
-            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .xLabel("value")
+            .yLabel("density")
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
             .fontColor("black")
             .fontSize(14)
             .colors(DUMMY_COLORS)
@@ -160,7 +184,9 @@
         var barChart = new adt.widgets.BarChart("barchart", d3.select("#barchart"))
             .width(280)
             .height(200)
-            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .xLabel("category")
+            .yLabel("values")
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
             .fontColor("black")
             .fontSize(14)
             .colors("dodgerblue")
@@ -183,21 +209,34 @@
             .width(280)
             .height(200)
             .rows(2)
-            .cols(3)
-            .show(true)
+            .cols(2)
             .render();
-        /*grid.add(new adt.widgets.AreaChart("areachart")
-            .margins({left: 40, top: 10, right: 20, bottom: 30})
+        grid.add(new adt.widgets.LineChart("linechart", grid.w())
+            .margins({left: 30, top: 20, right: 10, bottom: 20})
             .fontColor("black")
-            .fontSize(14)
+            .fontSize(10)
             .colors(DUMMY_COLORS)
-            .data(DUMMY_DATA), 0, 0, 1, 1);*/
+            .data(DUMMY_DATA), 0, 0, 1, 1);
+        grid.add(new adt.widgets.AreaChart("areachart", grid.w())
+            .margins({left: 30, top: 20, right: 10, bottom: 20})
+            .fontColor("black")
+            .fontSize(10)
+            .colors(DUMMY_COLORS)
+            .data(DUMMY_DATA), 0, 1, 2, 1);
+        grid.add(new adt.widgets.BarChart("barchart", grid.w())
+            .margins({left: 30, top: 20, right: 10, bottom: 20})
+            .fontColor("black")
+            .fontSize(10)
+            .colors("dodgerblue")
+            .data(DUMMY_DATA_2), 1, 0, 1, 1);
 
         // Line chart
         var lineChart = new adt.widgets.LineChart("linechart", d3.select("#linechart"))
             .width(280)
             .height(200)
-            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .xLabel("time")
+            .yLabel("trends")
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
             .fontColor("black")
             .fontSize(14)
             .colors(DUMMY_COLORS)
@@ -210,11 +249,11 @@
             .y(0)
             .width(280)
             .height(200)
+            .labels(true)
             .backgroundColor("white")
-            .borderColor("black")
-            .foregroundColor("#888")
+            .borderColor("#555")
+            .foregroundColor("#999")
             .render();
-
         //});
     });
 </script>

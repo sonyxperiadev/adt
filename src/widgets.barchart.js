@@ -271,7 +271,7 @@
                     .attr("x", function(d) { return scale.x(d.x); })
                     .attr("width", scale.x.bandwidth())
                     .transition().duration(duration)
-                    .attr("y", function(d) { return scale.y(d.y) - 1; })
+                    .attr("y", function(d) { return scale.y(d.y); })
                     .attr("height", function(d) { return _w.attr.height-_w.attr.margins.top-_w.attr.margins.bottom - scale.y(d.y); });
             }
         };
@@ -297,20 +297,9 @@
                 .attr("transform", "translate(0," + innerHeight + ")");
             _svg.axes.y
                 .attr("transform", "translate(0," + 1 + ")");
-            _svg.g.selectAll(".axis path")
-                .style("fill", "none")
-                .style("stroke", _w.attr.fontColor)
-                .style("stroke-width", "2px")
-                .style("shape-rendering", "crispEdges");
-            _svg.g.selectAll(".tick > line")
-                .style("stroke", _w.attr.fontColor)
-                .style("stroke-width", "2px");
             _svg.g.selectAll(".tick > text")
-                .attr("stroke-width", 0)
                 .attr("cursor", "default")
-                .style("pointer-events", "all")
-                .style("font-size", _w.attr.fontSize + "px")
-                .style("fill", _w.attr.fontColor);
+                .style("pointer-events", "all");
             if (_w.attr.vertical) {
                 _svg.g.selectAll(".y.axis .tick > line")
                     .style("display", "none");

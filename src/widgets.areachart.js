@@ -260,31 +260,19 @@
             _svg.axisFn.y.tickFormat(_w.attr.yTickFormat);
             _svg.axes.y
                 .attr("transform", "translate(0," + 1 + ")");
-            _svg.g.selectAll(".axis path")
-                .style("fill", "none")
-                .style("stroke", _w.attr.fontColor)
-                .style("stroke-width", "2px")
-                .style("shape-rendering", "crispEdges");
-            _svg.g.selectAll(".tick > line")
-                .style("stroke", _w.attr.fontColor)
-                .style("stroke-width", "2px");
-            _svg.g.selectAll(".tick > text")
-                .attr("stroke-width", 0)
-                .style("font-size", _w.attr.fontSize + "px")
-                .style("fill", _w.attr.fontColor);
 
             // Labels
             _svg.labels.x
                 .attr("x", innerWidth + "px")
                 .attr("y", (innerHeight + 35) + "px")
+                .attr("fill", _w.attr.fontColor)
                 .style("font-size", _w.attr.fontSize + "px")
-                .style("fill", _w.attr.fontColor)
                 .text(_w.attr.xLabel);
             _svg.labels.y
                 .attr("x", 5 + "px")
                 .attr("y", (-5) + "px")
+                .attr("fill", _w.attr.fontColor)
                 .style("font-size", _w.attr.fontSize + "px")
-                .style("fill", _w.attr.fontColor)
                 .text(_w.attr.yLabel);
 
             // Plot

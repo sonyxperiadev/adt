@@ -516,9 +516,15 @@
          * @returns {adt.widgets.Widget} Reference to the current widget.
          */
         this.margins = function (margins) {
-            for (var side in margins) {
-                if (_attr.margins.hasOwnProperty(side))
-                    _attr.margins[side] = margins[side];
+            if (typeof margins === "number") {
+                ["top", "left", "bottom", "right"].forEach(function(m) {
+                    _attr.margins[m] = margins;
+                });
+            } else {
+                for (var side in margins) {
+                    if (_attr.margins.hasOwnProperty(side))
+                        _attr.margins[side] = margins[side];
+                }
             }
             return this;
         };
@@ -642,6 +648,24 @@
 
             // Additional styling
             _render.style(dur);
+
+            // Global settings
+            _widget.selectAll(".axis path")
+                .style("fill", "none")
+                .style("stroke", _attr.fontColor)
+                .style("stroke-width", "1px")
+                .style("shape-rendering", "crispEdges");
+            _widget.selectAll(".tick > line")
+                .style("stroke", _attr.fontColor)
+                .style("stroke-width", "1px")
+                .style("shape-rendering", "crispEdges");
+            _widget.selectAll(".tick > text")
+                .attr("stroke-width", 0)
+                .attr("font-family", "inherit")
+                .style("font-size", _attr.fontSize + "px")
+                .style("fill", _attr.fontColor);
+            _widget.selectAll("g")
+                .attr("font-family", "inherit");
 
             return this;
         };

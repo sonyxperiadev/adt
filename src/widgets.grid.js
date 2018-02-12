@@ -154,6 +154,11 @@
             return this;
         };
 
+        // TODO remove this
+        this.w = function() {
+            return _w.widget;
+        };
+
         /**
          * Makes the grid flexible, that is, it rescales all contained widgets when
          * the window size is changed.
@@ -342,7 +347,7 @@
             // Set up widget
             widget
                 .x(column * _w.attr.width / _columns + _w.attr.x)
-                .y(row * _w.attr.height / _rows + _w.attr.y)
+                .y(row * _w.attr.height / _rows + _w.attr.y + parent.attr("top"))
                 .width(width * _w.attr.width / _columns)
                 .height(height * _w.attr.height / _rows)
                 .render();
