@@ -37,7 +37,7 @@
     } else {
         global.adt = global.adt || {};
         global.adt.widgets = global.adt.widgets || {};
-        global.adt.widgets.hint.Hint = factory(global.d3, global.adt.widgets.Widget, global);
+        global.adt.widgets.Hint = factory(global.d3, global.adt.widgets.Widget, global);
     }
 } (this, function (d3, Widget) {
     "use strict";
@@ -82,9 +82,10 @@
          * @class _Hint
          * @memberOf adt.widgets.hint.Hint
          * @param {string} name Name of the hint.
+         * @param {object=} parent Parent element to append widget to. If not specified, widget is appended to body.
          * @private
          */
-        function _Hint(name) {
+        function _Hint(name, parent) {
             // Hint IDs
             var _idBase = "adt-widgets-hint-";
             var _id = _idBase + name;
@@ -96,7 +97,7 @@
             if (_hints.hasOwnProperty(_id)) {
                 return _hints[_id];
             } else {
-                var _w = Widget.call(this, name, "hint", "div");
+                var _w = Widget.call(this, name, "hint", "div", parent);
                 var that = this;
             }
 

@@ -105,27 +105,8 @@
          * @private
          */
         var _attr = {
-            relative: false,
-            x: 0,
             xDim: "px",
-            y: 0,
             yDim: "px",
-            width: 200,
-            height: 150,
-            margins: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            },
-            borders: {
-                left: null,
-                right: null,
-                top: null,
-                bottom: null
-            },
-            fontSize: 10,
-            fontColor: "white",
             fontWeight: "normal",
 
             /**
@@ -142,7 +123,7 @@
                  * @var {Array} _dim
                  * @memberOf adt.widgets.Widget._attr._categories
                  */
-                dim: ['x', 'y', 'width', 'height', 'margins', 'fontSize']
+                dim: []
             },
 
             /**
@@ -154,7 +135,7 @@
              * @param {string} name Name of the attribute.
              * @param {object} value Initial value of the attribute.
              * @param {string=} category Category to categorize attribute.
-             * @param {function=} setter Additional callback for the attribute setter.
+             * @param {function=} setter Optional setter function instead of a simple assignment.
              * @private
              */
             add: function (widget, name, value, category, setter) {
@@ -163,9 +144,11 @@
 
                 // Make setter
                 widget[name] = function (attr) {
-                    _attr[name] = attr;
-                    if (setter)
+                    if (setter) {
                         setter(attr);
+                    } else {
+                        _attr[name] = attr;
+                    }
                     return widget;
                 };
 
@@ -175,6 +158,43 @@
                 }
             }
         };
+
+        // Add default attributes
+        _attr.add(this, "relative", false);
+        _attr.add(this, "resize", 1);
+        _attr.add(this, "x", 0, "dim", function(x, dim) {
+            _attr.x = x;
+            if (typeof dim === "string" && ["px", "%"].indexOf(dim) > -1)
+                _attr.xDim = dim;
+        });
+        _attr.add(this, "y", 0, "dim", function(y, dim) {
+            _attr.y = y;
+            if (typeof dim === "string" && ["px", "%"].indexOf(dim) > -1)
+                _attr.yDim = dim;
+        });
+        _attr.add(this, "width", 200, "dim");
+        _attr.add(this, "height", 150, "dim");
+        _attr.add(this, "margins", {left: 0, right: 0, top: 0, bottom: 0}, "dim", function(margins) {
+            if (typeof margins === "number") {
+                ["top", "left", "bottom", "right"].forEach(function(m) {
+                    _attr.margins[m] = margins;
+                });
+            } else {
+                for (var side in margins) {
+                    if (_attr.margins.hasOwnProperty(side))
+                        _attr.margins[side] = margins[side];
+                }
+            }
+        });
+        _attr.add(this, "borders", {left: null, right: null, top: null, bottom: null}, null, function(borders) {
+            for (var side in borders) {
+                if (_attr.borders.hasOwnProperty(side))
+                    _attr.borders[side] = borders[side];
+            }
+        });
+        _attr.add(this, "fontColor", "black");
+        _attr.add(this, "fontSize", 10);
+        _attr.add(this, "fontWeight", "normal");
 
         /**
          * Collection of some convenience methods.
@@ -369,32 +389,6 @@
         })();
 
         /**
-         * Sets a scaling factor for the widget.
-         * Note that this scales all dimension related properties.
-         *
-         * @method resize
-         * @memberOf adt.widgets.Widget
-         * @param {number} scale Scaling factor to resize with.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.resize = function (scale) {
-            _attr.resize = scale;
-            return this;
-        };
-
-        /**
-         * Sets the position of the widget relative to parent.
-         *
-         * @method relative
-         * @memberOf adt.widgets.Widget
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.relative = function () {
-            _attr.relative = true;
-            return this;
-        };
-
-        /**
          * Sets the class of the widget. Note that this method replaces existing class content (that is, it does not
          * simply add a class, but sets the entire content for the class attribute).
          *
@@ -405,143 +399,6 @@
          */
         this.setClass = function (c) {
             _widget.attr("class", c);
-            return this;
-        };
-
-        /**
-         * Sets the X position of the widget.
-         *
-         * @method x
-         * @memberOf adt.widgets.Widget
-         * @param {number} x Distance from the window side. If positive, position is measured from the left,
-         * otherwise it is measured from the right.
-         * @param {string=} dim Distance dimension. If not specified, pixels are used.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.x = function (x, dim) {
-            _attr.x = x;
-            if (typeof dim === "string" && ["px", "%"].indexOf(dim) > -1)
-                _attr.xDim = dim;
-            return this;
-        };
-
-        /**
-         * Sets the Y position of the widget.
-         *
-         * @method y
-         * @memberOf adt.widgets.Widget
-         * @param {number} y Distance from the window side. If positive, position is measured from the top,
-         * otherwise it is measured from the bottom.
-         * @param {string=} dim Distance dimension. If not specified, pixels are used.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.y = function (y, dim) {
-            _attr.y = y;
-            if (typeof dim === "string" && ["px", "%"].indexOf(dim) > -1)
-                _attr.yDim = dim;
-            return this;
-        };
-
-        /**
-         * Sets the width of the widget.
-         *
-         * @method width
-         * @memberOf adt.widgets.Widget
-         * @param {number} width Width to set the widget to.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.width = function (width) {
-            _attr.width = width;
-            return this;
-        };
-
-        /**
-         * Sets the height of the widget.
-         *
-         * @method height
-         * @memberOf adt.widgets.Widget
-         * @param {number} height Height to set the widget to.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.height = function (height) {
-            _attr.height = height;
-            return this;
-        };
-
-        /**
-         * Sets the font color of the widget.
-         *
-         * @method fontColor
-         * @memberOf adt.widgets.Widget
-         * @param {string} color Color to set font to.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.fontColor = function (color) {
-            _attr.fontColor = color;
-            return this;
-        };
-
-        /**
-         * Sets the font size of the widget.
-         *
-         * @method fontSize
-         * @memberOf adt.widgets.Widget
-         * @param {string} size Size to set font to.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.fontSize = function (size) {
-            _attr.fontSize = size;
-            return this;
-        };
-
-        /**
-         * Sets the font weight of the widget.
-         *
-         * @method fontWeight
-         * @memberOf adt.widgets.Widget
-         * @param {string} weight Weight to set font to.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.fontWeight = function (weight) {
-            _attr.fontWeight = weight;
-            return this;
-        };
-
-        /**
-         * Sets the margins for the widget.
-         *
-         * @method margins
-         * @memberOf adt.widgets.Widget
-         * @param {object} margins Object containing the sides as keys and the values as margins.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.margins = function (margins) {
-            if (typeof margins === "number") {
-                ["top", "left", "bottom", "right"].forEach(function(m) {
-                    _attr.margins[m] = margins;
-                });
-            } else {
-                for (var side in margins) {
-                    if (_attr.margins.hasOwnProperty(side))
-                        _attr.margins[side] = margins[side];
-                }
-            }
-            return this;
-        };
-
-        /**
-         * Sets the borders for the widget.
-         *
-         * @method borders
-         * @memberOf adt.widgets.Widget
-         * @param {object} borders Object containing the sides as keys and the values as borders.
-         * @returns {adt.widgets.Widget} Reference to the current widget.
-         */
-        this.borders = function (borders) {
-            for (var side in borders) {
-                if (_attr.borders.hasOwnProperty(side))
-                    _attr.borders[side] = borders[side];
-            }
             return this;
         };
 
@@ -664,6 +521,8 @@
                 .attr("font-family", "inherit")
                 .style("font-size", _attr.fontSize + "px")
                 .style("fill", _attr.fontColor);
+            _widget
+                .style("font-family", "inherit");
             _widget.selectAll("g")
                 .attr("font-family", "inherit");
 

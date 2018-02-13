@@ -174,13 +174,15 @@
                     }));
 
             _svg.g.insert("g", ".track-overlay")
-                .style("font", "10px sans-serif")
+                .style("font-size", "10px")
+                .attr("font-family", "inherit")
                 .attr("transform", "translate(0," + 18 + ")")
                 .selectAll("text")
                 .data(_ordinalScale ? _domain : _scale.ticks(5))
                 .enter().append("text")
                 .attr("x", _scale)
                 .attr("text-anchor", "middle")
+                .attr("font-family", "inherit")
                 .attr("fill", _w.attr.fontColor)
                 .text(function (d) {
                     return d;

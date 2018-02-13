@@ -16,8 +16,15 @@
     <script src="../../src/widgets.barchart.js"></script>
     <script src="../../src/widgets.chordchart.js"></script>
     <script src="../../src/widgets.grid.js"></script>
+    <script src="../../src/widgets.hint.js"></script>
+    <script src="../../src/widgets.image.js"></script>
+    <script src="../../src/widgets.label.js"></script>
+    <script src="../../src/widgets.legend.js"></script>
     <script src="../../src/widgets.linechart.js"></script>
     <script src="../../src/widgets.map.js"></script>
+    <script src="../../src/widgets.piechart.js"></script>
+    <script src="../../src/widgets.slider.js"></script>
+    <script src="../../src/widgets.status.js"></script>
 
     <style>
         .title {
@@ -29,103 +36,200 @@
             margin-left: 40px;
             margin-top: 30px;
             margin-bottom: 30px;
+            font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
+        }
+        .examples {
+            width: 1100px;
+            margin: 0 auto;
         }
         .example-container {
-            width: 100%;
+            position: relative;
+            float: left;
+            width: 33%;
+            height: auto;
         }
         .example {
             position: relative;
-            float: left;
-            width: 320px;
+            width: 300px;
             height: 280px;
-            margin: 40px;
+            margin: calc(50% - 150px);
             box-shadow: 1px 1px 3px gray;
             border-radius: 3px;
-            font-family: 'Montserrat', sans-serif;
         }
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: 1100px) {
+            .examples {
+                width: 800px;
+            }
+            .example-container {
+                width: 50%;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            .examples {
+                width: 400px;
+            }
+            .example-container {
+                width: 100%;
+            }
             .example {
-                width: 320px;
-                margin-left: calc(50% - 150px);
-                margin-top: 30px;
-                margin-bottom: 30px;
+                margin-top: 20px;
             }
         }
         .example a {
             text-decoration: none;
-            color: dodgerblue;
+            color: black;
             font-family: 'Montserrat', sans-serif;
         }
         .example a:hover {
             color: #888;
         }
+        .example:hover a {
+            color: dodgerblue;
+        }
         .widget-container {
             display: block;
-            width: 320px;
-            height: 280px;
+            width: 260px;
+            height: 240px;
             padding: 20px;
         }
         .chart-name {
-            width: 280px;
+            width: 260px;
             height: 40px;
             font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
         }
         .widget {
             position: relative;
             display: block;
-            width: 280px;
+            width: 260px;
             height: 200px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Montserrat', 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
         }
     </style>
 </head>
 <body>
 <div class="title">Examples</div>
-<div class="example-container">
-    <div class="example">
-        <div class="widget-container">
-            <div class="chart-name"><a href="areachart.html">Area chart</a></div>
-            <div id="areachart" class="widget"></div>
+<div class="examples">
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="areachart.html">Area chart</a></div>
+                <div id="areachart" class="widget"></div>
+            </div>
         </div>
     </div>
 
-    <div class="example">
-        <div class="widget-container">
-            <div class="chart-name"><a href="barchart.html">Bar chart</a></div>
-            <div id="barchart" class="widget"></div>
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="barchart.html">Bar chart</a></div>
+                <div id="barchart" class="widget"></div>
+            </div>
         </div>
     </div>
 
-    <div class="example">
-        <div class="widget-container">
-            <div class="chart-name"><a href="chordchart.html">Chord chart</a></div>
-            <div id="chordchart" class="widget"></div>
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="chordchart.html">Chord chart</a></div>
+                <div id="chordchart" class="widget"></div>
+            </div>
         </div>
     </div>
 
-    <div class="example">
-        <div class="widget-container">
-            <div class="chart-name"><a href="grid.html">Grid</a></div>
-            <div id="grid" class="widget"></div>
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="grid.html">Grid</a></div>
+                <div id="grid" class="widget"></div>
+            </div>
         </div>
     </div>
 
-    <div class="example">
-        <div class="widget-container">
-            <div class="chart-name"><a href="linechart.html">Line chart</a></div>
-            <div id="linechart" class="widget"></div>
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="hint.html">Hint</a></div>
+                <div id="hint" class="widget"></div>
+            </div>
         </div>
     </div>
 
-    <div class="example">
-        <div class="widget-container">
-            <div class="chart-name"><a href="map.html">Map</a></div>
-            <div id="map" class="widget"></div>
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="image.html">Image</a></div>
+                <div id="image" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="label.html">Label</a></div>
+                <div id="label" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="legend.html">Legend</a></div>
+                <div id="legend" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="linechart.html">Line chart</a></div>
+                <div id="linechart" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="map.html">Map</a></div>
+                <div id="map" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="piechart.html">Piechart</a></div>
+                <div id="piechart" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="slider.html">Slider</a></div>
+                <div id="slider" class="widget"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="example-container">
+        <div class="example">
+            <div class="widget-container">
+                <div class="chart-name"><a href="status.html">Status</a></div>
+                <div id="status" class="widget"></div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
+    var WIDTH = 260;
+    var HEIGHT = 200;
     var DUMMY_DATA = [];
     for (var i=0; i<100; i++) {
         DUMMY_DATA.push({
@@ -156,25 +260,30 @@
         {source: "banana", target: "apple", value: 1},
         {source: "apple", target: "banana", value: 2}
     ];
+    var DUMMY_DATA_PIE = [
+        {name: "orange", value: 1, color: "black"},
+        {name: "lime", value: 4, color: "#444"},
+        {name: "banana", value: 4, color: "#888"},
+        {name: "apple", value: 2, color: "#aaa"}
+    ];
     var COLORS_MATRIX = {
-        'melon': "dodgerblue",
-        'apple': "crimson",
-        'pear': "limegreen",
-        'orange': "goldenrod",
-        'banana': "purple"
+        'melon': "black",
+        'apple': "#666",
+        'pear': "#888",
+        'orange': "#aaa",
+        'banana': "#ddd"
     };
-    var DUMMY_COLORS = {dogs: "dodgerblue", cats: "limegreen"};
+    var DUMMY_COLORS = {dogs: "#444", cats: "#888"};
 
     window.addEventListener("load", function() {
         //d3.csv("data/world_data.csv", function(data) {
         // Area chart
         var areaChart = new adt.widgets.AreaChart("areachart", d3.select("#areachart"))
-            .width(280)
-            .height(200)
+            .width(WIDTH)
+            .height(HEIGHT)
             .xLabel("value")
             .yLabel("density")
             .margins({left: 40, top: 20, right: 20, bottom: 40})
-            .fontColor("black")
             .fontSize(14)
             .colors(DUMMY_COLORS)
             .data(DUMMY_DATA)
@@ -182,62 +291,93 @@
 
         // Bar chart
         var barChart = new adt.widgets.BarChart("barchart", d3.select("#barchart"))
-            .width(280)
-            .height(200)
+            .width(WIDTH)
+            .height(HEIGHT)
             .xLabel("category")
             .yLabel("values")
             .margins({left: 40, top: 20, right: 20, bottom: 40})
-            .fontColor("black")
             .fontSize(14)
-            .colors("dodgerblue")
+            .colors("#888")
             .data(DUMMY_DATA_2)
             .render();
 
         // Chord chart
         var chordChart = new adt.widgets.ChordChart("chordchart", d3.select("#chordchart"))
-            .x(50)
+            .x(WIDTH/2-170)
             .radius(80)
             .margins({left: 40, top: 10, right: 20, bottom: 30})
-            .fontColor("black")
             .fontSize(14)
             .colors(COLORS_MATRIX)
             .data(DUMMY_DATA_MATRIX)
             .render();
 
-        // TODO fix grid positioning
+        // Grid
         var grid = new adt.widgets.Grid("grid", d3.select("#grid"))
-            .width(280)
-            .height(200)
+            .width(WIDTH)
+            .height(HEIGHT)
             .rows(2)
             .cols(2)
             .render();
         grid.add(new adt.widgets.LineChart("linechart", grid.w())
             .margins({left: 30, top: 20, right: 10, bottom: 20})
-            .fontColor("black")
             .fontSize(10)
             .colors(DUMMY_COLORS)
             .data(DUMMY_DATA), 0, 0, 1, 1);
         grid.add(new adt.widgets.AreaChart("areachart", grid.w())
             .margins({left: 30, top: 20, right: 10, bottom: 20})
-            .fontColor("black")
             .fontSize(10)
             .colors(DUMMY_COLORS)
             .data(DUMMY_DATA), 0, 1, 2, 1);
         grid.add(new adt.widgets.BarChart("barchart", grid.w())
             .margins({left: 30, top: 20, right: 10, bottom: 20})
-            .fontColor("black")
             .fontSize(10)
-            .colors("dodgerblue")
+            .colors("#888")
             .data(DUMMY_DATA_2), 1, 0, 1, 1);
+
+        // Hint
+        var hint = new adt.widgets.Hint("hint", d3.select("#hint"))
+            .x(80)
+            .y(50)
+            .text("This is a hint")
+            .render();
+
+        // Image
+        // TODO center image in container
+        var image = new adt.widgets.Image("image", d3.select("#image"))
+            .width(WIDTH)
+            .src("data/raccoon.jpg")
+            .render();
+
+        // Label
+        // TODO set default font color to black
+        var label = new adt.widgets.Label("label", d3.select("#label"))
+            .x(20)
+            .y(60)
+            .width(200)
+            .height(50)
+            .fontSize(20)
+            .text("Green tea and licorice")
+            .render();
+
+        // Legend
+        // TODO set default font color to black
+        var legend = new adt.widgets.Legend("legend", d3.select("#legend"))
+            .x(50)
+            .y(60)
+            .width(200)
+            .height(50)
+            .fontSize(20)
+            .color("#888")
+            .text("Fancy legend")
+            .render();
 
         // Line chart
         var lineChart = new adt.widgets.LineChart("linechart", d3.select("#linechart"))
-            .width(280)
-            .height(200)
+            .width(WIDTH)
+            .height(HEIGHT)
             .xLabel("time")
             .yLabel("trends")
             .margins({left: 40, top: 20, right: 20, bottom: 40})
-            .fontColor("black")
             .fontSize(14)
             .colors(DUMMY_COLORS)
             .data(DUMMY_DATA)
@@ -247,13 +387,47 @@
         var map = new adt.widgets.Map("map", d3.select("#map"))
             .x(0)
             .y(0)
-            .width(280)
-            .height(200)
+            .width(WIDTH)
+            .height(HEIGHT)
             .labels(true)
             .backgroundColor("white")
             .borderColor("#555")
             .foregroundColor("#999")
             .render();
+
+        // Pie chart
+        var pieChart = new adt.widgets.PieChart("piechart", d3.select("#piechart"))
+            .x(WIDTH/2-170)
+            .innerRadius(40)
+            .outerRadius(80)
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
+            .fontSize(14)
+            .data(DUMMY_DATA_PIE)
+            .render();
+
+        // Slider
+        var slider = new adt.widgets.Slider("slider", d3.select("#slider"))
+            .x(10)
+            .y(60)
+            .width(WIDTH - 20)
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
+            .fontSize(14)
+            .render();
+
+        // Status
+        var status = new adt.widgets.Status("status", d3.select("#status"))
+            .x(0)
+            .y(60)
+            .width(170)
+            .height(50)
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
+            .fontSize(20)
+            .label("Time:")
+            .render();
+        setInterval(function() {
+            status.status(new Date().toLocaleTimeString())
+                .render();
+        }, 100);
         //});
     });
 </script>
