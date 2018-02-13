@@ -34,9 +34,8 @@
  * @requires d3@v4
  * @requires lodash@4.17.4
  */
-// TODO add universal method xLabel, yLabel and use whenever applicable
 // TODO add attributes xType, xTickAngle, yTickFormat
-// TODO add attributes mouseover, mouseleave, click
+// TODO update widgets with new attributes
 // TODO add chart tooltip
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -195,6 +194,12 @@
         _attr.add(this, "fontColor", "black");
         _attr.add(this, "fontSize", 10);
         _attr.add(this, "fontWeight", "normal");
+        _attr.add(this, "xLabel", null);
+        _attr.add(this, "yLabel", null);
+        _attr.add(this, "xTickAngle", null);
+        _attr.add(this, "mouseover", null);
+        _attr.add(this, "mouseleave", null);
+        _attr.add(this, "click", null);
 
         /**
          * Collection of some convenience methods.
