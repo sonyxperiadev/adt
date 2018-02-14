@@ -276,7 +276,6 @@
     var DUMMY_COLORS = {dogs: "#444", cats: "#888"};
 
     window.addEventListener("load", function() {
-        //d3.csv("data/world_data.csv", function(data) {
         // Area chart
         var areaChart = new adt.widgets.AreaChart("areachart", d3.select("#areachart"))
             .width(WIDTH)
@@ -428,7 +427,6 @@
             status.status(new Date().toLocaleTimeString())
                 .render();
         }, 100);
-        //});
     });
 </script>
 </body>

@@ -72,33 +72,6 @@
          */
         _w.attr.add(this, "color", "white");
 
-        /**
-         * Sets callback for mouse over on the legend.
-         *
-         * @method mouseover
-         * @memberOf adt.widgets.legend.Legend
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseover", null);
-
-        /**
-         * Sets callback for mouse leave on the legend.
-         *
-         * @method mouseleave
-         * @memberOf adt.widgets.legend.Legend
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseleave", null);
-
-        /**
-         * Sets callback for click on the legend.
-         *
-         * @method click
-         * @memberOf adt.widgets.legend.Legend
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "click", null);
-
         // Widget elements.
         var _square = null;
         var _text = null;

@@ -52,24 +52,6 @@
         var _w = Widget.call(this, name, "areaChart", "svg", parent);
 
         /**
-         * Sets the X label.
-         *
-         * @method xLabel
-         * @memberOf adt.widgets.areachart.AreaChart
-         * @param {string} label Text to set label to.
-         */
-        _w.attr.add(this, "xLabel", "");
-
-        /**
-         * Sets the Y label.
-         *
-         * @method yLabel
-         * @memberOf adt.widgets.areachart.AreaChart
-         * @param {string} label Text to set label to.
-         */
-        _w.attr.add(this, "yLabel", "");
-
-        /**
          * Sets the type of the X axis.
          * Supported values are: number, time, string.
          * Default is number.
@@ -81,26 +63,6 @@
         _w.attr.add(this, "xType", "number");
 
         /**
-         * Sets the formatting function of the y ticks.
-         * Default is a float with two decimals.
-         *
-         * @method yTIckFormat
-         * @memberOf adt.widgets.areachart.AreaChart
-         * @param {function} format Formatting function.
-         */
-        _w.attr.add(this, "yTickFormat", d3.format(".2s"));
-
-        /**
-         * Sets the color of the area plots.
-         * Default is grey.
-         *
-         * @method colors
-         * @memberOf adt.widgets.areachart.AreaChart
-         * @param {(string|object)} color Single color string or an object containing colors for each plot.
-         */
-        _w.attr.add(this, "colors", "grey");
-
-        /**
          * Sets the opacity of the area plots.
          * Default is 0.3.
          *
@@ -109,16 +71,6 @@
          * @param {number} value The opacity value to set.
          */
         _w.attr.add(this, "opacity", 0.3);
-
-        /**
-         * Sets lowe boundary of the Y axis.
-         * Default is 0.
-         *
-         * @method yMin
-         * @memberOf adt.widgets.areachart.AreaChart
-         * @param {number} value Value to set lower boundary to.
-         */
-        _w.attr.add(this, "yMin", 0);
 
         // Widget elements.
         var _svg = null;

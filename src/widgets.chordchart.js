@@ -80,15 +80,6 @@
         _w.attr.add(this, "thickness", 10, "dim");
 
         /**
-         * Adds a label below the chord.
-         *
-         * @method label
-         * @memberOf adt.widgets.chordchart.ChordChart
-         * @param {string} text Label text.
-         */
-        _w.attr.add(this, "label", "");
-
-        /**
          * Whether to have ticks (labels on the segments).
          * Default is false.
          *
@@ -97,36 +88,6 @@
          * @param {boolean} on Whether to have ticks or not.
          */
         _w.attr.add(this, "ticks", false);
-
-        /**
-         * Sets the color of the lines.
-         * Default is Tableau's standard color scheme.
-         *
-         * @method colors
-         * @memberOf adt.widgets.chordchart.ChordChart
-         * @param {(string|object)} color Single color string or an object containing colors for each segment.
-         */
-        _w.attr.add(this, "colors", null);
-
-        /**
-         * Sets callback for mouse over on a segment.
-         * Can accept two parameters: the segment name and its index.
-         *
-         * @method mouseover
-         * @memberOf adt.widgets.chordchart.ChordChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseover", null);
-
-        /**
-         * Sets callback for mouse leave on a segment.
-         * Can accept two parameters: the segment name and its index.
-         *
-         * @method mouseleave
-         * @memberOf adt.widgets.chordchart.ChordChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseleave", null);
 
         /**
          * Inverts the chord meaning the color of each chord now correspods to the largest
@@ -549,7 +510,7 @@
                 .attr("font-family", "inherit")
                 .attr("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
-                .text(_w.attr.label);
+                .text(_w.attr.xLabel);
 
             _w.widget.style("display", "block");
         };

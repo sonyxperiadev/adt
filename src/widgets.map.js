@@ -145,33 +145,6 @@
         _w.attr.add(this, "borderColor", "white");
 
         /**
-         * Sets callback for mouse over on a country. Can accept two arguments: country name and country index.
-         *
-         * @method mouseover
-         * @memberOf adt.widgets.map.Map
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseover", null);
-
-        /**
-         * Sets callback for mouse leave on a country. Can accept two arguments: country name and country index.
-         *
-         * @method mouseleave
-         * @memberOf adt.widgets.map.Map
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseleave", null);
-
-        /**
-         * Sets callback for click on a country. Can accept two arguments: country name and country index.
-         *
-         * @method click
-         * @memberOf adt.widgets.map.Map
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "click", null);
-
-        /**
          * Sets callback for click on water.
          * Can accept one parameter denoting if a zoom out was performed.
          *

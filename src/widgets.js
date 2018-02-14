@@ -34,9 +34,10 @@
  * @requires d3@v4
  * @requires lodash@4.17.4
  */
-// TODO add attributes xType, xTickAngle, yTickFormat
+// TODO add attributes xType, yTickFormat
 // TODO update widgets with new attributes
 // TODO add chart tooltip
+// TODO add documentation to default attributes
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('lodash'), exports);
@@ -159,20 +160,81 @@
         };
 
         // Add default attributes
+        /**
+         * Whether to position widget relative to parent instead of absolute.
+         * Default is false.
+         *
+         * @method relative
+         * @memberOf adt.widgets.Widget
+         * @param {boolean} on True if relative position should be turned on.
+         */
         _attr.add(this, "relative", false);
+
+        /**
+         * Rescales widget and all of its dimension attributes by the specified factor.
+         * Default is 1.
+         *
+         * @method resize
+         * @memberOf adt.widgets.Widget
+         * @param {boolean} scale Factor to resize widget with.
+         */
         _attr.add(this, "resize", 1);
+
+        /**
+         * Sets the horizontal position of the widget.
+         * Default is 0px.
+         *
+         * @method x
+         * @memberOf adt.widgets.Widget
+         * @param {number} x Position value.
+         * @param {string} dim Dimension (unit) of the position. Supported values: px, %.
+         */
         _attr.add(this, "x", 0, "dim", function(x, dim) {
             _attr.x = x;
             if (typeof dim === "string" && ["px", "%"].indexOf(dim) > -1)
                 _attr.xDim = dim;
         });
+
+        /**
+         * Sets the vertical position of the widget.
+         * Default is 0px.
+         *
+         * @method y
+         * @memberOf adt.widgets.Widget
+         * @param {number} y Position value.
+         * @param {string} dim Dimension (unit) of the position. Supported values: px, %.
+         */
         _attr.add(this, "y", 0, "dim", function(y, dim) {
             _attr.y = y;
             if (typeof dim === "string" && ["px", "%"].indexOf(dim) > -1)
                 _attr.yDim = dim;
         });
+
+        /**
+         * Sets widget width in pixels. Default is 200.
+         *
+         * @method width
+         * @memberOf adt.widgets.Widget
+         * @param {number} w Width in pixels.
+         */
         _attr.add(this, "width", 200, "dim");
+
+        /**
+         * Sets widget height in pixels. Default is 150.
+         *
+         * @method height
+         * @memberOf adt.widgets.Widget
+         * @param {number} h Height in pixels.
+         */
         _attr.add(this, "height", 150, "dim");
+
+        /**
+         * Sets widget margins. Default is 0 for all sides.
+         *
+         * @method margins
+         * @memberOf adt.widgets.Widget
+         * @param {(number|object)} margins A single number to set all sides or an object specifying some of the sides.
+         */
         _attr.add(this, "margins", {left: 0, right: 0, top: 0, bottom: 0}, "dim", function(margins) {
             if (typeof margins === "number") {
                 ["top", "left", "bottom", "right"].forEach(function(m) {
@@ -185,21 +247,150 @@
                 }
             }
         });
+
+        /**
+         * Sets widget borders. Default is null for all sides.
+         *
+         * @method borders
+         * @memberOf adt.widgets.Widget
+         * @param {object) borders An object specifying some of the sides.
+         */
         _attr.add(this, "borders", {left: null, right: null, top: null, bottom: null}, null, function(borders) {
             for (var side in borders) {
                 if (_attr.borders.hasOwnProperty(side))
                     _attr.borders[side] = borders[side];
             }
         });
+
+        /**
+         * Sets the font color of the widget. This color is used for axes and all other non-plot type elements.
+         * Default is black.
+         *
+         * @method fontColor
+         * @memberOf adt.widgets.Widget
+         * @param {string} color Color to set font and axes to.
+         */
         _attr.add(this, "fontColor", "black");
+
+        /**
+         * Sets font size of the widget in pixels.
+         * Default is 10.
+         *
+         * @method fontSize.
+         * @memberOf adt.widgets.Widget
+         * @param {number} size Font size in pixels.
+         */
         _attr.add(this, "fontSize", 10);
+
+        /**
+         * Sets font weight of the text elements in the widget.
+         * Default is normal.
+         *
+         * @method fontWeight
+         * @memberOf adt.widgets.Widget
+         * @param {string} weight Font weight.
+         */
         _attr.add(this, "fontWeight", "normal");
+
+        /**
+         * Sets the horizontal label of the widget.
+         * Default is an empty string.
+         *
+         * @method xLabel
+         * @memberOf adt.widgets.Widget
+         * @param {string} label Label text.
+         */
         _attr.add(this, "xLabel", null);
+
+        /**
+         * Sets the vertical label of the widget.
+         * Default is an empty string.
+         *
+         * @method yLabel
+         * @memberOf adt.widgets.Widget
+         * @param {string} label Label text.
+         */
         _attr.add(this, "yLabel", null);
+
+        /**
+         * Sets the format function for the vertical ticks.
+         * Default is {d3.format(".2s")}, an SI prefixed number.
+         *
+         * @method yTickFormat
+         * @memberOf adt.widgets.Widget
+         * @param {function} format Function that converts a number to a string.
+         */
+        _attr.add(this, "yTickFormat", d3.format(".2s"));
+
+        /**
+         * Sets the angle of the horizontal tick labels.
+         * Default is 0.
+         *
+         * @method xTickAngle
+         * @memberOf adt.widgets.Widget
+         * @param {number} angle The angle to set.
+         */
         _attr.add(this, "xTickAngle", null);
+
+        /**
+         * Sets vertical lower boundary of the widget.
+         * Default is 0.
+         *
+         * @method yMin
+         * @memberOf adt.widgets.Widget
+         * @param {number} value Value to set vertical minimum to.
+         */
+        _attr.add(this, "yMin", 0);
+
+        /**
+         * Sets a callback when various elements of the widget are hovered.
+         * The behavior of this callback is specific to each widget: for chart widgets, it is bound to the
+         * plot elements (lines, bars, axis ticks), for the map it is bound to the countries, whereas for standalone
+         * widgets such as a legend, it is bound to the widget itself.
+         * Default is null.
+         *
+         * @method mouseover
+         * @memberOf adt.widgets.Widget
+         * @param {function} callback Callback to trigger on mouseover.
+         */
         _attr.add(this, "mouseover", null);
+
+        /**
+         * Sets a callback when the mouse leaves various elements of the widget.
+         * The behavior of this callback is specific to each widget: for chart widgets, it is bound to the
+         * plot elements (lines, bars, axis ticks), for the map it is bound to the countries, whereas for standalone
+         * widgets such as a legend, it is bound to the widget itself.
+         * Default is null.
+         *
+         * @method mouseleave
+         * @memberOf adt.widgets.Widget
+         * @param {function} callback Callback to trigger on mouseleave.
+         */
         _attr.add(this, "mouseleave", null);
+
+        /**
+         * Sets a callback when the various elements of the widget are clicked.
+         * The behavior of this callback is specific to each widget: for chart widgets, it is bound to the
+         * plot elements (lines, bars, axis ticks), for the map it is bound to the countries, whereas for standalone
+         * widgets such as a legend, it is bound to the widget itself.
+         * Default is null.
+         *
+         * @method click
+         * @memberOf adt.widgets.Widget
+         * @param {function} callback Callback to trigger on click.
+         */
         _attr.add(this, "click", null);
+
+        /**
+         * Sets the color(s) of the widget plot elements.
+         * Default is #888.
+         *
+         * @method colors
+         * @memberOf adt.widgets.Widget
+         * @param {(string|object)} color Single color to set all plot elements or an object specifying the color of
+         * each plot.
+         */
+        _attr.add(this, "colors", "#888");
 
         /**
          * Collection of some convenience methods.

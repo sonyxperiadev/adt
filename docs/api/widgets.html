@@ -1,55 +1,92 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.widgets</div><nav><div><input type='checkbox' id='s1-adt.widgets'></input><label for='s1-adt.widgets'>widgets</label><div class='s1'><input type='checkbox' id='s2-adt.widgets.Widget'></input><label for='s2-adt.widgets.Widget'>Widget</label><div class='s2'><a href='#api-adt.widgets.Widget.resize'>resize</a><a href='#api-adt.widgets.Widget.relative'>relative</a><a href='#api-adt.widgets.Widget.addClass'>addClass</a><a href='#api-adt.widgets.Widget.x'>x</a><a href='#api-adt.widgets.Widget.y'>y</a><a href='#api-adt.widgets.Widget.width'>width</a><a href='#api-adt.widgets.Widget.height'>height</a><a href='#api-adt.widgets.Widget.fontColor'>fontColor</a><a href='#api-adt.widgets.Widget.fontSize'>fontSize</a><a href='#api-adt.widgets.Widget.fontWeight'>fontWeight</a><a href='#api-adt.widgets.Widget.margins'>margins</a><a href='#api-adt.widgets.Widget.borders'>borders</a><a href='#api-adt.widgets.Widget.render'>render</a><a href='#api-adt.widgets.Widget.describe'>describe</a><a href='#api-adt.widgets.Widget.placeholder'>placeholder</a><a href='#api-adt.widgets.Widget.remove'>remove</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets'>adt.widgets</h2>Module for creating and adding various widgets to an interactive dashboard. Part of the Analytics Dashboard Tools.  This module contains the base class for all widgets, and therefore it is required to be loaded. All widgets come with some default functionality which are implemented in this module. Furthermore, each widget has their own settings which are defined as properties of the widget. Each property of a widget comes with a setter which is simply a function of the widget with the property name. For example, the property <code>xLabel</code> is set by <code>Widget.xLabel("Some label")</code>.  With a few exception, most of the widget methods return a reference to the widget itself for chaining. 
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.widgets</div><nav><div><input type='checkbox' id='s1-adt.widgets'></input><label for='s1-adt.widgets'>widgets</label><div class='s1'><input type='checkbox' id='s2-adt.widgets.Widget'></input><label for='s2-adt.widgets.Widget'>Widget</label><div class='s2'><a href='#api-adt.widgets.Widget.relative'>relative</a><a href='#api-adt.widgets.Widget.resize'>resize</a><a href='#api-adt.widgets.Widget.x'>x</a><a href='#api-adt.widgets.Widget.y'>y</a><a href='#api-adt.widgets.Widget.width'>width</a><a href='#api-adt.widgets.Widget.height'>height</a><a href='#api-adt.widgets.Widget.margins'>margins</a><a href='#api-adt.widgets.Widget.borders'>borders</a><a href='#api-adt.widgets.Widget.fontColor'>fontColor</a><a href='#api-adt.widgets.Widget.fontWeight'>fontWeight</a><a href='#api-adt.widgets.Widget.xLabel'>xLabel</a><a href='#api-adt.widgets.Widget.yLabel'>yLabel</a><a href='#api-adt.widgets.Widget.yTickFormat'>yTickFormat</a><a href='#api-adt.widgets.Widget.xTickAngle'>xTickAngle</a><a href='#api-adt.widgets.Widget.yMin'>yMin</a><a href='#api-adt.widgets.Widget.mouseover'>mouseover</a><a href='#api-adt.widgets.Widget.mouseleave'>mouseleave</a><a href='#api-adt.widgets.Widget.click'>click</a><a href='#api-adt.widgets.Widget.colors'>colors</a><a href='#api-adt.widgets.Widget.addClass'>addClass</a><a href='#api-adt.widgets.Widget.render'>render</a><a href='#api-adt.widgets.Widget.describe'>describe</a><a href='#api-adt.widgets.Widget.placeholder'>placeholder</a><a href='#api-adt.widgets.Widget.remove'>remove</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets'>adt.widgets</h2>Module for creating and adding various widgets to an interactive dashboard. Part of the Analytics Dashboard Tools.  This module contains the base class for all widgets, and therefore it is required to be loaded. All widgets come with some default functionality which are implemented in this module. Furthermore, each widget has their own settings which are defined as properties of the widget. Each property of a widget comes with a setter which is simply a function of the widget with the property name. For example, the property <code>xLabel</code> is set by <code>Widget.xLabel("Some label")</code>.  With a few exception, most of the widget methods return a reference to the widget itself for chaining. 
 <br><br>Requires: <code>d3@v4</code> <code>lodash@4.17.4</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.Widget'>Widget</h2>
 <div class='card'><pre><code>adt.widgets.Widget(name, type[, element[, parent]])</code></pre>
 <br>The base widget class, all widgets inherit this parent class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Name of the widget. This is used to identify the element.</td></tr><tr><td><i>type</i></td><td><code>string</code></td><td>Widget type, part of the generated widget ID.</td></tr><tr><td><i>element</i></td><td><code>string</code></td><td>HTML element type to use in the widget. If not specified, SVG is used. <code>optional</code></td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, it is attached to body. <code>optional</code></td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.fontSize.'>fontSize.</h2>
+<div class='card'><pre><code>adt.widgets.Widget.fontSize.(size)</code></pre>
+<br>Sets font size of the widget in pixels. Default is 10. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>size</i></td><td><code>number</code></td><td>Font size in pixels.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.relative'>relative</h2>
+<div class='card'><pre><code>adt.widgets.Widget.relative(on)</code></pre>
+<br>Whether to position widget relative to parent instead of absolute. Default is false. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>on</i></td><td><code>boolean</code></td><td>True if relative position should be turned on.</td></tr></table>
 </div><br><h2 id='api-adt.widgets.Widget.resize'>resize</h2>
 <div class='card'><pre><code>adt.widgets.Widget.resize(scale)</code></pre>
-<br>Sets a scaling factor for the widget. Note that this scales all dimension related properties. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>scale</i></td><td><code>number</code></td><td>Scaling factor to resize with.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.relative'>relative</h2>
-<div class='card'><pre><code>adt.widgets.Widget.relative()</code></pre>
-<br>Sets the position of the widget relative to parent. 
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.addClass'>addClass</h2>
+<br>Rescales widget and all of its dimension attributes by the specified factor. Default is 1. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>scale</i></td><td><code>boolean</code></td><td>Factor to resize widget with.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.x'>x</h2>
+<div class='card'><pre><code>adt.widgets.Widget.x(x, dim)</code></pre>
+<br>Sets the horizontal position of the widget. Default is 0px. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>x</i></td><td><code>number</code></td><td>Position value.</td></tr><tr><td><i>dim</i></td><td><code>string</code></td><td>Dimension (unit) of the position. Supported values: px, %.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.y'>y</h2>
+<div class='card'><pre><code>adt.widgets.Widget.y(y, dim)</code></pre>
+<br>Sets the vertical position of the widget. Default is 0px. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>y</i></td><td><code>number</code></td><td>Position value.</td></tr><tr><td><i>dim</i></td><td><code>string</code></td><td>Dimension (unit) of the position. Supported values: px, %.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.width'>width</h2>
+<div class='card'><pre><code>adt.widgets.Widget.width(w)</code></pre>
+<br>Sets widget width in pixels. Default is 200. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>w</i></td><td><code>number</code></td><td>Width in pixels.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.height'>height</h2>
+<div class='card'><pre><code>adt.widgets.Widget.height(h)</code></pre>
+<br>Sets widget height in pixels. Default is 150. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>h</i></td><td><code>number</code></td><td>Height in pixels.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.margins'>margins</h2>
+<div class='card'><pre><code>adt.widgets.Widget.margins(margins)</code></pre>
+<br>Sets widget margins. Default is 0 for all sides. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>margins</i></td><td><code>number</code> <code>object</code></td><td>A single number to set all sides or an object specifying some of the sides.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.borders'>borders</h2>
+<div class='card'><pre><code>adt.widgets.Widget.borders(borders)</code></pre>
+<br>Sets widget borders. Default is null for all sides. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>borders</i></td><td><code>object</code></td><td>An object specifying some of the sides.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.fontColor'>fontColor</h2>
+<div class='card'><pre><code>adt.widgets.Widget.fontColor(color)</code></pre>
+<br>Sets the font color of the widget. This color is used for axes and all other non-plot type elements. Default is black. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code></td><td>Color to set font and axes to.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.fontWeight'>fontWeight</h2>
+<div class='card'><pre><code>adt.widgets.Widget.fontWeight(weight)</code></pre>
+<br>Sets font weight of the text elements in the widget. Default is normal. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>weight</i></td><td><code>string</code></td><td>Font weight.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.xLabel'>xLabel</h2>
+<div class='card'><pre><code>adt.widgets.Widget.xLabel(label)</code></pre>
+<br>Sets the horizontal label of the widget. Default is an empty string. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Label text.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.yLabel'>yLabel</h2>
+<div class='card'><pre><code>adt.widgets.Widget.yLabel(label)</code></pre>
+<br>Sets the vertical label of the widget. Default is an empty string. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Label text.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.yTickFormat'>yTickFormat</h2>
+<div class='card'><pre><code>adt.widgets.Widget.yTickFormat(format)</code></pre>
+<br>Sets the format function for the vertical ticks. Default is <code>d3.format(".2s")</code>, an SI prefixed number. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>format</i></td><td><code>function</code></td><td>Function that converts a number to a string.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.xTickAngle'>xTickAngle</h2>
+<div class='card'><pre><code>adt.widgets.Widget.xTickAngle(angle)</code></pre>
+<br>Sets the angle of the horizontal tick labels. Default is 0. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>angle</i></td><td><code>number</code></td><td>The angle to set.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.yMin'>yMin</h2>
+<div class='card'><pre><code>adt.widgets.Widget.yMin(value)</code></pre>
+<br>Sets vertical lower boundary of the widget. Default is 0. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>Value to set vertical minimum to.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.mouseover'>mouseover</h2>
+<div class='card'><pre><code>adt.widgets.Widget.mouseover(callback)</code></pre>
+<br>Sets a callback when various elements of the widget are hovered. The behavior of this callback is specific to each widget: for chart widgets, it is bound to the plot elements (lines, bars, axis ticks), for the map it is bound to the countries, whereas for standalone widgets such as a legend, it is bound to the widget itself. Default is null. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to trigger on mouseover.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.mouseleave'>mouseleave</h2>
+<div class='card'><pre><code>adt.widgets.Widget.mouseleave(callback)</code></pre>
+<br>Sets a callback when the mouse leaves various elements of the widget. The behavior of this callback is specific to each widget: for chart widgets, it is bound to the plot elements (lines, bars, axis ticks), for the map it is bound to the countries, whereas for standalone widgets such as a legend, it is bound to the widget itself. Default is null. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to trigger on mouseleave.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.click'>click</h2>
+<div class='card'><pre><code>adt.widgets.Widget.click(callback)</code></pre>
+<br>Sets a callback when the various elements of the widget are clicked. The behavior of this callback is specific to each widget: for chart widgets, it is bound to the plot elements (lines, bars, axis ticks), for the map it is bound to the countries, whereas for standalone widgets such as a legend, it is bound to the widget itself. Default is null. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to trigger on click.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.colors'>colors</h2>
+<div class='card'><pre><code>adt.widgets.Widget.colors(color)</code></pre>
+<br>Sets the color(s) of the widget plot elements. Default is #888. 
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code> <code>object</code></td><td>Single color to set all plot elements or an object specifying the color of each plot.</td></tr></table>
+</div><br><h2 id='api-adt.widgets.Widget.addClass'>addClass</h2>
 <div class='card'><pre><code>adt.widgets.Widget.addClass(c)</code></pre>
 <br>Sets the class of the widget. Note that this method replaces existing class content (that is, it does not simply add a class, but sets the entire content for the class attribute). 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>c</i></td><td><code>string</code></td><td>Class to set the widget to.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.x'>x</h2>
-<div class='card'><pre><code>adt.widgets.Widget.x(x[, dim])</code></pre>
-<br>Sets the X position of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>x</i></td><td><code>number</code></td><td>Distance from the window side. If positive, position is measured from the left, otherwise it is measured from the right.</td></tr><tr><td><i>dim</i></td><td><code>string</code></td><td>Distance dimension. If not specified, pixels are used. <code>optional</code></td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.y'>y</h2>
-<div class='card'><pre><code>adt.widgets.Widget.y(y[, dim])</code></pre>
-<br>Sets the Y position of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>y</i></td><td><code>number</code></td><td>Distance from the window side. If positive, position is measured from the top, otherwise it is measured from the bottom.</td></tr><tr><td><i>dim</i></td><td><code>string</code></td><td>Distance dimension. If not specified, pixels are used. <code>optional</code></td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.width'>width</h2>
-<div class='card'><pre><code>adt.widgets.Widget.width(width)</code></pre>
-<br>Sets the width of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>width</i></td><td><code>number</code></td><td>Width to set the widget to.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.height'>height</h2>
-<div class='card'><pre><code>adt.widgets.Widget.height(height)</code></pre>
-<br>Sets the height of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>height</i></td><td><code>number</code></td><td>Height to set the widget to.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.fontColor'>fontColor</h2>
-<div class='card'><pre><code>adt.widgets.Widget.fontColor(color)</code></pre>
-<br>Sets the font color of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code></td><td>Color to set font to.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.fontSize'>fontSize</h2>
-<div class='card'><pre><code>adt.widgets.Widget.fontSize(size)</code></pre>
-<br>Sets the font size of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>size</i></td><td><code>string</code></td><td>Size to set font to.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.fontWeight'>fontWeight</h2>
-<div class='card'><pre><code>adt.widgets.Widget.fontWeight(weight)</code></pre>
-<br>Sets the font weight of the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>weight</i></td><td><code>string</code></td><td>Weight to set font to.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.margins'>margins</h2>
-<div class='card'><pre><code>adt.widgets.Widget.margins(margins)</code></pre>
-<br>Sets the margins for the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>margins</i></td><td><code>object</code></td><td>Object containing the sides as keys and the values as margins.</td></tr></table>
-<table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.borders'>borders</h2>
-<div class='card'><pre><code>adt.widgets.Widget.borders(borders)</code></pre>
-<br>Sets the borders for the widget. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>borders</i></td><td><code>object</code></td><td>Object containing the sides as keys and the values as borders.</td></tr></table>
 <table><thead><tr><th class='fifth'>return</th><th>description</th></tr></thead><tr><td><i><code>adt.widgets.Widget</code></i></td><td>Reference to the current widget.</td></tr></table></div><br><h2 id='api-adt.widgets.Widget.render'>render</h2>
 <div class='card'><pre><code>adt.widgets.Widget.render([duration])</code></pre>
 <br>Renders the widget. Note that without calling this method, the widget is not rendered at all. 

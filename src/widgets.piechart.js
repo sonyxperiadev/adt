@@ -71,33 +71,6 @@
          */
         _w.attr.add(this, "outerRadius", 50, "dim");
 
-        /**
-         * Sets pie chart label.
-         *
-         * @method label
-         * @memberOf adt.widgets.piechart.PieChart
-         * @param {string} text Label text.
-         */
-        _w.attr.add(this, "label", "");
-
-        /**
-         * Sets callback for mouse over on a slice.
-         *
-         * @method mouseover
-         * @memberOf adt.widgets.piechart.PieChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseover", null);
-
-        /**
-         * Sets callback for mouse leave on a slice.
-         *
-         * @method mouseleave
-         * @memberOf adt.widgets.piechart.PieChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseleave", null);
-
         // Widget elements.
         var _svg = null;
         var _data = [{
@@ -204,7 +177,7 @@
                 .style("width", (10 + 2 * _w.attr.outerRadius) + "px")
                 .style("font-size", Math.min(16, _w.attr.outerRadius*0.4) + "px")
                 .style("fill", _w.attr.fontColor)
-                .text(_w.attr.label);
+                .text(_w.attr.xLabel);
 
             // Interactions
             if (_w.attr.mouseover) {

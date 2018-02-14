@@ -52,24 +52,6 @@
         var _w = Widget.call(this, name, "barChart", "svg", parent);
 
         /**
-         * Sets the X label.
-         *
-         * @method xLabel
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {string} label Text to set label to.
-         */
-        _w.attr.add(this, "xLabel", "");
-
-        /**
-         * Sets the Y label.
-         *
-         * @method yLabel
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {string} label Text to set label to.
-         */
-        _w.attr.add(this, "yLabel", "");
-
-        /**
          * Sets the type of the X axis.
          * Supported values are: number, time, string.
          * Default is number.
@@ -79,54 +61,6 @@
          * @param {string} type Type of the X axis.
          */
         _w.attr.add(this, "xType", "string");
-
-        /**
-         * Sets angle of rotation for the X axis ticks.
-         * Default value is 0.
-         *
-         * @method xTickAngle
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {number} angle Rotation angle in degrees.
-         */
-        _w.attr.add(this, "xTickAngle", 0);
-
-        /**
-         * Sets the formatting function of the y ticks.
-         * Default is a float with two decimals.
-         *
-         * @method yTIckFormat
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {function} format Formatting function.
-         */
-        _w.attr.add(this, "yTickFormat", d3.format(".2s"));
-
-        /**
-         * Sets the color of the bars.
-         * Default is grey.
-         *
-         * @method colors
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {(string|object)} color Single color string or an object containing colors for each plot.
-         */
-        _w.attr.add(this, "colors", "grey");
-
-        /**
-         * Sets callback for mouse over on a bar.
-         *
-         * @method mouseover
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseover", null);
-
-        /**
-         * Sets callback for mouse leave on a bar.
-         *
-         * @method mouseleave
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseleave", null);
 
         /**
          * Makes the bar chart vertical, effectively swapping the axes.

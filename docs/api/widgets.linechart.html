@@ -1,44 +1,16 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.linechart</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.widgets.linechart</div><nav><div><input type='checkbox' id='s2-adt.widgets.linechart'></input><label for='s2-adt.widgets.linechart'>linechart</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.linechart.LineChart'></input><label for='s3-adt.widgets.linechart.LineChart'>LineChart</label><div class='s3'><a href='#api-adt.widgets.linechart.LineChart.xLabel'>xLabel</a><a href='#api-adt.widgets.linechart.LineChart.yLabel'>yLabel</a><a href='#api-adt.widgets.linechart.LineChart.xType'>xType</a><a href='#api-adt.widgets.linechart.LineChart.yTIckFormat'>yTIckFormat</a><a href='#api-adt.widgets.linechart.LineChart.colors'>colors</a><a href='#api-adt.widgets.linechart.LineChart.legend'>legend</a><a href='#api-adt.widgets.linechart.LineChart.yMin'>yMin</a><a href='#api-adt.widgets.linechart.LineChart.mouseover'>mouseover</a><a href='#api-adt.widgets.linechart.LineChart.mouseleave'>mouseleave</a><a href='#api-adt.widgets.linechart.LineChart.data'>data</a><a href='#api-adt.widgets.linechart.LineChart.highlight'>highlight</a><a href='#api-adt.widgets.linechart.LineChart.addMarker'>addMarker</a><a href='#api-adt.widgets.linechart.LineChart.removeMarker'>removeMarker</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.linechart'>adt.widgets.linechart</h2>Module implementing a line chart. Part of the Analytics Dashboard Tools. 
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,700' rel='stylesheet'><link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/synesenom/whiteprint/2ef94c22/wp.min.css'><link rel='stylesheet' type='text/css' href='../style/adt.css'><style>img#logo{position:fixed;top:20px;right:20px;width:100px;}</style><title>adt.widgets.linechart</title></head><body><input type='checkbox' id='menu'><label for='menu' id='open'>☰</label><aside><div class='logo'>adt.widgets.linechart</div><nav><div><input type='checkbox' id='s2-adt.widgets.linechart'></input><label for='s2-adt.widgets.linechart'>linechart</label><div class='s2'><input type='checkbox' id='s3-adt.widgets.linechart.LineChart'></input><label for='s3-adt.widgets.linechart.LineChart'>LineChart</label><div class='s3'><a href='#api-adt.widgets.linechart.LineChart.xType'>xType</a><a href='#api-adt.widgets.linechart.LineChart.legend'>legend</a><a href='#api-adt.widgets.linechart.LineChart.data'>data</a><a href='#api-adt.widgets.linechart.LineChart.highlight'>highlight</a><a href='#api-adt.widgets.linechart.LineChart.addMarker'>addMarker</a><a href='#api-adt.widgets.linechart.LineChart.removeMarker'>removeMarker</a></div></div></div></nav></aside><main><h2 id='api-adt.widgets.linechart'>adt.widgets.linechart</h2>Module implementing a line chart. Part of the Analytics Dashboard Tools. 
 <br><br>Requires: <code>d3@v4</code> <code>adt.widgets.Widget</code><br><br>Copyright (C) 2017 Sony Mobile Communications Inc.<h2 id='api-adt.widgets.linechart.LineChart'>LineChart</h2>
 <div class='card'><pre><code>adt.widgets.linechart.LineChart(name[, parent])</code></pre>
 <br>The line chart widget class. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>name</i></td><td><code>string</code></td><td>Identifier of the widget.</td></tr><tr><td><i>parent</i></td><td><code>object</code></td><td>Parent element to append widget to. If not specified, widget is appended to body. <code>optional</code></td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.xLabel'>xLabel</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.xLabel(label)</code></pre>
-<br>Sets the X label. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Text to set label to.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.yLabel'>yLabel</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.yLabel(label)</code></pre>
-<br>Sets the Y label. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>label</i></td><td><code>string</code></td><td>Text to set label to.</td></tr></table>
 </div><br><h2 id='api-adt.widgets.linechart.LineChart.xType'>xType</h2>
 <div class='card'><pre><code>adt.widgets.linechart.LineChart.xType(type)</code></pre>
 <br>Sets the type of the X axis. Supported values are: number, time, string. Default is number. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>type</i></td><td><code>string</code></td><td>Type of the X axis.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.yTIckFormat'>yTIckFormat</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.yTIckFormat(format)</code></pre>
-<br>Sets the formatting function of the y ticks. Default is a float with two decimals. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>format</i></td><td><code>function</code></td><td>Formatting function.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.colors'>colors</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.colors(color)</code></pre>
-<br>Sets the color of the lines. Default is grey. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>color</i></td><td><code>string</code> <code>object</code></td><td>Single color string or an object containing colors for each plot.</td></tr></table>
 </div><br><h2 id='api-adt.widgets.linechart.LineChart.legend'>legend</h2>
 <div class='card'><pre><code>adt.widgets.linechart.LineChart.legend(on)</code></pre>
 <br>Adds a legend to the line chart (experimental feature). Legend is added to the right side of the chart and eats up 20% of the widget, therefore margin.right should be adjusted accordingly. Default is false. Note: this method is still experimental, and therefore it is unstable. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>on</i></td><td><code>boolean</code></td><td>Whether legend should be added.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.yMin'>yMin</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.yMin(value)</code></pre>
-<br>Sets lower boundary of the Y axis. Default is 0. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>value</i></td><td><code>number</code></td><td>Value to set lower boundary to.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.mouseover'>mouseover</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.mouseover(callback)</code></pre>
-<br>Sets callback for mouse over on a line. Must accept an argument with the name of the line. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
-</div><br><h2 id='api-adt.widgets.linechart.LineChart.mouseleave'>mouseleave</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.mouseleave(callback)</code></pre>
-<br>Sets callback for mouse leave on a line. Must accept an argument with the name of the line. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>callback</i></td><td><code>function</code></td><td>Callback to set.</td></tr></table>
 </div><br><h2 id='api-adt.widgets.linechart.LineChart.data'>data</h2>
 <div class='card'><pre><code>adt.widgets.linechart.LineChart.data(data, scale)</code></pre>
 <br>Binds data to the line plot. Data must be an array of <code>x: number, y: object</code> where y is an object containing the Y values for each line to plot. The data can optionally contain a <code>dy</code> property that corresponds to the error drawn around the line. Error is only drawn for lines that are defined as property in <code>dy</code>. 

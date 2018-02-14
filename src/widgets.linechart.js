@@ -52,24 +52,6 @@
         var _w = Widget.call(this, name, "lineChart", "svg", parent);
 
         /**
-         * Sets the X label.
-         *
-         * @method xLabel
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {string} label Text to set label to.
-         */
-        _w.attr.add(this, "xLabel", "");
-
-        /**
-         * Sets the Y label.
-         *
-         * @method yLabel
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {string} label Text to set label to.
-         */
-        _w.attr.add(this, "yLabel", "");
-
-        /**
          * Sets the type of the X axis.
          * Supported values are: number, time, string.
          * Default is number.
@@ -79,26 +61,6 @@
          * @param {string} type Type of the X axis.
          */
         _w.attr.add(this, "xType", "number");
-
-        /**
-         * Sets the formatting function of the y ticks.
-         * Default is a float with two decimals.
-         *
-         * @method yTIckFormat
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {function} format Formatting function.
-         */
-        _w.attr.add(this, "yTickFormat", d3.format(".2s"));
-
-        /**
-         * Sets the color of the lines.
-         * Default is grey.
-         *
-         * @method colors
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {(string|object)} color Single color string or an object containing colors for each plot.
-         */
-        _w.attr.add(this, "colors", "grey");
 
         /**
          * Adds a legend to the line chart (experimental feature).
@@ -112,36 +74,6 @@
          * @param {boolean} on Whether legend should be added.
          */
         _w.attr.add(this, "legend", false);
-
-        /**
-         * Sets lower boundary of the Y axis.
-         * Default is 0.
-         *
-         * @method yMin
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {number} value Value to set lower boundary to.
-         */
-        _w.attr.add(this, "yMin", 0);
-
-        /**
-         * Sets callback for mouse over on a line.
-         * Must accept an argument with the name of the line.
-         *
-         * @method mouseover
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseover", null);
-
-        /**
-         * Sets callback for mouse leave on a line.
-         * Must accept an argument with the name of the line.
-         *
-         * @method mouseleave
-         * @memberOf adt.widgets.linechart.LineChart
-         * @param {function} callback Callback to set.
-         */
-        _w.attr.add(this, "mouseleave", null);
 
         // Widget elements.
         var _svg = null;
