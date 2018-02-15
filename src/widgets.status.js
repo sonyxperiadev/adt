@@ -28,6 +28,7 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+ // TODO set status only on build not in style updater
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'));
@@ -76,7 +77,7 @@
         var _label = null;
         var _status = null;
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
             if (_label === null) {
                 _label = _w.widget.append("span")
@@ -95,8 +96,7 @@
             }
         };
 
-        _w.render.update = function() {};
-
+        // Style updater
         _w.render.style = function() {
             _w.widget
                 .style("font-size", _w.attr.fontSize + "px")
@@ -118,7 +118,6 @@
                 .style("font-weight", _w.attr.fontWeight)
                 .style("pointer-events", "none")
                 .html(_w.attr.status);
-            _w.widget.style("display", "block");
         };
 
     }

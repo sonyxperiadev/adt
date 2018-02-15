@@ -1834,14 +1834,13 @@
             erase: _touchLayer.erase
         };
 
-        // Rendering methods.
-        _w.render.build = function() {};
-
+        // Data updater
         _w.render.update = function() {
             // Update map layer
             _mapLayer._update();
         };
 
+        // Style updater
         _w.render.style = function() {
             _w.widget
                 .style("background-color", _w.attr.backgroundColor)
@@ -1858,9 +1857,6 @@
 
             // Mark clusters
             _clustering._mark();
-
-            // Show widget
-            _w.widget.style("display", "block");
         };
     }
 

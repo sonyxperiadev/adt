@@ -87,7 +87,7 @@
             _text.style("font-weight", on ? "900" : "normal");
         };
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
             if (!_square) {
                 _square = _w.widget.append("div")
@@ -108,8 +108,7 @@
             }
         };
 
-        _w.render.update = function() {};
-
+        // Style updater
         _w.render.style = function() {
             _w.widget.style("pointer-events", "all");
             _.forOwn(_w.attr.margins, function(margin, side) {
@@ -129,7 +128,6 @@
                 .style("margin-right", 0.4*_w.attr.fontSize + "px")
                 .style("margin-top", 0.2*_w.attr.fontSize + "px")
                 .style("background-color", _w.attr.color);
-            _w.widget.style("display", "block");
         }
     }
 

@@ -102,7 +102,7 @@
             _w.utils.highlight(_svg, "path", name);
         };
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
             if (_svg !== null)
                 return;
@@ -141,6 +141,7 @@
                 });
         };
 
+        // Data updater
         _w.render.update = function (duration) {
             _svg.g.datum(_data);
             _svg.paths.data(_svg.pie);
@@ -156,15 +157,18 @@
                 });
         };
 
+        // Style updater
         _w.render.style = function() {
             // Widget
             _w.widget
-                .style("width", (10 + 2 * _w.attr.outerRadius) + "px")
-                .style("height", (10 + 2 * _w.attr.outerRadius + 30) + "px");
+                // .style("width", (10 + 2 * _w.attr.outerRadius) + "px")
+                // .style("height", (10 + 2 * _w.attr.outerRadius + 30) + "px");
+                .style("width", 2*_w.attr.outerRadius + "px")
+                .style("height", 2*_w.attr.outerRadius + "px");
 
             // Chart
             _svg.g
-                .attr("transform", "translate(" + (5 + _w.attr.outerRadius) + "," + (5 + _w.attr.outerRadius) + ")");
+                .attr("transform", "translate(" + _w.attr.outerRadius + "," + _w.attr.outerRadius + ")");
 
             // Plot
             _svg.arc.outerRadius(_w.attr.outerRadius)
@@ -192,8 +196,6 @@
                         _w.attr.mouseleave(_data[i], i);
                     });
             }
-
-            _w.widget.style("display", "block");
         };
     }
 

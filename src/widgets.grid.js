@@ -371,23 +371,6 @@
                 return null;
             }
         };
-
-        // Rendering methods.
-        _w.render.build = function () {
-
-        };
-
-        _w.render.update = function (duration) {
-
-        };
-
-        _w.render.style = function () {
-            _w.widget
-                .style("width", _w.attr.width + "px")
-                .style("height", _w.attr.height + "px");
-
-            _w.widget.style("display", "block");
-        };
     }
 
     // Export

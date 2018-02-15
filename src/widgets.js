@@ -34,10 +34,15 @@
  * @requires d3@v4
  * @requires lodash@4.17.4
  */
-// TODO add attributes xType, yTickFormat
-// TODO update widgets with new attributes
+// TODO add example pages
 // TODO add chart tooltip
-// TODO add documentation to default attributes
+// TODO add boxplot
+// TODO add bubblechart
+// TODO add violin plot
+// TODO add scatter plot
+// TODO add heat map
+// TODO add calendar plot
+// TODO make plot data modifiable
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('lodash'), exports);
@@ -320,7 +325,9 @@
          * @memberOf adt.widgets.Widget
          * @param {function} format Function that converts a number to a string.
          */
-        _attr.add(this, "yTickFormat", d3.format(".2s"));
+        _attr.add(this, "yTickFormat", function(x) {
+            return x > 1 ? d3.format(".2s") : x;
+        });
 
         /**
          * Sets the angle of the horizontal tick labels.
@@ -432,8 +439,8 @@
                 // If no data, return (0, 1), (0, 1)
                 if (data === null || data === undefined || data.length < 1) {
                     return {
-                        x: {min: 0, max: 1},
-                        y: {min: 0, max: 1}
+                        x: {min: 0, max: 1, domain: [0.5]},
+                        y: {min: 0, max: 1, domain: []}
                     };
                 }
 
@@ -614,29 +621,29 @@
              * @memberOf adt.widgets.Widget._render
              */
             build: function () {
-                throw new Error("adt.widgets.Widgets Error: build() is not implemented");
+                //throw new Error("adt.widgets.Widgets Error: build() is not implemented");
             },
 
             /**
-             * Updates the widget.
-             * Must be overridden
+             * Updates the widget data.
+             * Must be overridden.
              *
              * @method update
              * @memberOf adt.widgets.Widget._render
              */
             update: function () {
-                throw new Error("adt.widgets.Widgets Error: update() is not implemented");
+                //throw new Error("adt.widgets.Widgets Error: update() is not implemented");
             },
 
             /**
-             * Sets widget style.
+             * Updates widget style.
              * Must be overridden.
              *
              * @method style
              * @memberOf adt.widgets.Widget._render
              */
             style: function () {
-                throw new Error("adt.widgets.Widgets Error: style() is not implemented");
+                //throw new Error("adt.widgets.Widgets Error: style() is not implemented");
             }
         };
 
@@ -678,13 +685,16 @@
                 _attr.resize = null;
             }
 
-            // Build widget
-            _render.build(dur);
+            // Build widget if first time render
+            if (!this._isBuilt) {
+                _render.build(dur);
+                this._isBuilt = true;
+            }
 
-            // Update content
+            // Update data
             _render.update(dur);
 
-            // Widget styles
+            // Widget position
             if (_attr.relative) {
                 _widget.style("position", "relative")
                     .style("top", null)
@@ -696,13 +706,12 @@
                     .style(_attr.x >= 0 ? "left" : "right", Math.abs(_attr.x) + _attr.xDim)
                     .style(_attr.y >= 0 ? "top" : "bottom", Math.abs(_attr.y) + _attr.yDim)
             }
+
+            // Widget size
             _widget.style("width", _attr.width + "px")
                 .style("height", _attr.height + "px");
 
-            // Additional styling
-            _render.style(dur);
-
-            // Global settings
+            // Axis and font styles
             _widget.selectAll(".axis path")
                 .style("fill", "none")
                 .style("stroke", _attr.fontColor)
@@ -722,6 +731,10 @@
             _widget.selectAll("g")
                 .attr("font-family", "inherit");
 
+            // Additional styling
+            _render.style();
+
+            _widget.style("display", "block");
             return this;
         };
 

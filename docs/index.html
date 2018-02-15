@@ -76,10 +76,13 @@
 
 	<!-- install -->
 	<h1 id="installing">installing</h1>
-	At the moment, modules should be included directly in the dashboard website:
-	<pre><code class="css">&lt;script src="module_name.js"&gt;&lt;/script&gt;</code></pre>
 
-	In future versions, the library will be added as a Node package.
+	<h2>Browser</h2>
+	Just include the required modules:
+	<pre><code class="css">&lt;script src="module_name.min.js"&gt;&lt;/script&gt;</code></pre>
+
+	<h2>Node</h2>
+	<pre><code class="bash">npm install somc-adt</code></pre>
 
 
 	<!-- requirements -->
@@ -90,20 +93,11 @@
 		<dt><code>d3@4</code></dt>
 		<dd>SVG manipulation library. <a href="https://d3js.org/">[website]</a></dd>
 
-		<dt><code>queue</code></dt>
-		<dd>Module for reading files asynchronously. <a href="https://github.com/d3/d3-queue">[github]</a></dd>
-
 		<dt><code>topojson</code></dt>
 		<dd>Module for reading TopoJSON files. <a href="https://github.com/topojson">[github]</a></dd>
 
 		<dt><code>lodash</code></dt>
 		<dd>A set of useful utility methods. <a href="https://lodash.com/">[website]</a></dd>
-
-		<dt><code>localforage</code></dt>
-		<dd>Module for managing local storage. <a href="http://localforage.github.io/localForage/">[website]</a></dd>
-
-		<dt><code>spin</code></dt>
-		<dd>Widget of showing a spinner. <a href="http://spin.js.org/">[website]</a></dd>
 	</dl>
 
 

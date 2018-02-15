@@ -83,7 +83,7 @@
             var _box = null;
             var _content = null;
 
-            // Rendering methods.
+            // Builder
             _w.render.build = function (duration) {
                 _w.widget
                     .style("display", "none")
@@ -122,9 +122,7 @@
                     .style("overflow", "scroll");
             };
 
-            _w.render.update = function () {
-            };
-
+            // Style updater
             _w.render.style = function (duration) {
                 var bg = d3.color(_w.attr.backgroundColor);
 

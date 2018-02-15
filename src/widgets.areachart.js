@@ -26,6 +26,8 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+// TODO add transition to render methods
+// TODO add mouse events
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'));
@@ -49,7 +51,7 @@
      * @constructor
      */
     function AreaChart(name, parent) {
-        var _w = Widget.call(this, name, "areaChart", "svg", parent);
+        var _w = Widget.call(this, name, "areachart", "svg", parent);
 
         /**
          * Sets the type of the X axis.
@@ -73,7 +75,7 @@
         _w.attr.add(this, "opacity", 0.3);
 
         // Widget elements.
-        var _svg = null;
+        var _svg = {};
         var _data = [];
         var _scaleFactor = 1.0;
 
@@ -87,16 +89,9 @@
          * @param {number} scale Optional scaling parameter. Each data point is divided by this value.
          */
         this.data = function(data, scale) {
-            _data = _.cloneDeep(data);
+            _data = data;
 
-            // Sort if number / date
-            if (_w.attr.xType === "number" || _w.attr.xType === "time") {
-                _data.sort(function(a, b) {
-                    return a.x - b.x;
-                });
-            }
-
-            // Scale data
+            // Set scale
             if (typeof scale === "number" && scale > 0)
                 _scaleFactor = scale;
             return this;
@@ -113,22 +108,17 @@
             _w.utils.highlight(_svg, ".area", key);
         };
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
-            if (_svg !== null)
-                return;
-            _svg = {};
-
-            // Add chart itself
+            // Add widget
             _svg.g = _w.widget.append("g");
 
-            // Add axes
+            // Axes
             _svg.axisFn = {
                 x: d3.axisBottom()
                     .ticks(7),
                 y: d3.axisLeft()
                     .ticks(5)
-                    .tickFormat(_w.attr.yTickFormat)
             };
             _svg.axes = {
                 x: _svg.g.append("g")
@@ -137,7 +127,7 @@
                     .attr("class", "y axis")
             };
 
-            // Add labels
+            // Labels
             _svg.labels = {
                 x: _svg.g.append("text")
                     .attr("class", "x axis-label")
@@ -148,20 +138,15 @@
                     .attr("text-anchor", "begin")
                     .attr("stroke-width", 0)
             };
-
-            // Add areas
-            _svg.areas = {};
-            _.forOwn(_data[0].y, function(yk, k) {
-                _svg.areas[k] = _svg.g.append("path")
-                    .attr("class", "area " + _w.utils.encode(k))
-                    .style("fill-opacity", _w.attr.opacity)
-                    .style("shape-rendering", "geometricPrecision");
-            });
         };
 
+        // Data updater
         _w.render.update = function(duration) {
-            // Make scaled copy of data
+            // Prepare data
             var data = _.cloneDeep(_data);
+            data.sort(function(a, b) {
+                return a.x - b.x;
+            });
             for (var i = 0; i < data.length; i++) {
                 for (var y in data[i].y) {
                     if (data[i].y.hasOwnProperty(y))
@@ -169,31 +154,50 @@
                 }
             }
 
+            // Calculate scale
             var scale = _w.utils.scale(_w.utils.boundary(data),
                 _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                 _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                 {x: {type: _w.attr.xType}});
+
+            // Update axes
             _svg.axes.x
                 .transition().duration(duration)
                 .call(_svg.axisFn.x.scale(scale.x));
             _svg.axes.y
                 .transition().duration(duration)
                 .call(_svg.axisFn.y.scale(scale.y));
-            _.forOwn(data[0].y, function(yk, k) {
-                var area = d3.area()
-                    .x(function (d) {
-                        return scale.x(d.x) + 1;
-                    })
-                    .y0(_w.attr.height-_w.attr.margins.top-_w.attr.margins.bottom-1)
-                    .y1(function (d) {
-                        return scale.y(d.y[k]);
+
+            // Update plots
+            if (data.length > 0) {
+                // Add areas if needed
+                if (_svg.areas === undefined) {
+                    _svg.areas = {};
+                    _.forOwn(data[0].y, function(yk, k) {
+                        _svg.areas[k] = _svg.g.append("path")
+                            .attr("class", "area " + _w.utils.encode(k))
+                            .style("shape-rendering", "geometricPrecision");
                     });
-                _svg.g.select("." + _w.utils.encode(k))
-                    .transition().duration(duration)
-                    .attr("d", area(data));
-            });
+                }
+
+                // Update data
+                _.forOwn(data[0].y, function (yk, k) {
+                    var area = d3.area()
+                        .x(function (d) {
+                            return scale.x(d.x) + 1;
+                        })
+                        .y0(_w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom - 1)
+                        .y1(function (d) {
+                            return scale.y(d.y[k]);
+                        });
+                    _svg.g.select("." + _w.utils.encode(k))
+                        .transition().duration(duration)
+                        .attr("d", area(data));
+                });
+            }
         };
 
+        // Style updater
         _w.render.style = function() {
             // Inner dimensions
             var innerWidth = _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
@@ -229,10 +233,10 @@
 
             // Plot
             _.forOwn(_svg.areas, function(lk, k) {
-                _svg.areas[k].style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k]);
+                _svg.areas[k]
+                    .style("fill-opacity", _w.attr.opacity)
+                    .style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k]);
             });
-
-            _w.widget.style("display", "block");
         };
     }
 

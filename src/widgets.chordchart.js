@@ -100,7 +100,7 @@
         _w.attr.add(this, "invert", false);
 
         // Widget elements.
-        var _svg = null;
+        var _svg = {};
         var _data = [];
         var _indexByName = d3.map();
         var _nameByIndex = d3.map();
@@ -311,33 +311,34 @@
             _w.utils.highlight(_svg, ".ribbon", key);
         };
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
-            if (_svg !== null)
-                return;
-            _svg = {};
-
-            // Add chart itself
+            // Add widget
             _svg.g = _w.widget.append("g");
 
-            // Make chord generator
+            // Add chord function
             _svg.chordFn = d3.chord()
                 .padAngle(0.05)
                 .sortGroups(d3.descending)
                 .sortSubgroups(d3.descending);
 
-            // Build path functions
+            // Path builders
             _svg.arc = d3.arc();
             _svg.ribbonFn = d3.ribbon();
 
-            // Add label
+            // Label
             _svg.label = _svg.g.append("text")
                 .attr("text-anchor", "middle")
                 .attr("stroke-width", "0px")
                 .style("fill", "white");
         };
 
+        // Data updater
         _w.render.update = function(duration) {
+            // Calculate radii
+            var innerRadius = _w.attr.radius - _w.attr.thickness - _w.attr.margins.left,
+                outerRadius = _w.attr.radius - _w.attr.margins.left;
+
             // Stop all ongoing transitions
             if (_svg.groups)
                 _svg.groups.transition();
@@ -358,8 +359,8 @@
 
             // Entering groups
             _svg.arc
-                .innerRadius(_w.attr.radius)
-                .outerRadius(_w.attr.radius + _w.attr.thickness);
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius);
             _svg.groups = _svg.g.selectAll(".group")
                 .data(_svg.chord.groups, function (d) {
                     return d.index;
@@ -400,7 +401,7 @@
                     .attr("transform", function (d) {
                         d.angle = (d.startAngle + d.endAngle) / 2;
                         return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" +
-                            " translate(" + (_w.attr.radius + _w.attr.thickness + 10) + ")" +
+                            " translate(" + (_w.attr.radius - _w.attr.margins.left + 5) + ")" +
                             (d.angle > Math.PI ? " rotate(180)" : " rotate(0)");
                     })
                     .attr("text-anchor", function (d) {
@@ -432,7 +433,7 @@
                     .attr("transform", function (d) {
                         d.angle = (d.startAngle + d.endAngle) / 2;
                         return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" +
-                            " translate(" + (_w.attr.radius + _w.attr.thickness + 10) + ")" +
+                            " translate(" + (_w.attr.radius - _w.attr.margins.left + 5) + ")" +
                             (d.angle > Math.PI ? " rotate(180)" : " rotate(0)");
                     })
                     .attr("text-anchor", function (d) {
@@ -442,7 +443,7 @@
 
             // Entering ribbons
             _svg.ribbonFn
-                .radius(_w.attr.radius);
+                .radius(innerRadius);
             _svg.ribbons = _svg.g.selectAll(".ribbon")
                 .data(_svg.chord, _ribbonId);
             _svg.newRibbons = _svg.ribbons.enter().append("path")
@@ -457,7 +458,7 @@
                 .style("fill", function (d) {
                     return _w.attr.colors[_w.attr.invert ? d.source.name : d.target.name];
                 })
-                .style("stroke-width", "2px")
+                .style("stroke-width", "1px")
                 .style("stroke", "white");
             _svg.newRibbons
                 .transition().duration(duration)
@@ -488,31 +489,25 @@
             _prev_chord = _svg.chord;
         };
 
+        // Style updater
         _w.render.style = function() {
-            var space = _w.attr.ticks ? _aura * _w.attr.fontSize * 0.8 : 0;
-            _w.attr.width = space + 2 * (_w.attr.radius + _w.attr.thickness);
-            _w.attr.height = space + 20 + 2 * (_w.attr.radius + _w.attr.thickness);
-
             // Widget
             _w.widget
-                .style("width", _w.attr.width + "px")
-                .style("height", _w.attr.height + "px");
+                .style("width", 2*_w.attr.radius + "px")
+                .style("height", 2*_w.attr.radius + "px");
 
             // Chart
             _svg.g
-                .attr("transform", "translate(" + _w.attr.width/2
-                    + "," + _w.attr.height/2 + ")");
+                .attr("transform", "translate(" + _w.attr.radius
+                    + "," + _w.attr.radius + ")");
 
             // Label
             _svg.label
                 .attr("transform", "translate(0," + (15 + _w.attr.radius + _w.attr.thickness) + ")")
                 .style("width", 2*(_w.attr.radius + _w.attr.thickness) + "px")
-                .attr("font-family", "inherit")
                 .attr("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
                 .text(_w.attr.xLabel);
-
-            _w.widget.style("display", "block");
         };
     }
 

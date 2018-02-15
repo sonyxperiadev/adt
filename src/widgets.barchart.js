@@ -73,8 +73,8 @@
         _w.attr.add(this, "vertical", false);
 
         // Widget elements
-        var _svg = null;
-        var _data = [{x: 0, y: 1}];
+        var _svg = {};
+        var _data = [];
 
         /**
          * Binds data to the bar chart.
@@ -85,15 +85,7 @@
          * @returns {adt.widgets.barchart.BarChart} Reference to the current bar chart.
          */
         this.data = function(data) {
-            _data = _.cloneDeep(data);
-
-            // Sort if number / date
-            if (_w.attr.xType === "number" || _w.attr.xType === "time") {
-                _data.sort(function(a, b) {
-                    return a.x - b.x;
-                });
-            }
-
+            _data = data;
             return this;
         };
 
@@ -108,27 +100,18 @@
             _w.utils.highlight(_svg, ".bar", key);
         };
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
-            if (_svg !== null)
-                return;
-            _svg = {};
-
             // Add chart itself
             _svg.g = _w.widget.append("g");
 
-            // Add axes
+            // Axes
             _svg.axisFn = {
                 x: d3.axisBottom()
                     .ticks(4),
                 y: d3.axisLeft()
                     .ticks(4)
             };
-            if (_w.attr.vertical) {
-                _svg.axisFn.x.tickFormat(_w.attr.yTickFormat);
-            } else {
-                _svg.axisFn.y.tickFormat(_w.attr.yTickFormat);
-            }
             _svg.axes = {
                 x: _svg.g.append("g")
                     .attr("class", "x axis"),
@@ -136,7 +119,7 @@
                     .attr("class", "y axis")
             };
 
-            // Add labels
+            // Labels
             _svg.labels = {
                 x: _svg.g.append("text")
                     .attr("class", "x axis-label")
@@ -147,36 +130,31 @@
                     .attr("text-anchor", "begin")
                     .attr("stroke-width", 0)
             };
-
-            // Add bars
-            _svg.bars = _svg.g.selectAll(".bar")
-                .data(_data)
-                .enter().append("rect")
-                .attr("class", function(d) { return "bar " + _w.utils.encode("" + d.x); })
-                .style("pointer-events", "all")
-                .style("stroke", "none")
-                .style("shape-rendering", "geometricPrecision");
-            if (_w.attr.vertical) {
-                _svg.bars
-                    .attr("x", 2)
-                    .attr("width", 0);
-            } else {
-                _svg.bars
-                    .attr("y", _w.attr.height-_w.attr.margins.top-_w.attr.margins.bottom-1)
-                    .attr("height", 0);
-            }
         };
 
+        // Data updater
         _w.render.update = function(duration) {
-            // Scale
+            // Prepare data
+            var data = _.cloneDeep(_data);
+            if (_w.attr.xType === "number" || _w.attr.xType === "time") {
+                data.sort(function(a, b) {
+                    return a.x - b.x;
+                });
+            } else {
+                data.sort(function(a, b) {
+                    return a.y - b.y;
+                });
+            }
+
+            // Calculate scale
             var scale;
             if (_w.attr.vertical) {
-                scale = _w.utils.scale(_w.utils.boundary(_data, {y: [0, null]}),
+                scale = _w.utils.scale(_w.utils.boundary(data, {y: [0, null]}),
                     _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                     _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                     {x: {type: _w.attr.xType}, y: {reverse: true}});
             } else {
-                scale = _w.utils.scale(_w.utils.boundary(_data, {y: [0, null]}),
+                scale = _w.utils.scale(_w.utils.boundary(data, {y: [0, null]}),
                     _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                     _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                     {x: {type: _w.attr.xType}});
@@ -191,35 +169,59 @@
                 .call(_svg.axisFn.y.scale(_w.attr.vertical ? scale.x : scale.y));
 
             // Plot
-            _svg.bars
-                .data(_data);
-            if (_w.attr.vertical) {
-                _svg.bars
-                    .attr("y", function(d) { return scale.x(d.x); })
-                    .attr("height", scale.x.bandwidth())
-                    .transition().duration(duration)
-                    .attr("x", 2)
-                    .attr("width", function(d) { return scale.y(d.y); });
-            } else {
-                _svg.bars
-                    .attr("x", function(d) { return scale.x(d.x); })
-                    .attr("width", scale.x.bandwidth())
-                    .transition().duration(duration)
-                    .attr("y", function(d) { return scale.y(d.y); })
-                    .attr("height", function(d) { return _w.attr.height-_w.attr.margins.top-_w.attr.margins.bottom - scale.y(d.y); });
+            if (data.length > 0) {
+                // Add bars if needed
+                if (_svg.bars === undefined) {
+                    _svg.bars = _svg.g.selectAll(".bar")
+                        .data(data)
+                        .enter().append("rect")
+                        .attr("class", function(d) { return "bar " + _w.utils.encode("" + d.x); })
+                        .style("pointer-events", "all")
+                        .style("stroke", "none")
+                        .style("shape-rendering", "geometricPrecision");
+                    if (_w.attr.vertical) {
+                        _svg.bars
+                            .attr("x", 2)
+                            .attr("width", 0);
+                    } else {
+                        _svg.bars
+                            .attr("y", _w.attr.height-_w.attr.margins.top-_w.attr.margins.bottom-1)
+                            .attr("height", 0);
+                    }
+                }
+
+                // Update data
+                _svg.bars.data(_data);
+                if (_w.attr.vertical) {
+                    _svg.bars
+                        .attr("y", function(d) { return scale.x(d.x); })
+                        .attr("height", scale.x.bandwidth())
+                        .transition().duration(duration)
+                        .attr("x", 2)
+                        .attr("width", function(d) { return scale.y(d.y); });
+                } else {
+                    _svg.bars
+                        .attr("x", function(d) { return scale.x(d.x); })
+                        .attr("width", scale.x.bandwidth())
+                        .transition().duration(duration)
+                        .attr("y", function(d) { return scale.y(d.y); })
+                        .attr("height", function(d) { return _w.attr.height-_w.attr.margins.top-_w.attr.margins.bottom - scale.y(d.y); });
+                }
             }
         };
 
+        // Style updater
         _w.render.style = function() {
             // Inner dimensions
             var innerWidth = _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                 innerHeight = _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom;
 
-            // Chart (using conventional margins)
+            // Chart
             _svg.g
-                .attr("width", innerWidth + "px")
-                .attr("height", innerHeight + "px")
-                .attr("transform", "translate(" + _w.attr.margins.left + "," + _w.attr.margins.top + ")");
+                .style("width", innerWidth + "px")
+                .style("height", innerHeight + "px")
+                .attr("transform", "translate(" + _w.attr.margins.left + "," + _w.attr.margins.top + ")")
+                .style("pointer-events", "all");
 
             // Axes
             if (_w.attr.vertical) {
@@ -259,32 +261,44 @@
                 .text(_w.attr.vertical ? _w.attr.xLabel : _w.attr.yLabel);
 
             // Plot
-            _svg.bars
-                .style("fill", function(d) { return typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[d.x]; });
-
-            // Interactions (for ticks as well)
-            if (_w.attr.mouseover) {
+            if (_svg.bars !== undefined) {
                 _svg.bars
-                    .on("mouseover", function (d, i) {
-                        _w.attr.mouseover(_data[i], i);
+                    .style("fill", function (d) {
+                        return typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[d.x];
                     });
-                _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
-                    .on("mouseover", function (d, i) {
-                        _w.attr.mouseover(_data[i], i);
-                    });
-            }
-            if (_w.attr.mouseleave) {
-                _svg.bars
-                    .on("mouseleave", function (d, i) {
-                        _w.attr.mouseleave(_data[i], i);
-                    });
-                _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
-                    .on("mouseleave", function (d, i) {
-                        _w.attr.mouseleave(_data[i], i);
-                    });
-            }
 
-            _w.widget.style("display", "block");
+                // Interactions (for ticks as well)
+                if (_w.attr.mouseover) {
+                    _svg.bars
+                        .on("mouseover", function (d, i) {
+                            _w.attr.mouseover(_data[i], i);
+                        });
+                    _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
+                        .on("mouseover", function (d, i) {
+                            _w.attr.mouseover(_data[i], i);
+                        });
+                }
+                if (_w.attr.mouseleave) {
+                    _svg.bars
+                        .on("mouseleave", function (d, i) {
+                            _w.attr.mouseleave(_data[i], i);
+                        });
+                    _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
+                        .on("mouseleave", function (d, i) {
+                            _w.attr.mouseleave(_data[i], i);
+                        });
+                }
+                if (_w.attr.click) {
+                    _svg.bars
+                        .on("click", function (d, i) {
+                            _w.attr.click(_data[i], i);
+                        });
+                    _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
+                        .on("click", function (d, i) {
+                            _w.attr.click(_data[i], i);
+                        });
+                }
+            }
         };
     }
 

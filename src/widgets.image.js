@@ -62,11 +62,7 @@
          */
         _w.attr.add(this, "src", "");
 
-        // Rendering methods.
-        _w.render.build = function() {};
-
-        _w.render.update = function() {};
-
+        // Style updater
         _w.render.style = function() {
             _w.widget
                 .style("width", null)

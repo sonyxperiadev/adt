@@ -29,6 +29,7 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+ // TODO set text only on build not in style updater
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'), exports);
@@ -73,11 +74,7 @@
          */
         _w.attr.add(this, "align", "center");
 
-        // Rendering methods.
-        _w.render.build = function() {};
-
-        _w.render.update = function() {};
-
+        // Style updater
         _w.render.style = function() {
             _w.widget
                 .style("color", _w.attr.fontColor)
@@ -92,7 +89,6 @@
             _.forOwn(_w.attr.borders, function(border, side) {
                 _w.widget.style("border-" + side, border);
             });
-            _w.widget.style("display", "block");
         };
     }
 

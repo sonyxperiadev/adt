@@ -29,6 +29,7 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+// TODO fix bug with disappearing hint when position is out of window
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'), exports);
@@ -107,6 +108,15 @@
              */
             _w.attr.add(this, "text", "");
 
+            /**
+             * Pins the hint to the DOM so that it does not disappear on mousemove.
+             *
+             * @method pin
+             * @memberOf adt.widgets.hint.Hin
+             * @param {boolean} pinned Whether the hint should be pinned.
+             */
+            _w.attr.add(this, "pin", false);
+
             // Add missing CSS for hint
             try {
                 if (d3.select("#" + _styleId).empty()) {
@@ -116,21 +126,10 @@
                 }
 
                 // Setup mouse interaction
-                if (d3.select("#" + _detectorId).empty()) {
-                    d3.select("body")
-                        .append("div")
-                        .attr("id", _detectorId)
-                        .style("position", "absolute")
-                        .style("top", 0)
-                        .style("bottom", 0)
-                        .style("left", 0)
-                        .style("right", 0)
-                        .on("mousemove", function () {
-                            d3.selectAll("." + _class).remove();
-                            d3.select(this).remove();
-                            _clear();
-                        });
-                }
+                window.addEventListener("mousemove", function() {
+                    d3.selectAll("." + _class + ".removable").remove();
+                    _clear();
+                });
             } catch (e) {
                 console.error("MissingDOMException: there is no DOM, could not add widget");
             }
@@ -150,9 +149,10 @@
                     .style("font-size", "0.9em")
                     .style("font-weight", "bold")
                     .style("pointer-events", "none");
+                if (!_w.attr.pin) {
+                    _w.widget.classed("removable", true);
+                }
             };
-
-            _w.render.update = function () {};
 
             _w.render.style = function (duration) {
                 _w.widget
@@ -162,11 +162,14 @@
 
                 // Show animation if first time created
                 if (!_hints[_id]) {
-                    _hints[_id] = that;
                     _w.widget
                         .style("opacity", 0)
                         .transition().duration(duration)
                         .style("opacity", 1);
+
+                    if (!_w.attr.pin) {
+                        _hints[_id] = that;
+                    }
                 }
             };
         }

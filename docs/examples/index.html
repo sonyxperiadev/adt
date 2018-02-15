@@ -257,8 +257,8 @@
         {source: "orange", target: "melon", value: 10},
         {source: "orange", target: "apple", value: 11},
         {source: "orange", target: "pear", value: 12},
-        {source: "banana", target: "apple", value: 1},
-        {source: "apple", target: "banana", value: 2}
+        {source: "grape", target: "apple", value: 1},
+        {source: "apple", target: "grape", value: 2}
     ];
     var DUMMY_DATA_PIE = [
         {name: "orange", value: 1, color: "black"},
@@ -284,8 +284,8 @@
             .yLabel("density")
             .margins({left: 40, top: 20, right: 20, bottom: 40})
             .fontSize(14)
-            .colors(DUMMY_COLORS)
             .data(DUMMY_DATA)
+            .colors(DUMMY_COLORS)
             .render();
 
         // Bar chart
@@ -302,10 +302,12 @@
 
         // Chord chart
         var chordChart = new adt.widgets.ChordChart("chordchart", d3.select("#chordchart"))
-            .x(WIDTH/2-170)
-            .radius(80)
-            .margins({left: 40, top: 10, right: 20, bottom: 30})
+            .x(30)
+            .radius(100)
+            .thickness(10)
+            .margins(34)
             .fontSize(14)
+            .ticks(true)
             .colors(COLORS_MATRIX)
             .data(DUMMY_DATA_MATRIX)
             .render();
@@ -338,6 +340,7 @@
             .x(80)
             .y(50)
             .text("This is a hint")
+            .pin(true)
             .render();
 
         // Image
@@ -396,7 +399,8 @@
 
         // Pie chart
         var pieChart = new adt.widgets.PieChart("piechart", d3.select("#piechart"))
-            .x(WIDTH/2-170)
+            .x(50)
+            .y(20)
             .innerRadius(40)
             .outerRadius(80)
             .margins({left: 40, top: 20, right: 20, bottom: 40})
@@ -407,7 +411,7 @@
         // Slider
         var slider = new adt.widgets.Slider("slider", d3.select("#slider"))
             .x(10)
-            .y(60)
+            .y(70)
             .width(WIDTH - 20)
             .margins({left: 40, top: 20, right: 20, bottom: 40})
             .fontSize(14)

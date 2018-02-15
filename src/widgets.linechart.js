@@ -76,7 +76,7 @@
         _w.attr.add(this, "legend", false);
 
         // Widget elements.
-        var _svg = null;
+        var _svg = {};
         var _data = [];
         var _scaleFactor = 1.0;
         var _markers = [];
@@ -93,14 +93,7 @@
          * @param {number} scale Optional scaling parameter. Each data point is divided by this value.
          */
         this.data = function(data, scale) {
-            _data = _.cloneDeep(data);
-
-            // Sort if number / date
-            if (_w.attr.xType === "number" || _w.attr.xType === "time") {
-                _data.sort(function(a, b) {
-                    return a.x - b.x;
-                });
-            }
+            _data = data;
 
             // Scale data
             if (typeof scale === "number" && scale > 0)
@@ -224,67 +217,38 @@
             return false;
         };
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function() {
-            if (_svg !== null)
-                return;
-            _svg = {};
-
-            // Add chart itself
+            // Add widget
             _svg.g = _w.widget.append("g");
 
-            // Add axes
+            // Axes
             _svg.axisFn = {
                 x: d3.axisBottom()
                     .ticks(7),
                 y: d3.axisLeft()
                     .ticks(5)
-                    .tickFormat(_w.attr.yTickFormat)
             };
             _svg.axes = {
                 x: _svg.g.append("g")
-                    .attr("class", "x axis")
-                    .attr("font-family", "inherit"),
+                    .attr("class", "x axis"),
                 y: _svg.g.append("g")
                     .attr("class", "y axis")
-                    .attr("font-family", "inherit")
             };
 
-            // Add labels
+            // Labels
             _svg.labels = {
                 x: _svg.g.append("text")
                     .attr("class", "x axis-label")
                     .attr("text-anchor", "end")
-                    .attr("font-family", "inherit")
                     .attr("stroke-width", 0),
                 y: _svg.g.append("text")
                     .attr("class", "y axis-label")
                     .attr("text-anchor", "begin")
-                    .attr("font-family", "inherit")
                     .attr("stroke-width", 0)
             };
 
-            // Add error bands
-            _svg.errors = {};
-            _.forOwn(_data[0].y, function(yk, k) {
-                _svg.errors[k] = _svg.g.append("path")
-                    .attr("class", "error " + _w.utils.encode(k))
-                    .style("fill-opacity", 0.2)
-                    .style("stroke-width", "0px")
-                    .style("shape-rendering", "geometricPrecision");
-            });
-
-            // Add lines
-            _svg.lines = {};
-            _.forOwn(_data[0].y, function(yk, k) {
-                _svg.lines[k] = _svg.g.append("path")
-                    .attr("class", "line " + _w.utils.encode(k))
-                    .style("fill", "none")
-                    .style("stroke-width", "2px")
-                    .style("shape-rendering", "geometricPrecision");
-            });
-
-            // Add legend
+            // Legend
             if (_w.attr.legend) {
                 var legend = _svg.g.append("g")
                     .attr("class", "legend");
@@ -319,9 +283,13 @@
             }
         };
 
+        // Data updater
         _w.render.update = function(duration) {
-            // Make scaled copy of data
+            // Prepare data
             var data = _.cloneDeep(_data);
+            data.sort(function(a, b) {
+                return a.x - b.x;
+            });
             for (var i = 0; i < data.length; i++) {
                 for (var y in data[i].y) {
                     if (data[i].y.hasOwnProperty(y))
@@ -335,11 +303,13 @@
                 }
             }
 
-            // Scale and axes
+            // Calculate scale
             _svg.scale = _w.utils.scale(_w.utils.boundary(data, {y: [_w.attr.yMin, null]}),
                 _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                 _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                 {x: {type: _w.attr.xType}});
+
+            // Update axes
             _svg.axes.x
                 .transition().duration(duration)
                 .call(_svg.axisFn.x.scale(_svg.scale.x));
@@ -347,33 +317,60 @@
                 .transition().duration(duration)
                 .call(_svg.axisFn.y.scale(_svg.scale.y));
 
-            // Lines and error bands
-            _.forOwn(data[0].y, function(yk, k) {
-                if (data[0].hasOwnProperty('dy') && data[0].dy.hasOwnProperty(k)) {
-                    var error = d3.area()
-                        .x(function (d) {
-                            return scale.x(d.x) + 2;
-                        }).y0(function (d) {
-                            return scale.y(d.y[k]-d.dy[k]);
-                        }).y1(function (d) {
-                            return scale.y(d.y[k]+d.dy[k]);
-                        });
-                    _svg.errors[k]
-                        .transition().duration(duration)
-                        .attr("d", error(data));
-                }
-                var line = d3.line()
-                    .x(function (d) {
-                        return _svg.scale.x(d.x) + 2;
-                    }).y(function (d) {
-                        return _svg.scale.y(d.y[k]);
+            // Update plots
+            if (data.length > 0) {
+                // Add lines if needed
+                if (_svg.lines === undefined) {
+                    // Error bands
+                    _svg.errors = {};
+                    _.forOwn(data[0].y, function(yk, k) {
+                        _svg.errors[k] = _svg.g.append("path")
+                            .attr("class", "error " + _w.utils.encode(k))
+                            .style("fill-opacity", 0.2)
+                            .style("stroke-width", "0px")
+                            .style("shape-rendering", "geometricPrecision");
                     });
-                _svg.lines[k]
-                    .transition().duration(duration)
-                    .attr("d", line(data));
-            });
+
+                    // Add lines
+                    _svg.lines = {};
+                    _.forOwn(data[0].y, function(yk, k) {
+                        _svg.lines[k] = _svg.g.append("path")
+                            .attr("class", "line " + _w.utils.encode(k))
+                            .style("fill", "none")
+                            .style("stroke-width", "2px")
+                            .style("shape-rendering", "geometricPrecision");
+                    });
+                }
+
+                // Update data
+                _.forOwn(data[0].y, function(yk, k) {
+                    if (data[0].hasOwnProperty('dy') && data[0].dy.hasOwnProperty(k)) {
+                        var error = d3.area()
+                            .x(function (d) {
+                                return scale.x(d.x) + 2;
+                            }).y0(function (d) {
+                                return scale.y(d.y[k]-d.dy[k]);
+                            }).y1(function (d) {
+                                return scale.y(d.y[k]+d.dy[k]);
+                            });
+                        _svg.errors[k]
+                            .transition().duration(duration)
+                            .attr("d", error(data));
+                    }
+                    var line = d3.line()
+                        .x(function (d) {
+                            return _svg.scale.x(d.x) + 2;
+                        }).y(function (d) {
+                            return _svg.scale.y(d.y[k]);
+                        });
+                    _svg.lines[k]
+                        .transition().duration(duration)
+                        .attr("d", line(data));
+                });
+            }
         };
 
+        // Style updater
         _w.render.style = function() {
             // Inner dimensions
             var innerWidth = _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
@@ -397,14 +394,14 @@
             _svg.labels.x
                 .attr("x", innerWidth + "px")
                 .attr("y", (innerHeight + 35) + "px")
-                .style("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
+                .style("font-size", _w.attr.fontSize + "px")
                 .text(_w.attr.xLabel);
             _svg.labels.y
                 .attr("x", 5 + "px")
                 .attr("y", (-5) + "px")
-                .style("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
+                .style("font-size", _w.attr.fontSize + "px")
                 .text(_w.attr.yLabel);
 
             // Plot
@@ -426,10 +423,11 @@
                     })
                     .on("mouseleave", function() {
                         _w.attr.mouseleave && _w.attr.mouseleave(k);
+                    })
+                    .on("click", function() {
+                        _w.attr.click && _w.attr.click(k);
                     });
             });
-
-            _w.widget.style("display", "block");
         };
     }
 

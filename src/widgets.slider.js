@@ -106,7 +106,7 @@
         var _domain = [];
         var _scale = null;
 
-        // Rendering methods.
+        // Builder
         _w.render.build = function () {
             if (_svg !== null)
                 return;
@@ -141,13 +141,14 @@
             _svg.g.append("line")
                 .attr("stroke-linecap", "round")
                 .attr("stroke", _w.attr.fontColor)
-                .attr("stroke-width", "10px")
+                .attr("stroke-width", "9px")
                 .attr("x1", _scale.range()[0])
                 .attr("x2", _scale.range()[1])
                 .select(function () {
                     return this.parentNode.appendChild(this.cloneNode(true));
                 })
-                .style("stroke", "#eee")
+                .style("stroke", "white")
+                .style("opacity", 0.9)
                 .style("stroke-width", "8px")
                 .select(function () {
                     return this.parentNode.appendChild(this.cloneNode(true));
@@ -191,17 +192,14 @@
             _svg.handle = _svg.g.insert("circle", ".track-overlay")
                 .style("fill", "white")
                 .style("stroke", _w.attr.fontColor)
-                .style("stroke-width", "1.2px")
+                .style("stroke-width", "0.5px")
                 .attr("r", 8);
         };
 
-        _w.render.update = function (duration) {
-        };
-
+        // Style updater
         _w.render.style = function () {
             _w.widget.style("width", (_w.attr.width) + "px");
             _w.widget.style("height", 50 + "px");
-            _w.widget.style("display", "block");
         };
     }
 
