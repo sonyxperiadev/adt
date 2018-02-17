@@ -505,8 +505,7 @@
 
             // Chart
             _svg.g
-                .attr("transform", "translate(" + _w.attr.radius
-                    + "," + _w.attr.radius + ")");
+                .attr("transform", "translate(" + _w.attr.radius + "," + _w.attr.radius + ")");
 
             // Label
             _svg.label

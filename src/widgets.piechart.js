@@ -96,10 +96,11 @@
          *
          * @method highlight
          * @memberOf adt.widgets.piechart.PieChart
-         * @param {string} name Name of the slice to highlight.
+         * @param {string} key Key of the segment to highlight.
+         * @param {number} duration Duration of the highlight animation.
          */
-        this.highlight = function(name) {
-            _w.utils.highlight(_svg, "path", name);
+        this.highlight = function(key, duration) {
+            _w.utils.highlight(_svg, "path", key, duration);
         };
 
         // Builder
@@ -159,10 +160,11 @@
 
         // Style updater
         _w.render.style = function() {
+            // Calculate radii
+            var outerRadius = _w.attr.outerRadius - _w.attr.margins.left;
+
             // Widget
             _w.widget
-                // .style("width", (10 + 2 * _w.attr.outerRadius) + "px")
-                // .style("height", (10 + 2 * _w.attr.outerRadius + 30) + "px");
                 .style("width", 2*_w.attr.outerRadius + "px")
                 .style("height", 2*_w.attr.outerRadius + "px");
 
@@ -171,31 +173,31 @@
                 .attr("transform", "translate(" + _w.attr.outerRadius + "," + _w.attr.outerRadius + ")");
 
             // Plot
-            _svg.arc.outerRadius(_w.attr.outerRadius)
+            _svg.arc.outerRadius(outerRadius)
                 .innerRadius(_w.attr.innerRadius);
             _svg.paths.attr("d", _svg.arc);
 
             // Label
             _svg.label
-                .attr("transform", "translate(0," + (15 + _w.attr.outerRadius) + ")")
+                .attr("transform", "translate(0," + _w.attr.outerRadius + ")")
                 .style("width", (10 + 2 * _w.attr.outerRadius) + "px")
                 .style("font-size", Math.min(16, _w.attr.outerRadius*0.4) + "px")
                 .style("fill", _w.attr.fontColor)
                 .text(_w.attr.xLabel);
 
             // Interactions
-            if (_w.attr.mouseover) {
-                _svg.paths
-                    .on("mouseover", function (d, i) {
-                        _w.attr.mouseover(_data[i], i);
-                    });
-            }
-            if (_w.attr.mouseleave) {
-                _svg.paths
-                    .on("mouseleave", function (d, i) {
-                        _w.attr.mouseleave(_data[i], i);
-                    });
-            }
+            _svg.paths
+                .on("mouseover", function (d, i) {
+                    _w.attr.mouseover && _w.attr.mouseover(d.data.name, i);
+                });
+            _svg.paths
+                .on("mouseleave", function (d, i) {
+                    _w.attr.mouseleave && _w.attr.mouseleave(d.data.name, i);
+                });
+            _svg.paths
+                .on("click", function (d, i) {
+                    _w.attr.click && _w.attr.click(d.data.name, i);
+                });
         };
     }
 

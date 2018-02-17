@@ -7,14 +7,14 @@
     <script src="../../dependencies/d3.v4.min.js"></script>
     <script src="../../dependencies/lodash.4.17.4.min.js"></script>
     <script src="../../dependencies/topojson.v1.min.js"></script>
-    <title>bar chart | adt</title>
+    <title>pie chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../../dependencies/wp.min.css">
     <link rel="stylesheet" type="text/css" href="../style/adt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.barchart.js"></script>
+    <script src="../../src/widgets.piechart.js"></script>
     <style>
         main {
             margin-bottom: 40px;
@@ -56,22 +56,16 @@
     <h1>prepare data and size</h1>
     <pre><code class="javascript">// Generate some data
 var data = [
-    {x: 'apple', y: 13},
-    {x: 'banana', y: 4},
-    {x: 'mango', y: 6},
-    {x: 'orange', y: 2},
-    {x: 'melon', y: 11},
-    {x: 'kiwi', y: 7},
-    {x: 'pear', y: 3}
+    {name: "orange", value: 1, color: "orange"},
+    {name: "mango", value: 4, color: "tomato"},
+    {name: "banana", value: 4, color: "gold"},
+    {name: "apple", value: 2, color: "limegreen"}
 ];
 var colors = {
-    apple: "lime",
+    lime: "lime",
     banana: "gold",
-    mango: "tomato",
     orange: "orange",
-    melon: "green",
-    kiwi: "limegreen",
-    pear: "khaki"
+    apple: "limegreen"
 };
 
 // Read chart size from #widget div
@@ -79,23 +73,21 @@ var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
 
     <h1>create and render chart</h1>
-    <pre><code class="javascript">// Add chart to the div with id='widget'
-// Use chaining to set parameters
-var chart = new adt.widgets.BarChart("mychart", d3.select("#widget"))
-    .data(data)              // Bind data
-    .width(width)            // Dimensions
-    .height(height)
-    .xLabel("fruit name")    // Labels
-    .yLabel("stock")
-    .margins(60)             // All margins are set to 40px
-    .fontSize(14)            // Set font size to 14 px
-    .colors(colors)          // Set colors as key-value pairs
-    .vertical(true)          // Make it vertical
-    .render();               // Finally, render chart</code></pre>
+    <pre><code class="javascript">// Add chart
+var chart = new adt.widgets.PieChart("mychart", d3.select("#widget"))
+    .data(data)                         // Bind data
+    .x(width/2 - height/2 + 20)         // Dimensions
+    .innerRadius(30)
+    .outerRadius(height / 2 - 20)
+    .xLabel("fruits")                   // Add label
+    .margins(30)                        // Margins are set to 30px
+    .fontSize(14)                       // Font is set to 14px
+    .colors(colors)
+    .render();                          // Render chart</code></pre>
 
     <h1>interactions</h1>
     <pre><code class="javascript">// Add interactions
-areaChart
+chart
     .mouseover(function(k) {
         // Highlight hovered bar
         chart.highlight(k, 300);
@@ -113,22 +105,16 @@ areaChart
 <script>
     // Generate some data
     var data = [
-        {x: 'apple', y: 13},
-        {x: 'banana', y: 4},
-        {x: 'mango', y: 6},
-        {x: 'orange', y: 2},
-        {x: 'melon', y: 11},
-        {x: 'kiwi', y: 7},
-        {x: 'pear', y: 3}
+        {name: "orange", value: 1, color: "orange"},
+        {name: "mango", value: 4, color: "tomato"},
+        {name: "banana", value: 4, color: "gold"},
+        {name: "apple", value: 2, color: "limegreen"}
     ];
     var colors = {
-        apple: "lime",
+        lime: "lime",
         banana: "gold",
-        mango: "tomato",
         orange: "orange",
-        melon: "green",
-        kiwi: "limegreen",
-        pear: "khaki"
+        apple: "limegreen"
     };
 
     // Read chart size from #widget div
@@ -136,16 +122,15 @@ areaChart
     var height = parseFloat(d3.select("#widget").style("height"));
 
     // Add chart
-    var chart = new adt.widgets.BarChart("mychart", d3.select("#widget"))
+    var chart = new adt.widgets.PieChart("mychart", d3.select("#widget"))
         .data(data)
-        .width(width)
-        .height(height)
-        .xLabel("fruit name")
-        .yLabel("stock")
-        .margins(60)
+        .x(width/2 - height/2 + 20)
+        .innerRadius(30)
+        .outerRadius(height / 2 - 20)
+        .xLabel("fruits")
+        .margins(30)
         .fontSize(14)
         .colors(colors)
-        .vertical(true)
         .render();
 
     // Add interactions
@@ -165,9 +150,12 @@ areaChart
         .render();
 
     window.onresize = function() {
+        width = parseFloat(d3.select("#widget").style("width"));
+        height = parseFloat(d3.select("#widget").style("height"));
         chart
-            .width(parseFloat(d3.select("#widget").style("width")))
-            .height(parseFloat(d3.select("#widget").style("height")))
+            .x(width/2 - height/2 + 20)
+            .innerRadius(30)
+            .outerRadius(height / 2 - 20)
             .render();
     }
 </script>
