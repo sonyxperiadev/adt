@@ -7,14 +7,14 @@
     <script src="../../dependencies/d3.v4.min.js"></script>
     <script src="../../dependencies/lodash.4.17.4.min.js"></script>
     <script src="../../dependencies/topojson.v1.min.js"></script>
-    <title>line chart | adt</title>
+    <title>chord chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../../dependencies/wp.min.css">
     <link rel="stylesheet" type="text/css" href="../style/adt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.linechart.js"></script>
+    <script src="../../src/widgets.chordchart.js"></script>
     <style>
         main {
             margin-bottom: 40px;
@@ -54,44 +54,56 @@
     <div id="widget"></div>
 
     <h1>prepare data and size</h1>
-    <pre><code class="javascript">// Generate some data with errors
-var data = Array.from(new Array(100).keys()).map(function(i) {
-    return {
-        x: i,
-        y: {
-            first: 10 * Math.pow(i/40, 2),
-            second: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
-        },
-        dy: {
-            first: i/10,
-            second: 6
-        }
-    }
-});
+    <pre><code class="javascript">// Generate some data
+var data = [
+    {source: "melon", target: "apple", value: 1},
+    {source: "melon", target: "pear", value: 2},
+    {source: "melon", target: "lime", value: 3},
+    {source: "apple", target: "melon", value: 4},
+    {source: "apple", target: "pear", value: 5},
+    {source: "apple", target: "lime", value: 6},
+    {source: "pear", target: "melon", value: 7},
+    {source: "pear", target: "apple", value: 8},
+    {source: "pear", target: "lime", value: 9},
+    {source: "lime", target: "melon", value: 10},
+    {source: "lime", target: "apple", value: 11},
+    {source: "lime", target: "pear", value: 12},
+    {source: "orange", target: "apple", value: 1},
+    {source: "apple", target: "orange", value: 2}
+];
+var colors = {
+    apple: "limegreen",
+    banana: "gold",
+    mango: "tomato",
+    orange: "orange",
+    melon: "green",
+    lime: "lime",
+    pear: "khaki"
+};
 
 // Read chart size from #widget div
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
 
     <h1>create and render chart</h1>
-    <pre><code class="javascript">// Add chart to the div with id='widget'
-// Use chaining to set parameters
-var chart = new adt.widgets.AreaChart("mychart", d3.select("#widget"))
-    .data(data)                                         // Bind data
-    .width(width)                                       // Dimensions
-    .height(height)
-    .xLabel("day")                                      // Labels
-    .yLabel("price in SEK")
-    .margins(40)                                        // All margins are set to 40px
-    .fontSize(14)                                       // Set font size to 14 px
-    .colors({first: "dodgerblue", second: "limegreen"}) // Set colors as key-value pairs
-    .render();                                          // Finally, render chart</code></pre>
+    <pre><code class="javascript">// Add chart
+var chart = new adt.widgets.ChordChart("mychart", d3.select("#widget"))
+    .data(data)                     // Bind data
+    .x(width/2 - height/2)          // Dimensions
+    .radius(height / 2)
+    .thickness(10)
+    .xLabel("fruit trade")          // Add label
+    .margins(60)                    // Margins on all side are 40px
+    .fontSize(14)                   // Set font size to 14px
+    .ticks(true)                    // Show group labels
+    .colors(colors)
+    .render();                      // Render chord</code></pre>
 
     <h1>interactions</h1>
     <pre><code class="javascript">// Add interactions
 chart
     .mouseover(function(k) {
-        // Highlight hovered plot
+        // Highlight hovered bar
         chart.highlight(k, 300);
     })
     .mouseleave(function() {
@@ -103,47 +115,56 @@ chart
         alert("Plot clicked: '" + k + "'");
     })
     .render();</code></pre>
-
-    <h1>additional features</h1>
-    <pre><code class="javascript">// Add trend marker
-var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");</code></pre>
 </main>
 <script>
     // Generate some data
-    var data = Array.from(new Array(100).keys()).map(function(i) {
-        return {
-            x: i,
-            y: {
-                first: 10 * Math.pow(i/40, 2),
-                second: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
-            },
-            dy: {
-                first: i/10,
-                second: 6
-            }
-        }
-    });
+    var data = [
+        {source: "melon", target: "apple", value: 1},
+        {source: "melon", target: "pear", value: 2},
+        {source: "melon", target: "lime", value: 3},
+        {source: "apple", target: "melon", value: 4},
+        {source: "apple", target: "pear", value: 5},
+        {source: "apple", target: "lime", value: 6},
+        {source: "pear", target: "melon", value: 7},
+        {source: "pear", target: "apple", value: 8},
+        {source: "pear", target: "lime", value: 9},
+        {source: "lime", target: "melon", value: 10},
+        {source: "lime", target: "apple", value: 11},
+        {source: "lime", target: "pear", value: 12},
+        {source: "orange", target: "apple", value: 1},
+        {source: "apple", target: "orange", value: 2}
+    ];
+    var colors = {
+        apple: "limegreen",
+        banana: "gold",
+        mango: "tomato",
+        orange: "orange",
+        melon: "green",
+        lime: "lime",
+        pear: "khaki"
+    };
 
     // Read chart size from #widget div
     var width = parseFloat(d3.select("#widget").style("width"));
     var height = parseFloat(d3.select("#widget").style("height"));
 
     // Add chart
-    var chart = new adt.widgets.LineChart("mychart", d3.select("#widget"))
+    var chart = new adt.widgets.ChordChart("mychart", d3.select("#widget"))
         .data(data)
-        .width(width)
-        .height(height)
-        .xLabel("days")
-        .yLabel("price in SEK")
-        .margins(40)
+        .x(width/2 - height/2)
+        .radius(height / 2)
+        .thickness(10)
+        .xLabel("fruit trade")
+        .margins(60)
         .fontSize(14)
-        .colors({first: "dodgerblue", second: "limegreen"})
+        .ticks(true)
+        .colors(colors)
         .render();
 
     // Add interactions
     chart
         .mouseover(function(k) {
-            // Highlight hovered plot
+            // Highlight hovered bar
             chart.highlight(k, 300);
         })
         .mouseleave(function() {
@@ -156,13 +177,12 @@ var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");</code
         })
         .render();
 
-    // Add trend marker
-    var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");
-
     window.onresize = function() {
+        width = parseFloat(d3.select("#widget").style("width"));
+        height = parseFloat(d3.select("#widget").style("height"));
         chart
-            .width(parseFloat(d3.select("#widget").style("width")))
-            .height(parseFloat(d3.select("#widget").style("height")))
+            .x(width/2 - height/2)
+            .radius(height / 2)
             .render();
     }
 </script>

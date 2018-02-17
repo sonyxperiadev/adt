@@ -317,9 +317,8 @@
                         data[i].y[y] /= _scaleFactor;
 
                     // Check if we have error
-                    if (data[i].hasOwnProperty('dy')) {
-                        if (data[i].dy.hasOwnProperty(y))
-                            data[i].dy[y] /= _scaleFactor;
+                    if (data[i].hasOwnProperty('dy') && data[i].dy.hasOwnProperty(y)) {
+                        data[i].dy[y] /= _scaleFactor;
                     }
                 }
             }

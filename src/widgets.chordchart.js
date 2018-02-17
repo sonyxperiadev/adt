@@ -34,6 +34,7 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+// TODO update style for ticks in render.style()
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'), exports);
@@ -306,9 +307,10 @@
          * @method highlight
          * @memberOf adt.widgets.chordchart.ChordChart
          * @param {string} key Key of the segment to highlight.
+         * @param {number} duration Duration of the highlight animation.
          */
-        this.highlight = function(key) {
-            _w.utils.highlight(_svg, ".ribbon", key);
+        this.highlight = function(key, duration) {
+            _w.utils.highlight(_svg, ".ribbon", key, duration);
         };
 
         // Builder
@@ -379,6 +381,11 @@
                     if (_w.attr.mouseleave) {
                         _w.attr.mouseleave(d.name, i);
                     }
+                })
+                .on("click", function(d, i) {
+                    if (_w.attr.click) {
+                        _w.attr.click(d.name, i);
+                    }
                 });
             _svg.newGroups.append("path")
                 .attr("id", function (d) {
@@ -407,7 +414,7 @@
                     .attr("text-anchor", function (d) {
                         return d.angle > Math.PI ? "end" : "begin";
                     })
-                    .style("font-size", _w.attr.fontSize * 0.6 + "px")
+                    .style("font-size", _w.attr.fontSize * 0.8 + "px")
                     .style("font-weight", _w.attr.fontWeight)
                     .style("fill", _w.attr.fontColor);
             }
@@ -503,7 +510,7 @@
 
             // Label
             _svg.label
-                .attr("transform", "translate(0," + (15 + _w.attr.radius + _w.attr.thickness) + ")")
+                .attr("transform", "translate(0," + _w.attr.radius + ")")
                 .style("width", 2*(_w.attr.radius + _w.attr.thickness) + "px")
                 .attr("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
