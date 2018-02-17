@@ -136,7 +136,7 @@
         _w.render.update = function(duration) {
             // Prepare data
             var data = _.cloneDeep(_data);
-            if (_w.attr.xType === "number" || _w.attr.xType === "time") {
+            /*if (_w.attr.xType === "number" || _w.attr.xType === "time") {
                 data.sort(function(a, b) {
                     return a.x - b.x;
                 });
@@ -144,7 +144,7 @@
                 data.sort(function(a, b) {
                     return a.y - b.y;
                 });
-            }
+            }*/
 
             // Calculate scale
             var scale;
@@ -271,31 +271,31 @@
                 if (_w.attr.mouseover) {
                     _svg.bars
                         .on("mouseover", function (d, i) {
-                            _w.attr.mouseover(_data[i], i);
+                            _w.attr.mouseover(d.x, i);
                         });
                     _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
                         .on("mouseover", function (d, i) {
-                            _w.attr.mouseover(_data[i], i);
+                            _w.attr.mouseover(data[i].x, i);
                         });
                 }
                 if (_w.attr.mouseleave) {
                     _svg.bars
                         .on("mouseleave", function (d, i) {
-                            _w.attr.mouseleave(_data[i], i);
+                            _w.attr.mouseleave(d.x, i);
                         });
                     _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
                         .on("mouseleave", function (d, i) {
-                            _w.attr.mouseleave(_data[i], i);
+                            _w.attr.mouseleave(data[i].x, i);
                         });
                 }
                 if (_w.attr.click) {
                     _svg.bars
                         .on("click", function (d, i) {
-                            _w.attr.click(_data[i], i);
+                            _w.attr.click(d.x, i);
                         });
                     _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
                         .on("click", function (d, i) {
-                            _w.attr.click(_data[i], i);
+                            _w.attr.click(data[i].x, i);
                         });
                 }
             }
