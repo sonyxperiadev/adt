@@ -413,6 +413,9 @@
                     })
                     .on("mouseleave", function() {
                         _w.attr.mouseleave && _w.attr.mouseleave(k);
+                    })
+                    .on("click", function() {
+                        _w.attr.click && _w.attr.click(k);
                     });
             });
             _.forOwn(_svg.lines, function(lk, k) {

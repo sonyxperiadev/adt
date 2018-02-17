@@ -326,7 +326,7 @@
          * @param {function} format Function that converts a number to a string.
          */
         _attr.add(this, "yTickFormat", function(x) {
-            return x > 1 ? d3.format(".2s") : x;
+            return x > 1 ? d3.format(".2s")(x) : x;
         });
 
         /**
@@ -566,17 +566,20 @@
              * @param {object} svg The inner SVG of the widget.
              * @param {string} selector Selector of the widget elements.
              * @param {string} key Key of the element to highlight.
+             * @param {number} duration Duration of the highlight animation.
              * @private
              */
-            function _highlight(svg, selector, key) {
+            function _highlight(svg, selector, key, duration) {
                 if (svg !== null) {
                     if (typeof key === "string") {
                         svg.g.selectAll(selector)
+                            .transition().duration(duration ? duration : 0)
                             .style("opacity", function () {
                                 return d3.select(this).classed(_encode(key)) ? 1 : 0.1;
                             });
                     } else {
                         svg.g.selectAll(selector)
+                            .transition().duration(duration ? duration : 0)
                             .style("opacity", 1);
                     }
                 }

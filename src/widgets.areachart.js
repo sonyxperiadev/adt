@@ -103,9 +103,10 @@
          * @method highlight
          * @memberOf adt.widgets.areachart.AreaChart
          * @param {string} key Key of the area to highlight.
+         * @param {number} duration Duration of the highlight animation.
          */
-        this.highlight = function(key) {
-            _w.utils.highlight(_svg, ".area", key);
+        this.highlight = function(key, duration) {
+            _w.utils.highlight(_svg, ".area", key, duration);
         };
 
         // Builder
@@ -232,10 +233,19 @@
                 .text(_w.attr.yLabel);
 
             // Plot
-            _.forOwn(_svg.areas, function(lk, k) {
+            _.forOwn(_svg.areas, function(ak, k) {
                 _svg.areas[k]
                     .style("fill-opacity", _w.attr.opacity)
-                    .style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k]);
+                    .style("fill", typeof _w.attr.colors === "string" ? _w.attr.colors : _w.attr.colors[k])
+                    .on("mouseover", function() {
+                        _w.attr.mouseover && _w.attr.mouseover(k);
+                    })
+                    .on("mouseleave", function() {
+                        _w.attr.mouseleave && _w.attr.mouseleave(k);
+                    })
+                    .on("click", function() {
+                        _w.attr.click && _w.attr.click(k);
+                    });
             });
         };
     }

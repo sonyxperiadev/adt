@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
+    <script src="../../dependencies/d3.v4.min.js"></script>
+    <script src="../../dependencies/lodash.4.17.4.min.js"></script>
+    <script src="../../dependencies/topojson.v1.min.js"></script>
+    <title>area chart | adt</title>
+    <link rel="stylesheet" type="text/css" href="../../dependencies/wp.min.css">
+    <link rel="stylesheet" type="text/css" href="../style/adt.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../src/widgets.js"></script>
+    <script src="../../src/widgets.areachart.js"></script>
+    <style>
+        main {
+            margin-bottom: 40px;
+        }
+        #widget {
+            display: block;
+            position: relative;
+            width: 600px;
+            height: 300px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+        @media screen and (max-width: 800px) {
+            main {
+                width: 90%;
+                max-width: 90%;
+            }
+            #widget {
+                width: 90%;
+                height: 200px;
+            }
+            pre code {
+                width: 100%;
+                font-size: 1em;
+            }
+        }
+        pre {
+            width : 100%;
+        }
+        pre code {
+            width: 700px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div id="widget"></div>
+
+    <h1>prepare data and size</h1>
+    <pre><code class="javascript">// Generate some data
+var data = Array.from(new Array(100).keys()).map(function(i) {
+    return {
+        x: i,
+        y: {
+            dogs: 10 * Math.pow(i/40, 2),
+            cats: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
+        }
+    }
+});
+
+// Read chart size from #widget div
+var width = parseFloat(d3.select("#widget").style("width"));
+var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
+
+    <h1>create and render chart</h1>
+    <pre><code class="javascript">// Add chart to the div with id='widget'
+// Use chaining to set parameters
+var areaChart = new adt.widgets.AreaChart("mychart",
+                                          d3.select("#widget"))
+    .data(data)                                         // Bind data
+    .width(width)                                       // Dimensions
+    .height(height)
+    .xLabel("value")                                    // Labels
+    .yLabel("probability density")
+    .margins(40)                                        // All margins are set to 40px
+    .fontSize(14)                                       // Set font size to 14 px
+    .colors({dogs: "dodgerblue", cats: "limegreen"})    // Set colors as key-value pairs
+    .render();                                          // Finally, render chart</code></pre>
+
+    <h1>interactions</h1>
+    <pre><code class="javascript">// Add interactions
+areaChart
+    .mouseover(function(k) {
+        // Highlight hovered plot
+        areaChart.highlight(k, 200);
+    })
+    .mouseleave(function() {
+        // Remove highlights by passing null
+        areaChart.highlight(null, 200);
+    })
+    .click(function(k) {
+        // Show an alert on click
+        alert("Plot clicked: '" + k + "'");
+    });</code></pre>
+</main>
+<script>
+    // Generate some data
+    var data = Array.from(new Array(100).keys()).map(function(i) {
+        return {
+            x: i,
+            y: {
+                dogs: 10 * Math.pow(i/40, 2),
+                cats: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
+            }
+        }
+    });
+
+    // Read chart size from #widget div
+    var width = parseFloat(d3.select("#widget").style("width"));
+    var height = parseFloat(d3.select("#widget").style("height"));
+
+    // Add chart
+    var areaChart = new adt.widgets.AreaChart("mychart", d3.select("#widget"))
+        .data(data)
+        .width(width)
+        .height(height)
+        .xLabel("value")
+        .yLabel("probability density")
+        .margins(40)
+        .fontSize(14)
+        .colors({dogs: "dodgerblue", cats: "limegreen"})
+        .render();
+
+    // Add interactions
+    areaChart
+        .mouseover(function(k) {
+            // Highlight hovered plot
+            areaChart.highlight(k, 200);
+        })
+        .mouseleave(function() {
+            // Remove highlights by passing null
+            areaChart.highlight(null, 200);
+        })
+        .click(function(k) {
+            // Show an alert on click
+            alert("Plot clicked: '" + k + "'");
+        });
+
+    window.onresize = function() {
+        areaChart
+            .width(parseFloat(d3.select("#widget").style("width")))
+            .height(parseFloat(d3.select("#widget").style("height")))
+            .render();
+    }
+</script>
+</body>
+</html>
