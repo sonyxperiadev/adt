@@ -95,9 +95,10 @@
          * @method highlight
          * @memberOf adt.widgets.barchart.BarChart
          * @param {string} key Key of the line to highlight.
+         * @param {number} duration Duration of the highlight animation.
          */
-        this.highlight = function(key) {
-            _w.utils.highlight(_svg, ".bar", key);
+        this.highlight = function(key, duration) {
+            _w.utils.highlight(_svg, ".bar", key, duration);
         };
 
         // Builder
@@ -136,15 +137,6 @@
         _w.render.update = function(duration) {
             // Prepare data
             var data = _.cloneDeep(_data);
-            /*if (_w.attr.xType === "number" || _w.attr.xType === "time") {
-                data.sort(function(a, b) {
-                    return a.x - b.x;
-                });
-            } else {
-                data.sort(function(a, b) {
-                    return a.y - b.y;
-                });
-            }*/
 
             // Calculate scale
             var scale;

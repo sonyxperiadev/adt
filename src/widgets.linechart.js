@@ -79,7 +79,7 @@
         var _svg = {};
         var _data = [];
         var _scaleFactor = 1.0;
-        var _markers = [];
+        var _markers = {};
 
         /**
          * Binds data to the line plot.
@@ -107,9 +107,12 @@
          * @method highlight
          * @memberOf adt.widgets.linechart.LineChart
          * @param {string} key Key of the line to highlight.
+         * @param {number} duration Duration of the highlight animation.
          */
-        this.highlight = function(key) {
-            _w.utils.highlight(_svg, ".line", key);
+        this.highlight = function(key, duration) {
+            _w.utils.highlight(_svg, ".line", key, duration);
+            _w.utils.highlight(_svg, ".error", key, duration);
+            _w.utils.highlight(_svg, ".marker", key, duration);
         };
         var highlight = this.highlight;
 
@@ -153,37 +156,55 @@
             // Add marker
             var xCorner = y1 < y2 ? start : end;
             var yCorner = y1 < y2 ? y2 : y1;
-            var marker = _svg.g.append("g")
-                .attr("class", "marker");
-            marker.append("line")
+            var marker = {
+                start: {
+                    x: start,
+                    y: y1
+                },
+                end: {
+                    x: end,
+                    y: y2
+                },
+                corner: {
+                    x: xCorner,
+                    y: yCorner
+                },
+                g: _svg.g.append("g")
+                    .attr("class", "marker " + _w.utils.encode(key))
+            };
+            marker.g.append("line")
+                .attr("class", "horizontal")
                 .attr("x1", _svg.scale.x(start)+2)
                 .attr("y1", _svg.scale.y(yCorner))
                 .attr("x2", _svg.scale.x(end)+2)
                 .attr("y2", _svg.scale.y(yCorner))
                 .style("stroke", color)
                 .style("stroke-dasharray", "3 3")
-                .style("stroke-width", 2);
-           marker.append("line")
+                .style("stroke-width", 1);
+           marker.g.append("line")
+                .attr("class", "vertical")
                 .attr("x1", _svg.scale.x(xCorner)+2)
                 .attr("y1", _svg.scale.y(y1))
                 .attr("x2", _svg.scale.x(xCorner)+2)
                 .attr("y2", _svg.scale.y(y2))
                 .style("stroke", color)
                 .style("stroke-dasharray", "3 3")
-                .style("stroke-width", 2);
-            marker.append("circle")
+                .style("stroke-width", 1);
+            marker.g.append("circle")
+                .attr("class", "start")
                 .attr("cx", _svg.scale.x(start)+2)
                 .attr("cy", _svg.scale.y(y1))
                 .attr("r", 4)
                 .style("stroke", "none")
                 .style("fill", color);
-            marker.append("circle")
+            marker.g.append("circle")
+                .attr("class", "end")
                 .attr("cx", _svg.scale.x(end)+2)
                 .attr("cy", _svg.scale.y(y2))
                 .attr("r", 4)
                 .style("stroke", "none")
                 .style("fill", color);
-            marker.append("text")
+            marker.g.append("text")
                 .attr("x", _svg.scale.x(xCorner)+2)
                 .attr("y", _svg.scale.y(yCorner))
                 .attr("dy", -5)
@@ -210,7 +231,7 @@
          */
         this.removeMarker = function(id) {
             if (_markers.hasOwnProperty(id)) {
-                _markers[id].remove();
+                _markers[id].g.remove();
                 delete _markers[id];
                 return true;
             }
@@ -304,7 +325,8 @@
             }
 
             // Calculate scale
-            _svg.scale = _w.utils.scale(_w.utils.boundary(data, {y: [_w.attr.yMin, null]}),
+            var boundary = _w.utils.boundary(data, {y: [_w.attr.yMin, null]})
+            _svg.scale = _w.utils.scale(boundary,
                 _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                 _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                 {x: {type: _w.attr.xType}});
@@ -347,11 +369,11 @@
                     if (data[0].hasOwnProperty('dy') && data[0].dy.hasOwnProperty(k)) {
                         var error = d3.area()
                             .x(function (d) {
-                                return scale.x(d.x) + 2;
+                                return _svg.scale.x(d.x) + 2;
                             }).y0(function (d) {
-                                return scale.y(d.y[k]-d.dy[k]);
+                                return _svg.scale.y(Math.max(d.y[k]-d.dy[k], boundary.y.min));
                             }).y1(function (d) {
-                                return scale.y(d.y[k]+d.dy[k]);
+                                return _svg.scale.y(Math.min(d.y[k]+d.dy[k], boundary.y.max));
                             });
                         _svg.errors[k]
                             .transition().duration(duration)
@@ -430,6 +452,31 @@
                     .on("click", function() {
                         _w.attr.click && _w.attr.click(k);
                     });
+            });
+
+            // Markers
+            _.forOwn(_markers, function(marker) {
+                marker.g.select(".horizontal")
+                    .attr("x1", _svg.scale.x(marker.start.x)+2)
+                    .attr("y1", _svg.scale.y(marker.corner.y))
+                    .attr("x2", _svg.scale.x(marker.end.x)+2)
+                    .attr("y2", _svg.scale.y(marker.corner.y));
+                marker.g.select(".vertical")
+                    .attr("x1", _svg.scale.x(marker.corner.x)+2)
+                    .attr("y1", _svg.scale.y(marker.start.y))
+                    .attr("x2", _svg.scale.x(marker.corner.x)+2)
+                    .attr("y2", _svg.scale.y(marker.end.y));
+                marker.g.select(".start")
+                    .attr("cx", _svg.scale.x(marker.start.x)+2)
+                    .attr("cy", _svg.scale.y(marker.start.y));
+                marker.g.select(".end")
+                    .attr("cx", _svg.scale.x(marker.end.x)+2)
+                    .attr("cy", _svg.scale.y(marker.end.y));
+                marker.g.select("text")
+                    .attr("x", _svg.scale.x(marker.corner.x)+2)
+                    .attr("y", _svg.scale.y(marker.corner.y))
+                    .attr("text-anchor", marker.start.y < marker.end.y ? "start" : "end")
+                    .style("fill", _w.attr.fontColor)
             });
         };
     }

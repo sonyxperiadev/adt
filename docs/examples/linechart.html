@@ -7,14 +7,14 @@
     <script src="../../dependencies/d3.v4.min.js"></script>
     <script src="../../dependencies/lodash.4.17.4.min.js"></script>
     <script src="../../dependencies/topojson.v1.min.js"></script>
-    <title>bar chart | adt</title>
+    <title>area chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../../dependencies/wp.min.css">
     <link rel="stylesheet" type="text/css" href="../style/adt.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.barchart.js"></script>
+    <script src="../../src/widgets.linechart.js"></script>
     <style>
         main {
             margin-bottom: 40px;
@@ -54,25 +54,20 @@
     <div id="widget"></div>
 
     <h1>prepare data and size</h1>
-    <pre><code class="javascript">// Generate some data
-var data = [
-    {x: 'apple', y: 13},
-    {x: 'banana', y: 4},
-    {x: 'mango', y: 6},
-    {x: 'orange', y: 2},
-    {x: 'melon', y: 11},
-    {x: 'kiwi', y: 7},
-    {x: 'pear', y: 3}
-];
-var colors = {
-    apple: "lime",
-    banana: "gold",
-    mango: "tomato",
-    orange: "orange",
-    melon: "green",
-    kiwi: "limegreen",
-    pear: "khaki"
-};
+    <pre><code class="javascript">// Generate some data with errors
+var data = Array.from(new Array(100).keys()).map(function(i) {
+    return {
+        x: i,
+        y: {
+            first: 10 * Math.pow(i/40, 2),
+            second: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
+        },
+        dy: {
+            first: i/10,
+            second: 6
+        }
+    }
+});
 
 // Read chart size from #widget div
 var width = parseFloat(d3.select("#widget").style("width"));
@@ -81,88 +76,88 @@ var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
     <h1>create and render chart</h1>
     <pre><code class="javascript">// Add chart to the div with id='widget'
 // Use chaining to set parameters
-var chart = new adt.widgets.BarChart("mychart", d3.select("#widget"))
-    .data(data)              // Bind data
-    .width(width)            // Dimensions
+var chart = new adt.widgets.AreaChart("mychart", d3.select("#widget"))
+    .data(data)                                         // Bind data
+    .width(width)                                       // Dimensions
     .height(height)
-    .xLabel("fruit name")    // Labels
-    .yLabel("stock")
-    .margins(60)             // All margins are set to 40px
-    .fontSize(14)            // Set font size to 14 px
-    .colors(colors)          // Set colors as key-value pairs
-    .vertical(true)          // Make it vertical
-    .render();               // Finally, render chart</code></pre>
+    .xLabel("day")                                      // Labels
+    .yLabel("price in SEK")
+    .margins(40)                                        // All margins are set to 40px
+    .fontSize(14)                                       // Set font size to 14 px
+    .colors({first: "dodgerblue", second: "limegreen"}) // Set colors as key-value pairs
+    .render();                                          // Finally, render chart</code></pre>
 
     <h1>interactions</h1>
     <pre><code class="javascript">// Add interactions
-areaChart
+chart
     .mouseover(function(k) {
-        // Highlight hovered bar
+        // Highlight hovered plot
         chart.highlight(k, 300);
     })
     .mouseleave(function() {
         // Remove highlights by passing null
         chart.highlight(null, 300);
     })
-    .click(function(k, i) {
+    .click(function(k) {
         // Show an alert on click
         alert("Plot clicked: '" + k + "'");
     })
     .render();</code></pre>
+
+    <h1>additional features</h1>
+    <pre><code class="javascript">// Add trend marker
+var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");</code></pre>
 </main>
 <script>
     // Generate some data
-    var data = [
-        {x: 'apple', y: 13},
-        {x: 'banana', y: 4},
-        {x: 'mango', y: 6},
-        {x: 'orange', y: 2},
-        {x: 'melon', y: 11},
-        {x: 'kiwi', y: 7},
-        {x: 'pear', y: 3}
-    ];
-    var colors = {
-        apple: "lime",
-        banana: "gold",
-        mango: "tomato",
-        orange: "orange",
-        melon: "green",
-        kiwi: "limegreen",
-        pear: "khaki"
-    };
+    var data = Array.from(new Array(100).keys()).map(function(i) {
+        return {
+            x: i,
+            y: {
+                first: 10 * Math.pow(i/40, 2),
+                second: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
+            },
+            dy: {
+                first: i/10,
+                second: 6
+            }
+        }
+    });
 
     // Read chart size from #widget div
     var width = parseFloat(d3.select("#widget").style("width"));
     var height = parseFloat(d3.select("#widget").style("height"));
 
     // Add chart
-    var chart = new adt.widgets.BarChart("mychart", d3.select("#widget"))
+    var chart = new adt.widgets.LineChart("mychart", d3.select("#widget"))
         .data(data)
         .width(width)
         .height(height)
-        .xLabel("fruit name")
-        .yLabel("stock")
-        .margins(60)
+        .xLabel("days")
+        .yLabel("price in SEK")
+        .margins(40)
         .fontSize(14)
-        .colors(colors)
-        .vertical(true)
+        .colors({first: "dodgerblue", second: "limegreen"})
         .render();
 
     // Add interactions
     chart
         .mouseover(function(k) {
-            // Highlight hovered bar
+            // Highlight hovered plot
             chart.highlight(k, 300);
         })
         .mouseleave(function() {
             // Remove highlights by passing null
             chart.highlight(null, 300);
         })
-        .click(function(k, i) {
+        .click(function(k) {
             // Show an alert on click
             alert("Plot clicked: '" + k + "'");
         })
         .render();
+
+    // Add trend marker
+    var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");
 
     window.onresize = function() {
         chart
