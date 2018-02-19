@@ -78,7 +78,7 @@
         var _widget;
         try {
             if (parent) {
-                _widget = parent.append(element)
+                _widget = d3.select(parent).append(element)
                     .attr("id", "adt-widget-" + type + "-" + name)
                     .attr("class", "adt-widget")
                     .style("display", "none")

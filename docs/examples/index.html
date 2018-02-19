@@ -270,7 +270,7 @@
 
     window.addEventListener("load", function() {
         // Area chart
-        var areaChart = new adt.widgets.AreaChart("areachart", d3.select("#areachart"))
+        var areaChart = new adt.widgets.AreaChart("areachart", "#areachart")
             .width(WIDTH)
             .height(HEIGHT)
             .xLabel("value")
@@ -282,7 +282,7 @@
             .render();
 
         // Bar chart
-        var barChart = new adt.widgets.BarChart("barchart", d3.select("#barchart"))
+        var barChart = new adt.widgets.BarChart("barchart", "#barchart")
             .width(WIDTH)
             .height(HEIGHT)
             .xLabel("category")
@@ -294,7 +294,7 @@
             .render();
 
         // Chord chart
-        var chordChart = new adt.widgets.ChordChart("chordchart", d3.select("#chordchart"))
+        var chordChart = new adt.widgets.ChordChart("chordchart", "#chordchart")
             .x(30)
             .radius(100)
             .thickness(10)
@@ -306,7 +306,7 @@
             .render();
 
         // Grid
-        var grid = new adt.widgets.Grid("grid", d3.select("#grid"))
+        var grid = new adt.widgets.Grid("grid", "#grid")
             .width(WIDTH)
             .height(HEIGHT)
             .rows(2)
@@ -329,7 +329,7 @@
             .data(DUMMY_DATA_2), 1, 0, 1, 1);
 
         // Hint
-        var hint = new adt.widgets.Hint("hint", d3.select("#hint"))
+        var hint = new adt.widgets.Hint("hint", "#hint")
             .x(80)
             .y(50)
             .text("This is a hint")
@@ -338,14 +338,14 @@
 
         // Image
         // TODO center image in container
-        var image = new adt.widgets.Image("image", d3.select("#image"))
+        var image = new adt.widgets.Image("image", "#image")
             .width(WIDTH)
             .src("data/raccoon.jpg")
             .render();
 
         // Label
         // TODO set default font color to black
-        var label = new adt.widgets.Label("label", d3.select("#label"))
+        var label = new adt.widgets.Label("label", "#label")
             .x(20)
             .y(60)
             .width(200)
@@ -356,7 +356,7 @@
 
         // Legend
         // TODO set default font color to black
-        var legend = new adt.widgets.Legend("legend", d3.select("#legend"))
+        var legend = new adt.widgets.Legend("legend", "#legend")
             .x(50)
             .y(60)
             .width(200)
@@ -367,7 +367,7 @@
             .render();
 
         // Line chart
-        var lineChart = new adt.widgets.LineChart("linechart", d3.select("#linechart"))
+        var lineChart = new adt.widgets.LineChart("linechart", "#linechart")
             .width(WIDTH)
             .height(HEIGHT)
             .xLabel("time")
@@ -379,7 +379,7 @@
             .render();
 
         // Map
-        var map = new adt.widgets.Map("map", d3.select("#map"))
+        var map = new adt.widgets.Map("map", "#map")
             .x(0)
             .y(0)
             .width(WIDTH)
@@ -391,7 +391,7 @@
             .render();
 
         // Pie chart
-        var pieChart = new adt.widgets.PieChart("piechart", d3.select("#piechart"))
+        var pieChart = new adt.widgets.PieChart("piechart", "#piechart")
             .x(50)
             .y(20)
             .innerRadius(40)
@@ -402,7 +402,7 @@
             .render();
 
         // Slider
-        var slider = new adt.widgets.Slider("slider", d3.select("#slider"))
+        var slider = new adt.widgets.Slider("slider", "#slider")
             .x(10)
             .y(70)
             .width(WIDTH - 20)
@@ -411,7 +411,7 @@
             .render();
 
         // Status
-        var status = new adt.widgets.Status("status", d3.select("#status"))
+        var status = new adt.widgets.Status("status", "#status")
             .x(0)
             .y(60)
             .width(170)

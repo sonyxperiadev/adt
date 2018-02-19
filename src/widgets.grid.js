@@ -156,7 +156,7 @@
 
         // TODO remove this
         this.w = function() {
-            return _w.widget;
+            return "#" + name;
         };
 
         /**
@@ -347,7 +347,7 @@
             // Set up widget
             widget
                 .x(column * _w.attr.width / _columns + _w.attr.x)
-                .y(row * _w.attr.height / _rows + _w.attr.y + parent.attr("top"))
+                .y(row * _w.attr.height / _rows + _w.attr.y + d3.select(parent).attr("top"))
                 .width(width * _w.attr.width / _columns)
                 .height(height * _w.attr.height / _rows)
                 .render();
