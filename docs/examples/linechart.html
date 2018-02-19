@@ -6,55 +6,29 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
     <script src="../dependencies/d3.v4.min.js"></script>
     <script src="../dependencies/lodash.4.17.4.min.js"></script>
-    <script src="../dependencies/topojson.v1.min.js"></script>
-    <title>line chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../dependencies/wp.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/adt.css">
+    <link rel="stylesheet" type="text/css" href="../style/examples.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.linechart.js"></script>
-    <style>
-        main {
-            margin-bottom: 40px;
-        }
-        #widget {
-            display: block;
-            position: relative;
-            width: 600px;
-            height: 300px;
-            margin: 0 auto;
-            margin-top: 30px;
-        }
-        @media screen and (max-width: 800px) {
-            main {
-                width: 90%;
-                max-width: 90%;
-            }
-            #widget {
-                width: 90%;
-                height: 200px;
-            }
-            pre code {
-                width: 100%;
-                font-size: 1em;
-            }
-        }
-        pre {
-            width : 100%;
-        }
-        pre code {
-            width: 700px;
-        }
-    </style>
+    <script src="../dependencies/codedoc.min.js"></script>
+    <script>
+        codedoc.heading()
+            .callback(function() {
+                hljs.initHighlighting.called = false;
+                hljs.initHighlighting();
+            });
+    </script>
+    <script src="../dl/widgets.min.js"></script>
+    <script src="../dl/widgets.linechart.min.js"></script>
+    <title>line chart | adt</title>
 </head>
 <body>
 <main>
     <div id="widget"></div>
-
-    <h1>prepare data and size</h1>
-    <pre><code class="javascript">// Generate some data with errors
+    <div id="code-doc"></div>
+</main>
+<script class="doc">
+// generate some data
 var data = Array.from(new Array(100).keys()).map(function(i) {
     return {
         x: i,
@@ -68,27 +42,24 @@ var data = Array.from(new Array(100).keys()).map(function(i) {
         }
     }
 });
-
-// Read chart size from #widget div
+</script>
+<script class="doc">
+// create chart
 var width = parseFloat(d3.select("#widget").style("width"));
-var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
-
-    <h1>create and render chart</h1>
-    <pre><code class="javascript">// Add chart to the div with id='widget'
-// Use chaining to set parameters
-var chart = new adt.widgets.AreaChart("mychart", d3.select("#widget"))
-    .data(data)                                         // Bind data
-    .width(width)                                       // Dimensions
+var height = parseFloat(d3.select("#widget").style("height"));
+var chart = new adt.widgets.LineChart("mychart", "#widget")
+    .data(data)
+    .width(width)
     .height(height)
-    .xLabel("day")                                      // Labels
+    .xLabel("days")
     .yLabel("price in SEK")
-    .margins(40)                                        // All margins are set to 40px
-    .fontSize(14)                                       // Set font size to 14 px
-    .colors({first: "dodgerblue", second: "limegreen"}) // Set colors as key-value pairs
-    .render();                                          // Finally, render chart</code></pre>
-
-    <h1>interactions</h1>
-    <pre><code class="javascript">// Add interactions
+    .margins(40)
+    .fontSize(14)
+    .colors({first: "dodgerblue", second: "limegreen"})
+    .render();
+</script>
+<script class="doc">
+// add interactions
 chart
     .mouseover(function(k) {
         // Highlight hovered plot
@@ -102,63 +73,14 @@ chart
         // Show an alert on click
         alert("Plot clicked: '" + k + "'");
     })
-    .render();</code></pre>
-
-    <h1>additional features</h1>
-    <pre><code class="javascript">// Add trend marker
-var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");</code></pre>
-</main>
+    .render();
+</script>
+<script class="doc">
+// additional features
+// add trend marker
+var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");
+</script>
 <script>
-    // Generate some data
-    var data = Array.from(new Array(100).keys()).map(function(i) {
-        return {
-            x: i,
-            y: {
-                first: 10 * Math.pow(i/40, 2),
-                second: 10 * Math.log(i+1) * Math.pow(Math.cos(Math.PI*i/15), 2) + 2
-            },
-            dy: {
-                first: i/10,
-                second: 6
-            }
-        }
-    });
-
-    // Read chart size from #widget div
-    var width = parseFloat(d3.select("#widget").style("width"));
-    var height = parseFloat(d3.select("#widget").style("height"));
-
-    // Add chart
-    var chart = new adt.widgets.LineChart("mychart", d3.select("#widget"))
-        .data(data)
-        .width(width)
-        .height(height)
-        .xLabel("days")
-        .yLabel("price in SEK")
-        .margins(40)
-        .fontSize(14)
-        .colors({first: "dodgerblue", second: "limegreen"})
-        .render();
-
-    // Add interactions
-    chart
-        .mouseover(function(k) {
-            // Highlight hovered plot
-            chart.highlight(k, 300);
-        })
-        .mouseleave(function() {
-            // Remove highlights by passing null
-            chart.highlight(null, 300);
-        })
-        .click(function(k) {
-            // Show an alert on click
-            alert("Plot clicked: '" + k + "'");
-        })
-        .render();
-
-    // Add trend marker
-    var marker = chart.addMarker("mymarker", "first", 50, 89, "trend marker");
-
     window.onresize = function() {
         chart
             .width(parseFloat(d3.select("#widget").style("width")))

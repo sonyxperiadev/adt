@@ -6,55 +6,29 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
     <script src="../dependencies/d3.v4.min.js"></script>
     <script src="../dependencies/lodash.4.17.4.min.js"></script>
-    <script src="../dependencies/topojson.v1.min.js"></script>
-    <title>bar chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../dependencies/wp.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/adt.css">
+    <link rel="stylesheet" type="text/css" href="../style/examples.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.barchart.js"></script>
-    <style>
-        main {
-            margin-bottom: 40px;
-        }
-        #widget {
-            display: block;
-            position: relative;
-            width: 600px;
-            height: 300px;
-            margin: 0 auto;
-            margin-top: 30px;
-        }
-        @media screen and (max-width: 800px) {
-            main {
-                width: 90%;
-                max-width: 90%;
-            }
-            #widget {
-                width: 90%;
-                height: 200px;
-            }
-            pre code {
-                width: 100%;
-                font-size: 1em;
-            }
-        }
-        pre {
-            width : 100%;
-        }
-        pre code {
-            width: 700px;
-        }
-    </style>
+    <script src="../dependencies/codedoc.min.js"></script>
+    <script>
+        codedoc.heading()
+            .callback(function() {
+                hljs.initHighlighting.called = false;
+                hljs.initHighlighting();
+            });
+    </script>
+    <script src="../dl/widgets.min.js"></script>
+    <script src="../dl/widgets.barchart.min.js"></script>
+    <title>bar chart | adt</title>
 </head>
 <body>
 <main>
     <div id="widget"></div>
-
-    <h1>prepare data and size</h1>
-    <pre><code class="javascript">// Generate some data
+    <div id="code-doc"></div>
+</main>
+<script class="doc">
+// generate some data
 var data = [
     {x: 'apple', y: 13},
     {x: 'banana', y: 4},
@@ -73,29 +47,26 @@ var colors = {
     kiwi: "limegreen",
     pear: "khaki"
 };
-
-// Read chart size from #widget div
+</script>
+<script class="doc">
+// create chart
 var width = parseFloat(d3.select("#widget").style("width"));
-var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
-
-    <h1>create and render chart</h1>
-    <pre><code class="javascript">// Add chart to the div with id='widget'
-// Use chaining to set parameters
-var chart = new adt.widgets.BarChart("mychart", d3.select("#widget"))
-    .data(data)              // Bind data
-    .width(width)            // Dimensions
+var height = parseFloat(d3.select("#widget").style("height"));
+var chart = new adt.widgets.BarChart("mychart", "#widget")
+    .data(data)
+    .width(width)
     .height(height)
-    .xLabel("fruit name")    // Labels
+    .xLabel("fruit name")
     .yLabel("stock")
-    .margins(60)             // All margins are set to 40px
-    .fontSize(14)            // Set font size to 14 px
-    .colors(colors)          // Set colors as key-value pairs
-    .vertical(true)          // Make it vertical
-    .render();               // Finally, render chart</code></pre>
-
-    <h1>interactions</h1>
-    <pre><code class="javascript">// Add interactions
-areaChart
+    .margins(60)
+    .fontSize(14)
+    .colors(colors)
+    .vertical(true)
+    .render();
+</script>
+<script class="doc">
+// add interactions
+chart
     .mouseover(function(k) {
         // Highlight hovered bar
         chart.highlight(k, 300);
@@ -108,62 +79,9 @@ areaChart
         // Show an alert on click
         alert("Plot clicked: '" + k + "'");
     })
-    .render();</code></pre>
-</main>
+    .render();
+</script>
 <script>
-    // Generate some data
-    var data = [
-        {x: 'apple', y: 13},
-        {x: 'banana', y: 4},
-        {x: 'mango', y: 6},
-        {x: 'orange', y: 2},
-        {x: 'melon', y: 11},
-        {x: 'kiwi', y: 7},
-        {x: 'pear', y: 3}
-    ];
-    var colors = {
-        apple: "lime",
-        banana: "gold",
-        mango: "tomato",
-        orange: "orange",
-        melon: "green",
-        kiwi: "limegreen",
-        pear: "khaki"
-    };
-
-    // Read chart size from #widget div
-    var width = parseFloat(d3.select("#widget").style("width"));
-    var height = parseFloat(d3.select("#widget").style("height"));
-
-    // Add chart
-    var chart = new adt.widgets.BarChart("mychart", d3.select("#widget"))
-        .data(data)
-        .width(width)
-        .height(height)
-        .xLabel("fruit name")
-        .yLabel("stock")
-        .margins(60)
-        .fontSize(14)
-        .colors(colors)
-        .vertical(true)
-        .render();
-
-    // Add interactions
-    chart
-        .mouseover(function(k) {
-            // Highlight hovered bar
-            chart.highlight(k, 300);
-        })
-        .mouseleave(function() {
-            // Remove highlights by passing null
-            chart.highlight(null, 300);
-        })
-        .click(function(k) {
-            // Show an alert on click
-            alert("Plot clicked: '" + k + "'");
-        })
-        .render();
-
     window.onresize = function() {
         chart
             .width(parseFloat(d3.select("#widget").style("width")))

@@ -1,0 +1,31 @@
+main {
+    margin-bottom: 40px;
+}
+#widget {
+    display: block;
+    position: relative;
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+@media screen and (max-width: 800px) {
+    main {
+        width: 90%;
+        max-width: 90%;
+    }
+    #widget {
+        width: 90%;
+        height: 200px;
+    }
+    pre code {
+        width: 100%;
+        font-size: 1em;
+    }
+}
+pre {
+    width : 100%;
+}
+pre code {
+    width: 700px;
+}

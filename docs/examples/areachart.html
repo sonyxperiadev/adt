@@ -6,54 +6,21 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
     <script src="../dependencies/d3.v4.min.js"></script>
     <script src="../dependencies/lodash.4.17.4.min.js"></script>
-    <script src="../dependencies/topojson.v1.min.js"></script>
-    <script src="../dependencies/code-doc.js"></script>
-    <script>
-        codify.callback(function() {
-            hljs.initHighlighting.called = false;
-            hljs.initHighlighting();
-        });
-    </script>
-    <title>area chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../dependencies/wp.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/adt.css">
+    <link rel="stylesheet" type="text/css" href="../style/examples.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.areachart.js"></script>
-    <style>
-        main {
-            margin-bottom: 40px;
-        }
-        #widget {
-            display: block;
-            position: relative;
-            width: 600px;
-            height: 300px;
-            margin: 0 auto;
-            margin-top: 30px;
-        }
-        @media screen and (max-width: 800px) {
-            main {
-                width: 90%;
-                max-width: 90%;
-            }
-            #widget {
-                width: 90%;
-                height: 200px;
-            }
-            pre code {
-                width: 100%;
-                font-size: 1em;
-            }
-        }
-        pre {
-            width : 100%;
-        }
-        pre code {
-            width: 700px;
-        }
-    </style>
+    <script src="../dependencies/codedoc.min.js"></script>
+    <script>
+        codedoc.heading()
+            .callback(function() {
+                hljs.initHighlighting.called = false;
+                hljs.initHighlighting();
+            });
+    </script>
+    <script src="../dl/widgets.min.js"></script>
+    <script src="../dl/widgets.areachart.min.js"></script>
+    <title>area chart | adt</title>
 </head>
 <body>
 <main>

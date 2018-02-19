@@ -6,55 +6,29 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,700" rel="stylesheet">
     <script src="../dependencies/d3.v4.min.js"></script>
     <script src="../dependencies/lodash.4.17.4.min.js"></script>
-    <script src="../dependencies/topojson.v1.min.js"></script>
-    <title>chord chart | adt</title>
     <link rel="stylesheet" type="text/css" href="../dependencies/wp.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/adt.css">
+    <link rel="stylesheet" type="text/css" href="../style/examples.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../src/widgets.js"></script>
-    <script src="../../src/widgets.chordchart.js"></script>
-    <style>
-        main {
-            margin-bottom: 40px;
-        }
-        #widget {
-            display: block;
-            position: relative;
-            width: 600px;
-            height: 300px;
-            margin: 0 auto;
-            margin-top: 30px;
-        }
-        @media screen and (max-width: 800px) {
-            main {
-                width: 90%;
-                max-width: 90%;
-            }
-            #widget {
-                width: 90%;
-                height: 200px;
-            }
-            pre code {
-                width: 100%;
-                font-size: 1em;
-            }
-        }
-        pre {
-            width : 100%;
-        }
-        pre code {
-            width: 700px;
-        }
-    </style>
+    <script src="../dependencies/codedoc.min.js"></script>
+    <script>
+        codedoc.heading()
+            .callback(function() {
+                hljs.initHighlighting.called = false;
+                hljs.initHighlighting();
+            });
+    </script>
+    <script src="../dl/widgets.min.js"></script>
+    <script src="../dl/widgets.chordchart.min.js"></script>
+    <title>chord chart | adt</title>
 </head>
 <body>
 <main>
     <div id="widget"></div>
-
-    <h1>prepare data and size</h1>
-    <pre><code class="javascript">// Generate some data
+    <div id="code-doc"></div>
+</main>
+<script class="doc">
+// generate some data
 var data = [
     {source: "melon", target: "apple", value: 1},
     {source: "melon", target: "pear", value: 2},
@@ -80,27 +54,25 @@ var colors = {
     lime: "lime",
     pear: "khaki"
 };
-
-// Read chart size from #widget div
+</script>
+<script class="doc">
+// create chart
 var width = parseFloat(d3.select("#widget").style("width"));
-var height = parseFloat(d3.select("#widget").style("height"));</code></pre>
-
-    <h1>create and render chart</h1>
-    <pre><code class="javascript">// Add chart
-var chart = new adt.widgets.ChordChart("mychart", d3.select("#widget"))
-    .data(data)                     // Bind data
-    .x(width/2 - height/2)          // Dimensions
+var height = parseFloat(d3.select("#widget").style("height"));
+var chart = new adt.widgets.ChordChart("mychart", "#widget")
+    .data(data)
+    .x(width/2 - height/2)
     .radius(height / 2)
     .thickness(10)
-    .xLabel("fruit trade")          // Add label
-    .margins(60)                    // Margins on all side are 40px
-    .fontSize(14)                   // Set font size to 14px
-    .ticks(true)                    // Show group labels
+    .xLabel("fruit trade")
+    .margins(60)
+    .fontSize(14)
+    .ticks(true)
     .colors(colors)
-    .render();                      // Render chord</code></pre>
-
-    <h1>interactions</h1>
-    <pre><code class="javascript">// Add interactions
+    .render();
+</script>
+<script class="doc">
+// add interactions
 chart
     .mouseover(function(k) {
         // Highlight hovered bar
@@ -114,69 +86,9 @@ chart
         // Show an alert on click
         alert("Plot clicked: '" + k + "'");
     })
-    .render();</code></pre>
-</main>
+    .render();
+</script>
 <script>
-    // Generate some data
-    var data = [
-        {source: "melon", target: "apple", value: 1},
-        {source: "melon", target: "pear", value: 2},
-        {source: "melon", target: "lime", value: 3},
-        {source: "apple", target: "melon", value: 4},
-        {source: "apple", target: "pear", value: 5},
-        {source: "apple", target: "lime", value: 6},
-        {source: "pear", target: "melon", value: 7},
-        {source: "pear", target: "apple", value: 8},
-        {source: "pear", target: "lime", value: 9},
-        {source: "lime", target: "melon", value: 10},
-        {source: "lime", target: "apple", value: 11},
-        {source: "lime", target: "pear", value: 12},
-        {source: "orange", target: "apple", value: 1},
-        {source: "apple", target: "orange", value: 2}
-    ];
-    var colors = {
-        apple: "limegreen",
-        banana: "gold",
-        mango: "tomato",
-        orange: "orange",
-        melon: "green",
-        lime: "lime",
-        pear: "khaki"
-    };
-
-    // Read chart size from #widget div
-    var width = parseFloat(d3.select("#widget").style("width"));
-    var height = parseFloat(d3.select("#widget").style("height"));
-
-    // Add chart
-    var chart = new adt.widgets.ChordChart("mychart", d3.select("#widget"))
-        .data(data)
-        .x(width/2 - height/2)
-        .radius(height / 2)
-        .thickness(10)
-        .xLabel("fruit trade")
-        .margins(60)
-        .fontSize(14)
-        .ticks(true)
-        .colors(colors)
-        .render();
-
-    // Add interactions
-    chart
-        .mouseover(function(k) {
-            // Highlight hovered bar
-            chart.highlight(k, 300);
-        })
-        .mouseleave(function() {
-            // Remove highlights by passing null
-            chart.highlight(null, 300);
-        })
-        .click(function(k) {
-            // Show an alert on click
-            alert("Plot clicked: '" + k + "'");
-        })
-        .render();
-
     window.onresize = function() {
         width = parseFloat(d3.select("#widget").style("width"));
         height = parseFloat(d3.select("#widget").style("height"));
