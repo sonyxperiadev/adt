@@ -16,9 +16,9 @@
 <br>Binds data to the line plot. Data must be an array of <code>x: number, y: object</code> where y is an object containing the Y values for each line to plot. The data can optionally contain a <code>dy</code> property that corresponds to the error drawn around the line. Error is only drawn for lines that are defined as property in <code>dy</code>. 
 <br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>data</i></td><td><code>Array</code></td><td>Array of data points.</td></tr><tr><td><i>scale</i></td><td><code>number</code></td><td>Optional scaling parameter. Each data point is divided by this value.</td></tr></table>
 </div><br><h2 id='api-adt.widgets.linechart.LineChart.highlight'>highlight</h2>
-<div class='card'><pre><code>adt.widgets.linechart.LineChart.highlight(key)</code></pre>
+<div class='card'><pre><code>adt.widgets.linechart.LineChart.highlight(key, duration)</code></pre>
 <br>Highlights the specified plot. 
-<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>key</i></td><td><code>string</code></td><td>Key of the line to highlight.</td></tr></table>
+<br><table><thead><tr><th class='fifth'>arg</th><th class='fifth'>type</th><th>description</th></tr></thead><tr><td><i>key</i></td><td><code>string</code></td><td>Key of the line to highlight.</td></tr><tr><td><i>duration</i></td><td><code>number</code></td><td>Duration of the highlight animation.</td></tr></table>
 </div><br><h2 id='api-adt.widgets.linechart.LineChart.addMarker'>addMarker</h2>
 <div class='card'><pre><code>adt.widgets.linechart.LineChart.addMarker(id, key, start, end, label)</code></pre>
 <br>Adds a marker to the specified line. A marker is a text along with a 90-degree angle connecting two points of a line. If a marker with the specified identifier already exists, the marker is ignored. 
