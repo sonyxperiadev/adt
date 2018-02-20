@@ -35,10 +35,10 @@ pre code {
     font-size: 1em;
 }
 .good {
-    color: #00aa00;
+    color: #00cc00;
     font-weight: bold;
 }
 .bad {
-    color: #aa0000;
+    color: #cc0000;
     font-weight: bold;
 }

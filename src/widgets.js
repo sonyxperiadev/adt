@@ -43,6 +43,8 @@
 // TODO add heat map
 // TODO add calendar plot
 // TODO make plot data modifiable
+// TODO add placeholder as example
+// TODO add description as an example
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('lodash'), exports);
@@ -298,12 +300,22 @@
         _attr.add(this, "fontWeight", "normal");
 
         /**
+         * Sets the label of the widget.
+         * Default is an empty string.
+         *
+         * @method label
+         * @memberOf adt.widgets.Widget
+         * @param {string} text Label text.
+         */
+        _attr.add(this, "label", null);
+
+        /**
          * Sets the horizontal label of the widget.
          * Default is an empty string.
          *
          * @method xLabel
          * @memberOf adt.widgets.Widget
-         * @param {string} label Label text.
+         * @param {string} text Label text.
          */
         _attr.add(this, "xLabel", null);
 
@@ -313,13 +325,25 @@
          *
          * @method yLabel
          * @memberOf adt.widgets.Widget
-         * @param {string} label Label text.
+         * @param {string} text Label text.
          */
         _attr.add(this, "yLabel", null);
 
         /**
+         * Sets the format function for the ticks.
+         * Default is an SI prefixed number
+         *
+         * @method tickFormat
+         * @memberOf adt.widget.Widget
+         * @param {function} format Function that converts a number to a string.
+         */
+        _attr.add(this, "tickFormat", function(x) {
+            return x > 1 ? d3.format(".2s")(x) : x;
+        });
+
+        /**
          * Sets the format function for the vertical ticks.
-         * Default is {d3.format(".2s")}, an SI prefixed number.
+         * Default is an SI prefixed number.
          *
          * @method yTickFormat
          * @memberOf adt.widgets.Widget
@@ -816,15 +840,15 @@
 
                 // Show placeholder text
                 if (d3.select("#" + placeHolderId).empty()) {
-                    var realParent = parent ? parent : d3.select("body");
-                    realParent.append("div")
+                    var realParent = parent ? parent : "body";
+                    d3.select(realParent).append("div")
                         .attr("id", placeHolderId)
                         .style("position", "absolute")
                         .style("width", _attr.width + "px")
                         .style("height", _attr.height + "px")
                         .style("line-height", _attr.height + "px")
-                        .style(_attr.x > 0 ? "left" : "right", Math.abs(_attr.x) + _attr.xDim)
-                        .style(_attr.y > 0 ? "top" : "bottom", Math.abs(_attr.y) + _attr.yDim)
+                        .style(_attr.x >= 0 ? "left" : "right", Math.abs(_attr.x) + _attr.xDim)
+                        .style(_attr.y >= 0 ? "top" : "bottom", Math.abs(_attr.y) + _attr.yDim)
                         .style("text-align", "center")
                         .append("span")
                         .style("display", "inline-block")

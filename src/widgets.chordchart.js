@@ -498,10 +498,13 @@
 
         // Style updater
         _w.render.style = function() {
+            _w.attr.width = 2*_w.attr.radius;
+            _w.attr.height = 2*_w.attr.radius;
+
             // Widget
             _w.widget
-                .style("width", 2*_w.attr.radius + "px")
-                .style("height", 2*_w.attr.radius + "px");
+                .style("width", _w.attr.width + "px")
+                .style("height", _w.attr.height + "px");
 
             // Chart
             _svg.g
@@ -513,7 +516,7 @@
                 .style("width", 2*(_w.attr.radius + _w.attr.thickness) + "px")
                 .attr("font-size", _w.attr.fontSize + "px")
                 .style("fill", _w.attr.fontColor)
-                .text(_w.attr.xLabel);
+                .text(_w.attr.label);
         };
     }
 

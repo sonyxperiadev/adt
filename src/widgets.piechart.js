@@ -26,6 +26,7 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+// TODO simplify class
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'), exports);
@@ -101,6 +102,7 @@
          */
         this.highlight = function(key, duration) {
             _w.utils.highlight(_svg, "path", key, duration);
+            _w.utils.highlight(_svg, "text", key, duration);
         };
 
         // Builder
@@ -119,24 +121,38 @@
                 .style("fill", "white");
 
             // Add slices
-            _svg.arc = d3.arc();
             _svg.pie = d3.pie()
                 .value(function (d) {
                     return d.value;
-                });
-            _svg.paths = _svg.g
-                .datum(_data).selectAll("path")
-                .data(_svg.pie)
-                .enter().append("path")
-                .attr("class", function (d, i) {
-                    return _w.utils.encode(_data[i].name);
                 })
-                .attr("fill", function (d, i) {
-                    return _data[i].color;
+                .sort(null);
+            _svg.arc = d3.arc();
+
+            _svg.arcs = _svg.g.selectAll(".arc")
+                .data(_svg.pie(_data))
+                .enter().append("g")
+                .attr("class", "arc");
+            _svg.paths = _svg.arcs.append("path")
+                .attr("class", function (d) {
+                    return _w.utils.encode(d.data.name);
+                })
+                .attr("fill", function (d) {
+                    return d.data.color;
                 })
                 .style("shape-rendering", "geometricPrecision")
                 .style("pointer-events", "all")
-                .attr("d", _svg.arc)
+                .each(function (d) {
+                    this._current = d;
+                });
+            _svg.labelArc = d3.arc()
+                .outerRadius(_w.attr.outerRadius - 10)
+                .innerRadius(_w.attr.innerRadius - 10);
+            _svg.ticks = _svg.arcs.append("text")
+                .attr("class", function (d) {
+                    return _w.utils.encode(d.data.name);
+                })
+                .style("text-anchor", "middle")
+                .attr("dy", "0.35em")
                 .each(function (d) {
                     this._current = d;
                 });
@@ -144,10 +160,9 @@
 
         // Data updater
         _w.render.update = function (duration) {
-            _svg.g.datum(_data);
-            _svg.paths.data(_svg.pie);
+            _svg.arcs.datum(_data);
+            _svg.paths.data(_svg.pie(_data));
             _svg.paths
-                .attr("d", _svg.arc)
                 .transition().duration(duration)
                 .attrTween("d", function (a) {
                     var i = d3.interpolate(this._current, a);
@@ -156,17 +171,32 @@
                         return _svg.arc(i(t));
                     };
                 });
+            _svg.ticks.data(_svg.pie(data));
+            _svg.ticks
+                .text(function(d) {
+                    return _w.attr.tickFormat(d.data.value);
+                })
+                .transition().duration(duration)
+                .attrTween("transform", function(d) {
+                    var i = d3.interpolate(this._current, d);
+                    this._current = i(0);
+                    return function (t) {
+                        return "translate(" + _svg.labelArc.centroid(i(t)) + ")";
+                    };
+                });
         };
 
         // Style updater
         _w.render.style = function() {
             // Calculate radii
             var outerRadius = _w.attr.outerRadius - _w.attr.margins.left;
+            _w.attr.width = 2*_w.attr.outerRadius;
+            _w.attr.height = 2*_w.attr.outerRadius;
 
             // Widget
             _w.widget
-                .style("width", 2*_w.attr.outerRadius + "px")
-                .style("height", 2*_w.attr.outerRadius + "px");
+                .style("width", _w.attr.width + "px")
+                .style("height", _w.attr.height + "px");
 
             // Chart
             _svg.g
@@ -177,13 +207,20 @@
                 .innerRadius(_w.attr.innerRadius);
             _svg.paths.attr("d", _svg.arc);
 
+            // Ticks
+            _svg.labelArc.outerRadius(outerRadius - 10)
+                .innerRadius(_w.attr.innerRadius - 10);
+            _svg.ticks
+                .attr("d", _svg.labelArc)
+                .attr("fill", _w.attr.fontColor);
+
             // Label
             _svg.label
                 .attr("transform", "translate(0," + _w.attr.outerRadius + ")")
                 .style("width", (10 + 2 * _w.attr.outerRadius) + "px")
                 .style("font-size", Math.min(16, _w.attr.outerRadius*0.4) + "px")
                 .style("fill", _w.attr.fontColor)
-                .text(_w.attr.xLabel);
+                .text(_w.attr.label);
 
             // Interactions
             _svg.paths

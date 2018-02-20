@@ -19,7 +19,7 @@
             });
     </script>
     <script src="../dl/widgets.min.js"></script>
-    <script src="../dl/widgets.piechart.min.js"></script>
+    <script src="../../src/widgets.piechart.js"></script>
     <title>pie chart | adt</title>
 </head>
 <body>
@@ -35,14 +35,14 @@
         However, <span class="bad">changes are hard</span> to perceive on a pie chart, so use it only for static data.
         Furthermore, <span class="bad">small values are difficult to distinguish</span> or notice and therefore, avoid
         using pie charts when the data spans multiple orders of magnitude. Finally, due to the difficult access to small
-        values, it should be avoided when <span class="bad">interaction</span> is needed.enys.
+        values, it should be avoided when <span class="bad">interaction</span> is needed.
     </div>
     <div id="code-doc"></div>
 </main>
 <script class="doc">
 // generate some data
 var data = [
-    {name: "orange", value: 1, color: "orange"},
+    {name: "orange", value: 3, color: "orange"},
     {name: "mango", value: 4, color: "tomato"},
     {name: "banana", value: 4, color: "gold"},
     {name: "apple", value: 2, color: "limegreen"}
@@ -53,11 +53,12 @@ var data = [
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));
 var chart = new adt.widgets.PieChart("mychart", "#widget")
+    .describe("A simple pie chart")
     .data(data)
     .x(width/2 - height/2 + 20)
     .innerRadius(30)
     .outerRadius(height / 2 - 20)
-    .xLabel("fruits")
+    .label("fruits")
     .margins(30)
     .fontSize(14)
     .render();
@@ -88,7 +89,7 @@ chart
             .innerRadius(30)
             .outerRadius(height / 2 - 20)
             .render();
-    }
+    };
 </script>
 </body>
 </html>
