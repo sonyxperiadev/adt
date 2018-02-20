@@ -25,6 +25,18 @@
 <body>
 <main>
     <div id="widget"></div>
+    <h1>description</h1>
+    <div id="desc">
+        A pie chart represents one dimensional <span class="good">categorical data</span> of positive numbers only.
+        It is useful when <span class="good">fractions of a whole</span> (especially percentages) are to be shown for a
+        <span class="good">small number of categories</span> (5-7) and the <span class="good">focus is not on nuance differences</span>
+        among categories.<br><br>
+
+        However, <span class="bad">changes are hard</span> to perceive on a pie chart, so use it only for static data.
+        Furthermore, <span class="bad">small values are difficult to distinguish</span> or notice and therefore, avoid
+        using pie charts when the data spans multiple orders of magnitude. Finally, due to the difficult access to small
+        values, it should be avoided when <span class="bad">interaction</span> is needed.enys.
+    </div>
     <div id="code-doc"></div>
 </main>
 <script class="doc">
@@ -35,12 +47,6 @@ var data = [
     {name: "banana", value: 4, color: "gold"},
     {name: "apple", value: 2, color: "limegreen"}
 ];
-var colors = {
-    lime: "lime",
-    banana: "gold",
-    orange: "orange",
-    apple: "limegreen"
-};
 </script>
 <script class="doc">
 // create chart
@@ -54,7 +60,6 @@ var chart = new adt.widgets.PieChart("mychart", "#widget")
     .xLabel("fruits")
     .margins(30)
     .fontSize(14)
-    .colors(colors)
     .render();
 </script>
 <script class="doc">

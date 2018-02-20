@@ -11,11 +11,11 @@ main {
 }
 @media screen and (max-width: 800px) {
     main {
-        width: 90%;
+        width: 80%;
         max-width: 90%;
     }
     #widget {
-        width: 90%;
+        width: 80%;
         height: 200px;
     }
     pre code {
@@ -28,4 +28,17 @@ pre {
 }
 pre code {
     width: 700px;
+}
+.desc {
+    position: relative;
+    width: 100%;
+    font-size: 1em;
+}
+.good {
+    color: #00aa00;
+    font-weight: bold;
+}
+.bad {
+    color: #aa0000;
+    font-weight: bold;
 }
