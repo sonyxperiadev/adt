@@ -207,6 +207,15 @@
         <div class="example-container">
             <div class="example">
                 <div class="widget-container">
+                    <div class="chart-name"><a href="placeholder.html">Placeholder</a></div>
+                    <div id="placeholder" class="widget"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-container">
+            <div class="example">
+                <div class="widget-container">
                     <div class="chart-name"><a href="slider.html">Slider</a></div>
                     <div id="slider" class="widget"></div>
                 </div>
@@ -235,9 +244,10 @@
         });
     }
     var DUMMY_DATA_2 = [];
+    var chars = "abcdefghij";
     for (i=0; i<10; i++) {
         DUMMY_DATA_2.push({
-            x: i,
+            x: chars.charAt(i),
             y: Math.cos(i/1.2) + Math.pow(i/2.1, 1.1)
         });
     }
@@ -403,7 +413,21 @@
             .outerRadius(100)
             .margins(30)
             .fontSize(14)
+            .ticks(true)
             .render();
+
+        // Placeholder
+        var placeholder = new adt.widgets.LineChart("placeholder", "#placeholder")
+            .width(WIDTH)
+            .height(HEIGHT)
+            .xLabel("time")
+            .yLabel("trends")
+            .margins({left: 40, top: 20, right: 20, bottom: 40})
+            .fontSize(14)
+            .colors(DUMMY_COLORS)
+            .data(DUMMY_DATA)
+            .render();
+        placeholder.placeholder("This chart is empty and you see a placeholder instead");
 
         // Slider
         var slider = new adt.widgets.Slider("slider", "#slider")

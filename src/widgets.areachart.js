@@ -145,7 +145,7 @@
         _w.render.update = function(duration) {
             // Prepare data
             var data = _.cloneDeep(_data);
-            data.sort(function(a, b) {
+            data.sort(function (a, b) {
                 return a.x - b.x;
             });
             for (var i = 0; i < data.length; i++) {
@@ -174,7 +174,8 @@
                 // Add areas if needed
                 if (_svg.areas === undefined) {
                     _svg.areas = {};
-                    _.forOwn(data[0].y, function(yk, k) {
+                    _svg.lines = {}
+                    _.forOwn(data[0].y, function (yk, k) {
                         _svg.areas[k] = _svg.g.append("path")
                             .attr("class", "area " + _w.utils.encode(k))
                             .style("shape-rendering", "geometricPrecision");
@@ -187,11 +188,11 @@
                         .x(function (d) {
                             return scale.x(d.x) + 1;
                         })
-                        .y0(_w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom - 1)
+                        .y0(_w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom)
                         .y1(function (d) {
                             return scale.y(d.y[k]);
                         });
-                    _svg.g.select("." + _w.utils.encode(k))
+                    _svg.g.select(".area." + _w.utils.encode(k))
                         .transition().duration(duration)
                         .attr("d", area(data));
                 });

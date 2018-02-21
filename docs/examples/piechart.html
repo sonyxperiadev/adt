@@ -28,14 +28,15 @@
     <h1>description</h1>
     <div id="desc">
         A pie chart represents one dimensional <span class="good">categorical data</span> of positive numbers only.
-        It is useful when <span class="good">fractions of a whole</span> (especially percentages) are to be shown for a
-        <span class="good">small number of categories</span> (5-7) and the <span class="good">focus is not on nuance differences</span>
-        among categories.<br><br>
+        The angle of each sector is proportional to the value of the corresponding category.
+        It is useful when <span class="good">fractions</span> of a whole (especially percentages) are to be shown for a
+        <span class="good">few categories</span> (5-7) and the focus is on <span class="good">large differences</span>
+        among categories rather than nuances.<br><br>
 
-        However, <span class="bad">changes are hard</span> to perceive on a pie chart, so use it only for static data.
-        Furthermore, <span class="bad">small values are difficult to distinguish</span> or notice and therefore, avoid
-        using pie charts when the data spans multiple orders of magnitude. Finally, due to the difficult access to small
-        values, it should be avoided when <span class="bad">interaction</span> is needed.
+        However, <span class="bad">changes</span> are hard to perceive on a pie chart, and should be used only for
+        static data.
+        Furthermore, <span class="bad">small values</span> are difficult to distinguish or notice and
+        therefore, avoid using pie charts when the data spans multiple orders of magnitude.
     </div>
     <div id="code-doc"></div>
 </main>
@@ -53,7 +54,7 @@ var data = [
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));
 var chart = new adt.widgets.PieChart("mychart", "#widget")
-    .describe("A simple pie chart")
+    .describe("A simple pie chart showing the number of fruits in a virtual basket.")
     .data(data)
     .x(width/2 - height/2 + 20)
     .innerRadius(30)
@@ -61,6 +62,7 @@ var chart = new adt.widgets.PieChart("mychart", "#widget")
     .label("fruits")
     .margins(30)
     .fontSize(14)
+    .ticks(true)
     .render();
 </script>
 <script class="doc">

@@ -72,6 +72,15 @@
          */
         _w.attr.add(this, "outerRadius", 50, "dim");
 
+        /**
+         * Adds values as small labels inside the chart.
+         *
+         * @method ticks
+         * @memberOf adt.widgets.piechart.PieChart
+         * @param {boolean} add Adds ticks.
+         */
+        _w.attr.add(this, "ticks", false);
+
         // Widget elements.
         var _svg = null;
         var _data = [{
@@ -144,18 +153,18 @@
                 .each(function (d) {
                     this._current = d;
                 });
-            _svg.labelArc = d3.arc()
-                .outerRadius(_w.attr.outerRadius - 10)
-                .innerRadius(_w.attr.innerRadius - 10);
-            _svg.ticks = _svg.arcs.append("text")
-                .attr("class", function (d) {
-                    return _w.utils.encode(d.data.name);
-                })
-                .style("text-anchor", "middle")
-                .attr("dy", "0.35em")
-                .each(function (d) {
-                    this._current = d;
-                });
+            if (_w.attr.ticks) {
+                _svg.labelArc = d3.arc();
+                _svg.ticks = _svg.arcs.append("text")
+                    .attr("class", function (d) {
+                        return _w.utils.encode(d.data.name);
+                    })
+                    .style("text-anchor", "middle")
+                    .attr("dy", "0.35em")
+                    .each(function (d) {
+                        this._current = d;
+                    });
+            }
         };
 
         // Data updater
@@ -171,19 +180,21 @@
                         return _svg.arc(i(t));
                     };
                 });
-            _svg.ticks.data(_svg.pie(data));
-            _svg.ticks
-                .text(function(d) {
-                    return _w.attr.tickFormat(d.data.value);
-                })
-                .transition().duration(duration)
-                .attrTween("transform", function(d) {
-                    var i = d3.interpolate(this._current, d);
-                    this._current = i(0);
-                    return function (t) {
-                        return "translate(" + _svg.labelArc.centroid(i(t)) + ")";
-                    };
-                });
+            if (_w.attr.ticks) {
+                _svg.ticks.data(_svg.pie(_data));
+                _svg.ticks
+                    .text(function (d) {
+                        return _w.attr.tickFormat(d.data.value);
+                    })
+                    .transition().duration(duration)
+                    .attrTween("transform", function (d) {
+                        var i = d3.interpolate(this._current, d);
+                        this._current = i(0);
+                        return function (t) {
+                            return "translate(" + _svg.labelArc.centroid(i(t)) + ")";
+                        };
+                    });
+            }
         };
 
         // Style updater
@@ -208,11 +219,13 @@
             _svg.paths.attr("d", _svg.arc);
 
             // Ticks
-            _svg.labelArc.outerRadius(outerRadius - 10)
-                .innerRadius(_w.attr.innerRadius - 10);
-            _svg.ticks
-                .attr("d", _svg.labelArc)
-                .attr("fill", _w.attr.fontColor);
+            if (_w.attr.ticks) {
+                _svg.labelArc.outerRadius(0.5*(_w.attr.innerRadius+outerRadius))
+                    .innerRadius(0.5*(_w.attr.innerRadius+outerRadius));
+                _svg.ticks
+                    .attr("d", _svg.labelArc)
+                    .attr("fill", _w.attr.fontColor);
+            }
 
             // Label
             _svg.label

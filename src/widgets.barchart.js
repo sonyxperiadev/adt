@@ -49,18 +49,7 @@
      * @constructor
      */
     function BarChart(name, parent) {
-        var _w = Widget.call(this, name, "barChart", "svg", parent);
-
-        /**
-         * Sets the type of the X axis.
-         * Supported values are: number, time, string.
-         * Default is number.
-         *
-         * @method xType
-         * @memberOf adt.widgets.barchart.BarChart
-         * @param {string} type Type of the X axis.
-         */
-        _w.attr.add(this, "xType", "string");
+        var _w = Widget.call(this, name, "bar-chart", "svg", parent);
 
         /**
          * Makes the bar chart vertical, effectively swapping the axes.
@@ -96,9 +85,11 @@
          * @memberOf adt.widgets.barchart.BarChart
          * @param {string} key Key of the line to highlight.
          * @param {number} duration Duration of the highlight animation.
+         * @returns {adt.widgets.barchart.BarChart} Reference to the current bar chart.
          */
         this.highlight = function(key, duration) {
             _w.utils.highlight(_svg, ".bar", key, duration);
+            return this;
         };
 
         // Builder
@@ -135,21 +126,18 @@
 
         // Data updater
         _w.render.update = function(duration) {
-            // Prepare data
-            var data = _.cloneDeep(_data);
-
             // Calculate scale
             var scale;
             if (_w.attr.vertical) {
-                scale = _w.utils.scale(_w.utils.boundary(data, {y: [0, null]}),
+                scale = _w.utils.scale(_w.utils.boundary(_data, {y: [0, null]}),
                     _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
                     _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
-                    {x: {type: _w.attr.xType}, y: {reverse: true}});
+                    {x: {type: "string"}, y: {reverse: true}});
             } else {
-                scale = _w.utils.scale(_w.utils.boundary(data, {y: [0, null]}),
+                scale = _w.utils.scale(_w.utils.boundary(_data, {y: [0, null]}),
                     _w.attr.width - _w.attr.margins.left - _w.attr.margins.right,
                     _w.attr.height - _w.attr.margins.top - _w.attr.margins.bottom,
-                    {x: {type: _w.attr.xType}});
+                    {x: {type: "string"}});
             }
 
             // Axes
@@ -161,7 +149,7 @@
                 .call(_svg.axisFn.y.scale(_w.attr.vertical ? scale.x : scale.y));
 
             // Plot
-            if (data.length > 0) {
+            if (_data.length > 0) {
                 // Add bars if needed
                 if (_svg.bars === undefined) {
                     _svg.bars = _svg.g.selectAll(".bar")
@@ -267,7 +255,7 @@
                         });
                     _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
                         .on("mouseover", function (d, i) {
-                            _w.attr.mouseover(data[i].x, i);
+                            _w.attr.mouseover(_data[i].x, i);
                         });
                 }
                 if (_w.attr.mouseleave) {
@@ -277,7 +265,7 @@
                         });
                     _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
                         .on("mouseleave", function (d, i) {
-                            _w.attr.mouseleave(data[i].x, i);
+                            _w.attr.mouseleave(_data[i].x, i);
                         });
                 }
                 if (_w.attr.click) {
@@ -287,7 +275,7 @@
                         });
                     _svg.g.selectAll("." + (_w.attr.vertical ? "y" : "x") + ".axis .tick")
                         .on("click", function (d, i) {
-                            _w.attr.click(data[i].x, i);
+                            _w.attr.click(_data[i].x, i);
                         });
                 }
             }

@@ -25,6 +25,13 @@
 <body>
 <main>
     <div id="widget"></div>
+    <h1>description</h1>
+    <div id="desc">
+        A bar chart displays one dimensional <span class="good">categorical data</span>.
+        Useful when data is there is <span class="good">no relationship</span> between values, for instance if the data
+        comes from a counting process. Also, it can handle <span class="good">more categories</span> than a pie chart
+        (10-20).
+    </div>
     <div id="code-doc"></div>
 </main>
 <script class="doc">
@@ -53,6 +60,7 @@ var colors = {
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));
 var chart = new adt.widgets.BarChart("mychart", "#widget")
+    .describe("A colorful bar chart displaying the volume of fruits in a virtual fridge.")
     .data(data)
     .width(width)
     .height(height)

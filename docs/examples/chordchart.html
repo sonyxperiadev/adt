@@ -25,6 +25,13 @@
 <body>
 <main>
     <div id="widget"></div>
+    <h1>description</h1>
+    <div id="desc">
+        Chord charts represent <span class="good">flow data</span> (provided as a matrix) between a set of categories.
+        The angle of each sector (circumference) is proportional to the total out-flux of that category, and chords show
+        the net in-flux, that is, they are colored by the category which has larger in-flux from the other.
+        They are a convenient summary if there are <span class="good">few categories</span>.
+    </div>
     <div id="code-doc"></div>
 </main>
 <script class="doc">
@@ -60,6 +67,7 @@ var colors = {
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));
 var chart = new adt.widgets.ChordChart("mychart", "#widget")
+    .describe("Chord chart that displays the trade of fruit in a virtual community.")
     .data(data)
     .x(width/2 - height/2)
     .radius(height / 2)

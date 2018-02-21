@@ -26,6 +26,8 @@
  * @requires d3@v4
  * @requires adt.widgets.Widget
  */
+// TODO add log axes
+// TODO make marker separate widget
 (function (global, factory) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = factory(require('d3'), require('./widgets'), exports);
@@ -308,7 +310,7 @@
         _w.render.update = function(duration) {
             // Prepare data
             var data = _.cloneDeep(_data);
-            data.sort(function(a, b) {
+            data.sort(function (a, b) {
                 return a.x - b.x;
             });
             for (var i = 0; i < data.length; i++) {
@@ -344,7 +346,7 @@
                 if (_svg.lines === undefined) {
                     // Error bands
                     _svg.errors = {};
-                    _.forOwn(data[0].y, function(yk, k) {
+                    _.forOwn(data[0].y, function (yk, k) {
                         _svg.errors[k] = _svg.g.append("path")
                             .attr("class", "error " + _w.utils.encode(k))
                             .style("fill-opacity", 0.2)
@@ -354,7 +356,7 @@
 
                     // Add lines
                     _svg.lines = {};
-                    _.forOwn(data[0].y, function(yk, k) {
+                    _.forOwn(data[0].y, function (yk, k) {
                         _svg.lines[k] = _svg.g.append("path")
                             .attr("class", "line " + _w.utils.encode(k))
                             .style("fill", "none")
@@ -364,15 +366,15 @@
                 }
 
                 // Update data
-                _.forOwn(data[0].y, function(yk, k) {
+                _.forOwn(data[0].y, function (yk, k) {
                     if (data[0].hasOwnProperty('dy') && data[0].dy.hasOwnProperty(k)) {
                         var error = d3.area()
                             .x(function (d) {
                                 return _svg.scale.x(d.x) + 2;
                             }).y0(function (d) {
-                                return _svg.scale.y(Math.max(d.y[k]-d.dy[k], boundary.y.min));
+                                return _svg.scale.y(Math.max(d.y[k] - d.dy[k], boundary.y.min));
                             }).y1(function (d) {
-                                return _svg.scale.y(Math.min(d.y[k]+d.dy[k], boundary.y.max));
+                                return _svg.scale.y(Math.min(d.y[k] + d.dy[k], boundary.y.max));
                             });
                         _svg.errors[k]
                             .transition().duration(duration)
@@ -381,7 +383,8 @@
                     var line = d3.line()
                         .x(function (d) {
                             return _svg.scale.x(d.x) + 2;
-                        }).y(function (d) {
+                        })
+                        .y(function (d) {
                             return _svg.scale.y(d.y[k]);
                         });
                     _svg.lines[k]

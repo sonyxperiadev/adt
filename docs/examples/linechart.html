@@ -19,12 +19,19 @@
             });
     </script>
     <script src="../dl/widgets.min.js"></script>
-    <script src="../dl/widgets.linechart.min.js"></script>
+    <script src="../../src/widgets.linechart.js"></script>
     <title>line chart | adt</title>
 </head>
 <body>
 <main>
     <div id="widget"></div>
+    <h1>description</h1>
+    <div id="desc">
+        Line charts are most commonly used to show <span class="good">temporal changes</span> or trends in quantitative
+        data.
+        As the data points are connected, it is expected that consecutive points are <span class="good">related</span>
+        to each other.
+    </div>
     <div id="code-doc"></div>
 </main>
 <script class="doc">
@@ -48,6 +55,7 @@ var data = Array.from(new Array(100).keys()).map(function(i) {
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));
 var chart = new adt.widgets.LineChart("mychart", "#widget")
+    .describe("Line chart displaying two theoretical trends.")
     .data(data)
     .width(width)
     .height(height)

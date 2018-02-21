@@ -25,6 +25,15 @@
 <body>
 <main>
     <div id="widget"></div>
+    <h1>description</h1>
+    <div id="desc">
+        Area charts are used to show <span class="good">numerical series</span> in which consecutive values have a
+        relationship. Good examples are time series of <span class="good">volume type data</span> (e.g., sales) or a
+        density distribution of some quantity (probability density).<br><br>
+
+        Due to its transparent nature, only a <span class="bad">few plots</span> should be used to avoid unrecognizable
+        boundaries.
+    </div>
     <div id="code-doc"></div>
 </main>
 <script class="doc">
@@ -44,6 +53,7 @@ var data = Array.from(new Array(100).keys()).map(function(i) {
 var width = parseFloat(d3.select("#widget").style("width"));
 var height = parseFloat(d3.select("#widget").style("height"));
 var chart = new adt.widgets.AreaChart("mychart", "#widget")
+    .describe("An area chart showing two hypothetical density functions.")
     .data(data)
     .width(width)
     .height(height)

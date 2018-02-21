@@ -466,6 +466,8 @@
                     return _w.attr.colors[_w.attr.invert ? d.source.name : d.target.name];
                 })
                 .style("stroke-width", "1px")
+                .style("fill-opacity", 0.8)
+                .style("stroke-opacity", 0.8)
                 .style("stroke", "white");
             _svg.newRibbons
                 .transition().duration(duration)
